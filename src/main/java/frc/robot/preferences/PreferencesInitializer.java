@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.Preferences;
 
 import frc.robot.subsystems.drive.DrivePreferences;
 import frc.robot.subsystems.shooter.ShooterPreferences;
+import frc.robot.subsystems.turret.TurretPreferences;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -34,6 +36,7 @@ public final class PreferencesInitializer {
         DrivePreferences.initialize();
 
         ShooterPreferences.initialize();
+        TurretPreferences.initialize();
 
         logger.info("initialized");
     }

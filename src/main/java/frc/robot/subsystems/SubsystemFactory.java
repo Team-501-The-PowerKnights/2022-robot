@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.subsystems.drive.DriveFactory;
 import frc.robot.subsystems.shooter.ShooterFactory;
+import frc.robot.subsystems.turret.TurretFactory;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.telemetry.TelemetryManager;
 import frc.robot.utils.PKStatus;
@@ -39,9 +40,7 @@ public class SubsystemFactory {
 
         TelemetryManager tlmMgr = TelemetryManager.getInstance();
 
-        /***************
-         * Drive
-         ***************/
+        // ** Drive **
         SmartDashboard.putNumber(TelemetryNames.Drive.status, PKStatus.unknown.tlmValue);
         {
             DriveFactory.constructInstance();
@@ -50,13 +49,20 @@ public class SubsystemFactory {
             subsystems.add(ss);
         }
 
-        /***************
-         * Shooter
-         ***************/
+        // ** Shooter **
         SmartDashboard.putNumber(TelemetryNames.Shooter.status, PKStatus.unknown.tlmValue);
         {
             ShooterFactory.constructInstance();
             ISubsystem ss =ShooterFactory.getInstance();
+            tlmMgr.addProvider(ss);
+            subsystems.add(ss);
+        }
+
+        // ** Turret **
+        SmartDashboard.putNumber(TelemetryNames.Turret.status, PKStatus.unknown.tlmValue);
+        {
+            TurretFactory.constructInstance();
+            ISubsystem ss =TurretFactory.getInstance();
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
         }

@@ -61,6 +61,13 @@ Shooter.className = StubShooterSubsystem
 Shooter.defaultCommandName = ShooterDoNothing
 
 
+#####################
+# Turret
+#####################
+Turret.className = StubTurretSubsystem
+#Turret.className =
+Turret.defaultCommandName = TurretDoNothing
+
 
 #########################################
 #########################################

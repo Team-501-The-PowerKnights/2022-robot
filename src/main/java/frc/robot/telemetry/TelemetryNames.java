@@ -145,4 +145,12 @@ public final class TelemetryNames {
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
     }
+
+    public final class Turret {
+        public static final String name = SubsystemNames.turretName;
+
+        public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+    }
+
 }
