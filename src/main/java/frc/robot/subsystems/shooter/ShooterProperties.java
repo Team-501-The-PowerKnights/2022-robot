@@ -6,7 +6,7 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.subsystems.drive;
+package frc.robot.subsystems.shooter;
 
 
 import frc.robot.subsystems.SubsystemNames;
@@ -15,13 +15,13 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public final class DriveProperties {
+public final class ShooterProperties {
     
     /** Our classes' logger **/
     @SuppressWarnings("unused")
-    private static final PKLogger logger = RioLogger.getLogger(DriveProperties.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ShooterProperties.class.getName());
 
-    private DriveProperties() {}
+    private ShooterProperties() {}
 
     static private final String name = SubsystemNames.driveName;
     static final String className = name + ".className";

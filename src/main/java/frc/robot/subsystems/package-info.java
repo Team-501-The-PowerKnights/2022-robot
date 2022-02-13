@@ -13,16 +13,34 @@
  * <p>
  * More detail ...
  * 
- * (1) Classes needed
- * <code>IXxxxSubsystem</code>
- * <code>BaseXxxxSubsystem</code>
- * <code>XxxxSubsystem</code>
- * <code>XxxxFactory</code>
- * <code>XxxxPreferences</code>
- * (2) Edit <code>PreferencesInitializer<code> to add the 
+ * (1) Subsystems Needed
+ * <code>subsystems/Xxxxxx<code>
+ * <code>IXXxxxxxSubsystem</code>
+ * <code>BaseXXxxxxxSubsystem</code>
+ * <code>StubXXxxxxxSubsystem</code>
+ * <code>XxxxxxFactory</code>
+ * <code>XxxxxxPreferences</code>
+ * <code>XxxxxxProperties</code>
+ * 
+ * (2) Commands Needed
+ * <code>commands/Xxxxxx<code>
+ * <code>XxxxxxCommandBase</code>  command
+ * <code>XxxxxxDoNothing</code> command
+ * 
+ * (3) Add Subsystem to other parts
+ * <code>SubsystemNames</code>
+ * <code>TelemetryNames</code>
+ * 
+ * (4) Edit <code>PreferencesInitializer</code> to add the 
  * <code>initialize()<code> call to the 
  * subsystem's <code>Preferences<code> class.
  * </p>
+ * 
+ * (5) Edit <code>SubsystemsFactory</code> to add the
+ * code to create the <code>XxxxxxFactory</code>.
+ * 
+ * (6) Edit the properties file(s) to add the new subystem. At a
+ * minimum it needs the section, className of 
  *
  * @since 2022.0.0
  * @author first.stu

@@ -60,35 +60,11 @@ Vision.className = StubVisionSensor
 #########################################
 
 #####################
-# Ballevator
-#####################
-Ballevator.className = StubBallevatorSubsystem
-#Ballevator.className =
-Ballevator.defaultCommandName = BallevatorDoNothing
-
-
-#####################
-# Climber
-#####################
-Climber.className = StubClimberSubsystem
-#Climber.className =
-Climber.defaultCommandName = ClimberDoNothing
-
-
-#####################
 # Drive
 #####################
 Drive.className = StubDriveSubsystem
 #Drive.className =
 Drive.defaultCommandName = DriveDoNothing
-
-
-#####################
-# Hopper
-#####################
-Hopper.className = StubHopperSubsystem
-#Hopper.className =
-Hopper.defaultCommandName = HopperDoNothing
 
 
 #####################
@@ -100,11 +76,11 @@ Intake.defaultCommandName = IntakeDoNothing
 
 
 #####################
-# Turret
+# Ballevator
 #####################
-Turret.className = StubTurretSubsystem
-#Turret.className =
-Turret.defaultCommandName = TurretDoNothing
+Ballevator.className = StubBallevatorSubsystem
+#Ballevator.className =
+Ballevator.defaultCommandName = BallevatorDoNothing
 
 
 #####################
@@ -114,6 +90,21 @@ Shooter.className = StubShooterSubsystem
 #Shooter.className =
 Shooter.defaultCommandName = ShooterDoNothing
 
+
+#####################
+# Turret
+#####################
+Turret.className = StubTurretSubsystem
+#Turret.className =
+Turret.defaultCommandName = TurretDoNothing
+
+
+#####################
+# Climber
+#####################
+Climber.className = StubClimberSubsystem
+#Climber.className =
+Climber.defaultCommandName = ClimberDoNothing
 
 
 #########################################

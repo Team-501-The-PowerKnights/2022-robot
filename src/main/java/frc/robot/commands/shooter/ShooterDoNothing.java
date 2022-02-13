@@ -6,25 +6,22 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.subsystems.drive;
+package frc.robot.commands.shooter;
 
-
-import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public final class DriveProperties {
-    
+public class ShooterDoNothing extends ShooterCommandBase {
+
     /** Our classes' logger **/
-    @SuppressWarnings("unused")
-    private static final PKLogger logger = RioLogger.getLogger(DriveProperties.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ShooterDoNothing.class.getName());
 
-    private DriveProperties() {}
+    public ShooterDoNothing() {
+        logger.info("constructing {}", getName());
 
-    static private final String name = SubsystemNames.driveName;
-    static final String className = name + ".className";
-    static final String defaultCommandName = name + ".defaultCommandName";
-    
+        logger.info("constructed");
+    }
+
 }

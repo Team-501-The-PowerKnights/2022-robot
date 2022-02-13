@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 import edu.wpi.first.wpilibj.Preferences;
 
 import frc.robot.subsystems.drive.DrivePreferences;
-
+import frc.robot.subsystems.shooter.ShooterPreferences;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -32,6 +32,8 @@ public final class PreferencesInitializer {
         logger.info("initializing");
 
         DrivePreferences.initialize();
+
+        ShooterPreferences.initialize();
 
         logger.info("initialized");
     }

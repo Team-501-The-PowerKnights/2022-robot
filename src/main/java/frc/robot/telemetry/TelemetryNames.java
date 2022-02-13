@@ -139,4 +139,10 @@ public final class TelemetryNames {
         public static final String targetClicks = name + ".targetClicks";
     }
 
+    public final class Shooter {
+        public static final String name = SubsystemNames.shooterName;
+
+        public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+    }
 }

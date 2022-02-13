@@ -53,6 +53,14 @@ Drive.className = StubDriveSubsystem
 Drive.defaultCommandName = DriveDoNothing
 
 
+#####################
+# Shooter
+#####################
+Shooter.className = StubShooterSubsystem
+#Shooter.className =
+Shooter.defaultCommandName = ShooterDoNothing
+
+
 
 #########################################
 #########################################
