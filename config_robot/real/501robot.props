@@ -76,11 +76,11 @@ Intake.defaultCommandName = IntakeDoNothing
 
 
 #####################
-# Ballevator
+# Elevator
 #####################
-Ballevator.className = StubBallevatorSubsystem
-#Ballevator.className =
-Ballevator.defaultCommandName = BallevatorDoNothing
+Elevator.className = StubElevatorSubsystem
+#Elevator.className =
+Elevator.defaultCommandName = ElevatorDoNothing
 
 
 #####################

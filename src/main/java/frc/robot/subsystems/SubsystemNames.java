@@ -19,11 +19,12 @@ public class SubsystemNames {
     public static final String hmiName = "HMI";
 
     public static final String driveName = "Drive";
+
+    public static final String elevatorName = "Elevator";
     public static final String shooterName = "Shooter";
      // Not really a subsystem ... next year - modules
      public static final String turretName = "Turret";
 
-    public static final String ballevatorName = "Ballevator";
     public static final String intakeName = "Intake";
 
     public static final String climberName = "Climber";

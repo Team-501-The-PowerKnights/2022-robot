@@ -15,6 +15,7 @@ import java.util.List;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.subsystems.drive.DriveFactory;
+import frc.robot.subsystems.elevator.ElevatorFactory;
 import frc.robot.subsystems.shooter.ShooterFactory;
 import frc.robot.subsystems.turret.TurretFactory;
 import frc.robot.telemetry.TelemetryNames;
@@ -45,6 +46,15 @@ public class SubsystemFactory {
         {
             DriveFactory.constructInstance();
             ISubsystem ss = DriveFactory.getInstance();
+            tlmMgr.addProvider(ss);
+            subsystems.add(ss);
+        }
+
+        // ** Elevator **
+        SmartDashboard.putNumber(TelemetryNames.Elevator.status, PKStatus.unknown.tlmValue);
+        {
+            ElevatorFactory.constructInstance();
+            ISubsystem ss =ElevatorFactory.getInstance();
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
         }

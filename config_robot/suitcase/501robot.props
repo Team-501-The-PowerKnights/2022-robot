@@ -54,6 +54,14 @@ Drive.defaultCommandName = DriveDoNothing
 
 
 #####################
+# Elevator
+#####################
+Elevator.className = StubElevatorSubsystem
+#Elevator.className =
+Elevator.defaultCommandName = ElevatorDoNothing
+
+
+#####################
 # Shooter
 #####################
 Shooter.className = StubShooterSubsystem
