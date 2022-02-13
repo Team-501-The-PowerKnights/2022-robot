@@ -1,0 +1,24 @@
+{
+    "fileName": "slf4j.json",
+    "name": "Simple_Logging_Facade_for_Java_501_FRC",
+    "version": "1.7.32",
+	"frcYear": 2022,
+    "uuid": "Ceki Gulcu <ceki@qos.ch>",
+    "mavenUrls": [
+        "https://repo1.maven.org/maven2/"
+    ],
+    "javaDependencies": [
+        {
+            "groupId": "org.slf4j",
+            "artifactId": "slf4j-parent",
+            "version": "1.7.32"
+        },
+		{
+            "groupId": "org.slf4j",
+            "artifactId": "slf4j-api",
+            "version": "1.7.32"
+        }
+    ],
+    "jniDependencies": [],
+    "cppDependencies": []
+}
