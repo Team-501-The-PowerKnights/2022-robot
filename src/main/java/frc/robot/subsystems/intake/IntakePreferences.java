@@ -9,8 +9,6 @@
 package frc.robot.subsystems.intake;
 
 
-import edu.wpi.first.wpilibj.Preferences;
-
 import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
@@ -32,8 +30,10 @@ import riolog.RioLogger;
 public final class IntakePreferences {
 
     /** Our classes' logger **/
+    @SuppressWarnings("unused")
     private static final PKLogger logger = RioLogger.getLogger(IntakePreferences.class.getName());
 
+    @SuppressWarnings("unused")
     static private final String name = SubsystemNames.driveName;
 
     private IntakePreferences() {}
