@@ -6,8 +6,8 @@
 #########################################
 #########################################
 
-Robot.robotName = Suitcase-Bot
-Robot.implementation = Suitcase
+Robot.robotName = Zester-Bot
+Robot.implementation = Zester
 
 
 

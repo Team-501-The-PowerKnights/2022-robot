@@ -6,30 +6,22 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.intake;
 
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-/**
- * Add your docs here.
- */
-public class DoNothingButton extends PKCommandBase {
+public class IntakeDoNothing extends IntakeCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(DoNothingButton.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IntakeDoNothing.class.getName());
 
-    // Something for unique identification
-    @SuppressWarnings("unused")
-    private final String button;
-
-    public DoNothingButton(String button) {
+    public IntakeDoNothing() {
         logger.info("constructing {}", getName());
 
-        this.button = button;
-        logger.info("for button {}", button);
+        logger.info("constructed");
     }
 
 }

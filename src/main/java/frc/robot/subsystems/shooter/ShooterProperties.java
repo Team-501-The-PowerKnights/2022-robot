@@ -6,30 +6,25 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.subsystems.shooter;
 
+
+import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-/**
- * Add your docs here.
- */
-public class DoNothingButton extends PKCommandBase {
-
+public final class ShooterProperties {
+    
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(DoNothingButton.class.getName());
-
-    // Something for unique identification
     @SuppressWarnings("unused")
-    private final String button;
+    private static final PKLogger logger = RioLogger.getLogger(ShooterProperties.class.getName());
 
-    public DoNothingButton(String button) {
-        logger.info("constructing {}", getName());
+    private ShooterProperties() {}
 
-        this.button = button;
-        logger.info("for button {}", button);
-    }
-
+    static private final String name = SubsystemNames.driveName;
+    static final String className = name + ".className";
+    static final String defaultCommandName = name + ".defaultCommandName";
+    
 }

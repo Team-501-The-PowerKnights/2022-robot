@@ -155,7 +155,7 @@ public class PropertiesManager {
         if (ownerProperties.containsKey(owner)) {
             return new PKProperties(owner, ownerProperties.get(owner));
         } else {
-            logger.error("Properties for owner {} don't exist");
+            logger.error("Properties for owner {} don't exist", owner);
             return new PKProperties(owner, new HashMap<String, String>());
         }
     }

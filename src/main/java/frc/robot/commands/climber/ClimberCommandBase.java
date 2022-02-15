@@ -6,8 +6,12 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.climber;
 
+
+import frc.robot.commands.PKCommandBase;
+import frc.robot.subsystems.climber.IClimberSubsystem;
+import frc.robot.subsystems.climber.ClimberFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -16,20 +20,22 @@ import riolog.RioLogger;
 /**
  * Add your docs here.
  */
-public class DoNothingButton extends PKCommandBase {
+abstract class ClimberCommandBase extends PKCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(DoNothingButton.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ClimberCommandBase.class.getName());
 
-    // Something for unique identification
-    @SuppressWarnings("unused")
-    private final String button;
+    // Handle to our subsystem
+    protected IClimberSubsystem climber;
 
-    public DoNothingButton(String button) {
+    public ClimberCommandBase() {
         logger.info("constructing {}", getName());
 
-        this.button = button;
-        logger.info("for button {}", button);
+        climber = ClimberFactory.getInstance();
+
+        addRequirements(climber);
+
+        logger.info("constructed");
     }
 
 }

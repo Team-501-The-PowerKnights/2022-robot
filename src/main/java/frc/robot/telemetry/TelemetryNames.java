@@ -139,4 +139,39 @@ public final class TelemetryNames {
         public static final String targetClicks = name + ".targetClicks";
     }
 
+    public final class Intake {
+        public static final String name = SubsystemNames.intakeName;
+
+        public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+    }
+
+    public final class Elevator {
+        public static final String name = SubsystemNames.elevatorName;
+
+        public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+    }
+
+    public final class Shooter {
+        public static final String name = SubsystemNames.shooterName;
+
+        public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+    }
+
+    public final class Turret {
+        public static final String name = SubsystemNames.turretName;
+
+        public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+    }
+
+    public final class Climber {
+        public static final String name = SubsystemNames.climberName;
+
+        public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+    }
+
 }

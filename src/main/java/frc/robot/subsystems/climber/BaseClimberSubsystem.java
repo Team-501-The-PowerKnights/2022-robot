@@ -6,14 +6,14 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.subsystems.drive;
+package frc.robot.subsystems.climber;
 
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import frc.robot.commands.drive.DriveDoNothing;
+import frc.robot.commands.climber.ClimberDoNothing;
 import frc.robot.properties.PKProperties;
 import frc.robot.properties.PropertiesManager;
 import frc.robot.subsystems.SubsystemNames;
@@ -27,15 +27,15 @@ import riolog.RioLogger;
 /**
  * Add your docs here.
  */
-abstract class BaseDriveSubsystem extends SubsystemBase implements IDriveSubsystem {
+abstract class BaseClimberSubsystem extends SubsystemBase implements IClimberSubsystem {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(BaseDriveSubsystem.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(BaseClimberSubsystem.class.getName());
 
     /** Our subsystem's name **/
-    protected static final String myName = SubsystemNames.driveName;
+    protected static final String myName = SubsystemNames.climberName;
 
-    BaseDriveSubsystem() {
+    BaseClimberSubsystem() {
         logger.info("constructing");
 
         logger.info("constructed");
@@ -45,7 +45,7 @@ abstract class BaseDriveSubsystem extends SubsystemBase implements IDriveSubsyst
     public void loadDefaultCommand() {
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
         String myClassName = props.getString("defaultCommandName");
-        String myPkgName = DriveDoNothing.class.getPackage().getName();
+        String myPkgName = ClimberDoNothing.class.getPackage().getName();
         String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
         logger.debug("class to load: {}", classToLoad);
 
@@ -59,11 +59,11 @@ abstract class BaseDriveSubsystem extends SubsystemBase implements IDriveSubsyst
             ourCommand = (Command) myObject;
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for: {}", myName);
-            ourCommand = (Command) new DriveDoNothing();
-            SmartDashboard.putNumber(TelemetryNames.Drive.status, PKStatus.degraded.tlmValue);
+            ourCommand = (Command) new ClimberDoNothing();
+            SmartDashboard.putNumber(TelemetryNames.Climber.status, PKStatus.degraded.tlmValue);
         }
 
         setDefaultCommand(ourCommand);
     }
-
+    
 }

@@ -6,8 +6,12 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.shooter;
 
+
+import frc.robot.commands.PKCommandBase;
+import frc.robot.subsystems.shooter.IShooterSubsystem;
+import frc.robot.subsystems.shooter.ShooterFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -16,20 +20,22 @@ import riolog.RioLogger;
 /**
  * Add your docs here.
  */
-public class DoNothingButton extends PKCommandBase {
+abstract class ShooterCommandBase extends PKCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(DoNothingButton.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ShooterCommandBase.class.getName());
 
-    // Something for unique identification
-    @SuppressWarnings("unused")
-    private final String button;
+    // Handle to our subsystem
+    protected IShooterSubsystem shooter;
 
-    public DoNothingButton(String button) {
+    public ShooterCommandBase() {
         logger.info("constructing {}", getName());
 
-        this.button = button;
-        logger.info("for button {}", button);
+        shooter = ShooterFactory.getInstance();
+
+        addRequirements(shooter);
+
+        logger.info("constructed");
     }
 
 }

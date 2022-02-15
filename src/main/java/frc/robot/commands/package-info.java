@@ -7,29 +7,3 @@
 /*-----------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
-
-import riolog.PKLogger;
-import riolog.RioLogger;
-
-
-/**
- * Add your docs here.
- */
-public class DoNothingButton extends PKCommandBase {
-
-    /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(DoNothingButton.class.getName());
-
-    // Something for unique identification
-    @SuppressWarnings("unused")
-    private final String button;
-
-    public DoNothingButton(String button) {
-        logger.info("constructing {}", getName());
-
-        this.button = button;
-        logger.info("for button {}", button);
-    }
-
-}

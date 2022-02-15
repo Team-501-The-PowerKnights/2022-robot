@@ -51,7 +51,7 @@ public abstract class PKCommandBase extends CommandBase {
     }
     
     // Flag for whether the first execution has happened
-    private boolean executeOnce;
+    private boolean executedOnce;
 
     protected PKCommandBase() {
         logger.info("constructing for {}", getName());
@@ -64,7 +64,7 @@ public abstract class PKCommandBase extends CommandBase {
     public void initialize() {
         logger.debug("initializing {}", getName());
 
-        executeOnce = false;
+        executedOnce = false;
     }
 
     // Called repeatedly while the Command is scheduled
@@ -74,8 +74,8 @@ public abstract class PKCommandBase extends CommandBase {
     }
 
     protected void logExecuteStart(PKLogger logger) {
-        if (!executeOnce) {
-            executeOnce = true;
+        if (!executedOnce) {
+            executedOnce = true;
             logger.trace("first execution of {}", getName());
 
             add(this);

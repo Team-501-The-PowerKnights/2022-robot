@@ -6,8 +6,12 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.intake;
 
+
+import frc.robot.commands.PKCommandBase;
+import frc.robot.subsystems.intake.IIntakeSubsystem;
+import frc.robot.subsystems.intake.IntakeFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -16,20 +20,22 @@ import riolog.RioLogger;
 /**
  * Add your docs here.
  */
-public class DoNothingButton extends PKCommandBase {
+abstract class IntakeCommandBase extends PKCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(DoNothingButton.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IntakeCommandBase.class.getName());
 
-    // Something for unique identification
-    @SuppressWarnings("unused")
-    private final String button;
+    // Handle to our subsystem
+    protected IIntakeSubsystem intake;
 
-    public DoNothingButton(String button) {
+    public IntakeCommandBase() {
         logger.info("constructing {}", getName());
 
-        this.button = button;
-        logger.info("for button {}", button);
+        intake = IntakeFactory.getInstance();
+
+        addRequirements(intake);
+
+        logger.info("constructed");
     }
 
 }

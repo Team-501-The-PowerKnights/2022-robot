@@ -6,30 +6,20 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.subsystems.turret;
 
 
-import riolog.PKLogger;
-import riolog.RioLogger;
+import frc.robot.subsystems.ISubsystem;
 
 
 /**
  * Add your docs here.
- */
-public class DoNothingButton extends PKCommandBase {
+ **/
+public interface ITurretSubsystem extends ISubsystem {
 
-    /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(DoNothingButton.class.getName());
-
-    // Something for unique identification
-    @SuppressWarnings("unused")
-    private final String button;
-
-    public DoNothingButton(String button) {
-        logger.info("constructing {}", getName());
-
-        this.button = button;
-        logger.info("for button {}", button);
-    }
+    /**
+     * Stop the turret from any motion it may have been running under.
+     */
+    public void stop();
 
 }

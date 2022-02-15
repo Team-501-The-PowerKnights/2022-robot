@@ -6,8 +6,12 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.turret;
 
+
+import frc.robot.commands.PKCommandBase;
+import frc.robot.subsystems.turret.ITurretSubsystem;
+import frc.robot.subsystems.turret.TurretFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -16,20 +20,22 @@ import riolog.RioLogger;
 /**
  * Add your docs here.
  */
-public class DoNothingButton extends PKCommandBase {
+abstract class TurretCommandBase extends PKCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(DoNothingButton.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(TurretCommandBase.class.getName());
 
-    // Something for unique identification
-    @SuppressWarnings("unused")
-    private final String button;
+    // Handle to our subsystem
+    protected ITurretSubsystem turret;
 
-    public DoNothingButton(String button) {
+    public TurretCommandBase() {
         logger.info("constructing {}", getName());
 
-        this.button = button;
-        logger.info("for button {}", button);
+        turret = TurretFactory.getInstance();
+
+        addRequirements(turret);
+
+        logger.info("constructed");
     }
 
 }
