@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.robot.subsystems.climber.ClimberFactory;
 import frc.robot.subsystems.drive.DriveFactory;
 import frc.robot.subsystems.elevator.ElevatorFactory;
 import frc.robot.subsystems.intake.IntakeFactory;
@@ -83,6 +83,15 @@ public class SubsystemFactory {
         {
             TurretFactory.constructInstance();
             ISubsystem ss =TurretFactory.getInstance();
+            tlmMgr.addProvider(ss);
+            subsystems.add(ss);
+        }
+
+        // ** Climber **
+        SmartDashboard.putNumber(TelemetryNames.Climber.status, PKStatus.unknown.tlmValue);
+        {
+            ClimberFactory.constructInstance();
+            ISubsystem ss =ClimberFactory.getInstance();
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
         }

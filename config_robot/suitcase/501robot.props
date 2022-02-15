@@ -85,6 +85,15 @@ Turret.className = StubTurretSubsystem
 Turret.defaultCommandName = TurretDoNothing
 
 
+#####################
+# Climber
+#####################
+Climber.className = StubClimberSubsystem
+#Climber.className =
+Climber.defaultCommandName = ClimberDoNothing
+
+
+
 #########################################
 #########################################
 # OI

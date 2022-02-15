@@ -26,7 +26,6 @@ public class SubsystemNames {
      // Not really a subsystem ... next year - modules
      public static final String turretName = "Turret";
 
-
     public static final String climberName = "Climber";
 
 }
