@@ -54,6 +54,14 @@ Drive.defaultCommandName = DriveDoNothing
 
 
 #####################
+# Intake
+#####################
+Intake.className = StubIntakeSubsystem
+#Intake.className =
+Intake.defaultCommandName = IntakeDoNothing
+
+
+#####################
 # Elevator
 #####################
 Elevator.className = StubElevatorSubsystem

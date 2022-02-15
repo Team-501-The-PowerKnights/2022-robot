@@ -139,6 +139,13 @@ public final class TelemetryNames {
         public static final String targetClicks = name + ".targetClicks";
     }
 
+    public final class Intake {
+        public static final String name = SubsystemNames.intakeName;
+
+        public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+    }
+
     public final class Elevator {
         public static final String name = SubsystemNames.elevatorName;
 

@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 import edu.wpi.first.wpilibj.Preferences;
 
 import frc.robot.subsystems.drive.DrivePreferences;
+import frc.robot.subsystems.elevator.ElevatorPreferences;
+import frc.robot.subsystems.intake.IntakePreferences;
 import frc.robot.subsystems.shooter.ShooterPreferences;
 import frc.robot.subsystems.turret.TurretPreferences;
 
@@ -35,7 +37,10 @@ public final class PreferencesInitializer {
 
         DrivePreferences.initialize();
 
+        IntakePreferences.initialize();
+        ElevatorPreferences.initialize();
         ShooterPreferences.initialize();
+
         TurretPreferences.initialize();
 
         logger.info("initialized");
