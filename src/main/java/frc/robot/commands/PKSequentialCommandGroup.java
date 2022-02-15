@@ -28,7 +28,7 @@ public class PKSequentialCommandGroup extends SequentialCommandGroup {
     // FIXME - Commands are handled differently (not through scheduler)
 
     // Flag for whether the first execution has happened
-    private boolean executeOnce;
+    private boolean executedOnce;
 
     public PKSequentialCommandGroup() {
         logger.info("constructing for {}", getName());
@@ -50,7 +50,7 @@ public class PKSequentialCommandGroup extends SequentialCommandGroup {
     public void initialize() {
         logger.debug("initializing {}", getName());
 
-        executeOnce = false;
+        executedOnce = false;
 
         super.initialize();
     }
@@ -64,8 +64,8 @@ public class PKSequentialCommandGroup extends SequentialCommandGroup {
     }
 
     protected void logExecuteStart(PKLogger logger) {
-        if (!executeOnce) {
-            executeOnce = true;
+        if (!executedOnce) {
+            executedOnce = true;
             logger.trace("first execution of {}", getName());
 
             // add(this);
