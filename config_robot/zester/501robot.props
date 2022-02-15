@@ -1,0 +1,94 @@
+#########################################
+#########################################
+#
+# Team 501 Robot Properties
+#
+#########################################
+#########################################
+
+Robot.robotName = Zester-Bot
+Robot.implementation = Zester
+
+
+
+#########################################
+#########################################
+# Module Defines
+#########################################
+#########################################
+
+#####################
+# PDP
+#####################
+PDP.className = StubPDPModule
+#PDP.className =
+
+
+
+#########################################
+#########################################
+# Sensor Defines
+#########################################
+#########################################
+
+#####################
+# Gyro
+#####################
+Gyro.className = StubGyroSensor
+#Gyro.className =
+
+
+
+#########################################
+#########################################
+# Subsystem Defines
+#########################################
+#########################################
+
+#####################
+# Drive
+#####################
+Drive.className = StubDriveSubsystem
+#Drive.className =
+Drive.defaultCommandName = DriveDoNothing
+
+
+#####################
+# Elevator
+#####################
+Elevator.className = StubElevatorSubsystem
+#Elevator.className =
+Elevator.defaultCommandName = ElevatorDoNothing
+
+
+#####################
+# Shooter
+#####################
+Shooter.className = StubShooterSubsystem
+#Shooter.className =
+Shooter.defaultCommandName = ShooterDoNothing
+
+
+#####################
+# Turret
+#####################
+Turret.className = StubTurretSubsystem
+#Turret.className =
+Turret.defaultCommandName = TurretDoNothing
+
+
+#########################################
+#########################################
+# OI
+#########################################
+#########################################
+
+#####################
+# Driver Gamepad
+#####################
+
+
+#####################
+# Operator Gamepad
+#####################
+
