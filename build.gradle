@@ -88,7 +88,7 @@ deployArtifact.jarTask = jar
 wpi.java.configureExecutableTasks(jar)
 wpi.java.configureTestTasks(test)
 
-
+deployroborio.dependsOn 'writeBuildInfo'
 build.dependsOn 'writeBuildInfo'
 
 task writeBuildInfo {
