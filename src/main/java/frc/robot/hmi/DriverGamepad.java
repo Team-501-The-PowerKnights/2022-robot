@@ -25,7 +25,7 @@ import riolog.RioLogger;
  * <p>
  * See <code>control_mode.md</code> for documentation of how configured and used.
  */
-public class DriverGamepad extends BaseGamepad {
+public class DriverGamepad extends F310Gamepad {
     
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(DriverGamepad.class.getName());
@@ -39,9 +39,9 @@ public class DriverGamepad extends BaseGamepad {
         super(0);
         logger.info("constructing {}");
 
-        turboButton = new JoystickButton(stick, 5);
-        crawlButton = new JoystickButton(stick, 6);
-        driveSwapButton = new JoystickButton(stick, 3);
+        turboButton = new JoystickButton(stick, leftBumper);
+        crawlButton = new JoystickButton(stick, rightBumper);
+        driveSwapButton = new JoystickButton(stick, backButton);
 
         logger.info("constructed");
     }

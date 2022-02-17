@@ -9,7 +9,7 @@
 - [analog] (Right Joystick L-R): Drivetrain Turn (left/right)
 - [button] (Right Bumper): Drivetrain Crawl Enabled *{whenHeld}*
 - [button] (Left Bumper): Drive Train Turbo Enabled *{whenHeld}*~~
-- [button] (???) Switch Drive Direction
+- [button] (Back Button) Switch Drive Direction
 - [analog] (Left Trigger): Intake In
 - [analog] (Right Trigger): Intake Out
 

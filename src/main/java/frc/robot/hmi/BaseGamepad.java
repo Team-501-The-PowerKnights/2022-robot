@@ -52,45 +52,5 @@ abstract class BaseGamepad  implements IGamepad {
         return retValue;
     }
 
-    
-    protected double getLeftYAxis() {
-        return -stick.getRawAxis(1);
-    }
-
-    protected double getLeftXAxis() {
-        return stick.getRawAxis(0);
-    }
-
-    protected double getRightYAxis() {
-        return -stick.getRawAxis(5);
-    }
-
-    protected double getRightXAxis() {
-        return stick.getRawAxis(4);
-    }
-
-    protected double getLeftTrigger() {
-        return stick.getRawAxis(2);
-    }
-
-    protected double getRightTrigger() {
-        return stick.getRawAxis(3);
-    }
-
-    protected boolean getGreenButton() {
-        return stick.getRawButton(1);
-    }
-
-    protected boolean getRedButton() {
-        return stick.getRawButton(2);
-    }
-
-    protected boolean getRightBumper() {
-        return stick.getRawButton(6);
-    }
-
-    protected boolean getStartButton() {
-        return stick.getRawButton(8);
-    }
 
 }

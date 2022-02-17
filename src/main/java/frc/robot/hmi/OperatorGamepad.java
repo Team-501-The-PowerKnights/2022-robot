@@ -24,7 +24,7 @@ import riolog.RioLogger;
  * <p>
  * See <code>control_mode.md</code> for documentation of how configured and used.
  */
-public class OperatorGamepad extends BaseGamepad {
+public class OperatorGamepad extends F310Gamepad {
     
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(OperatorGamepad.class.getName());
@@ -39,10 +39,10 @@ public class OperatorGamepad extends BaseGamepad {
         super(1);
         logger.info("constructing {}");
 
-        firePoseButton = new JoystickButton(stick, 1);
-        visionTargettingButton = new JoystickButton(stick, 6);
-        revShooterButton = new JoystickButton(stick, 2);
-        homeTurretButton = new JoystickButton(stick, 8);
+        firePoseButton = new JoystickButton(stick, greenButton);
+        visionTargettingButton = new JoystickButton(stick, rightBumper);
+        revShooterButton = new JoystickButton(stick, redButton);
+        homeTurretButton = new JoystickButton(stick, startButton);
 
         logger.info("constructed");
     }
