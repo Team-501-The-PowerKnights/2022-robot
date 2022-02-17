@@ -8,9 +8,7 @@
 
 package frc.robot.subsystems.elevator;
 
-
 import frc.robot.subsystems.ISubsystem;
-
 
 /**
  * Add your docs here.
@@ -21,5 +19,13 @@ public interface IElevatorSubsystem extends ISubsystem {
      * Stop the elevator from any motion it may have been running under.
      */
     public void stop();
+
+    public void lift();
+
+    public void lower();
+
+    public boolean isFull();
+
+    public void liftToLimit();
 
 }

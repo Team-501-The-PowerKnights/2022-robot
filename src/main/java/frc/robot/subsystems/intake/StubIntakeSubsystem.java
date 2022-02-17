@@ -8,13 +8,11 @@
 
 package frc.robot.subsystems.intake;
 
-
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-
 public class StubIntakeSubsystem extends BaseIntakeSubsystem {
-   
+
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(StubIntakeSubsystem.class.getName());
 
@@ -26,27 +24,50 @@ public class StubIntakeSubsystem extends BaseIntakeSubsystem {
 
     @Override
     public void stop() {
-        // Stub doesn't implement this 
+        // Stub doesn't implement this
     }
 
     @Override
     public void validateCalibration() {
-        // Stub doesn't implement this 
+        // Stub doesn't implement this
     }
 
     @Override
     public void updatePreferences() {
-        // Stub doesn't implement this 
+        // Stub doesn't implement this
     }
 
     @Override
     public void disable() {
-        // Stub doesn't implement this 
+        // Stub doesn't implement this
     }
 
     @Override
     public void updateTelemetry() {
-         // Stub doesn't implement this 
-    } 
-    
+        // Stub doesn't implement this
+    }
+
+    @Override
+    public void pullIn() {
+        // Stub doesn't implement this
+
+    }
+
+    @Override
+    public void pullIn(double speed) {
+        // Stub doesn't implement this
+
+    }
+
+    @Override
+    public void pushOut() {
+        // Stub doesn't implement this
+    }
+
+    @Override
+    public void pushOut(double speed) {
+        // Stub doesn't implement this
+
+    }
+
 }

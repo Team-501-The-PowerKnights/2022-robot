@@ -8,23 +8,45 @@
 
 package frc.robot.subsystems.elevator;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class StubElevatorSubsystem extends BaseElevatorSubsystem {
+public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(StubElevatorSubsystem.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ZesterElevatorSubsystem.class.getName());
 
-    StubElevatorSubsystem() {
+    private final TalonSRX motor;
+
+    private final DigitalInput limit;
+
+    // Keep for telemetry
+    private double tlmSpeed;
+
+    ZesterElevatorSubsystem() {
         logger.info("constructing");
+
+        motor = new TalonSRX(51);
+        motor.configFactoryDefault();
+        motor.setNeutralMode(NeutralMode.Brake);
+
+        limit = new DigitalInput(9);
+
+        tlmSpeed = 0.0;
 
         logger.info("constructed");
     }
 
     @Override
     public void stop() {
-        // Stub doesn't implement this
+        motor.set(ControlMode.PercentOutput, 0);
     }
 
     @Override
@@ -44,30 +66,37 @@ public class StubElevatorSubsystem extends BaseElevatorSubsystem {
 
     @Override
     public void updateTelemetry() {
-        // Stub doesn't implement this
+        SmartDashboard.putNumber(TelemetryNames.Elevator.speed, tlmSpeed);
+        SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit, limit.get());
     }
 
     @Override
     public void lift() {
-        // Stub doesn't implement this
-
+        setSpeed(-0.85);
     }
 
     @Override
     public void lower() {
-        // Stub doesn't implement this
-
+        setSpeed(1.0);
     }
 
     @Override
     public boolean isFull() {
-        // Stub doesn't implement this
-        return false;
+        return limit.get();
+    }
+
+    private void setSpeed(double speed) {
+        tlmSpeed = speed;
+        motor.set(ControlMode.PercentOutput, tlmSpeed);
     }
 
     @Override
     public void liftToLimit() {
-        // Stub doesn't implement this
+        if (!isFull()) {
+            lift();
+        } else {
+            stop();
+        }
     }
 
 }

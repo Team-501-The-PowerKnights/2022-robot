@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.drive;
 
-
 import java.util.List;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -21,7 +20,6 @@ import edu.wpi.first.math.geometry.Translation2d;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
 
@@ -120,6 +118,12 @@ class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public double getEncoderClicks() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public double getEncoderVelocity() {
         // TODO Auto-generated method stub
         return 0;
     }
