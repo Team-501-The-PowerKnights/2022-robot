@@ -92,6 +92,11 @@ public final class TelemetryNames {
         public static final String turn = name + ".turn";
 
         public static final String intakeSpeed = name + ".intakeSpeed";
+
+        public static final String firePose = name + ".firePose";
+        public static final String visionTargetting = name + ".visionTargetting";
+        public static final String revShooter = name + ".revShooter";
+        public static final String homeTurret = name + ".homeTurret";
     }
 
     /***************

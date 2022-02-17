@@ -15,15 +15,15 @@
 
 ## Operator
 ### Fire
-- [button] (Green #0): Fire Pose *{whenHeld}*
+- [button] (Green #1): Fire Pose *{whenHeld}*
   - if shooter is not revved up, rev up shooter
   - run intake and hopper
   - advance balls via ballevator into shooter
 ### Vision
-- [button] (Right Bumper #5): Enable vision targetting *{whenHeld}*
+- [button] (Right Bumper #6): Enable vision targetting *{whenHeld}*
   - enforce turret rotation with limits
 ### Shooter
-- [button] (Red #1): Rev Shooter *{whenHeld}*
+- [button] (Red #2): Rev Shooter *{whenHeld}*
   - use PID and selected set_point
   - else idle shooter at constant preset in code
 - [button] (POV Up 0): Shooter RPM fine adjustment off of baseline
@@ -31,13 +31,13 @@
   - +/- range **~50** RPM
   - funky start enable processing
 ### Turret
-- [button] (Start #7): Home Turret *{whenPressed}*
+- [button] (Start #8): Home Turret *{whenPressed}*
   - hold control until homed?
 - [button] (POV Left 270): Turret fine angle adjustment off of baseline
 - [button] (POV Right 90): Turret fine angle adjustment off of baseline
   - +/- range **~3** degrees
   - funky start enable processing
-- [analog] (Left Triger #2): Turret jog *{whenHeld}*
+- [analog] (Left Trigger #2): Turret jog *{whenHeld}*
   - counter-clockwise at constant preset in code
   - additive to final turret rotation value
   - stays from one shot sequence to next

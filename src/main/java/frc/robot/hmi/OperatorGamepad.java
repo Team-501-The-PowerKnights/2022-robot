@@ -10,6 +10,9 @@ package frc.robot.hmi;
 
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.button.Button;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -26,11 +29,20 @@ public class OperatorGamepad extends BaseGamepad {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(OperatorGamepad.class.getName());
 
+    private final Button firePoseButton;
+    private final Button visionTargettingButton;
+    private final Button revShooterButton;
+    private final Button homeTurretButton;
     
     public OperatorGamepad() 
     {
         super(1);
         logger.info("constructing {}");
+
+        firePoseButton = new JoystickButton(stick, 1);
+        visionTargettingButton = new JoystickButton(stick, 6);
+        revShooterButton = new JoystickButton(stick, 2);
+        homeTurretButton = new JoystickButton(stick, 8);
 
         logger.info("constructed");
     }
@@ -47,8 +59,10 @@ public class OperatorGamepad extends BaseGamepad {
 
     @Override
     public void updateTelemetry() {
-        // TODO Auto-generated method stub
-        
+        SmartDashboard.putBoolean(TelemetryNames.HMI.firePose, firePoseButton.get());
+        SmartDashboard.putBoolean(TelemetryNames.HMI.visionTargetting, visionTargettingButton.get());
+        SmartDashboard.putBoolean(TelemetryNames.HMI.revShooter, revShooterButton.get());
+        SmartDashboard.putBoolean(TelemetryNames.HMI.homeTurret, homeTurretButton.get()); 
     }
 
 }

@@ -10,7 +10,7 @@
 package frc.robot.hmi;
 
 
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.GenericHID;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -22,13 +22,13 @@ abstract class BaseGamepad  implements IGamepad {
     private static final PKLogger logger = RioLogger.getLogger(BaseGamepad.class.getName());
 
     /** Our joystick */
-    protected final Joystick stick;
+    protected final GenericHID stick;
 
     protected BaseGamepad(int port)
     {
         logger.info("constructing {}");
 
-        stick = new Joystick(port);
+        stick = new GenericHID(port);
 
         logger.info("constructed");
     }
@@ -75,6 +75,22 @@ abstract class BaseGamepad  implements IGamepad {
 
     protected double getRightTrigger() {
         return stick.getRawAxis(3);
+    }
+
+    protected boolean getGreenButton() {
+        return stick.getRawButton(1);
+    }
+
+    protected boolean getRedButton() {
+        return stick.getRawButton(2);
+    }
+
+    protected boolean getRightBumper() {
+        return stick.getRawButton(6);
+    }
+
+    protected boolean getStartButton() {
+        return stick.getRawButton(8);
     }
 
 }
