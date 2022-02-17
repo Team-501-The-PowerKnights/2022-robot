@@ -90,6 +90,8 @@ public final class TelemetryNames {
 
         public static final String speed = name + ".speed";
         public static final String turn = name + ".turn";
+
+        public static final String intakeSpeed = name + ".intakeSpeed";
     }
 
     /***************

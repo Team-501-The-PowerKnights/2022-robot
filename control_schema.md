@@ -10,8 +10,8 @@
 - [button] (Right Bumper): Drivetrain Crawl Enabled *{whenHeld}*
 - [button] (Left Bumper): Drive Train Turbo Enabled *{whenHeld}*~~
 - [button] (???) Switch Drive Direction
-- [analog] (Left Trigger): Intake In & Hopper
-- [analog] (Right Trigger): Intake Out & Hopper
+- [analog] (Left Trigger): Intake In
+- [analog] (Right Trigger): Intake Out
 
 ## Operator
 ### Fire
