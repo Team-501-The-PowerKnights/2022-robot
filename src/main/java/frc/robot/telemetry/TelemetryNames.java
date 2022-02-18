@@ -8,11 +8,9 @@
 
 package frc.robot.telemetry;
 
-
 import frc.robot.modules.ModuleNames;
 import frc.robot.sensors.SensorNames;
 import frc.robot.subsystems.SubsystemNames;
-
 
 /**
  * Provides a standard way of defining names for the <i>Telemetry</i> used in
@@ -21,7 +19,8 @@ import frc.robot.subsystems.SubsystemNames;
  **/
 public final class TelemetryNames {
 
-    private TelemetryNames() {}
+    private TelemetryNames() {
+    }
 
     public final class Misc {
         public static final String name = "Misc";
@@ -108,7 +107,7 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
-        
+
         public static final String busVoltage = name + ".busVoltage";
         public static final String totalCurrent = name + ".totalCurrent";
         public static final String totalEnergy = name + ".totalEnergy";
@@ -129,6 +128,30 @@ public final class TelemetryNames {
         public static final String yaw = name + ".yaw";
         public static final String angle = name + ".angle";
         public static final String heading = name + ".heading";
+    }
+
+    public final class TurretLocation {
+        public static final String name = SensorNames.turretLocationName;
+
+        public static final String status = name + ".status";
+        public static final String isFound = name + ".isFound";
+    }
+
+    public final class Vision {
+        public static final String name = SensorNames.visionName;
+
+        // Set by the vision program running on R-PI
+        public static final String status = name + ".status";
+        // Running count for iterations of program
+        public static final String heart_beat = name + ".heart_beat";
+        // Valid solution?
+        public static final String locked = name + ".locked";
+        // Delta offset (+ CCW; rotate CW to fix & - CW; rotate CCW to fix)
+        public static final String angle = name + ".angle";
+        // Incremented every time
+        public static final String count = name + ".count";
+
+        public static final String enabled = name + ".enabled";
     }
 
     /***************
@@ -154,6 +177,8 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+
+        public static final String speed = name + ".speed";
     }
 
     public final class Elevator {
@@ -161,6 +186,8 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+        public static final String speed = name + ".speed";
+        public static final String atLimit = name + ".atLimit";
     }
 
     public final class Shooter {
@@ -168,6 +195,10 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+        public static final String isActive = name + ".isActive";
+        public static final String rpm = name + ".rpm";
+        public static final String targetRpm = name + ".targetRpm";
+        public static final String atTarget = name + ".atTarget";
     }
 
     public final class Turret {
@@ -175,6 +206,10 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+        public static final String angle = name + ".angle";
+        public static final String position = name + ".rawPosition";
+        public static final String isHomed = name + ".isHomed";
+        public static final String visionPIDOutput = name + ".visionPIDOutput";
     }
 
     public final class Climber {
@@ -182,6 +217,9 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+        public static final String topLimit = name + ".topLimit";
+        public static final String bottomLimit = name + ".bottomLimit";
+        public static final String speed = name + ".speed";
     }
 
 }

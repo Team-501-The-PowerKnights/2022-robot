@@ -6,17 +6,15 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors;
+package frc.robot.sensors.turretlocation;
+
+import frc.robot.sensors.ISensor;
 
 /**
- * Provides a standard way of defining names for the <i>Sensors</i> used in the
- * program. No code should define or use a hard-coded string outside of the ones
- * defined in this class.
+ * Add your docs here.
  **/
-public class SensorNames {
+public interface ITurretLocationSensor extends ISensor {
 
-    public static final String gyroName = "Gyro";
-    public static final String turretLocationName = "TurretLocation";
-    public static final String visionName = "Vision";
+    public boolean get();
 
 }
