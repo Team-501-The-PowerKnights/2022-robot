@@ -51,8 +51,6 @@
 
 
 
-
-
 - [button] (??????): Extend Climber *{whenPressed}*
   - limit by encoder or limit switch
   - speed is constant preset in code
