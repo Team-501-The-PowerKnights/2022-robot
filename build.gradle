@@ -5,6 +5,8 @@ plugins {
     id "edu.wpi.first.GradleRIO" version "2022.2.1"
 }
 
+apply plugin: 'java'
+
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
 
@@ -87,6 +89,10 @@ jar {
 deployArtifact.jarTask = jar
 wpi.java.configureExecutableTasks(jar)
 wpi.java.configureTestTasks(test)
+
+javadoc {
+    source = sourceSets.main.allJava
+}
 
 deployroborio.dependsOn 'writeBuildInfo'
 build.dependsOn 'writeBuildInfo'
