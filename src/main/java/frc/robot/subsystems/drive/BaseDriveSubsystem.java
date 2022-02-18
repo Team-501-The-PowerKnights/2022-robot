@@ -66,4 +66,16 @@ abstract class BaseDriveSubsystem extends SubsystemBase implements IDriveSubsyst
         setDefaultCommand(ourCommand);
     }
 
+    protected double speed = 0.0;
+    protected double turn = 0.0;
+    protected double leftSpeed = 0.0;
+    protected double rightSpeed = 0.0;
+
+    @Override
+    public void updateTelemetry()
+    {
+        SmartDashboard.putNumber(TelemetryNames.Drive.leftSpeed, leftSpeed);
+        SmartDashboard.putNumber(TelemetryNames.Drive.rightSpeed, rightSpeed);
+    }
+
 }

@@ -88,4 +88,12 @@ abstract class F310Gamepad extends BaseGamepad {
         return stick.getRawButton(startButton);
     }
 
+    protected final boolean isPov90() {
+        return (stick.getPOV() == 90);
+    }
+
+    protected final boolean isPov270() {
+        return (stick.getPOV() == 270);
+    }
+
 }

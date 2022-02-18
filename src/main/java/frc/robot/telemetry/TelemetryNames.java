@@ -144,6 +144,9 @@ public final class TelemetryNames {
         public static final String encoderClicks = name + ".encoderClicks";
         public static final String distanceClicks = name + ".distanceClicks";
         public static final String targetClicks = name + ".targetClicks";
+
+        public static final String leftSpeed = name + ".leftSpeed";
+        public static final String rightSpeed = name + ".rightSpeed";
     }
 
     public final class Intake {

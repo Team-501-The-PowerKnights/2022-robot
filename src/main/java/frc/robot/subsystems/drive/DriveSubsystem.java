@@ -140,6 +140,8 @@ class DriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void updateTelemetry() {
+        super.updateTelemetry();
+
         SmartDashboard.putNumber(TelemetryNames.Drive.encoderClicks, getEncoderClicks());
     }
 
@@ -190,11 +192,6 @@ class DriveSubsystem extends BaseDriveSubsystem {
     /*
      * Drive constraint values
      */
-
-    private static double speed;
-    private static double turn;
-    private static double leftSpeed;
-    private static double rightSpeed;
 
     private final double quickTurnThreshold = 0.2;
 

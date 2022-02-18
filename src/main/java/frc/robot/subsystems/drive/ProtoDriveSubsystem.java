@@ -132,6 +132,7 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void updateTelemetry() {
+        super.updateTelemetry();
         // TODO Auto-generated method stub
 
     }
