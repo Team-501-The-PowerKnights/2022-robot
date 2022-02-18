@@ -18,7 +18,7 @@ package frc.robot.config;
  * tools do with keyword expansions.
  **/
 class BuildVersionInfo {
-    public static final String programmer = "Caleb Hagner";
-    public static final String commitSHA = "9bac587";
-    public static final String timeStamp = "20220215-194131";
+    public static final String programmer = "Stu Lewin";
+    public static final String commitSHA = "2223449";
+    public static final String timeStamp = "20220218-091041";
 }

@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.drive;
 
+
 import java.util.List;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -23,6 +24,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
+
 class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
 
     /** Our classes' logger **/
@@ -37,7 +39,6 @@ class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
 
     @SuppressWarnings("unused")
     private final IGyroSensor nav;
-
 
     SuitcaseDriveSubsystem() {
         logger.info("constructing");
