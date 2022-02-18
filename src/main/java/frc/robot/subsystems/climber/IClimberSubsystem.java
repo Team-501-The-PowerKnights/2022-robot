@@ -8,9 +8,7 @@
 
 package frc.robot.subsystems.climber;
 
-
 import frc.robot.subsystems.ISubsystem;
-
 
 /**
  * Add your docs here.
@@ -21,5 +19,20 @@ public interface IClimberSubsystem extends ISubsystem {
      * Stop the climber from any motion it may have been running under.
      */
     public void stop();
+
+    /**
+     * Extend in preparation for the climb
+     **/
+    public void extend();
+
+    /**
+     * Pull in to actually lift robot and climb
+     **/
+    public void climb();
+
+    /**
+     * Run the motors in reverse to retract and arm. Should only be run in the pit.
+     **/
+    public void retract();
 
 }

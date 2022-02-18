@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.drive;
 
-
 import java.util.List;
 
 import com.revrobotics.RelativeEncoder;
@@ -40,7 +39,6 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class DriveSubsystem extends BaseDriveSubsystem {
 
@@ -277,26 +275,32 @@ class DriveSubsystem extends BaseDriveSubsystem {
     public void setSpeed(int canID, double speed) {
 
         switch (canID) {
-        case 11:
-            leftFrontMotor.set(speed);
-            break;
-        case 12:
-            leftRearMotor.set(speed);
-            break;
-        case 13:
-            rightFrontMotor.set(speed);
-            break;
-        case 14:
-            rightRearMotor.set(speed);
-            break;
-        default:
-            break;
+            case 11:
+                leftFrontMotor.set(speed);
+                break;
+            case 12:
+                leftRearMotor.set(speed);
+                break;
+            case 13:
+                rightFrontMotor.set(speed);
+                break;
+            case 14:
+                rightRearMotor.set(speed);
+                break;
+            default:
+                break;
         }
     }
 
     @Override
     public double getEncoderClicks() {
         return ((leftEncoder.getPosition() + rightEncoder.getPosition()) / 2);
+    }
+
+    @Override
+    public double getEncoderVelocity() {
+        // TODO Auto-generated method stub
+        return 0;
     }
 
 }

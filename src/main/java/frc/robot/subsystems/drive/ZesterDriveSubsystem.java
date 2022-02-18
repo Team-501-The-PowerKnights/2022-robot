@@ -16,7 +16,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -35,23 +35,23 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 
 import frc.robot.sensors.gyro.GyroFactory;
 import frc.robot.sensors.gyro.IGyroSensor;
-
+import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-class ProtoDriveSubsystem extends BaseDriveSubsystem {
+public class ZesterDriveSubsystem extends BaseDriveSubsystem {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ProtoDriveSubsystem.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ZesterDriveSubsystem.class.getName());
 
     /**
      * Drive Constants
      */
-    private static final double s = 0.0645; // Volts
-    private static final double v = 2.84; // VoltSeconds Per Meter
-    private static final double a = 0.28; // VoltSecondsSquared Per Meter
-    private static final double p = 2.53; // Drive Velocity
-    private static final double trackWidth = 0.616; // Meters
+    private static final double s = 0.147; // Volts
+    private static final double v = 2.82; // VoltSeconds Per Meter
+    private static final double a = 0.393; // VoltSecondsSquared Per Meter
+    private static final double p = 2.57; // Drive Velocity
+    private static final double trackWidth = 0.629; // Meters
     private static final double ramseteB = 2;
     private static final double ramseteZeta = 0.7;
     private static final double maxSpeed = 3.04; // Meters Per Second
@@ -77,38 +77,43 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
     private final CANSparkMax rightFrontMotor;
     private final CANSparkMax rightRearMotor;
 
-    private final MotorControllerGroup left;
-    private final MotorControllerGroup right;
-
     private final RelativeEncoder leftEncoder;
     private final RelativeEncoder rightEncoder;
 
     private final IGyroSensor nav;
 
     private final DifferentialDrive drive;
-    private final DifferentialDriveKinematics driveKinematics;
-    private final DifferentialDriveOdometry driveOdometry;
+    public DifferentialDriveKinematics driveKinematics;
+    public DifferentialDriveOdometry driveOdometry;
 
-    ProtoDriveSubsystem() {
+    private DriveHelper helper;
+
+    ZesterDriveSubsystem() {
         logger.info("constructing");
 
-        leftFrontMotor = new CANSparkMax(23, MotorType.kBrushless);
-        leftRearMotor = new CANSparkMax(22, MotorType.kBrushless);
-        rightFrontMotor = new CANSparkMax(20, MotorType.kBrushless);
-        rightRearMotor = new CANSparkMax(21, MotorType.kBrushless);
+        leftFrontMotor = new CANSparkMax(11, MotorType.kBrushless);
+        leftFrontMotor.restoreFactoryDefaults();
+        leftRearMotor = new CANSparkMax(12, MotorType.kBrushless);
+        leftRearMotor.restoreFactoryDefaults();
+        rightFrontMotor = new CANSparkMax(13, MotorType.kBrushless);
+        rightFrontMotor.restoreFactoryDefaults();
+        rightRearMotor = new CANSparkMax(14, MotorType.kBrushless);
+        rightRearMotor.restoreFactoryDefaults();
 
-        left = new MotorControllerGroup(leftFrontMotor, leftRearMotor);
-        right = new MotorControllerGroup(rightFrontMotor, rightRearMotor);
+        rightFrontMotor.setInverted(true);
 
-        left.setInverted(false);
-        right.setInverted(true);
+        leftRearMotor.follow(leftFrontMotor);
+        rightRearMotor.follow(rightFrontMotor);
 
         leftEncoder = leftFrontMotor.getEncoder();
+        leftEncoder.setPosition(0.0);
         rightEncoder = rightFrontMotor.getEncoder();
+        rightEncoder.setPosition(0.0);
 
         nav = GyroFactory.getInstance();
 
-        drive = new DifferentialDrive(left, right);
+        drive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
+        drive.setSafetyEnabled(false);
         driveKinematics = new DifferentialDriveKinematics(trackWidth);
         driveOdometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(nav.getAngle()));
 
@@ -117,6 +122,8 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
 
         trajectoryConfig = new TrajectoryConfig(maxSpeed, maxAcceleration).setKinematics(driveKinematics)
                 .addConstraint(autoVoltageConstraint);
+
+        helper = new DriveHelper();
 
         logger.info("constructed");
     }
@@ -130,31 +137,22 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void updateTelemetry() {
-        // TODO Auto-generated method stub
-
+        SmartDashboard.putNumber(TelemetryNames.Drive.encoderClicks, getEncoderClicks());
     }
 
     @Override
     public void validateCalibration() {
         // TODO Auto-generated method stub
-
     }
 
     @Override
     public void updatePreferences() {
         // TODO Auto-generated method stub
-
     }
 
     @Override
     public void disable() {
         // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void stop() {
-        drive.tankDrive(0, 0);
     }
 
     @Override
@@ -172,13 +170,50 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
         }
     }
 
+    @Override
+    public void stop() {
+        drive.tankDrive(0, 0);
+    }
+
+    @Override
+    public void swap() {
+        // FIXME - Can't just do this without ensuring robot is 'still'
+        // FIXME - the API for this changed; needs to be in the follow?
+        logger.warn("not implemented yet");
+        // leftFrontMotor.setInverted(leftFrontMotor.getInverted() ? false : true);
+        // rightFrontMotor.setInverted(rightFrontMotor.getInverted() ? false : true);
+    }
+
     /*
      * Drive constraint values
      */
 
+    private static double speed;
+    private static double turn;
+    private static double leftSpeed;
+    private static double rightSpeed;
+
+    private final double quickTurnThreshold = 0.2;
+
     @Override
     public void drive(double hmiSpeed, double hmiTurn) {
-        drive.arcadeDrive(hmiSpeed, hmiTurn);
+        // Save off passed values for telemetry
+        speed = hmiSpeed;
+        turn = hmiTurn;
+
+        boolean quickTurn = (Math.abs(speed) < quickTurnThreshold);
+        DriveSignal driveSignal = helper.cheesyDrive(speed, turn, quickTurn, false);
+
+        arcadeDrive(driveSignal);
+    }
+
+    private void arcadeDrive(DriveSignal driveSignal) {
+        // Save values for telemetry
+        leftSpeed = driveSignal.getLeft();
+        rightSpeed = driveSignal.getRight();
+
+        leftFrontMotor.set(leftSpeed);
+        rightFrontMotor.set(rightSpeed);
     }
 
     @Override
@@ -197,7 +232,7 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
 
     protected double convertInchesToEncoderClicks(double inches) {
         return inches * (1 / 12) // Conversion to feet
-                * 3.281 // Conversion to meters
+                * (1 / 3.281) // Conversion to meters
                 * (1 / (2 * Math.PI * wheelRadius)) // Convert to wheel revolutions (Circumference)
                 * (beltGearing) // Convert to output shaft revolutions (Belt gearing)
                 * (1 / gearboxGearing); // Convert to motor revolutions (TB Mini gearing)
@@ -237,26 +272,32 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void setSpeed(int canID, double speed) {
-        // TODO Auto-generated method stub
 
-    }
-
-    @Override
-    public void swap() {
-        // TODO Auto-generated method stub
-
+        switch (canID) {
+            case 11:
+                leftFrontMotor.set(speed);
+                break;
+            case 12:
+                leftRearMotor.set(speed);
+                break;
+            case 13:
+                rightFrontMotor.set(speed);
+                break;
+            case 14:
+                rightRearMotor.set(speed);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
     public double getEncoderClicks() {
-        // TODO Auto-generated method stub
-        return 0;
+        return ((leftEncoder.getPosition() + rightEncoder.getPosition()) / 2);
     }
 
     @Override
     public double getEncoderVelocity() {
-        // TODO Auto-generated method stub
-        return 0;
+        return ((leftEncoder.getVelocity() + rightEncoder.getVelocity()) / 2);
     }
-
 }
