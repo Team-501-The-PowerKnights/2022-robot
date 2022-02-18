@@ -59,7 +59,8 @@ Drive.defaultCommandName = DriveJoystickControl
 #####################
 Intake.className = StubIntakeSubsystem
 #Intake.className =
-Intake.defaultCommandName = IntakeDoNothing
+#Intake.defaultCommandName = IntakeDoNothing
+Intake.defaultCommandName = IntakeManualControl
 
 
 #####################

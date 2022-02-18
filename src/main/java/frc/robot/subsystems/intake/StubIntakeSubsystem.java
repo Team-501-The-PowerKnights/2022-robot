@@ -57,7 +57,7 @@ public class StubIntakeSubsystem extends BaseIntakeSubsystem {
 
     @Override
     public void pullIn(double speed) {
-        super.pushOut(speed);
+        super.pullIn(speed);
         
         setSpeed(speed);
     }
