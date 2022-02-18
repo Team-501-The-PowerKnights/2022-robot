@@ -36,15 +36,12 @@ public interface IDriveSubsystem extends ISubsystem {
     /**
      * "Swap" the drive (invert the sense of the motors)
      * 
-     * @param hmiSpeed
-     * @param hmiTurn
      */
     public void swap();
 
     /**
      * 
      * @param hmiSpeed
-     * @param hmiTurn
      */
     public void drive(double hmiSpeed, double hmiTurn);
 
