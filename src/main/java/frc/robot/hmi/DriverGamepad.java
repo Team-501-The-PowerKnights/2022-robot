@@ -73,14 +73,6 @@ public class DriverGamepad extends F310Gamepad {
      * Drive
      *********************/
 
-    public double getRawDriveSpeed() {
-        return deadBand(getLeftYAxis(), 0.05);
-    }
-
-    public double getRawDriveTurn() {
-        return deadBand(getRightXAxis(), 0.05);
-    }
-
     public double getDriveSpeed() {
         double hmiSpeed = getRawDriveSpeed();
         double calcSpeed;
@@ -92,6 +84,10 @@ public class DriverGamepad extends F310Gamepad {
             calcSpeed = hmiSpeed *= 0.50;
         }
         return calcSpeed;
+    }
+
+    private double getRawDriveSpeed() {
+        return deadBand(getLeftYAxis(), 0.05);
     }
 
     public double getDriveTurn() {
@@ -107,6 +103,10 @@ public class DriverGamepad extends F310Gamepad {
         return calcTurn;
     }
 
+    private double getRawDriveTurn() {
+        return deadBand(getRightXAxis(), 0.05);
+    }
+
     /*********************
      * Intake
      *********************/
@@ -114,15 +114,7 @@ public class DriverGamepad extends F310Gamepad {
     public double getIntakeSpeed() {
         return deadBand(getTriggerAxis(), 0.05);
     }
-    
-    /*********************
-     * Special Processing
-     *********************/
-
-    /**
-     * 
-     * @return
-     */
+ 
     private double getTriggerAxis() {
         if (getLeftTrigger() > getRightTrigger())
         {

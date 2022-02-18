@@ -45,8 +45,11 @@ public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
     }
 
     @Override
-    public void stop() {
-        motor.set(ControlMode.PercentOutput, 0);
+    public void updateTelemetry() {
+        super.updateTelemetry();
+
+        SmartDashboard.putNumber(TelemetryNames.Elevator.speed, tlmSpeed);
+        SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit, limit.get());
     }
 
     @Override
@@ -65,18 +68,23 @@ public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
     }
 
     @Override
-    public void updateTelemetry() {
-        SmartDashboard.putNumber(TelemetryNames.Elevator.speed, tlmSpeed);
-        SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit, limit.get());
+    public void stop() {
+        super.stop();
+
+        motor.set(ControlMode.PercentOutput, 0);
     }
 
     @Override
     public void lift() {
+        super.lift();
+
         setSpeed(-0.85);
     }
 
     @Override
     public void lower() {
+        super.lower();
+
         setSpeed(1.0);
     }
 
@@ -85,18 +93,20 @@ public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
         return limit.get();
     }
 
-    private void setSpeed(double speed) {
-        tlmSpeed = speed;
-        motor.set(ControlMode.PercentOutput, tlmSpeed);
-    }
-
     @Override
     public void liftToLimit() {
+        super.liftToLimit();
+
         if (!isFull()) {
             lift();
         } else {
             stop();
         }
+    }
+
+    private void setSpeed(double speed) {
+        tlmSpeed = speed;
+        motor.set(ControlMode.PercentOutput, tlmSpeed);
     }
 
 }

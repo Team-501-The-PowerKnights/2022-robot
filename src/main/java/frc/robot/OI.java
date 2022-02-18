@@ -116,4 +116,12 @@ public class OI implements ITelemetryProvider {
         return driverPad.getIntakeSpeed();
     }
 
+    /*****************
+     * Elevator
+     *****************/
+
+    public double getElevatorSpeed() {
+        return operatorPad.getElevatorSpeed();
+    }
+
 }

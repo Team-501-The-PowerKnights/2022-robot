@@ -23,10 +23,11 @@ public class StubElevatorSubsystem extends BaseElevatorSubsystem {
     }
 
     @Override
-    public void stop() {
+    public void updateTelemetry() {
+        super.updateTelemetry();
         // Stub doesn't implement this
     }
-
+    
     @Override
     public void validateCalibration() {
         // Stub doesn't implement this
@@ -42,19 +43,23 @@ public class StubElevatorSubsystem extends BaseElevatorSubsystem {
         // Stub doesn't implement this
     }
 
+
     @Override
-    public void updateTelemetry() {
+    public void stop() {
+        super.stop();
         // Stub doesn't implement this
     }
 
     @Override
     public void lift() {
+        super.lift();
         // Stub doesn't implement this
 
     }
 
     @Override
     public void lower() {
+        super.lower();
         // Stub doesn't implement this
 
     }
@@ -67,6 +72,7 @@ public class StubElevatorSubsystem extends BaseElevatorSubsystem {
 
     @Override
     public void liftToLimit() {
+        super.liftToLimit();
         // Stub doesn't implement this
     }
 

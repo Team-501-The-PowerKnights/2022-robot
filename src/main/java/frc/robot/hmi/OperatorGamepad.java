@@ -33,6 +33,8 @@ public class OperatorGamepad extends F310Gamepad {
     private final Button visionTargettingButton;
     private final Button revShooterButton;
     private final Button homeTurretButton;
+    private final Button elevatorUpButton;
+    private final Button elevatorDownButton;
     
     public OperatorGamepad() 
     {
@@ -43,6 +45,8 @@ public class OperatorGamepad extends F310Gamepad {
         visionTargettingButton = new JoystickButton(stick, rightBumper);
         revShooterButton = new JoystickButton(stick, redButton);
         homeTurretButton = new JoystickButton(stick, startButton);
+        elevatorUpButton = new JoystickButton(stick, leftTrigger);
+        elevatorDownButton = new JoystickButton(stick, rightTrigger);
 
         logger.info("constructed");
     }
@@ -63,6 +67,15 @@ public class OperatorGamepad extends F310Gamepad {
         SmartDashboard.putBoolean(TelemetryNames.HMI.visionTargetting, visionTargettingButton.get());
         SmartDashboard.putBoolean(TelemetryNames.HMI.revShooter, revShooterButton.get());
         SmartDashboard.putBoolean(TelemetryNames.HMI.homeTurret, homeTurretButton.get()); 
+        SmartDashboard.putNumber(TelemetryNames.HMI.elevatorSpeed, getElevatorSpeed());
+    }
+
+    /*********************
+     * Elevator
+     *********************/
+
+    public double getElevatorSpeed() {
+        return deadBand(getLeftYAxis(), 0.05);
     }
 
 }

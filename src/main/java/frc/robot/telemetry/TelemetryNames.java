@@ -96,6 +96,7 @@ public final class TelemetryNames {
         public static final String visionTargetting = name + ".visionTargetting";
         public static final String revShooter = name + ".revShooter";
         public static final String homeTurret = name + ".homeTurret";
+        public static final String elevatorSpeed = name + ".elevatorSpeed";
     }
 
     /***************
@@ -186,8 +187,12 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+
         public static final String speed = name + ".speed";
         public static final String atLimit = name + ".atLimit";
+        public static final String stopped = name + ".stopped";
+        public static final String lifting = name + ".lifting";
+        public static final String lowering = name + ".lowering";
     }
 
     public final class Shooter {
@@ -195,6 +200,7 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+
         public static final String isActive = name + ".isActive";
         public static final String rpm = name + ".rpm";
         public static final String targetRpm = name + ".targetRpm";
@@ -206,6 +212,7 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+
         public static final String angle = name + ".angle";
         public static final String position = name + ".rawPosition";
         public static final String isHomed = name + ".isHomed";
@@ -217,6 +224,7 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+
         public static final String topLimit = name + ".topLimit";
         public static final String bottomLimit = name + ".bottomLimit";
         public static final String speed = name + ".speed";

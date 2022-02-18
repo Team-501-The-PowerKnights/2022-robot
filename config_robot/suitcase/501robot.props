@@ -67,7 +67,8 @@ Intake.defaultCommandName = IntakeDoNothing
 #####################
 Elevator.className = StubElevatorSubsystem
 #Elevator.className =
-Elevator.defaultCommandName = ElevatorDoNothing
+#Elevator.defaultCommandName = ElevatorDoNothing
+Elevator.defaultCommandName = ElevatorManualControl
 
 
 #####################
