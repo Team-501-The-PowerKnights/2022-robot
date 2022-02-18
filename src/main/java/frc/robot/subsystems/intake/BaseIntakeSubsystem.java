@@ -65,5 +65,44 @@ abstract class BaseIntakeSubsystem extends SubsystemBase implements IIntakeSubsy
 
         setDefaultCommand(ourCommand);
     }
-    
+
+    protected double tlmSpeed = 0.0;
+    protected boolean tlmStopped = false;
+    protected boolean tlmPullingIn = false;
+    protected boolean tlmPushingOut = false;
+ 
+    @Override
+    public void updateTelemetry()
+    {
+        SmartDashboard.putNumber(TelemetryNames.Intake.speed, tlmSpeed);
+        SmartDashboard.putBoolean(TelemetryNames.Intake.stopped, tlmStopped);
+        SmartDashboard.putBoolean(TelemetryNames.Intake.pullingIn, tlmPullingIn);
+        SmartDashboard.putBoolean(TelemetryNames.Intake.pushingOut, tlmPushingOut);
+    }
+
+    protected void setTlmSpeed(double speed) {
+        tlmSpeed = speed;
+    }
+
+    @Override
+    public void stop() {
+        tlmStopped = true;
+        tlmPullingIn = false;
+        tlmPushingOut = false;
+    }
+
+    @Override
+    public void pullIn(double speed) {
+        tlmStopped = false;
+        tlmPullingIn = true;
+        tlmPushingOut = false;
+    }
+
+    @Override
+    public void pushOut(double speed) {
+        tlmStopped = false;
+        tlmPullingIn = false;
+        tlmPushingOut = true;
+    }
+
 }

@@ -180,6 +180,10 @@ public final class TelemetryNames {
         public static final String implClass = name + ".implClass";
 
         public static final String speed = name + ".speed";
+        public static final String stopped = name + ".stopped";
+        public static final String pullingIn = name + ".pullingIn";
+        public static final String pushingOut = name + "pushingOut";
+
     }
 
     public final class Elevator {
