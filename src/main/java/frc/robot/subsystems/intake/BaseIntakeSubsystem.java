@@ -66,10 +66,10 @@ abstract class BaseIntakeSubsystem extends SubsystemBase implements IIntakeSubsy
         setDefaultCommand(ourCommand);
     }
 
-    protected double tlmSpeed = 0.0;
-    protected boolean tlmStopped = false;
-    protected boolean tlmPullingIn = false;
-    protected boolean tlmPushingOut = false;
+    private double tlmSpeed = 0.0;
+    private boolean tlmStopped = false;
+    private boolean tlmPullingIn = false;
+    private boolean tlmPushingOut = false;
  
     @Override
     public void updateTelemetry()

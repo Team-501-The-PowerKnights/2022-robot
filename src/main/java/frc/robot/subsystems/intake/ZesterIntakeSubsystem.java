@@ -53,7 +53,7 @@ public class ZesterIntakeSubsystem extends BaseIntakeSubsystem {
 
     @Override
     public void disable() {
-        stop();
+        // Zester doesn't implement this
     }
 
     @Override
@@ -88,9 +88,9 @@ public class ZesterIntakeSubsystem extends BaseIntakeSubsystem {
     }
 
     private void setSpeed(double speed) {
-        super.setTlmSpeed(speed);
+        setTlmSpeed(speed);
 
-        motor.set(ControlMode.PercentOutput, tlmSpeed);
+        motor.set(ControlMode.PercentOutput, speed);
     }
 
 }

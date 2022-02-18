@@ -8,15 +8,19 @@
 
 package frc.robot.subsystems.elevator;
 
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.telemetry.TelemetryNames;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
 
@@ -27,9 +31,6 @@ public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
 
     private final DigitalInput limit;
 
-    // Keep for telemetry
-    private double tlmSpeed;
-
     ZesterElevatorSubsystem() {
         logger.info("constructing");
 
@@ -39,8 +40,6 @@ public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
 
         limit = new DigitalInput(9);
 
-        tlmSpeed = 0.0;
-
         logger.info("constructed");
     }
 
@@ -48,8 +47,7 @@ public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
     public void updateTelemetry() {
         super.updateTelemetry();
 
-        SmartDashboard.putNumber(TelemetryNames.Elevator.speed, tlmSpeed);
-        SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit, limit.get());
+       SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit, limit.get());
     }
 
     @Override
@@ -71,7 +69,7 @@ public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
     public void stop() {
         super.stop();
 
-        motor.set(ControlMode.PercentOutput, 0);
+        setSpeed(0.0);
     }
 
     @Override
@@ -105,8 +103,9 @@ public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
     }
 
     private void setSpeed(double speed) {
-        tlmSpeed = speed;
-        motor.set(ControlMode.PercentOutput, tlmSpeed);
+        setTlmSpeed(speed);
+
+        motor.set(ControlMode.PercentOutput, speed);
     }
 
 }

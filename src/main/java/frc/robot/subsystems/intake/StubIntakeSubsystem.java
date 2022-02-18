@@ -51,8 +51,8 @@ public class StubIntakeSubsystem extends BaseIntakeSubsystem {
 
     @Override
     public void pullIn() {
+        // Stub doesn't implement this
         pullIn(-3.14159);
-
     }
 
     @Override
@@ -64,6 +64,7 @@ public class StubIntakeSubsystem extends BaseIntakeSubsystem {
 
     @Override
     public void pushOut() {
+        // Stub doesn't implement this
         pushOut(3.14159);
     }
 

@@ -66,16 +66,23 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
         setDefaultCommand(ourCommand);
     }
 
-    protected boolean tlmStopped = false;
-    protected boolean tlmLifting = false;
-    protected boolean tlmLowering = false;
+    private double tlmSpeed = 0.0;
+    private boolean tlmStopped = false;
+    private boolean tlmLifting = false;
+    private boolean tlmLowering = false;
 
     @Override
     public void updateTelemetry()
     {
+        SmartDashboard.putNumber(TelemetryNames.Elevator.speed, tlmSpeed);
         SmartDashboard.putBoolean(TelemetryNames.Elevator.stopped, tlmStopped);
         SmartDashboard.putBoolean(TelemetryNames.Elevator.lifting, tlmLifting);
         SmartDashboard.putBoolean(TelemetryNames.Elevator.lowering, tlmLowering);
+    }
+
+    protected void setTlmSpeed(double speed)
+    {
+        tlmSpeed = speed;
     }
 
     @Override
