@@ -22,6 +22,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.commands.DoNothing;
+import frc.robot.commands.PKSequentialCommandGroup;
+import frc.robot.commands.drive.DriveForwardTimed;
 import frc.robot.commands.turret.TurretHome;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModuleFactory;
@@ -172,6 +174,8 @@ public class Robot extends TimedRobot {
         autoChooser = new SendableChooser<>();
 
         autoChooser.setDefaultOption("Do Nothing", new DoNothing());
+        autoChooser.addOption("Drive Forward (Timed)", new DriveForwardTimed());
+        autoChooser.addOption("Home Turret", new TurretHome());
 
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
@@ -307,15 +311,14 @@ public class Robot extends TimedRobot {
             s.updatePreferences();
         }
 
-        // FIXME: Remove the hardcoded auto command
         // CommandScheduler.getInstance().schedule(true, new DriveForwardTimed());
         // CommandScheduler.getInstance().schedule(true, new AutoFull());
         autoCommand = autoChooser.getSelected();
         logger.info("auto command is {}", autoCommand.getName());
         if (autoCommand != null) {
+            CommandScheduler.getInstance().schedule(true, autoCommand);
             // CommandScheduler.getInstance().schedule(true, new
             // PKSequentialCommandGroup(new TurretHome(), autoCommand));
-            CommandScheduler.getInstance().schedule(true, new TurretHome());
         }
 
         logger.info("initialized autonomous");
