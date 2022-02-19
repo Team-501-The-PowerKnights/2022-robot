@@ -27,7 +27,7 @@ public class StubElevatorSubsystem extends BaseElevatorSubsystem {
         super.updateTelemetry();
         // Stub doesn't implement this
     }
-    
+
     @Override
     public void validateCalibration() {
         // Stub doesn't implement this
@@ -42,7 +42,6 @@ public class StubElevatorSubsystem extends BaseElevatorSubsystem {
     public void disable() {
         // Stub doesn't implement this
     }
-
 
     @Override
     public void stop() {
@@ -83,6 +82,12 @@ public class StubElevatorSubsystem extends BaseElevatorSubsystem {
         setTlmSpeed(speed);
 
         // Stub doesn't implement this
+    }
+
+    @Override
+    public void increment() {
+        // TODO Auto-generated method stub
+
     }
 
 }
