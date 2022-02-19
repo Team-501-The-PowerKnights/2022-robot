@@ -11,7 +11,7 @@ package frc.robot.commands;
 
 /**
  * Defines a marker interface for commands which are meant to function for use
- * in I&T of the robot.
+ * in I{@literal &}T of the robot.
  */
 public interface IIandTCommand {
 }

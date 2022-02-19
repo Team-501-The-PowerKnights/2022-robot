@@ -289,7 +289,7 @@ public class Robot extends TimedRobot {
 
     /**
      * This autonomous runs the autonomous command selected by your
-     * {@link RobotContainer} class.
+     * frc.robot.RobotContainer class.
      */
     @Override
     public void autonomousInit() {
