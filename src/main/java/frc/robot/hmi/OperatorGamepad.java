@@ -68,6 +68,7 @@ public class OperatorGamepad extends F310Gamepad {
         SmartDashboard.putBoolean(TelemetryNames.HMI.revShooter, revShooterButton.get());
         SmartDashboard.putBoolean(TelemetryNames.HMI.homeTurret, homeTurretButton.get());
         SmartDashboard.putNumber(TelemetryNames.HMI.elevatorSpeed, getElevatorSpeed());
+        SmartDashboard.putNumber(TelemetryNames.HMI.turretJog, getTurretJog());
     }
 
     /*********************
@@ -77,6 +78,27 @@ public class OperatorGamepad extends F310Gamepad {
     public double getElevatorSpeed() {
         // + is forward/up and - is backward/down
         return deadBand(-getLeftYAxis(), 0.05);
+    }
+
+    /*********************
+     * Turret
+     *********************/
+
+    public double getTurretJog()
+    {
+        // + is CCW and - is CW
+        return deadBand(getTriggerAxis(), 0.05);
+    }
+
+    private double getTriggerAxis() {
+        if (getLeftTrigger() > getRightTrigger())
+        {
+            return getLeftTrigger();
+        }
+        else
+        {
+            return -getRightTrigger();
+        }
     }
 
 }

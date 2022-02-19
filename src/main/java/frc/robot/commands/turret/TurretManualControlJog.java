@@ -6,43 +6,50 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.intake;
+package frc.robot.commands.turret;
 
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class IntakeManualControl extends IntakeOICommandBase {
-        
+public class TurretManualControlJog extends TurretOICommandBase {
+    
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IntakeManualControl.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(TurretManualControlJog.class.getName());
 
     /**
-     * Creates a new IntakeManualControl.
+     * Creates a new TurretManualControlJog.
      */
-    public IntakeManualControl() {
+    public TurretManualControlJog() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
     }
+
+    // FIXME: This is a hack; use commands right
+    boolean started = true;
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
         super.execute();
 
-        double speed = oi.getIntakeSpeed();
+        double speed = oi.getTurretJog();
         if ( speed == 0 ) {
-            intake.stop();
+            turret.stop();
+            started = false;
         }
-        else if ( speed > 0 )
-        {
-            intake.pullIn();
-        }
-        else if ( speed < 0 )
-        {
-            intake.pushOut();
+        else if ( !started ) {
+            if ( speed > 0 )
+            {
+                turret.jogCCW();
+            }
+            else if ( speed < 0 )
+            {
+                turret.jogCW();
+            }
+            started = true;
         }
     }
 

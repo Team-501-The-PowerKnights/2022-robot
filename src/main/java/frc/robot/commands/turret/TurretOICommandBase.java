@@ -6,37 +6,32 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.turretlocation;
+package frc.robot.commands.turret;
 
 
-import edu.wpi.first.wpilibj.DigitalInput;
+import frc.robot.OI;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
 /**
- * Provides implementation of <code>ITurretLocationSensor</code> for the
- * <i>Real-Bot</i>.
+ * Add your docs here.
  */
-class TurretLocationSensor extends BaseTurretLocationSensor {
-
+public class TurretOICommandBase extends TurretCommandBase {
+            
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(TurretLocationSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(TurretOICommandBase.class.getName());
 
-    private DigitalInput location;
+    // Handle to the OI
+    protected OI oi;
 
-    TurretLocationSensor() {
-        logger.info("constructing");
+    public TurretOICommandBase() {
+        logger.info("constructing {}", getName());
 
-        location = new DigitalInput(8);
+        oi = OI.getInstance();
 
         logger.info("constructed");
-    }
-
-    @Override
-    public boolean get() {
-        return !(location.get());
     }
 
 }

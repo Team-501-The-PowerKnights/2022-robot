@@ -8,11 +8,10 @@
 
 package frc.robot.sensors.vision;
 
-import org.slf4j.Logger;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.telemetry.TelemetryNames;
+import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Provides implementation of <code>IVisionSensor</code> for the
@@ -21,7 +20,7 @@ import riolog.RioLogger;
 class VisionSensor extends BaseVisionSensor {
 
     /** Our classes' logger **/
-    private static final Logger logger = RioLogger.getLogger(VisionSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(VisionSensor.class.getName());
 
     private LimelightVision mySensor;
 
@@ -35,8 +34,7 @@ class VisionSensor extends BaseVisionSensor {
 
     @Override
     public void updateTelemetry() {
-        SmartDashboard.putBoolean(TelemetryNames.Vision.locked, mySensor.isLocked());
-        SmartDashboard.putBoolean(TelemetryNames.Vision.enabled, mySensor.isEnabled());
+       super.updateTelemetry();
     }
 
     @Override
@@ -65,7 +63,9 @@ class VisionSensor extends BaseVisionSensor {
 
     @Override
     public boolean isLocked() {
-        return mySensor.isLocked();
+        boolean locked = mySensor.isLocked();
+        setTlmLocked(locked);
+        return locked;
     }
 
 }

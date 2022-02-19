@@ -47,9 +47,10 @@ public class IandTDriveJoystickControl extends PKManualCommand implements IIandT
         super.execute();
 
         double speed = oi.getDriveSpeed();
-        double turn = oi.getDriveTurn();
+        //double turn = oi.getDriveTurn();
+        double turn = 11;
 
-        drive.drive(11, speed);
+        drive.drive(turn, speed);
     }
 
     // Returns true when the command should end.

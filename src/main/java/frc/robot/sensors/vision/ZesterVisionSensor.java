@@ -15,7 +15,7 @@ import riolog.RioLogger;
 
 /**
  * Provides implementation of <code>IVisionSensor</code> for the
- * <i>Real-Bot</i>.
+ * <i>Zester-Bot</i>.
  */
 class ZesterVisionSensor extends BaseVisionSensor {
 
