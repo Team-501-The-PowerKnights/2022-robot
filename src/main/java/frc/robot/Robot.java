@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.commands.DoNothing;
 import frc.robot.commands.PKSequentialCommandGroup;
+import frc.robot.commands.drive.DriveForwardDistance;
 import frc.robot.commands.drive.DriveForwardTimed;
 import frc.robot.commands.turret.TurretHome;
 import frc.robot.modules.IModule;
@@ -175,6 +176,7 @@ public class Robot extends TimedRobot {
 
         autoChooser.setDefaultOption("Do Nothing", new DoNothing());
         autoChooser.addOption("Drive Forward (Timed)", new DriveForwardTimed());
+        autoChooser.addOption("Drive Off Line", new DriveForwardDistance(3));
         autoChooser.addOption("Home Turret", new TurretHome());
 
         SmartDashboard.putData("Auto Mode", autoChooser);
