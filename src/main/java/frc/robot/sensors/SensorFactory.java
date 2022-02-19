@@ -8,20 +8,20 @@
 
 package frc.robot.sensors;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.sensors.gyro.GyroFactory;
+import frc.robot.sensors.turretlocation.TurretLocationFactory;
+import frc.robot.sensors.vision.VisionFactory;
 import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Add your docs here.
@@ -42,6 +42,22 @@ public class SensorFactory {
         {
             GyroFactory.constructInstance();
             ISensor s = GyroFactory.getInstance();
+            tlmMgr.addProvider(s);
+            sensors.add(s);
+        }
+
+        SmartDashboard.putNumber(TelemetryNames.TurretLocation.status, PKStatus.unknown.tlmValue);
+        {
+            TurretLocationFactory.constructInstance();
+            ISensor s = TurretLocationFactory.getInstance();
+            tlmMgr.addProvider(s);
+            sensors.add(s);
+        }
+
+        SmartDashboard.putNumber(TelemetryNames.Gyro.status, PKStatus.unknown.tlmValue);
+        {
+            VisionFactory.constructInstance();
+            ISensor s = VisionFactory.getInstance();
             tlmMgr.addProvider(s);
             sensors.add(s);
         }

@@ -6,26 +6,36 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.gyro;
+package frc.robot.sensors.turretlocation;
 
+import org.slf4j.Logger;
 
-import riolog.PKLogger;
+import edu.wpi.first.wpilibj.DigitalInput;
+
 import riolog.RioLogger;
 
-
 /**
- * Provides implementation of <code>IGyroSensor</code> for the
- * <i>Suitcase-Bot</i> which is based on the navX-MXP sensor.
+ * Provides implementation of <code>ITurretLocationSensor</code> for the
+ * <i>Real-Bot</i>.
  */
-class ProtoGyroSensor extends SuitcaseGyroSensor {
+class TurretLocationSensor extends BaseTurretLocationSensor {
 
-    /* Our classes logger */
-    private static final PKLogger logger = RioLogger.getLogger(ProtoGyroSensor.class.getName());
+    /** Our classes' logger **/
+    private static final Logger logger = RioLogger.getLogger(TurretLocationSensor.class.getName());
 
-    ProtoGyroSensor() {
+    private DigitalInput location;
+
+    TurretLocationSensor() {
         logger.info("constructing");
 
+        location = new DigitalInput(8);
+
         logger.info("constructed");
+    }
+
+    @Override
+    public boolean get() {
+        return location.get();
     }
 
 }

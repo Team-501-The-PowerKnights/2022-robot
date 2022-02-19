@@ -16,8 +16,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.RamseteController;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -25,22 +24,22 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.math.controller.RamseteController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 
 import frc.robot.sensors.gyro.GyroFactory;
 import frc.robot.sensors.gyro.IGyroSensor;
 import frc.robot.telemetry.TelemetryNames;
-
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-class DriveSubsystem extends BaseDriveSubsystem {
+public class DriveSubsystem extends BaseDriveSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(DriveSubsystem.class.getName());
@@ -89,7 +88,7 @@ class DriveSubsystem extends BaseDriveSubsystem {
 
     private DriveHelper helper;
 
-    public DriveSubsystem() {
+    DriveSubsystem() {
         logger.info("constructing");
 
         leftFrontMotor = new CANSparkMax(11, MotorType.kBrushless);
@@ -299,8 +298,6 @@ class DriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public double getEncoderVelocity() {
-        // TODO Auto-generated method stub
-        return 0;
+        return ((leftEncoder.getVelocity() + rightEncoder.getVelocity()) / 2);
     }
-
 }

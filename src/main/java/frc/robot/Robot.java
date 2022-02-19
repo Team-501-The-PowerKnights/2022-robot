@@ -12,7 +12,6 @@
 
 package frc.robot;
 
-
 import java.util.List;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -23,6 +22,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.commands.DoNothing;
+import frc.robot.commands.PKSequentialCommandGroup;
+import frc.robot.commands.turret.TurretHome;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModuleFactory;
 import frc.robot.preferences.PreferencesInitializer;
@@ -39,7 +40,6 @@ import frc.robot.subsystems.SubsystemFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -199,7 +199,7 @@ public class Robot extends TimedRobot {
         tlmMgr.sendTelemetry();
 
         // Add an indicator about what auto command is current selected
-       SmartDashboard.putBoolean(TelemetryNames.Misc.realAuto,
+        SmartDashboard.putBoolean(TelemetryNames.Misc.realAuto,
                 !autoChooser.getSelected().getName().equalsIgnoreCase("DoNothing"));
     }
 
@@ -313,7 +313,9 @@ public class Robot extends TimedRobot {
         autoCommand = autoChooser.getSelected();
         logger.info("auto command is {}", autoCommand.getName());
         if (autoCommand != null) {
-            CommandScheduler.getInstance().schedule(true, autoCommand);
+            // CommandScheduler.getInstance().schedule(true, new
+            // PKSequentialCommandGroup(new TurretHome(), autoCommand));
+            CommandScheduler.getInstance().schedule(true, new TurretHome());
         }
 
         logger.info("initialized autonomous");
