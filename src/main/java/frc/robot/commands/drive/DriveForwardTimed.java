@@ -35,7 +35,7 @@ public class DriveForwardTimed extends DriveCommandBase {
         super.initialize();
 
         // 4 seconds = 200 * 20 msec (@ 50 Hz)
-        executeCount = 200;
+        executeCount = 180;
     }
 
     @Override

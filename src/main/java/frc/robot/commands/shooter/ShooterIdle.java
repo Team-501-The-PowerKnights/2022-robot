@@ -19,8 +19,20 @@ public class ShooterIdle extends ShooterCommandBase {
   /** Our classes' logger **/
   private static final Logger logger = RioLogger.getLogger(ShooterIdle.class.getName());
 
+  private double speed;
+
   public ShooterIdle() {
     logger.info("constructing {}", getName());
+
+    this.speed = 0.52;
+
+    logger.info("constructed");
+  }
+
+  public ShooterIdle( double speed ) {
+    logger.info("constructing {} w/ speed = ", getName(), speed);
+
+    this.speed = speed;
 
     logger.info("constructed");
   }
@@ -30,7 +42,7 @@ public class ShooterIdle extends ShooterCommandBase {
     super.execute();
 
     // FIXME: Add a 'full speed' command
-    shooter.setSpeed(29, 0.50);
+    shooter.setSpeed(29, speed);
   }
 
 }
