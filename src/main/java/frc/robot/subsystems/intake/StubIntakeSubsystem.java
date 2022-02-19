@@ -23,8 +23,8 @@ public class StubIntakeSubsystem extends BaseIntakeSubsystem {
     }
 
     @Override
-    public void stop() {
-        // Stub doesn't implement this
+    public void updateTelemetry() {
+        super.updateTelemetry();
     }
 
     @Override
@@ -43,31 +43,42 @@ public class StubIntakeSubsystem extends BaseIntakeSubsystem {
     }
 
     @Override
-    public void updateTelemetry() {
-        // Stub doesn't implement this
+    public void stop() {
+        super.stop();
+
+        setSpeed(0.0);
     }
 
     @Override
     public void pullIn() {
         // Stub doesn't implement this
-
+        pullIn(-3.14159);
     }
 
     @Override
     public void pullIn(double speed) {
-        // Stub doesn't implement this
-
+        super.pullIn(speed);
+        
+        setSpeed(speed);
     }
 
     @Override
     public void pushOut() {
         // Stub doesn't implement this
+        pushOut(3.14159);
     }
 
     @Override
     public void pushOut(double speed) {
-        // Stub doesn't implement this
+        super.pushOut(speed);
 
+        setSpeed(speed);
     }
 
+    private void setSpeed(double speed) {
+        super.setTlmSpeed(speed);
+
+        // Stub doesn't implement this
+    }
+    
 }

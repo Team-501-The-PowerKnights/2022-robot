@@ -38,6 +38,20 @@ Gyro.className = StubGyroSensor
 #Gyro.className =
 
 
+#####################
+# Vision
+#####################
+Vision.className = StubVisionSensor
+#Vision.className =
+
+
+#####################
+# Turret Location
+#####################
+TurretLocation.className = StubTurretLocationSensor
+#TurretLocation.className 
+
+
 
 #########################################
 #########################################
@@ -48,9 +62,10 @@ Gyro.className = StubGyroSensor
 #####################
 # Drive
 #####################
-Drive.className = StubDriveSubsystem
-#Drive.className =
-Drive.defaultCommandName = DriveDoNothing
+#Drive.className = StubDriveSubsystem
+Drive.className =
+#Drive.defaultCommandName = DriveDoNothing
+Drive.defaultCommandName = DriveJoystickControl
 
 
 #####################
@@ -58,7 +73,8 @@ Drive.defaultCommandName = DriveDoNothing
 #####################
 Intake.className = StubIntakeSubsystem
 #Intake.className =
-Intake.defaultCommandName = IntakeDoNothing
+#Intake.defaultCommandName = IntakeDoNothing
+Intake.defaultCommandName = IntakeManualControl
 
 
 #####################
@@ -66,7 +82,8 @@ Intake.defaultCommandName = IntakeDoNothing
 #####################
 Elevator.className = StubElevatorSubsystem
 #Elevator.className =
-Elevator.defaultCommandName = ElevatorDoNothing
+#Elevator.defaultCommandName = ElevatorDoNothing
+Elevator.defaultCommandName = ElevatorManualControl
 
 
 #####################
@@ -82,7 +99,9 @@ Shooter.defaultCommandName = ShooterDoNothing
 #####################
 Turret.className = StubTurretSubsystem
 #Turret.className =
-Turret.defaultCommandName = TurretDoNothing
+#Turret.defaultCommandName = TurretDoNothing
+Turret.defaultCommandName = TurretManualControlJog
+
 
 
 #####################

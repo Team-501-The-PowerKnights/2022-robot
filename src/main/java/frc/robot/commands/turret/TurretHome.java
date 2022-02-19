@@ -7,9 +7,10 @@
 
 package frc.robot.commands.turret;
 
-import org.slf4j.Logger;
 
+import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Add your docs here.
@@ -17,7 +18,7 @@ import riolog.RioLogger;
 public class TurretHome extends TurretCommandBase {
 
     /** Our classes' logger **/
-    private static final Logger logger = RioLogger.getLogger(TurretHome.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(TurretHome.class.getName());
 
     public TurretHome() {
         logger.info("constructing {}", getName());

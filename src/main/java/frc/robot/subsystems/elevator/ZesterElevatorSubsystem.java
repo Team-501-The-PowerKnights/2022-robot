@@ -8,15 +8,19 @@
 
 package frc.robot.subsystems.elevator;
 
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.telemetry.TelemetryNames;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
 
@@ -27,9 +31,6 @@ public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
 
     private final DigitalInput limit;
 
-    // Keep for telemetry
-    private double tlmSpeed;
-
     ZesterElevatorSubsystem() {
         logger.info("constructing");
 
@@ -39,14 +40,14 @@ public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
 
         limit = new DigitalInput(9);
 
-        tlmSpeed = 0.0;
-
         logger.info("constructed");
     }
 
     @Override
-    public void stop() {
-        motor.set(ControlMode.PercentOutput, 0);
+    public void updateTelemetry() {
+        super.updateTelemetry();
+
+       SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit, limit.get());
     }
 
     @Override
@@ -65,18 +66,23 @@ public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
     }
 
     @Override
-    public void updateTelemetry() {
-        SmartDashboard.putNumber(TelemetryNames.Elevator.speed, tlmSpeed);
-        SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit, limit.get());
+    public void stop() {
+        super.stop();
+
+        setSpeed(0.0);
     }
 
     @Override
     public void lift() {
+        super.lift();
+
         setSpeed(-0.85);
     }
 
     @Override
     public void lower() {
+        super.lower();
+
         setSpeed(1.0);
     }
 
@@ -85,18 +91,21 @@ public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
         return limit.get();
     }
 
-    private void setSpeed(double speed) {
-        tlmSpeed = speed;
-        motor.set(ControlMode.PercentOutput, tlmSpeed);
-    }
-
     @Override
     public void liftToLimit() {
+        super.liftToLimit();
+
         if (!isFull()) {
             lift();
         } else {
             stop();
         }
+    }
+
+    private void setSpeed(double speed) {
+        setTlmSpeed(speed);
+
+        motor.set(ControlMode.PercentOutput, speed);
     }
 
 }

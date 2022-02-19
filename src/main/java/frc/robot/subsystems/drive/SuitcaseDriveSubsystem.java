@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.drive;
 
+
 import java.util.List;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -15,11 +16,14 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
+import frc.robot.sensors.gyro.GyroFactory;
+import frc.robot.sensors.gyro.IGyroSensor;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
 
@@ -32,6 +36,9 @@ class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
     private final VictorSP rightRearMotor;
 
     private final MotorControllerGroup right;
+
+    @SuppressWarnings("unused")
+    private final IGyroSensor nav;
 
     SuitcaseDriveSubsystem() {
         logger.info("constructing");
@@ -47,6 +54,8 @@ class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
         leftFrontMotor.setInverted(false);
         right.setInverted(true);
 
+        nav = GyroFactory.getInstance();
+
         logger.info("constructed");
     }
 
@@ -57,6 +66,7 @@ class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void updateTelemetry() {
+        super.updateTelemetry();
         // TODO Auto-generated method stub
 
     }
@@ -91,11 +101,15 @@ class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void drive(double hmiSpeed, double hmiTurn) {
+        // set for telemetry
+        speed = hmiSpeed;
+        turn = hmiTurn;
+        leftSpeed = speed;
+        rightSpeed = turn;
         // Really no heavy implementation, just need to see that the controllers can be
-        // sent
-        // instructions
-        leftFrontMotor.set(ControlMode.PercentOutput, hmiSpeed);
-        right.set(hmiTurn);
+        // sent instructions
+        leftRearMotor.set(ControlMode.PercentOutput, speed);
+        right.set(turn);
     }
 
     @Override

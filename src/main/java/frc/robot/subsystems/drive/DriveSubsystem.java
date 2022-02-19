@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.drive;
 
+
 import java.util.List;
 
 import com.revrobotics.RelativeEncoder;
@@ -39,7 +40,8 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class DriveSubsystem extends BaseDriveSubsystem {
+
+class DriveSubsystem extends BaseDriveSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(DriveSubsystem.class.getName());
@@ -137,6 +139,8 @@ public class DriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void updateTelemetry() {
+        super.updateTelemetry();
+
         SmartDashboard.putNumber(TelemetryNames.Drive.encoderClicks, getEncoderClicks());
     }
 
@@ -187,11 +191,6 @@ public class DriveSubsystem extends BaseDriveSubsystem {
     /*
      * Drive constraint values
      */
-
-    private static double speed;
-    private static double turn;
-    private static double leftSpeed;
-    private static double rightSpeed;
 
     private final double quickTurnThreshold = 0.2;
 
@@ -272,7 +271,6 @@ public class DriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void setSpeed(int canID, double speed) {
-
         switch (canID) {
             case 11:
                 leftFrontMotor.set(speed);

@@ -62,6 +62,7 @@ abstract class BaseShooterSubsystem extends SubsystemBase implements IShooterSub
         }
 
         setDefaultCommand(ourCommand);
+        SmartDashboard.putString(TelemetryNames.Shooter.defCommand, ourCommand.getClass().getSimpleName());
     }
     
 }

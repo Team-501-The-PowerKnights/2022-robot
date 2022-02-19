@@ -37,6 +37,18 @@ PDP.className = StubPDPModule
 Gyro.className = StubGyroSensor
 #Gyro.className =
 
+#####################
+# Vision
+#####################
+Vision.className = StubVisionSensor
+#Vision.className =
+
+#####################
+# Turret Location
+#####################
+TurretLocation.className = StubTurretLocationSensor
+#TurretLocation.className 
+
 
 
 #########################################
@@ -48,9 +60,10 @@ Gyro.className = StubGyroSensor
 #####################
 # Drive
 #####################
-Drive.className = StubDriveSubsystem
-#Drive.className =
-Drive.defaultCommandName = DriveDoNothing
+#Drive.className = StubDriveSubsystem
+Drive.className =
+#Drive.defaultCommandName = DriveDoNothing
+Drive.defaultCommandName = DriveJoystickControl
 
 
 #####################
@@ -64,9 +77,10 @@ Intake.defaultCommandName = IntakeDoNothing
 #####################
 # Elevator
 #####################
-Elevator.className = StubElevatorSubsystem
-#Elevator.className =
-Elevator.defaultCommandName = ElevatorDoNothing
+#Elevator.className = StubElevatorSubsystem
+Elevator.className =
+#Elevator.defaultCommandName = ElevatorDoNothing
+Elevator.defaultCommandName = ElevatorManualControl
 
 
 #####################

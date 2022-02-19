@@ -94,7 +94,8 @@ javadoc {
     source = sourceSets.main.allJava
 }
 
-deployroborio.dependsOn 'writeBuildInfo'
+//deployroborio.dependsOn 'writeBuildInfo'
+//deployroborio.dependsOn 'build'
 build.dependsOn 'writeBuildInfo'
 
 task writeBuildInfo {

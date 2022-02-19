@@ -89,6 +89,15 @@ public final class TelemetryNames {
 
         public static final String speed = name + ".speed";
         public static final String turn = name + ".turn";
+
+        public static final String intakeSpeed = name + ".intakeSpeed";
+
+        public static final String firePose = name + ".firePose";
+        public static final String visionTargetting = name + ".visionTargetting";
+        public static final String revShooter = name + ".revShooter";
+        public static final String homeTurret = name + ".homeTurret";
+        public static final String elevatorSpeed = name + ".elevatorSpeed";
+        public static final String turretJog = name + ".turretJog";
     }
 
     /***************
@@ -100,6 +109,7 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+        public static final String defCommand = name + "defCommand";
 
         public static final String busVoltage = name + ".busVoltage";
         public static final String totalCurrent = name + ".totalCurrent";
@@ -127,24 +137,20 @@ public final class TelemetryNames {
         public static final String name = SensorNames.turretLocationName;
 
         public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+       
         public static final String isFound = name + ".isFound";
     }
 
     public final class Vision {
         public static final String name = SensorNames.visionName;
 
-        // Set by the vision program running on R-PI
         public static final String status = name + ".status";
-        // Running count for iterations of program
-        public static final String heart_beat = name + ".heart_beat";
-        // Valid solution?
-        public static final String locked = name + ".locked";
-        // Delta offset (+ CCW; rotate CW to fix & - CW; rotate CCW to fix)
-        public static final String angle = name + ".angle";
-        // Incremented every time
-        public static final String count = name + ".count";
+        public static final String implClass = name + ".implClass";
 
         public static final String enabled = name + ".enabled";
+        public static final String active = name + ".active";
+        public static final String locked = name + ".locked";
     }
 
     /***************
@@ -156,10 +162,14 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+        public static final String defCommand = name + ".defCommand";
 
         public static final String encoderClicks = name + ".encoderClicks";
         public static final String distanceClicks = name + ".distanceClicks";
         public static final String targetClicks = name + ".targetClicks";
+
+        public static final String leftSpeed = name + ".leftSpeed";
+        public static final String rightSpeed = name + ".rightSpeed";
     }
 
     public final class Intake {
@@ -167,8 +177,13 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+        public static final String defCommand = name + ".defCommand";
 
         public static final String speed = name + ".speed";
+        public static final String stopped = name + ".stopped";
+        public static final String pullingIn = name + ".pullingIn";
+        public static final String pushingOut = name + "pushingOut";
+
     }
 
     public final class Elevator {
@@ -176,8 +191,14 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+        public static final String defCommand = name + ".defCommand";
+
         public static final String speed = name + ".speed";
         public static final String atLimit = name + ".atLimit";
+        public static final String stopped = name + ".stopped";
+        public static final String lifting = name + ".lifting";
+        public static final String lowering = name + ".lowering";
+        public static final String full = name + ".full";
     }
 
     public final class Shooter {
@@ -185,6 +206,8 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+        public static final String defCommand = name + ".defCommand";
+
         public static final String isActive = name + ".isActive";
         public static final String rpm = name + ".rpm";
         public static final String targetRpm = name + ".targetRpm";
@@ -196,6 +219,8 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+        public static final String defCommand = name + ".defCommand";
+
         public static final String angle = name + ".angle";
         public static final String position = name + ".rawPosition";
         public static final String isHomed = name + ".isHomed";
@@ -207,6 +232,8 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+        public static final String defCommand = name + ".defCommand";
+
         public static final String topLimit = name + ".topLimit";
         public static final String bottomLimit = name + ".bottomLimit";
         public static final String speed = name + ".speed";

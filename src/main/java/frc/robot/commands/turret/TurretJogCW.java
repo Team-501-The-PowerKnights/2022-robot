@@ -7,14 +7,15 @@
 
 package frc.robot.commands.turret;
 
-import org.slf4j.Logger;
 
+import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 public class TurretJogCW extends TurretCommandBase {
 
     /** Our classes' logger **/
-    private static final Logger logger = RioLogger.getLogger(TurretJogCW.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(TurretJogCW.class.getName());
 
     public TurretJogCW() {
         logger.info("constructing {}", getName());

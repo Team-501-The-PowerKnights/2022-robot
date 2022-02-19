@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.drive;
 
+
 import java.util.List;
 
 import com.revrobotics.RelativeEncoder;
@@ -36,8 +37,10 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.sensors.gyro.GyroFactory;
 import frc.robot.sensors.gyro.IGyroSensor;
 import frc.robot.telemetry.TelemetryNames;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 public class ZesterDriveSubsystem extends BaseDriveSubsystem {
 
@@ -137,6 +140,8 @@ public class ZesterDriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void updateTelemetry() {
+        super.updateTelemetry();
+
         SmartDashboard.putNumber(TelemetryNames.Drive.encoderClicks, getEncoderClicks());
     }
 
@@ -187,11 +192,6 @@ public class ZesterDriveSubsystem extends BaseDriveSubsystem {
     /*
      * Drive constraint values
      */
-
-    private static double speed;
-    private static double turn;
-    private static double leftSpeed;
-    private static double rightSpeed;
 
     private final double quickTurnThreshold = 0.2;
 
@@ -300,4 +300,5 @@ public class ZesterDriveSubsystem extends BaseDriveSubsystem {
     public double getEncoderVelocity() {
         return ((leftEncoder.getVelocity() + rightEncoder.getVelocity()) / 2);
     }
+
 }

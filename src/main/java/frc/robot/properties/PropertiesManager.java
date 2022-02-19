@@ -10,6 +10,7 @@ package frc.robot.properties;
 
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ import static java.util.stream.Collectors.*;
 import static java.util.Map.Entry.*;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.properties.PropertyNames.Robot;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
@@ -73,8 +75,20 @@ public class PropertiesManager {
         robotImpl = props.getString(Robot.implementation);
         SmartDashboard.putString(TelemetryNames.Misc.robotImpl, robotImpl);
 
-        SmartDashboard.putNumber(TelemetryNames.Properties.status, PKStatus.success.tlmValue);
-    }
+        // Check to see if file exists and mark as failed if not
+        if ( !new File(fileName).exists()) {
+            logger.error("Properties file doesn't exist {}", fileName);
+            SmartDashboard.putNumber(TelemetryNames.Properties.status, PKStatus.failed.tlmValue);
+        }
+        // Check to see if the robot info exists and mark as suspect if not
+        else if ( robotName.isEmpty() || robotImpl.isEmpty() ) {
+            logger.warn("Properties file {} exists but missing key info", fileName);
+            SmartDashboard.putNumber(TelemetryNames.Properties.status, PKStatus.unknown.tlmValue);
+        }
+        else {
+            SmartDashboard.putNumber(TelemetryNames.Properties.status, PKStatus.success.tlmValue);
+        }
+     }
 
     public static PropertiesManager getInstance() {
         if (ourInstance == null) {
@@ -109,7 +123,11 @@ public class PropertiesManager {
             props.forEach((k, v) -> sort(k, v));
         } catch (IOException ex) {
             logger.error("Can't load properties from file {}", fileName, ex);
-            // FIXME - Need to handle this error and not continue
+            // Handled above ...
+        }
+
+        if (ownerProperties.isEmpty()) {
+            logger.error("No properties parsed from file {}", fileName);
         }
 
         logger.info("constructed");

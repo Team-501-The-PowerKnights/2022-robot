@@ -8,12 +8,14 @@
 
 package frc.robot.subsystems.drive;
 
+
 import java.util.List;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
 
 import frc.robot.subsystems.ISubsystem;
+
 
 /**
  * Add your docs here.
@@ -55,8 +57,16 @@ public interface IDriveSubsystem extends ISubsystem {
 
     public void setSpeed(int canID, double speed);
 
+    /**
+     * 
+     * @return number of encoder clicks
+     */
     public double getEncoderClicks();
 
+    /**
+     * 
+     * @return encoder velocity (clicks per second?)
+     */
     public double getEncoderVelocity();
 
 }

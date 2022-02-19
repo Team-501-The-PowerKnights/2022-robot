@@ -8,14 +8,15 @@
 
 package frc.robot.sensors.vision;
 
-import org.slf4j.Logger;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Wrapper for the Limelight Vision Sensor to provide ease when switching from
@@ -26,20 +27,18 @@ class LimelightVision {
 
     /** Our classes' logger **/
     @SuppressWarnings("unused")
-    private static final Logger logger = RioLogger.getLogger(LimelightVision.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(LimelightVision.class.getName());
 
     private NetworkTable table;
 
     boolean limelightValid;
 
     LimelightVision() {
-
         table = NetworkTableInstance.getDefault().getTable("limelight");
 
         limelightValid = (table != null) ? true : false;
 
         SmartDashboard.putBoolean("limelightValid", limelightValid);
-
     }
 
     protected boolean isLocked() {

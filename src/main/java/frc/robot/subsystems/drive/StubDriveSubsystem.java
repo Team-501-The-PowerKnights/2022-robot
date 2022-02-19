@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.drive;
 
+
 import java.util.List;
 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -15,6 +16,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class StubDriveSubsystem extends BaseDriveSubsystem {
 
@@ -34,6 +36,7 @@ class StubDriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void updateTelemetry() {
+        super.updateTelemetry();
         // Stub doesn't implement this
     }
 
@@ -90,7 +93,7 @@ class StubDriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public double getEncoderVelocity() {
-        // TODO Auto-generated method stub
+        // Stub doesn't implement this
         return 0;
     }
 

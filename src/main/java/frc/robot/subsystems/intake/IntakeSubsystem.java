@@ -8,13 +8,13 @@
 
 package frc.robot.subsystems.intake;
 
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 public class IntakeSubsystem extends BaseIntakeSubsystem {
 
@@ -23,9 +23,6 @@ public class IntakeSubsystem extends BaseIntakeSubsystem {
 
     // Our motor to drive the intake in (up) & out (down)
     private final TalonSRX motor;
-
-    // Keep for telemetry
-    private double tlmSpeed;
 
     /**
      * Creates a new IntakeSubsystem.
@@ -36,19 +33,12 @@ public class IntakeSubsystem extends BaseIntakeSubsystem {
         motor = new TalonSRX(41);
         motor.configFactoryDefault();
 
-        tlmSpeed = 0.0;
-
         logger.info("constructed");
     }
 
     @Override
     public void updateTelemetry() {
-        SmartDashboard.putNumber(TelemetryNames.Intake.speed, tlmSpeed);
-    }
-
-    @Override
-    public void stop() {
-        setSpeed(0.0);
+        super.updateTelemetry();
     }
 
     @Override
@@ -67,12 +57,21 @@ public class IntakeSubsystem extends BaseIntakeSubsystem {
     }
 
     @Override
+    public void stop() {
+        super.stop();
+
+        setSpeed(0.0);
+    }
+
+    @Override
     public void pullIn() {
         setSpeed(1.0);
     }
 
     @Override
     public void pullIn(double speed) {
+        super.pullIn(speed);
+
         setSpeed(speed);
     }
 
@@ -83,13 +82,16 @@ public class IntakeSubsystem extends BaseIntakeSubsystem {
 
     @Override
     public void pushOut(double speed) {
+        super.pushOut(speed);
+
         setSpeed(speed);
 
     }
 
     private void setSpeed(double speed) {
-        tlmSpeed = speed;
-        motor.set(ControlMode.PercentOutput, tlmSpeed);
+        setTlmSpeed(speed);
+
+        motor.set(ControlMode.PercentOutput, speed);
     }
 
 }

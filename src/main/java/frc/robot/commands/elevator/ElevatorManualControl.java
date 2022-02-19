@@ -6,37 +6,23 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.drive;
+package frc.robot.commands.elevator;
 
-
-import frc.robot.commands.IIandTCommand;
-import frc.robot.commands.PKManualCommand;
-import frc.robot.subsystems.drive.DriveFactory;
-import frc.robot.subsystems.drive.IDriveSubsystem;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-/**
- * Add your docs here.
- */
-public class IandTDriveJoystickControl extends PKManualCommand implements IIandTCommand {
-
+public class ElevatorManualControl extends ElevatorOICommandBase {
+    
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(DriveJoystickControl.class.getName());
-
-    // Handle to our subsystem
-    private IDriveSubsystem drive;
+    private static final PKLogger logger = RioLogger.getLogger(ElevatorManualControl.class.getName());
 
     /**
      * Creates a new DriveJoystickControl.
      */
-    public IandTDriveJoystickControl() {
+    public ElevatorManualControl() {
         logger.info("constructing {}", getName());
-
-        drive = DriveFactory.getInstance();
-        addRequirements(drive);
 
         logger.info("constructed");
     }
@@ -46,17 +32,17 @@ public class IandTDriveJoystickControl extends PKManualCommand implements IIandT
     public void execute() {
         super.execute();
 
-        double speed = oi.getDriveSpeed();
-        //double turn = oi.getDriveTurn();
-        double turn = 11;
-
-        drive.drive(turn, speed);
+        double speed = oi.getElevatorSpeed();
+        if ( speed == 0 ) {
+            elevator.stop();
+        }
+        else if ( speed > 0 )
+        {
+            elevator.lift();
+        }
+        else if ( speed < 0 )
+        {
+            elevator.lower();
+        }
     }
-
-    // Returns true when the command should end.
-    @Override
-    public boolean isFinished() {
-        return false;
-    }
-
 }

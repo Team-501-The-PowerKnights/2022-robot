@@ -6,37 +6,36 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.turretlocation;
+package frc.robot.commands.elevator;
 
-
-import edu.wpi.first.wpilibj.DigitalInput;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-/**
- * Provides implementation of <code>ITurretLocationSensor</code> for the
- * <i>Zester-Bot</i>.
- */
-class ZesterTurretLocationSensor extends BaseTurretLocationSensor {
-
+public class ElevatorLift extends ElevatorCommandBase {
+    
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ZesterTurretLocationSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ElevatorLift.class.getName());
 
-    private DigitalInput location;
-
-    ZesterTurretLocationSensor() {
-        logger.info("constructing");
-
-        location = new DigitalInput(8);
+    public ElevatorLift() {
+        logger.info("constructing {}", getName());
 
         logger.info("constructed");
     }
 
     @Override
-    public boolean get() {
-        return location.get();
+    public void execute() {
+        super.execute();
+
+        elevator.lift();
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        super.end(interrupted);
+
+        elevator.stop();
     }
 
 }

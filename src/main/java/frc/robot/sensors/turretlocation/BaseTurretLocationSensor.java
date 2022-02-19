@@ -8,17 +8,18 @@
 
 package frc.robot.sensors.turretlocation;
 
-import org.slf4j.Logger;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.telemetry.TelemetryNames;
 
+import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 abstract class BaseTurretLocationSensor implements ITurretLocationSensor {
 
     /** Our classes' logger **/
-    private static final Logger logger = RioLogger.getLogger(BaseTurretLocationSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(BaseTurretLocationSensor.class.getName());
 
     /** Our sensor's name **/
     protected static final String myName = TelemetryNames.TurretLocation.name;

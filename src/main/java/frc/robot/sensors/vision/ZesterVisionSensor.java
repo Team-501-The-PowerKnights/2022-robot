@@ -8,20 +8,19 @@
 
 package frc.robot.sensors.vision;
 
-import org.slf4j.Logger;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.telemetry.TelemetryNames;
+import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Provides implementation of <code>IVisionSensor</code> for the
- * <i>Real-Bot</i>.
+ * <i>Zester-Bot</i>.
  */
 class ZesterVisionSensor extends BaseVisionSensor {
 
     /** Our classes' logger **/
-    private static final Logger logger = RioLogger.getLogger(ZesterVisionSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ZesterVisionSensor.class.getName());
 
     private LimelightVision mySensor;
 
@@ -35,8 +34,7 @@ class ZesterVisionSensor extends BaseVisionSensor {
 
     @Override
     public void updateTelemetry() {
-        SmartDashboard.putBoolean(TelemetryNames.Vision.locked, mySensor.isLocked());
-        SmartDashboard.putBoolean(TelemetryNames.Vision.enabled, mySensor.isEnabled());
+        super.updateTelemetry();
     }
 
     @Override
@@ -65,7 +63,9 @@ class ZesterVisionSensor extends BaseVisionSensor {
 
     @Override
     public boolean isLocked() {
-        return mySensor.isLocked();
+        boolean locked = mySensor.isLocked();
+        setTlmLocked(locked);
+        return locked;
     }
 
 }

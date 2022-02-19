@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.drive;
 
+
 import java.util.List;
 
 import com.revrobotics.RelativeEncoder;
@@ -38,6 +39,7 @@ import frc.robot.sensors.gyro.IGyroSensor;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class ProtoDriveSubsystem extends BaseDriveSubsystem {
 
@@ -130,6 +132,7 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void updateTelemetry() {
+        super.updateTelemetry();
         // TODO Auto-generated method stub
 
     }

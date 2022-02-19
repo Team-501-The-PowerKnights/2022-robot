@@ -64,6 +64,7 @@ abstract class BaseClimberSubsystem extends SubsystemBase implements IClimberSub
         }
 
         setDefaultCommand(ourCommand);
+        SmartDashboard.putString(TelemetryNames.Climber.defCommand, ourCommand.getClass().getSimpleName());
     }
     
 }

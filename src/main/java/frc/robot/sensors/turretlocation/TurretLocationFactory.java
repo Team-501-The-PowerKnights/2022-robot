@@ -8,7 +8,6 @@
 
 package frc.robot.sensors.turretlocation;
 
-import org.slf4j.Logger;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -18,7 +17,9 @@ import frc.robot.sensors.SensorNames;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
+import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * 
@@ -26,7 +27,7 @@ import riolog.RioLogger;
 public class TurretLocationFactory {
 
     /** Our classes' logger **/
-    private static final Logger logger = RioLogger.getLogger(TurretLocationFactory.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(TurretLocationFactory.class.getName());
 
     /** Singleton instance of class for all to use **/
     private static ITurretLocationSensor ourInstance;
@@ -68,13 +69,13 @@ public class TurretLocationFactory {
             @SuppressWarnings("deprecation")
             Object myObject = myClass.newInstance();
             ourInstance = (ITurretLocationSensor) myObject;
-            SmartDashboard.putNumber(TelemetryNames.Gyro.status, PKStatus.success.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.TurretLocation.status, PKStatus.success.tlmValue);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for {}", myName);
             ourInstance = new StubTurretLocationSensor();
-            SmartDashboard.putNumber(TelemetryNames.Gyro.status, PKStatus.degraded.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.TurretLocation.status, PKStatus.degraded.tlmValue);
         }
-        SmartDashboard.putString(TelemetryNames.Gyro.implClass, ourInstance.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.TurretLocation.implClass, ourInstance.getClass().getSimpleName());
     }
 
     /**
