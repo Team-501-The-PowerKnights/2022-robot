@@ -8,7 +8,6 @@
 
 package frc.robot.sensors;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,6 @@ import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Add your docs here.
