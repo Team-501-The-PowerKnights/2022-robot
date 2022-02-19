@@ -8,20 +8,21 @@
 
 package frc.robot.sensors.turretlocation;
 
-import org.slf4j.Logger;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 
+import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Provides implementation of <code>ITurretLocationSensor</code> for the
- * <i>Real-Bot</i>.
+ * <i>Zester-Bot</i>.
  */
 class ZesterTurretLocationSensor extends BaseTurretLocationSensor {
 
     /** Our classes' logger **/
-    private static final Logger logger = RioLogger.getLogger(ZesterTurretLocationSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ZesterTurretLocationSensor.class.getName());
 
     private DigitalInput location;
 

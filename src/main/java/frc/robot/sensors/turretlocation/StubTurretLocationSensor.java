@@ -8,9 +8,10 @@
 
 package frc.robot.sensors.turretlocation;
 
-import org.slf4j.Logger;
 
+import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Provides implementation of <code>ITurretHomeSensor</code> which has no sensor
@@ -20,7 +21,7 @@ import riolog.RioLogger;
 class StubTurretLocationSensor extends BaseTurretLocationSensor {
 
     /** Our classes' logger **/
-    private static final Logger logger = RioLogger.getLogger(StubTurretLocationSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(StubTurretLocationSensor.class.getName());
 
     StubTurretLocationSensor() {
         logger.info("constructing");

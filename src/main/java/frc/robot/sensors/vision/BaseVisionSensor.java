@@ -8,17 +8,18 @@
 
 package frc.robot.sensors.vision;
 
-import org.slf4j.Logger;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.telemetry.TelemetryNames;
 
+import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 abstract class BaseVisionSensor implements IVisionSensor {
 
     /** Our classes' logger **/
-    private static final Logger logger = RioLogger.getLogger(BaseVisionSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(BaseVisionSensor.class.getName());
 
     protected static final String myName = TelemetryNames.Vision.name;
 
