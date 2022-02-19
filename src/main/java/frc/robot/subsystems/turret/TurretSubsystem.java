@@ -149,71 +149,71 @@ public class TurretSubsystem extends BaseTurretSubsystem {
         logger.debug("starting ...");
         SmartDashboard.putBoolean(TelemetryNames.Turret.isHomed, false);
 
-        if (DriverStation.isAutonomous()) {
-            encoder.setPosition(convertTurretAngleToCounts(-90));
-        } else if (DriverStation.isTeleop()) {
-            double firstAngle = getAngle();
+        // if (DriverStation.isAutonomous()) {
+        // encoder.setPosition(convertTurretAngleToCounts(-90));
+        // } else if (DriverStation.isTeleop()) {
+        double firstAngle = getAngle();
 
-            /*
-             * IMPORTANT - The inner loop get() needs to be there!
-             */
-            // TODO - Figure out why this doesn't work if no inner get()
+        /*
+         * IMPORTANT - The inner loop get() needs to be there!
+         */
+        // TODO - Figure out why this doesn't work if no inner get()
 
-            logger.debug("gross test");
-            while (!(location.get())) {
-                logger.debug("sensor = {}", location.get());
-                motor.set(0.55);
-                if (getAngle() - firstAngle >= 100) {
-                    return;
-                }
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+        logger.debug("gross test");
+        while (!(location.get())) {
+            logger.debug("sensor = {}", location.get());
+            motor.set(0.55);
+            if (getAngle() - firstAngle >= 100) {
+                return;
             }
-            motor.set(0.0);
-            logger.debug("found set point (gross)");
-
-            logger.debug("back off");
-            while ((location.get())) {
-                logger.debug("sensor = {}", location.get());
-                motor.set(-0.05);
-                if (getAngle() - firstAngle >= 100) {
-                    return;
-                }
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
-            motor.set(0.0);
-            logger.debug("backed off set point");
-
-            logger.debug("fine test");
-            while (!(location.get())) {
-                logger.debug("sensor = {}", location.get());
-                motor.set(0.03);
-                if (getAngle() - firstAngle >= 100) {
-                    return;
-                }
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-            motor.set(0.0);
-            logger.debug("found set point (fine)");
-
-            encoder.setPosition(55);
-
-            motor.setIdleMode(IdleMode.kCoast);
         }
+        motor.set(0.0);
+        logger.debug("found set point (gross)");
+
+        logger.debug("back off");
+        while ((location.get())) {
+            logger.debug("sensor = {}", location.get());
+            motor.set(-0.05);
+            if (getAngle() - firstAngle >= 100) {
+                return;
+            }
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        motor.set(0.0);
+        logger.debug("backed off set point");
+
+        logger.debug("fine test");
+        while (!(location.get())) {
+            logger.debug("sensor = {}", location.get());
+            motor.set(0.03);
+            if (getAngle() - firstAngle >= 100) {
+                return;
+            }
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        motor.set(0.0);
+        logger.debug("found set point (fine)");
+
+        encoder.setPosition(55);
+
+        motor.setIdleMode(IdleMode.kCoast);
+        // }
 
         SmartDashboard.putBoolean(TelemetryNames.Turret.isHomed, true);
         logger.debug("... done");
