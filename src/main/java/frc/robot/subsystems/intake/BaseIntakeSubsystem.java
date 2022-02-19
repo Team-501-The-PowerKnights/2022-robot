@@ -64,6 +64,7 @@ abstract class BaseIntakeSubsystem extends SubsystemBase implements IIntakeSubsy
         }
 
         setDefaultCommand(ourCommand);
+        SmartDashboard.putString(TelemetryNames.Intake.defCommand, ourCommand.getClass().getSimpleName());
     }
 
     private double tlmSpeed = 0.0;

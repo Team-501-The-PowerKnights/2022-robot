@@ -170,7 +170,7 @@
               "_title": "PDP.status"
             }
           },
-          "27,9": {
+          "22,9": {
             "size": [
               5,
               2
@@ -181,7 +181,7 @@
               "_title": "Turret.implClass"
             }
           },
-          "27,7": {
+          "22,7": {
             "size": [
               5,
               2
@@ -192,18 +192,7 @@
               "_title": "Turret.status"
             }
           },
-          "7,9": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter.implClass",
-              "_title": "Shooter.implClass"
-            }
-          },
-          "2,11": {
+          "25,0": {
             "size": [
               5,
               2
@@ -214,7 +203,7 @@
               "_title": "Scheduler.status"
             }
           },
-          "12,9": {
+          "7,9": {
             "size": [
               5,
               2
@@ -225,7 +214,7 @@
               "_title": "Intake.implClass"
             }
           },
-          "12,7": {
+          "7,7": {
             "size": [
               5,
               2
@@ -236,7 +225,7 @@
               "_title": "Intake.status"
             }
           },
-          "17,9": {
+          "12,9": {
             "size": [
               5,
               2
@@ -247,7 +236,7 @@
               "_title": "Elevator.implClass"
             }
           },
-          "17,7": {
+          "12,7": {
             "size": [
               5,
               2
@@ -258,18 +247,18 @@
               "_title": "Elevator.status"
             }
           },
-          "22,9": {
+          "17,9": {
             "size": [
               5,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter.implClass",
+              "_source0": "network_table:///SmartDashboard/Shooter.defCommand",
               "_title": "Shooter.implClass"
             }
           },
-          "22,7": {
+          "17,7": {
             "size": [
               5,
               2
@@ -280,18 +269,7 @@
               "_title": "Shooter.status"
             }
           },
-          "7,7": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter.status",
-              "_title": "Shooter.status"
-            }
-          },
-          "32,9": {
+          "27,9": {
             "size": [
               5,
               2
@@ -302,7 +280,7 @@
               "_title": "Climber.implClass"
             }
           },
-          "32,7": {
+          "27,7": {
             "size": [
               5,
               2
@@ -377,6 +355,72 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/TurretLocation.status",
               "_title": "TurretLocation.status"
+            }
+          },
+          "27,11": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climber.defCommand",
+              "_title": "Climber.defCommand"
+            }
+          },
+          "2,11": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drive.defCommand",
+              "_title": "Drive.defCommand"
+            }
+          },
+          "7,11": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Intake.defCommand",
+              "_title": "Intake.defCommand"
+            }
+          },
+          "22,11": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.defCommand",
+              "_title": "Turret.defCommand"
+            }
+          },
+          "17,11": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.defCommand",
+              "_title": "Shooter.defCommand"
+            }
+          },
+          "12,11": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Elevator.defCommand",
+              "_title": "Elevator.defCommand"
             }
           }
         }
@@ -928,6 +972,17 @@
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
+          },
+          "2,4": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drive.defCommand",
+              "_title": "Drive.defCommand"
+            }
           }
         }
       }
@@ -1013,6 +1068,17 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Intake.implClass",
               "_title": "Intake.implClass"
+            }
+          },
+          "2,4": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Intake.defCommand",
+              "_title": "Intake.defCommand"
             }
           }
         }
@@ -1111,6 +1177,17 @@
               "_source0": "network_table:///SmartDashboard/Elevator.speed",
               "_title": "Elevator.speed"
             }
+          },
+          "2,4": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Elevator.defCommand",
+              "_title": "Elevator.defCommand"
+            }
           }
         }
       }
@@ -1139,13 +1216,24 @@
           },
           "2,2": {
             "size": [
-              5,
+              3,
               2
             ],
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Shooter.status",
               "_title": "Shooter.status"
+            }
+          },
+          "2,4": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.defCommand",
+              "_title": "Shooter.defCommand"
             }
           }
         }
@@ -1164,7 +1252,7 @@
         "tiles": {
           "2,2": {
             "size": [
-              5,
+              3,
               2
             ],
             "content": {
@@ -1217,6 +1305,17 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/TurretLocation.status",
               "_title": "TurretLocation.status"
+            }
+          },
+          "2,4": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.defCommand",
+              "_title": "Turret.defCommand"
             }
           }
         }
@@ -2023,6 +2122,171 @@
               "_title": "TurretLocation.isFound",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "48,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/limelight_PipelineName",
+              "_title": "limelight_PipelineName"
+            }
+          },
+          "50,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/limelight_Interface",
+              "_title": "limelight_Interface"
+            }
+          },
+          "18,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/limelight_Stream",
+              "_title": "limelight_Stream"
+            }
+          },
+          "22,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ClimberdefCommand",
+              "_title": "ClimberdefCommand"
+            }
+          },
+          "32,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/DrivedefCommand",
+              "_title": "DrivedefCommand"
+            }
+          },
+          "46,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IntakedefCommand",
+              "_title": "IntakedefCommand"
+            }
+          },
+          "48,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ElevatordefCommand",
+              "_title": "ElevatordefCommand"
+            }
+          },
+          "50,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ShooterdefCommand",
+              "_title": "ShooterdefCommand"
+            }
+          },
+          "6,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/TurretdefCommand",
+              "_title": "TurretdefCommand"
+            }
+          },
+          "10,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drive.defCommand",
+              "_title": "Drive.defCommand"
+            }
+          },
+          "14,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Intake.defCommand",
+              "_title": "Intake.defCommand"
+            }
+          },
+          "16,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Elevator.defCommand",
+              "_title": "Elevator.defCommand"
+            }
+          },
+          "22,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.defCommand",
+              "_title": "Shooter.defCommand"
+            }
+          },
+          "32,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.defCommand",
+              "_title": "Turret.defCommand"
+            }
+          },
+          "46,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climber.defCommand",
+              "_title": "Climber.defCommand"
             }
           }
         }

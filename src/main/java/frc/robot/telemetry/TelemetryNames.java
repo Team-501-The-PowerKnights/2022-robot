@@ -108,6 +108,7 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+        public static final String defCommand = name + "defCommand";
 
         public static final String busVoltage = name + ".busVoltage";
         public static final String totalCurrent = name + ".totalCurrent";
@@ -136,7 +137,7 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
-        
+       
         public static final String isFound = name + ".isFound";
     }
 
@@ -160,6 +161,7 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+        public static final String defCommand = name + ".defCommand";
 
         public static final String encoderClicks = name + ".encoderClicks";
         public static final String distanceClicks = name + ".distanceClicks";
@@ -174,6 +176,7 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+        public static final String defCommand = name + ".defCommand";
 
         public static final String speed = name + ".speed";
         public static final String stopped = name + ".stopped";
@@ -187,6 +190,7 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+        public static final String defCommand = name + ".defCommand";
 
         public static final String speed = name + ".speed";
         public static final String atLimit = name + ".atLimit";
@@ -200,6 +204,7 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+        public static final String defCommand = name + ".defCommand";
 
         public static final String isActive = name + ".isActive";
         public static final String rpm = name + ".rpm";
@@ -212,6 +217,7 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+        public static final String defCommand = name + ".defCommand";
 
         public static final String angle = name + ".angle";
         public static final String position = name + ".rawPosition";
@@ -224,6 +230,7 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+        public static final String defCommand = name + ".defCommand";
 
         public static final String topLimit = name + ".topLimit";
         public static final String bottomLimit = name + ".bottomLimit";

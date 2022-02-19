@@ -64,6 +64,7 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
         }
 
         setDefaultCommand(ourCommand);
+        SmartDashboard.putString(TelemetryNames.Elevator.defCommand, ourCommand.getClass().getSimpleName());
     }
 
     private double tlmSpeed = 0.0;

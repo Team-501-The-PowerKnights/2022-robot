@@ -64,6 +64,7 @@ abstract class BaseDriveSubsystem extends SubsystemBase implements IDriveSubsyst
         }
 
         setDefaultCommand(ourCommand);
+        SmartDashboard.putString(TelemetryNames.Drive.defCommand, ourCommand.getClass().getSimpleName());
     }
 
     protected double speed = 0.0;
