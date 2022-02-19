@@ -76,7 +76,8 @@ public class OperatorGamepad extends F310Gamepad {
      *********************/
 
     public double getElevatorSpeed() {
-        return deadBand(getLeftYAxis(), 0.05);
+        // + is forward/up and - is backward/down
+        return deadBand(-getLeftYAxis(), 0.05);
     }
 
 }
