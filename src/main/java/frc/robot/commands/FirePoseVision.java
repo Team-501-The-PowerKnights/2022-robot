@@ -51,15 +51,17 @@ public class FirePoseVision extends PKCommandBase {
         super.execute();
 
         intake.pullIn();
+        elevator.lift();
 
         shooter.shoot();
 
         boolean visionGood = (vision.isActive() && vision.isLocked()) || !(vision.isActive());
         if (visionGood && shooter.atTargetVelocity()) {
             elevator.lift();
+            elevator.increment();
         } else {
             // ballevator.liftToLimit();
-            elevator.stop();
+            elevator.stopIncrement();
         }
     }
 
@@ -68,6 +70,7 @@ public class FirePoseVision extends PKCommandBase {
         super.end(interrupted);
 
         elevator.stop();
+        elevator.stopIncrement();
 
         // Don't stop shooter (default is idle command)
         // shooter.stop();

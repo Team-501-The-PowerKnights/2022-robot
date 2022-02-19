@@ -26,6 +26,8 @@ public interface IElevatorSubsystem extends ISubsystem {
 
     public void increment();
 
+    public void stopIncrement();
+
     public boolean isFull();
 
     public void liftToLimit();

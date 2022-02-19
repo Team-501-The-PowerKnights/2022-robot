@@ -112,4 +112,10 @@ public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
 
     }
 
+    @Override
+    public void stopIncrement() {
+        // TODO Auto-generated method stub
+
+    }
+
 }

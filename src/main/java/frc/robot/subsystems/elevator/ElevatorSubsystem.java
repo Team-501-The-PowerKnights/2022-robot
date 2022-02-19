@@ -8,9 +8,6 @@
 
 package frc.robot.subsystems.elevator;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -95,6 +92,11 @@ public class ElevatorSubsystem extends BaseElevatorSubsystem {
     @Override
     public void increment() {
         incrementer.set(0.4);
+    }
+
+    @Override
+    public void stopIncrement() {
+        incrementer.set(0.0);
     }
 
     @Override
