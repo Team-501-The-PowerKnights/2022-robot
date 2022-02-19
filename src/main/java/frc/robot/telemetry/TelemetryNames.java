@@ -197,6 +197,7 @@ public final class TelemetryNames {
         public static final String stopped = name + ".stopped";
         public static final String lifting = name + ".lifting";
         public static final String lowering = name + ".lowering";
+        public static final String full = name + ".full";
     }
 
     public final class Shooter {

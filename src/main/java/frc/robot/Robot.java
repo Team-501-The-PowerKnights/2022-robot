@@ -308,6 +308,7 @@ public class Robot extends TimedRobot {
             s.updatePreferences();
         }
 
+        // FIXME: Remove the hardcoded auto command
         // CommandScheduler.getInstance().schedule(true, new DriveForwardTimed());
         // CommandScheduler.getInstance().schedule(true, new AutoFull());
         autoCommand = autoChooser.getSelected();

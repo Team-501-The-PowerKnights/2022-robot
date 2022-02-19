@@ -38,8 +38,7 @@ class VisionSensor extends BaseVisionSensor {
 
     @Override
     public void updateTelemetry() {
-        SmartDashboard.putBoolean(TelemetryNames.Vision.locked, mySensor.isLocked());
-        SmartDashboard.putBoolean(TelemetryNames.Vision.enabled, mySensor.isEnabled());
+       super.updateTelemetry();
     }
 
     @Override
@@ -68,7 +67,9 @@ class VisionSensor extends BaseVisionSensor {
 
     @Override
     public boolean isLocked() {
-        return mySensor.isLocked();
+        boolean locked = mySensor.isLocked();
+        setTlmLocked(locked);
+        return locked;
     }
 
 }
