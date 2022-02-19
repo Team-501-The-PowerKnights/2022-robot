@@ -39,17 +39,17 @@ Gyro.className = StubGyroSensor
 
 
 #####################
-# TurretLocation
-#####################
-TurretLocation.className = StubTurretLocationSensor
-#TurretLocation.className =
-
-
-#####################
 # Vision
 #####################
 Vision.className = StubVisionSensor
 #Vision.className =
+
+
+#####################
+# TurretLocation
+#####################
+TurretLocation.className = StubTurretLocationSensor
+#TurretLocation.className =
 
 
 
