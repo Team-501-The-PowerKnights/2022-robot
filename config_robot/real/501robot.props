@@ -34,22 +34,22 @@ PDP.className = StubPDPModule
 #####################
 # Gyro
 #####################
-Gyro.className = StubGyroSensor
-#Gyro.className =
+#Gyro.className = StubGyroSensor
+Gyro.className =
 
 
 #####################
 # Vision
 #####################
-Vision.className = StubVisionSensor
-#Vision.className =
+#Vision.className = StubVisionSensor
+Vision.className =
 
 
 #####################
 # TurretLocation
 #####################
-TurretLocation.className = StubTurretLocationSensor
-#TurretLocation.className =
+#TurretLocation.className = StubTurretLocationSensor
+TurretLocation.className =
 
 
 
@@ -62,40 +62,44 @@ TurretLocation.className = StubTurretLocationSensor
 #####################
 # Drive
 #####################
-Drive.className = StubDriveSubsystem
-#Drive.className =
-Drive.defaultCommandName = DriveDoNothing
+# Drive.className = StubDriveSubsystem
+Drive.className =
+#Drive.defaultCommandName = DriveDoNothing
+Drive.defaultCommandName = DriveJoystickControl
 
 
 #####################
 # Intake
 #####################
-Intake.className = StubIntakeSubsystem
-#Intake.className =
-Intake.defaultCommandName = IntakeDoNothing
+# Intake.className = StubIntakeSubsystem
+Intake.className =
+#Intake.defaultCommandName = IntakeDoNothing
+Intake.defaultCommandName = IntakeManualControl
 
 
 #####################
 # Elevator
 #####################
-Elevator.className = StubElevatorSubsystem
-#Elevator.className =
-Elevator.defaultCommandName = ElevatorDoNothing
+#Elevator.className = StubElevatorSubsystem
+Elevator.className =
+#Elevator.defaultCommandName = ElevatorDoNothing
+Elevator.defaultCommandName = ElevatorManualControl
 
 
 #####################
 # Shooter
 #####################
-Shooter.className = StubShooterSubsystem
-#Shooter.className =
-Shooter.defaultCommandName = ShooterDoNothing
+#Shooter.className = StubShooterSubsystem
+Shooter.className =
+#Shooter.defaultCommandName = ShooterDoNothing
+Shooter.defaultCommandName = ShooterIdle
 
 
 #####################
 # Turret
 #####################
-Turret.className = StubTurretSubsystem
-#Turret.className =
+#Turret.className = StubTurretSubsystem
+Turret.className =
 Turret.defaultCommandName = TurretDoNothing
 
 
