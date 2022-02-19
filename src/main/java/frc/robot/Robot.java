@@ -25,6 +25,7 @@ import frc.robot.commands.DoNothing;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.PKSequentialCommandGroup;
 import frc.robot.commands.drive.DriveBackwardDistance;
+import frc.robot.commands.drive.DriveBackwardTimed;
 import frc.robot.commands.drive.DriveForwardDistance;
 import frc.robot.commands.drive.DriveForwardTimed;
 import frc.robot.commands.elevator.ElevatorLift;
@@ -179,13 +180,26 @@ public class Robot extends TimedRobot {
         autoChooser = new SendableChooser<>();
 
         autoChooser.setDefaultOption("Do Nothing", new DoNothing());
-        autoChooser.addOption("Drive Forward (Timed)", new DriveForwardTimed());
-        autoChooser.addOption("Drive Backwards (3 feet)", new DriveBackwardDistance(3));
-        autoChooser.addOption("Shoot and Drive Backwards (3 feet)",
+
+        // FIXME: This only works because default shooter command is idle
+
+        // FIXME: Make parameterized like distance
+        autoChooser.addOption("Drive Forward (4 sec)", new DriveForwardTimed());
+        autoChooser.addOption("Drive Forward (3 feet)", new DriveForwardDistance(3));
+        autoChooser.addOption("Shoot and Drive Forward (3 feet)",
+            new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardDistance(3)));
+        autoChooser.addOption("Shoot and Drive Forward (4 sec)",
+            new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardTimed()));
+
+        autoChooser.addOption("Drive Backward (4 sec)", new DriveBackwardTimed());
+        autoChooser.addOption("Drive Backward (3 feet)", new DriveBackwardDistance(3));
+        autoChooser.addOption("Shoot and Drive Backward (3 feet)",
                 new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardDistance(3)));
-        autoChooser.addOption("Pick up Balls and Shoot While Driving Forward",
-                new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardDistance(3), new IntakeIngest()));
-        autoChooser.addOption("Home Turret", new TurretHome());
+        autoChooser.addOption("Shoot and Drive Backward (4 sec)",
+                new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardTimed()));
+
+        autoChooser.addOption("Full Auto (Driving Forward)",
+                new PKParallelCommandGroup(new ElevatorLift(), new IntakeIngest(), new DriveForwardTimed()));
 
         SmartDashboard.putData("Auto Mode", autoChooser);
     }

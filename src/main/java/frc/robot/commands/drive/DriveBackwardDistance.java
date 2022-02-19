@@ -32,7 +32,8 @@ public class DriveBackwardDistance extends DriveCommandBase {
         logger.info("constructing {}", getName());
 
         distanceClicks = distanceInFeet * 6.849; // motor revolutions per foot
-
+        // FIXME: this seems better than 2x's the distance
+        distanceClicks /= 2;
         SmartDashboard.putNumber(TelemetryNames.Drive.distanceClicks, distanceClicks);
 
         logger.info("constructed");
