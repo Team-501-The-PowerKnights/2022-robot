@@ -93,7 +93,7 @@
               "_title": "Drive.status"
             }
           },
-          "7,5": {
+          "9,5": {
             "size": [
               5,
               2
@@ -104,7 +104,7 @@
               "_title": "Gyro.implClass"
             }
           },
-          "7,3": {
+          "9,3": {
             "size": [
               5,
               2
@@ -321,7 +321,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Properties.status",
-              "_title": "SmartDashboard/Properties.status"
+              "_title": "Properties.status"
             }
           },
           "32,2": {
@@ -332,7 +332,238 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Preferences.status",
-              "_title": "SmartDashboard/Preferences.status"
+              "_title": "Preferences.status"
+            }
+          },
+          "14,5": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Vision.implClass",
+              "_title": "Vision.implClass"
+            }
+          },
+          "14,3": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Vision.status",
+              "_title": "Vision.status"
+            }
+          },
+          "19,5": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/TurretLocation.implClass",
+              "_title": "TurretLocation.implClass"
+            }
+          },
+          "19,3": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/TurretLocation.status",
+              "_title": "TurretLocation.status"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Sensors",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 32.0,
+        "showGrid": true,
+        "hgap": 8.0,
+        "vgap": 8.0,
+        "titleType": 0,
+        "tiles": {
+          "2,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Vision.implClass",
+              "_title": "Vision.implClass"
+            }
+          },
+          "2,9": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Vision.locked",
+              "_title": "Vision.locked",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "2,2": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Vision.status",
+              "_title": "Vision.status"
+            }
+          },
+          "2,7": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Vision.enabled",
+              "_title": "Vision.enabled",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "2,5": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Vision.active",
+              "_title": "Vision.active",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "8,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/TurretLocation.implClass",
+              "_title": "TurretLocation.implClass"
+            }
+          },
+          "8,5": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/TurretLocation.isFound",
+              "_title": "TurretLocation.isFound",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "8,2": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/TurretLocation.status",
+              "_title": "TurretLocation.status"
+            }
+          },
+          "14,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gyro.implClass",
+              "_title": "Gyro.implClass"
+            }
+          },
+          "14,2": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gyro.status",
+              "_title": "Gyro.status"
+            }
+          },
+          "14,5": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gyro.angle",
+              "_title": "Gyro.angle"
+            }
+          },
+          "17,5": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gyro.heading",
+              "_title": "Gyro.heading"
+            }
+          },
+          "14,7": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gyro.roll",
+              "_title": "Gyro.roll"
+            }
+          },
+          "14,9": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gyro.pitch",
+              "_title": "Gyro.pitch"
+            }
+          },
+          "14,11": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gyro.yaw",
+              "_title": "Gyro.yaw"
             }
           }
         }
@@ -512,7 +743,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/HMI.elevatorSpeed",
-              "_title": "SmartDashboard/HMI.elevatorSpeed"
+              "_title": "HMI.elevatorSpeed"
             }
           }
         }
@@ -894,7 +1125,30 @@
         "hgap": 8.0,
         "vgap": 8.0,
         "titleType": 0,
-        "tiles": {}
+        "tiles": {
+          "2,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.implClass",
+              "_title": "Shooter.implClass"
+            }
+          },
+          "2,2": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.status",
+              "_title": "Shooter.status"
+            }
+          }
+        }
       }
     },
     {
@@ -907,7 +1161,65 @@
         "hgap": 8.0,
         "vgap": 8.0,
         "titleType": 0,
-        "tiles": {}
+        "tiles": {
+          "2,2": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.status",
+              "_title": "Turret.status"
+            }
+          },
+          "2,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.implClass",
+              "_title": "Turret.implClass"
+            }
+          },
+          "15,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/TurretLocation.isFound",
+              "_title": "TurretLocation.isFound",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "10,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/TurretLocation.implClass",
+              "_title": "TurretLocation.implClass"
+            }
+          },
+          "10,2": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/TurretLocation.status",
+              "_title": "TurretLocation.status"
+            }
+          }
+        }
       }
     },
     {
@@ -1615,6 +1927,102 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Elevator.speed",
               "_title": "Elevator.speed"
+            }
+          },
+          "42,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Vision.status",
+              "_title": "Vision.status"
+            }
+          },
+          "16,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Vision.implClass",
+              "_title": "Vision.implClass"
+            }
+          },
+          "38,1": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Vision.enabled",
+              "_title": "Vision.enabled",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "10,5": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Vision.active",
+              "_title": "Vision.active",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "14,5": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Vision.locked",
+              "_title": "Vision.locked",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "44,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/TurretLocation.status",
+              "_title": "TurretLocation.status"
+            }
+          },
+          "46,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/TurretLocation.implClass",
+              "_title": "TurretLocation.implClass"
+            }
+          },
+          "42,1": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/TurretLocation.isFound",
+              "_title": "TurretLocation.isFound",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
