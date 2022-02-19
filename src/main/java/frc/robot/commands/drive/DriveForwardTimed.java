@@ -42,7 +42,7 @@ public class DriveForwardTimed extends DriveCommandBase {
     public void execute() {
         super.execute();
 
-        double speed = 0.4;
+        double speed = 0.3; //0.4
         double turn = 0.0;
 
         drive.drive(speed, turn);
