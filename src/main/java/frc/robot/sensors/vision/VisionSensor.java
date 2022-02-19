@@ -9,10 +9,6 @@
 package frc.robot.sensors.vision;
 
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import frc.robot.telemetry.TelemetryNames;
-
 import riolog.PKLogger;
 import riolog.RioLogger;
 

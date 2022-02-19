@@ -22,7 +22,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.commands.DoNothing;
-import frc.robot.commands.PKSequentialCommandGroup;
 import frc.robot.commands.turret.TurretHome;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModuleFactory;
