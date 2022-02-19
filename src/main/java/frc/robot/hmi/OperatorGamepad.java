@@ -13,6 +13,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
+import frc.robot.commands.PKParallelCommandGroup;
+import frc.robot.commands.shooter.ShooterSpinUpFormula;
+import frc.robot.commands.turret.TurretVisionAlign;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -33,8 +36,6 @@ public class OperatorGamepad extends F310Gamepad {
     private final Button visionTargettingButton;
     private final Button revShooterButton;
     private final Button homeTurretButton;
-    private final Button elevatorUpButton;
-    private final Button elevatorDownButton;
     
     public OperatorGamepad() 
     {
@@ -45,8 +46,6 @@ public class OperatorGamepad extends F310Gamepad {
         visionTargettingButton = new JoystickButton(stick, rightBumper);
         revShooterButton = new JoystickButton(stick, redButton);
         homeTurretButton = new JoystickButton(stick, startButton);
-        elevatorUpButton = new JoystickButton(stick, leftTrigger);
-        elevatorDownButton = new JoystickButton(stick, rightTrigger);
 
         logger.info("constructed");
     }
@@ -56,6 +55,8 @@ public class OperatorGamepad extends F310Gamepad {
     public void configureButtonBindings() {
         // TODO Auto-generated method stub
         logger.info("configure");
+        
+        visionTargettingButton.whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(), new ShooterSpinUpFormula()));
         
         logger.info("configured");
     }

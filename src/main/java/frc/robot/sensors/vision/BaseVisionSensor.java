@@ -10,6 +10,7 @@ package frc.robot.sensors.vision;
 
 import org.slf4j.Logger;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.RioLogger;
@@ -32,18 +33,37 @@ abstract class BaseVisionSensor implements IVisionSensor {
         logger.info("constructed");
     }
 
+    private boolean tlmEnabled = false;
+    private boolean tlmActive = false;
+    private boolean tlmLocked = false;
+
+
+    @Override
+    public void updateTelemetry() {
+        SmartDashboard.putBoolean(TelemetryNames.Vision.enabled, tlmEnabled);
+        SmartDashboard.putBoolean(TelemetryNames.Vision.active, tlmActive);
+        SmartDashboard.putBoolean(TelemetryNames.Vision.locked, tlmLocked);
+    }
+
     @Override
     public void enable() {
-        isActive = true;
+        tlmActive = true;
+        tlmEnabled = true;
     }
 
     @Override
     public void disable() {
-        isActive = false;
+        tlmActive = false;
+        tlmEnabled = false;
     }
 
     public boolean isActive() {
-        return isActive;
+        return tlmActive;
     }
 
+    protected void setTlmLocked(boolean locked)
+    {
+        tlmLocked = locked;
+    }
+    
 }

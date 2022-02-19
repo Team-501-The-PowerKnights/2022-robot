@@ -68,13 +68,13 @@ public class VisionFactory {
             @SuppressWarnings("deprecation")
             Object myObject = myClass.newInstance();
             ourInstance = (IVisionSensor) myObject;
-            SmartDashboard.putNumber(TelemetryNames.Gyro.status, PKStatus.success.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.Vision.status, PKStatus.success.tlmValue);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for {}", myName);
             ourInstance = new StubVisionSensor();
-            SmartDashboard.putNumber(TelemetryNames.Gyro.status, PKStatus.degraded.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.Vision.status, PKStatus.degraded.tlmValue);
         }
-        SmartDashboard.putString(TelemetryNames.Gyro.implClass, ourInstance.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.Vision.implClass, ourInstance.getClass().getSimpleName());
     }
 
     /**

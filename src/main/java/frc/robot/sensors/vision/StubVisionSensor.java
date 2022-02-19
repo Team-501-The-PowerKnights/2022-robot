@@ -8,9 +8,10 @@
 
 package frc.robot.sensors.vision;
 
-import org.slf4j.Logger;
 
+import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Provides implementation of <code>IVisionSensor</code> which has no sensor or
@@ -20,7 +21,7 @@ import riolog.RioLogger;
 class StubVisionSensor extends BaseVisionSensor {
 
     /** Our classes' logger **/
-    private static final Logger logger = RioLogger.getLogger(StubVisionSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(StubVisionSensor.class.getName());
 
     StubVisionSensor() {
         logger.info("constructing");
@@ -30,6 +31,7 @@ class StubVisionSensor extends BaseVisionSensor {
 
     @Override
     public void updateTelemetry() {
+        super.updateTelemetry();
         // Stub doesn't implement anything useful
     }
 
@@ -48,6 +50,7 @@ class StubVisionSensor extends BaseVisionSensor {
     @Override
     public boolean isLocked() {
         // Stub doesn't do anything useful
+        setTlmLocked(false);
         return false;
     }
 

@@ -135,24 +135,20 @@ public final class TelemetryNames {
         public static final String name = SensorNames.turretLocationName;
 
         public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+        
         public static final String isFound = name + ".isFound";
     }
 
     public final class Vision {
         public static final String name = SensorNames.visionName;
 
-        // Set by the vision program running on R-PI
         public static final String status = name + ".status";
-        // Running count for iterations of program
-        public static final String heart_beat = name + ".heart_beat";
-        // Valid solution?
-        public static final String locked = name + ".locked";
-        // Delta offset (+ CCW; rotate CW to fix & - CW; rotate CCW to fix)
-        public static final String angle = name + ".angle";
-        // Incremented every time
-        public static final String count = name + ".count";
+        public static final String implClass = name + ".implClass";
 
         public static final String enabled = name + ".enabled";
+        public static final String active = name + ".active";
+        public static final String locked = name + ".locked";
     }
 
     /***************

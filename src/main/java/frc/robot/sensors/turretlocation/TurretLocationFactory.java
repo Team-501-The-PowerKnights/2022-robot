@@ -68,13 +68,13 @@ public class TurretLocationFactory {
             @SuppressWarnings("deprecation")
             Object myObject = myClass.newInstance();
             ourInstance = (ITurretLocationSensor) myObject;
-            SmartDashboard.putNumber(TelemetryNames.Gyro.status, PKStatus.success.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.TurretLocation.status, PKStatus.success.tlmValue);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for {}", myName);
             ourInstance = new StubTurretLocationSensor();
-            SmartDashboard.putNumber(TelemetryNames.Gyro.status, PKStatus.degraded.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.TurretLocation.status, PKStatus.degraded.tlmValue);
         }
-        SmartDashboard.putString(TelemetryNames.Gyro.implClass, ourInstance.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.TurretLocation.implClass, ourInstance.getClass().getSimpleName());
     }
 
     /**

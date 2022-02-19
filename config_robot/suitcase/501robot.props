@@ -37,6 +37,17 @@ PDP.className = StubPDPModule
 Gyro.className = StubGyroSensor
 #Gyro.className =
 
+#####################
+# Vision
+#####################
+Vision.className = StubVisionSensor
+#Vision.className =
+
+#####################
+# Turret Location
+#####################
+TurretLocation.className = StubTurretLocationSensor
+#TurretLocation.className 
 
 
 #########################################
