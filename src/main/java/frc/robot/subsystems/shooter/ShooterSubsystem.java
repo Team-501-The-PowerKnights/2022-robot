@@ -56,8 +56,8 @@ public class ShooterSubsystem extends BaseShooterSubsystem {
         leftMotor.restoreFactoryDefaults();
         rightMotor = new CANSparkMax(22, MotorType.kBrushless);
         rightMotor.restoreFactoryDefaults();
-        leftMotor.enableVoltageCompensation(11);
-        rightMotor.enableVoltageCompensation(11);
+        leftMotor.enableVoltageCompensation(11.0);
+        rightMotor.enableVoltageCompensation(11.0);
         // + spin out, - spin in
         leftMotor.setInverted(true);
 
@@ -156,7 +156,8 @@ public class ShooterSubsystem extends BaseShooterSubsystem {
         // Dashboard provides scale for shooter speed
         // double scale = Preferences.getDouble(Shooter.scale, 1.0);
         // speed *= scale;
-        speed = Math.min(0.20, speed);
+        //speed = Math.min(0.20, speed);
+        // FIXME: Need to get commands to handle idle and spin up again this year
         return speed;
     }
 

@@ -129,7 +129,7 @@ public class OI implements ITelemetryProvider {
      *****************/
 
     public double getTurretJog() {
-        return operatorPad.getElevatorSpeed();
+        return operatorPad.getTurretJog();
     }
 
 }

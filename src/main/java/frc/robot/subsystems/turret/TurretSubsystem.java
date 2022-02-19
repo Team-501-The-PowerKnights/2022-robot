@@ -80,10 +80,16 @@ public class TurretSubsystem extends BaseTurretSubsystem {
         logger.info("constructed");
     }
 
+    private double tlmSpeed;
+
     @Override
     public void updateTelemetry() {
         SmartDashboard.putNumber(TelemetryNames.Turret.angle, getAngle());
         SmartDashboard.putNumber(TelemetryNames.Turret.position, encoder.getPosition());
+
+        // FIXME: Add to a base class somewhere ...
+        SmartDashboard.putNumber(TelemetryNames.Turret.setSpeed, tlmSpeed);
+        SmartDashboard.putNumber(TelemetryNames.Turret.speed, motor.get());
     }
 
     @Override
@@ -101,7 +107,6 @@ public class TurretSubsystem extends BaseTurretSubsystem {
             pid.setD(pid_D, 1);
             pid.setFF(pid_F, 1);
         }
-
     }
 
     @Override
@@ -239,9 +244,10 @@ public class TurretSubsystem extends BaseTurretSubsystem {
 
     @Override
     public void setSpeed(int canID, double speed) {
+        tlmSpeed = speed * 0.25;
         switch (canID) {
             case 20:
-                motor.set(speed);
+                motor.set(tlmSpeed);
                 break;
             default:
                 break;

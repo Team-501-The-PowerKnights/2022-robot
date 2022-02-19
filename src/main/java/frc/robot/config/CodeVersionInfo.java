@@ -15,6 +15,6 @@ package frc.robot.config;
 class CodeVersionInfo {
 
     // Provides a version string that gets incorporated into build
-    public static final String version = "2022.0.0.0";
+    public static final String version = "2022.0.1.0";
 
 }

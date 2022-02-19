@@ -29,7 +29,8 @@ public class ShooterIdle extends ShooterCommandBase {
   public void execute() {
     super.execute();
 
-    shooter.setSpeed(29, 0.20);
+    // FIXME: Add a 'full speed' command
+    shooter.setSpeed(29, 0.50);
   }
 
 }
