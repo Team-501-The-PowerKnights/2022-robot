@@ -56,7 +56,10 @@ public class ShooterSubsystem extends BaseShooterSubsystem {
         leftMotor.restoreFactoryDefaults();
         rightMotor = new CANSparkMax(22, MotorType.kBrushless);
         rightMotor.restoreFactoryDefaults();
+        leftMotor.enableVoltageCompensation(11);
+        rightMotor.enableVoltageCompensation(11);
         // + spin out, - spin in
+        leftMotor.setInverted(true);
 
         // Slaved and inverted
         rightMotor.follow(leftMotor, true);
@@ -146,9 +149,9 @@ public class ShooterSubsystem extends BaseShooterSubsystem {
 
     private double idleShooter(double speed) {
         // Have to be connected to the field to idle
-        if (!OI.getInstance().isFieldConnected()) {
-            return 0.0;
-        }
+        // if (!OI.getInstance().isFieldConnected()) {
+        // return 0.0;
+        // }
 
         // Dashboard provides scale for shooter speed
         // double scale = Preferences.getDouble(Shooter.scale, 1.0);

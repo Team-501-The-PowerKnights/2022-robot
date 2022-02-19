@@ -6,17 +6,17 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.elevator;
+package frc.robot.commands.intake;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ElevatorLift extends ElevatorCommandBase {
+public class IntakeIngest extends IntakeCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ElevatorLift.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IntakeIngest.class.getName());
 
-    public ElevatorLift() {
+    public IntakeIngest() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
@@ -26,16 +26,7 @@ public class ElevatorLift extends ElevatorCommandBase {
     public void execute() {
         super.execute();
 
-        elevator.lift();
-        elevator.increment();
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        super.end(interrupted);
-
-        elevator.stop();
-        elevator.stopIncrement();
+        intake.pullIn();
     }
 
 }

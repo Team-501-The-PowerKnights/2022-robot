@@ -35,21 +35,21 @@ PDP.className = StubPDPModule
 # Gyro
 #####################
 #Gyro.className = StubGyroSensor
-Gyro.className =
+Gyro.className = GyroSensor
 
 
 #####################
 # Vision
 #####################
 #Vision.className = StubVisionSensor
-Vision.className =
+Vision.className = VisionSensor
 
 
 #####################
 # TurretLocation
 #####################
 #TurretLocation.className = StubTurretLocationSensor
-TurretLocation.className =
+TurretLocation.className = TurretLocationSensor
 
 
 
@@ -63,7 +63,7 @@ TurretLocation.className =
 # Drive
 #####################
 # Drive.className = StubDriveSubsystem
-Drive.className =
+Drive.className = DriveSubsystem
 #Drive.defaultCommandName = DriveDoNothing
 Drive.defaultCommandName = DriveJoystickControl
 
@@ -71,8 +71,8 @@ Drive.defaultCommandName = DriveJoystickControl
 #####################
 # Intake
 #####################
-# Intake.className = StubIntakeSubsystem
-Intake.className =
+#Intake.className = StubIntakeSubsystem
+Intake.className = IntakeSubsystem
 #Intake.defaultCommandName = IntakeDoNothing
 Intake.defaultCommandName = IntakeManualControl
 
@@ -81,7 +81,7 @@ Intake.defaultCommandName = IntakeManualControl
 # Elevator
 #####################
 #Elevator.className = StubElevatorSubsystem
-Elevator.className =
+Elevator.className = ElevatorSubsystem
 #Elevator.defaultCommandName = ElevatorDoNothing
 Elevator.defaultCommandName = ElevatorManualControl
 
@@ -90,7 +90,7 @@ Elevator.defaultCommandName = ElevatorManualControl
 # Shooter
 #####################
 #Shooter.className = StubShooterSubsystem
-Shooter.className =
+Shooter.className = ShooterSubsystem
 #Shooter.defaultCommandName = ShooterDoNothing
 Shooter.defaultCommandName = ShooterIdle
 
@@ -99,8 +99,8 @@ Shooter.defaultCommandName = ShooterIdle
 # Turret
 #####################
 #Turret.className = StubTurretSubsystem
-Turret.className =
-Turret.defaultCommandName = TurretDoNothing
+Turret.className = TurretSubsystem
+Turret.defaultCommandName = TurretManualControlJog
 
 
 #####################

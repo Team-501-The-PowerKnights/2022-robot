@@ -32,18 +32,19 @@ public class OperatorGamepad extends F310Gamepad {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(OperatorGamepad.class.getName());
 
-    private final Button firePoseButton;
+    // private final Button firePoseButton;
     private final Button visionTargettingButton;
-    private final Button revShooterButton;
+    // private final Button revShooterButton;
     private final Button homeTurretButton;
 
     public OperatorGamepad() {
         super(1);
         logger.info("constructing {}");
 
-        firePoseButton = new JoystickButton(stick, greenButton);
-        visionTargettingButton = new JoystickButton(stick, rightBumper);
-        revShooterButton = new JoystickButton(stick, redButton);
+        // firePoseButton = new JoystickButton(stick, greenButton);
+        // visionTargettingButton = new JoystickButton(stick, rightBumper);
+        visionTargettingButton = new JoystickButton(stick, greenButton);
+        // revShooterButton = new JoystickButton(stick, redButton);
         homeTurretButton = new JoystickButton(stick, startButton);
 
         logger.info("constructed");
@@ -53,19 +54,23 @@ public class OperatorGamepad extends F310Gamepad {
     public void configureButtonBindings() {
         logger.info("configure");
 
+        // visionTargettingButton
+        // .whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(), new
+        // ShooterSpinUpFormula()));
         visionTargettingButton
-                .whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(), new ShooterSpinUpFormula()));
+                .whenHeld(new TurretVisionAlign());
         homeTurretButton.whenHeld(new TurretHome());
-        firePoseButton.whenHeld(new FirePoseVision());
+        // firePoseButton.whenHeld(new FirePoseVision());
 
         logger.info("configured");
     }
 
     @Override
     public void updateTelemetry() {
-        SmartDashboard.putBoolean(TelemetryNames.HMI.firePose, firePoseButton.get());
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.firePose, firePoseButton.get());
         SmartDashboard.putBoolean(TelemetryNames.HMI.visionTargetting, visionTargettingButton.get());
-        SmartDashboard.putBoolean(TelemetryNames.HMI.revShooter, revShooterButton.get());
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.revShooter,
+        // revShooterButton.get());
         SmartDashboard.putBoolean(TelemetryNames.HMI.homeTurret, homeTurretButton.get());
         SmartDashboard.putNumber(TelemetryNames.HMI.elevatorSpeed, getElevatorSpeed());
         SmartDashboard.putNumber(TelemetryNames.HMI.turretJog, getTurretJog());
@@ -84,19 +89,15 @@ public class OperatorGamepad extends F310Gamepad {
      * Turret
      *********************/
 
-    public double getTurretJog()
-    {
+    public double getTurretJog() {
         // + is CCW and - is CW
         return deadBand(getTriggerAxis(), 0.05);
     }
 
     private double getTriggerAxis() {
-        if (getLeftTrigger() > getRightTrigger())
-        {
+        if (getLeftTrigger() > getRightTrigger()) {
             return getLeftTrigger();
-        }
-        else
-        {
+        } else {
             return -getRightTrigger();
         }
     }

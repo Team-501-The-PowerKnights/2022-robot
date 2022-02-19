@@ -22,9 +22,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.commands.DoNothing;
+import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.PKSequentialCommandGroup;
+import frc.robot.commands.drive.DriveBackwardDistance;
 import frc.robot.commands.drive.DriveForwardDistance;
 import frc.robot.commands.drive.DriveForwardTimed;
+import frc.robot.commands.elevator.ElevatorLift;
+import frc.robot.commands.intake.IntakeIngest;
 import frc.robot.commands.turret.TurretHome;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModuleFactory;
@@ -176,7 +180,11 @@ public class Robot extends TimedRobot {
 
         autoChooser.setDefaultOption("Do Nothing", new DoNothing());
         autoChooser.addOption("Drive Forward (Timed)", new DriveForwardTimed());
-        autoChooser.addOption("Drive Off Line", new DriveForwardDistance(3));
+        autoChooser.addOption("Drive Backwards (3 feet)", new DriveBackwardDistance(3));
+        autoChooser.addOption("Shoot and Drive Backwards (3 feet)",
+                new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardDistance(3)));
+        autoChooser.addOption("Pick up Balls and Shoot While Driving Forward",
+                new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardDistance(3), new IntakeIngest()));
         autoChooser.addOption("Home Turret", new TurretHome());
 
         SmartDashboard.putData("Auto Mode", autoChooser);
