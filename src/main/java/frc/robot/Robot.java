@@ -20,10 +20,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.DoNothing;
+import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.PKSequentialCommandGroup;
+import frc.robot.commands.drive.DriveBackwardDistance;
+import frc.robot.commands.drive.DriveBackwardTimed;
+import frc.robot.commands.drive.DriveForwardDistance;
 import frc.robot.commands.drive.DriveForwardTimed;
+import frc.robot.commands.elevator.ElevatorLift;
+import frc.robot.commands.intake.IntakeIngest;
 import frc.robot.commands.turret.TurretHome;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModuleFactory;
@@ -174,8 +180,29 @@ public class Robot extends TimedRobot {
         autoChooser = new SendableChooser<>();
 
         autoChooser.setDefaultOption("Do Nothing", new DoNothing());
-        autoChooser.addOption("Drive Forward (Timed)", new DriveForwardTimed());
-        autoChooser.addOption("Home Turret", new TurretHome());
+
+        // FIXME: This only works because default shooter command is idle
+
+        // FIXME: Make parameterized like distance
+        autoChooser.addOption("Drive Forward (4 sec)", new DriveForwardTimed());
+        autoChooser.addOption("Drive Forward (3 feet)", new DriveForwardDistance(3));
+        autoChooser.addOption("Shoot and Drive Forward (3 feet)",
+            new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardDistance(3)));
+        autoChooser.addOption("Shoot and Drive Forward (4 sec)",
+            new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardTimed()));
+
+        autoChooser.addOption("Drive Backward (4 sec)", new DriveBackwardTimed());
+        autoChooser.addOption("Drive Backward (3 feet)", new DriveBackwardDistance(3));
+        autoChooser.addOption("Shoot and Drive Backward (3 feet)",
+                new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardDistance(3)));
+        autoChooser.addOption("Shoot and Drive Backward (4 sec)",
+                new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardTimed()));
+
+        autoChooser.addOption("Full Auto (Driving Forward)",
+                new PKParallelCommandGroup(new ElevatorLift(), new IntakeIngest(), new DriveForwardTimed()));
+        autoChooser.addOption("Full Auto (Driving Forward Delay)",
+                new PKParallelCommandGroup(new ElevatorLift(), new IntakeIngest(), 
+                new PKSequentialCommandGroup( new WaitCommand(1.0), new DriveForwardTimed())));
 
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
@@ -183,7 +210,7 @@ public class Robot extends TimedRobot {
     /**
      * This function is called every robot packet, no matter the mode. Use this for
      * items like diagnostics that you want ran during disabled, autonomous,
-     * teleoperated and test.
+     * teleoperated and test.6+++++6
      *
      * <p>
      * This runs after the mode specific periodic functions, but before LiveWindow

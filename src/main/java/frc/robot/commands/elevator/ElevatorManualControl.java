@@ -8,13 +8,11 @@
 
 package frc.robot.commands.elevator;
 
-
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-
 public class ElevatorManualControl extends ElevatorOICommandBase {
-    
+
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ElevatorManualControl.class.getName());
 
@@ -32,17 +30,18 @@ public class ElevatorManualControl extends ElevatorOICommandBase {
     public void execute() {
         super.execute();
 
-        double speed = oi.getElevatorSpeed();
-        if ( speed == 0 ) {
+        double liftSpeed = oi.getIntakeSpeed();
+        if (liftSpeed == 0) {
             elevator.stop();
-        }
-        else if ( speed > 0 )
-        {
+        } else if (liftSpeed > 0) {
             elevator.lift();
         }
-        else if ( speed < 0 )
-        {
-            elevator.lower();
+
+        double incrementSpeed = oi.getElevatorSpeed();
+        if (incrementSpeed == 0) {
+            elevator.stopIncrement();
+        } else if (incrementSpeed > 0) {
+            elevator.increment();
         }
     }
 }

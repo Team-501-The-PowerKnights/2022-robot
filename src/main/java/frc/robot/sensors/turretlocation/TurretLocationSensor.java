@@ -36,7 +36,7 @@ class TurretLocationSensor extends BaseTurretLocationSensor {
 
     @Override
     public boolean get() {
-        return location.get();
+        return !(location.get());
     }
 
 }

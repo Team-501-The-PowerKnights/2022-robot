@@ -225,6 +225,9 @@ public final class TelemetryNames {
         public static final String position = name + ".rawPosition";
         public static final String isHomed = name + ".isHomed";
         public static final String visionPIDOutput = name + ".visionPIDOutput";
+
+        public static final String setSpeed = name + ".setSpeed";
+        public static final String speed = name + ".speed";
     }
 
     public final class Climber {

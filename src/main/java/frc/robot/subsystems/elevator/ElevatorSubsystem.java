@@ -8,10 +8,9 @@
 
 package frc.robot.subsystems.elevator;
 
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,22 +20,26 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-
 public class ElevatorSubsystem extends BaseElevatorSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ElevatorSubsystem.class.getName());
 
-    private final TalonSRX motor;
+    private final CANSparkMax motor;
+    private final CANSparkMax incrementer;
 
     private final DigitalInput limit;
 
     ElevatorSubsystem() {
         logger.info("constructing");
 
-        motor = new TalonSRX(51);
-        motor.configFactoryDefault();
-        motor.setNeutralMode(NeutralMode.Brake);
+        motor = new CANSparkMax(51, MotorType.kBrushless);
+        motor.restoreFactoryDefaults();
+        motor.setIdleMode(IdleMode.kBrake);
+
+        incrementer = new CANSparkMax(52, MotorType.kBrushless);
+        incrementer.restoreFactoryDefaults();
+        incrementer.setIdleMode(IdleMode.kBrake);
 
         limit = new DigitalInput(9);
 
@@ -82,8 +85,18 @@ public class ElevatorSubsystem extends BaseElevatorSubsystem {
     @Override
     public void lower() {
         super.lower();
-    
+
         setSpeed(1.0);
+    }
+
+    @Override
+    public void increment() {
+        incrementer.set(0.4);
+    }
+
+    @Override
+    public void stopIncrement() {
+        incrementer.set(0.0);
     }
 
     @Override
@@ -91,11 +104,10 @@ public class ElevatorSubsystem extends BaseElevatorSubsystem {
         return limit.get();
     }
 
-
     @Override
     public void liftToLimit() {
         super.liftToLimit();
-    
+
         if (!isFull()) {
             lift();
         } else {
@@ -106,7 +118,7 @@ public class ElevatorSubsystem extends BaseElevatorSubsystem {
     private void setSpeed(double speed) {
         setTlmSpeed(speed);
 
-        motor.set(ControlMode.PercentOutput, speed);
+        motor.set(speed);
     }
 
 }

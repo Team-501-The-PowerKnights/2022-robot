@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.elevator;
 
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -20,7 +19,6 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
 
@@ -47,7 +45,7 @@ public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
     public void updateTelemetry() {
         super.updateTelemetry();
 
-       SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit, limit.get());
+        SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit, limit.get());
     }
 
     @Override
@@ -106,6 +104,18 @@ public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
         setTlmSpeed(speed);
 
         motor.set(ControlMode.PercentOutput, speed);
+    }
+
+    @Override
+    public void increment() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void stopIncrement() {
+        // TODO Auto-generated method stub
+
     }
 
 }
