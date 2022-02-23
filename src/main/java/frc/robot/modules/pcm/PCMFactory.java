@@ -10,7 +10,6 @@ package frc.robot.modules.pcm;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.modules.IModule;
 import frc.robot.modules.ModuleNames;
 import frc.robot.properties.PKProperties;
 import frc.robot.properties.PropertiesManager;
@@ -29,7 +28,7 @@ public class PCMFactory {
     private static final PKLogger logger = RioLogger.getLogger(PCMFactory.class.getName());
 
     /** Singleton instance of class for all to use **/
-    private static IModule ourInstance;
+    private static IPCMModule ourInstance;
     /** Name of our module **/
     private static final String myName = ModuleNames.pcmName;
 
@@ -71,7 +70,7 @@ public class PCMFactory {
             Class myClass = Class.forName(classToLoad);
             @SuppressWarnings("deprecation")
             Object myObject = myClass.newInstance();
-            ourInstance = (IModule) myObject;
+            ourInstance = (IPCMModule) myObject;
             SmartDashboard.putNumber(TelemetryNames.PCM.status, PKStatus.success.tlmValue);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for: {}", myName);
@@ -88,7 +87,7 @@ public class PCMFactory {
      *
      * @return singleton instance of module
      **/
-    public static IModule getInstance() {
+    public static IPCMModule getInstance() {
         if (ourInstance == null) {
             throw new IllegalStateException(myName + " Not Constructed Yet");
         }
