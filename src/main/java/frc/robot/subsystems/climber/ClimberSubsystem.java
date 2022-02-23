@@ -63,18 +63,18 @@ public class ClimberSubsystem extends BaseClimberSubsystem {
 
     @Override
     public void validateCalibration() {
-        // TODO Auto-generated method stub
+        // Real doesn't implement this
 
     }
 
     @Override
     public void updatePreferences() {
-        // No preferences for climber
+        // Real doesn't implement this
     }
 
     @Override
     public void disable() {
-        // TODO Auto-generated method stub
+        // Real doesn't implement this
 
     }
 
