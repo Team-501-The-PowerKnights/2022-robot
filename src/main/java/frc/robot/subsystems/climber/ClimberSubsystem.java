@@ -37,7 +37,7 @@ public class ClimberSubsystem extends BaseClimberSubsystem {
     ClimberSubsystem() {
         logger.info("constructing");
 
-        leftMotor = new CANSparkMax(55, MotorType.kBrushless);
+        leftMotor = new CANSparkMax(56, MotorType.kBrushless);
         leftMotor.restoreFactoryDefaults();
         leftMotor.setIdleMode(IdleMode.kBrake);
 
