@@ -67,6 +67,16 @@ public class StubElevatorSubsystem extends BaseElevatorSubsystem {
     }
 
     @Override
+    public void increment() {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void stopIncrement() {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
     public boolean isFull() {
         // Stub doesn't implement this
         return false;
@@ -82,18 +92,6 @@ public class StubElevatorSubsystem extends BaseElevatorSubsystem {
         setTlmSpeed(speed);
 
         // Stub doesn't implement this
-    }
-
-    @Override
-    public void increment() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void stopIncrement() {
-        // TODO Auto-generated method stub
-
     }
 
 }
