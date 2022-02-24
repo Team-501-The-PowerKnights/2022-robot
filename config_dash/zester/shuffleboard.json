@@ -1290,7 +1290,7 @@
               "_title": "Shooter.defCommand"
             }
           },
-          "14,0": {
+          "16,0": {
             "size": [
               4,
               2
@@ -1303,7 +1303,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "19,4": {
+          "21,4": {
             "size": [
               4,
               2
@@ -1316,7 +1316,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "19,2": {
+          "21,2": {
             "size": [
               4,
               2
@@ -1327,7 +1327,7 @@
               "_title": "Shooter.rpm"
             }
           },
-          "19,0": {
+          "21,0": {
             "size": [
               4,
               2
@@ -1336,6 +1336,28 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Shooter.targetRpm",
               "_title": "Shooter.targetRpm"
+            }
+          },
+          "9,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.setSpeed",
+              "_title": "Shooter.setSpeed"
+            }
+          },
+          "9,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.speed",
+              "_title": "Shooter.speed"
             }
           }
         }
@@ -1374,7 +1396,7 @@
               "_title": "Turret.implClass"
             }
           },
-          "15,0": {
+          "25,0": {
             "size": [
               5,
               2
@@ -1387,7 +1409,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "10,0": {
+          "20,0": {
             "size": [
               5,
               2
@@ -1398,7 +1420,7 @@
               "_title": "TurretLocation.implClass"
             }
           },
-          "10,2": {
+          "20,2": {
             "size": [
               5,
               2
@@ -1418,6 +1440,28 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Turret.defCommand",
               "_title": "Turret.defCommand"
+            }
+          },
+          "9,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.setSpeed",
+              "_title": "Turret.setSpeed"
+            }
+          },
+          "9,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.speed",
+              "_title": "Turret.speed"
             }
           }
         }
@@ -2656,6 +2700,28 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Climber.speed",
               "_title": "Climber.speed"
+            }
+          },
+          "68,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.speed",
+              "_title": "Shooter.speed"
+            }
+          },
+          "62,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.setSpeed",
+              "_title": "Shooter.setSpeed"
             }
           }
         }
