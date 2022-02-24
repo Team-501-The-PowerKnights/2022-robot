@@ -43,6 +43,8 @@ class ClimberSubsystem extends BaseClimberSubsystem {
         rightMotor = new CANSparkMax(55, MotorType.kBrushless);
         rightMotor.restoreFactoryDefaults();
         rightMotor.setIdleMode(IdleMode.kBrake);
+
+        // Slaved and inverted?
         rightMotor.follow(leftMotor, true); // TODO - should this be inverted or not?
 
         limitUp = new AnalogInput(0);
@@ -54,13 +56,14 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     @Override
     public void updateTelemetry() {
         super.updateTelemetry();
+
         SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit, (limitUp.getValue() == 1));
         SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit, (limitDown.getValue() == 1));
     }
 
     @Override
     public void validateCalibration() {
-        // TODO Auto-generated method stub
+        // Real doesn't implement this
     }
 
     @Override
@@ -70,7 +73,7 @@ class ClimberSubsystem extends BaseClimberSubsystem {
 
     @Override
     public void disable() {
-        // TODO Auto-generated method stub
+        // Real doesn't implement this
     }
 
     @Override
@@ -95,7 +98,7 @@ class ClimberSubsystem extends BaseClimberSubsystem {
 
     private void setSpeed(double speed) {
         setTlmSpeed(speed);
-        motor.set(speed);
+        leftMotor.set(speed);
     }
 
 }
