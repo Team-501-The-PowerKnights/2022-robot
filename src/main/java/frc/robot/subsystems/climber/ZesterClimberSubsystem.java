@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.climber;
 
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -20,6 +21,7 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
+
 public class ZesterClimberSubsystem extends BaseClimberSubsystem {
 
     /** Our classes' logger **/
@@ -30,10 +32,7 @@ public class ZesterClimberSubsystem extends BaseClimberSubsystem {
     private final AnalogInput limitUp;
     private final AnalogInput limitDown;
 
-    // Keep for telemetry
-    private double tlmSpeed;
-
-    ZesterClimberSubsystem() {
+     ZesterClimberSubsystem() {
         logger.info("constructing");
 
         motor = new CANSparkMax(55, MotorType.kBrushless);
@@ -43,22 +42,19 @@ public class ZesterClimberSubsystem extends BaseClimberSubsystem {
         limitUp = new AnalogInput(0);
         limitDown = new AnalogInput(1);
 
-        tlmSpeed = 0.0;
-
         logger.info("constructed");
     }
 
     @Override
     public void updateTelemetry() {
+        super.updateTelemetry();
         SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit, (limitUp.getValue() == 1));
         SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit, (limitDown.getValue() == 1));
-        SmartDashboard.putNumber(TelemetryNames.Climber.speed, tlmSpeed);
     }
 
     @Override
     public void validateCalibration() {
         // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -69,12 +65,11 @@ public class ZesterClimberSubsystem extends BaseClimberSubsystem {
     @Override
     public void disable() {
         // TODO Auto-generated method stub
-
     }
 
     @Override
     public void stop() {
-        motor.set(0.0);
+        setSpeed(0.0);
     }
 
     @Override
@@ -93,8 +88,8 @@ public class ZesterClimberSubsystem extends BaseClimberSubsystem {
     }
 
     private void setSpeed(double speed) {
-        tlmSpeed = speed;
-        motor.set(tlmSpeed);
+        setTlmSpeed(speed);;
+        motor.set(speed);
     }
 
 }

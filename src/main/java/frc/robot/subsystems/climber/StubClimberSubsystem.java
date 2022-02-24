@@ -8,8 +8,10 @@
 
 package frc.robot.subsystems.climber;
 
+
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 public class StubClimberSubsystem extends BaseClimberSubsystem {
 
@@ -23,7 +25,7 @@ public class StubClimberSubsystem extends BaseClimberSubsystem {
     }
 
     @Override
-    public void stop() {
+    public void updateTelemetry() {
         // Stub doesn't implement this
     }
 
@@ -43,7 +45,7 @@ public class StubClimberSubsystem extends BaseClimberSubsystem {
     }
 
     @Override
-    public void updateTelemetry() {
+    public void stop() {
         // Stub doesn't implement this
     }
 
@@ -56,13 +58,11 @@ public class StubClimberSubsystem extends BaseClimberSubsystem {
     @Override
     public void climb() {
         // Stub doesn't implement this
-
     }
 
     @Override
     public void retract() {
         // Stub doesn't implement this
-
     }
 
 }
