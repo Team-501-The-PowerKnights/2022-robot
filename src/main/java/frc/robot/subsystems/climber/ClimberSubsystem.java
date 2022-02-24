@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.climber;
 
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -20,7 +21,8 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ClimberSubsystem extends BaseClimberSubsystem {
+
+class ClimberSubsystem extends BaseClimberSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimberSubsystem.class.getName());
@@ -30,9 +32,6 @@ public class ClimberSubsystem extends BaseClimberSubsystem {
 
     private final AnalogInput limitUp;
     private final AnalogInput limitDown;
-
-    // Keep for telemetry
-    private double tlmSpeed;
 
     ClimberSubsystem() {
         logger.info("constructing");
@@ -44,27 +43,27 @@ public class ClimberSubsystem extends BaseClimberSubsystem {
         rightMotor = new CANSparkMax(55, MotorType.kBrushless);
         rightMotor.restoreFactoryDefaults();
         rightMotor.setIdleMode(IdleMode.kBrake);
+
+        // Slaved and inverted?
         rightMotor.follow(leftMotor, true); // TODO - should this be inverted or not?
 
         limitUp = new AnalogInput(0);
         limitDown = new AnalogInput(1);
-
-        tlmSpeed = 0.0;
 
         logger.info("constructed");
     }
 
     @Override
     public void updateTelemetry() {
+        super.updateTelemetry();
+
         SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit, (limitUp.getValue() == 1));
         SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit, (limitDown.getValue() == 1));
-        SmartDashboard.putNumber(TelemetryNames.Climber.speed, tlmSpeed);
     }
 
     @Override
     public void validateCalibration() {
         // Real doesn't implement this
-
     }
 
     @Override
@@ -75,12 +74,11 @@ public class ClimberSubsystem extends BaseClimberSubsystem {
     @Override
     public void disable() {
         // Real doesn't implement this
-
     }
 
     @Override
     public void stop() {
-        leftMotor.set(0.0);
+        setSpeed(0.0);
     }
 
     @Override
@@ -99,8 +97,8 @@ public class ClimberSubsystem extends BaseClimberSubsystem {
     }
 
     private void setSpeed(double speed) {
-        tlmSpeed = speed;
-        leftMotor.set(tlmSpeed);
+        setTlmSpeed(speed);
+        leftMotor.set(speed);
     }
 
 }

@@ -67,4 +67,16 @@ abstract class BaseClimberSubsystem extends SubsystemBase implements IClimberSub
         SmartDashboard.putString(TelemetryNames.Climber.defCommand, ourCommand.getClass().getSimpleName());
     }
     
+    private double tlmSpeed = 0.0;
+
+    protected void setTlmSpeed(double speed) {
+        tlmSpeed = speed;
+    }
+    
+    @Override
+    public void updateTelemetry()
+    {
+        SmartDashboard.putNumber(TelemetryNames.Climber.speed, tlmSpeed);
+    }
+
 }

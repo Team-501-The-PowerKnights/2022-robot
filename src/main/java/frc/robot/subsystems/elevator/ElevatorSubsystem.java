@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.elevator;
 
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -20,7 +21,8 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ElevatorSubsystem extends BaseElevatorSubsystem {
+
+class ElevatorSubsystem extends BaseElevatorSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ElevatorSubsystem.class.getName());

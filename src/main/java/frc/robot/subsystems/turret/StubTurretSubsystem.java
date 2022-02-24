@@ -8,10 +8,12 @@
 
 package frc.robot.subsystems.turret;
 
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class StubTurretSubsystem extends BaseTurretSubsystem {
+
+class StubTurretSubsystem extends BaseTurretSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(StubTurretSubsystem.class.getName());
@@ -23,7 +25,8 @@ public class StubTurretSubsystem extends BaseTurretSubsystem {
     }
 
     @Override
-    public void stop() {
+    public void updateTelemetry() {
+        super.updateTelemetry();
         // Stub doesn't implement this
     }
 
@@ -41,52 +44,45 @@ public class StubTurretSubsystem extends BaseTurretSubsystem {
     public void disable() {
         // Stub doesn't implement this
     }
-
+    
     @Override
-    public void updateTelemetry() {
+    public void stop() {
         // Stub doesn't implement this
     }
 
     @Override
     public void setTurretAngle(double angle) {
         // Stub doesn't implement this
-
     }
 
     @Override
     public void home() {
         // Stub doesn't implement this
-
     }
 
     @Override
     public void setSpeed(int canID, double speed) {
         // Stub doesn't implement this
-
     }
 
     @Override
     public void jogCW() {
         // Stub doesn't implement this
-
     }
 
     @Override
     public void jogCCW() {
         // Stub doesn't implement this
-
     }
 
     @Override
     public void setAngleFromVision() {
         // Stub doesn't implement this
-
     }
 
     @Override
     public void holdAngle() {
         // Stub doesn't implement this
-
     }
 
     @Override

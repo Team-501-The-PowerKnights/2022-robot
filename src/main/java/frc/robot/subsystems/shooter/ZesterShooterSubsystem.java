@@ -8,19 +8,23 @@
 
 package frc.robot.subsystems.shooter;
 
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.OI;
 import frc.robot.commands.CommandingNames;
 import frc.robot.telemetry.TelemetryNames;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ZesterShooterSubsystem extends BaseShooterSubsystem {
+
+class ZesterShooterSubsystem extends BaseShooterSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ZesterShooterSubsystem.class.getName());
@@ -77,10 +81,14 @@ public class ZesterShooterSubsystem extends BaseShooterSubsystem {
     }
 
     @Override
-    public void stop() {
-        leftMotor.set(0.0);
+    public void updateTelemetry() {
+        setTlmSpeed(leftMotor.get());
+        super.updateTelemetry();
 
-        isActive = false;
+        SmartDashboard.putBoolean(TelemetryNames.Shooter.isActive, isActive);
+        SmartDashboard.putNumber(TelemetryNames.Shooter.rpm, encoder.getVelocity());
+        SmartDashboard.putNumber(TelemetryNames.Shooter.targetRpm, targetRpm);
+        SmartDashboard.putBoolean(TelemetryNames.Shooter.atTarget, atTargetVelocity());
     }
 
     @Override
@@ -90,23 +98,23 @@ public class ZesterShooterSubsystem extends BaseShooterSubsystem {
 
     @Override
     public void updatePreferences() {
+        // FIXME: Why is this? Isn't this updateTelemetry()?
         SmartDashboard.putBoolean(TelemetryNames.Shooter.isActive, isActive);
         SmartDashboard.putNumber(TelemetryNames.Shooter.rpm, encoder.getVelocity());
         SmartDashboard.putNumber(TelemetryNames.Shooter.targetRpm, targetRpm);
         SmartDashboard.putBoolean(TelemetryNames.Shooter.atTarget, atTargetVelocity());
     }
-
+    
     @Override
     public void disable() {
         logger.info("last value of RPM tolerance: {}", tolerance);
     }
 
     @Override
-    public void updateTelemetry() {
-        SmartDashboard.putBoolean(TelemetryNames.Shooter.isActive, isActive);
-        SmartDashboard.putNumber(TelemetryNames.Shooter.rpm, encoder.getVelocity());
-        SmartDashboard.putNumber(TelemetryNames.Shooter.targetRpm, targetRpm);
-        SmartDashboard.putBoolean(TelemetryNames.Shooter.atTarget, atTargetVelocity());
+    public void stop() {
+        setSpeed(0.0);
+
+        isActive = false;
     }
 
     @Override
@@ -137,7 +145,7 @@ public class ZesterShooterSubsystem extends BaseShooterSubsystem {
                 break;
             case 29:
                 // Assuming slaved
-                leftMotor.set(idleShooter(speed));
+                setSpeed(idleShooter(speed));
                 break;
             default:
                 break;
@@ -171,6 +179,12 @@ public class ZesterShooterSubsystem extends BaseShooterSubsystem {
     @Override
     public String getActivePosition() {
         return activePosition;
+    }
+   
+    private void setSpeed(double speed) {
+        setTlmSetSpeed(speed);
+
+        leftMotor.set(speed);
     }
 
 }

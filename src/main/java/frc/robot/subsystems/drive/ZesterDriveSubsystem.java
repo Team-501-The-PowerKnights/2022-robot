@@ -42,7 +42,7 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class ZesterDriveSubsystem extends BaseDriveSubsystem {
+class ZesterDriveSubsystem extends BaseDriveSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ZesterDriveSubsystem.class.getName());

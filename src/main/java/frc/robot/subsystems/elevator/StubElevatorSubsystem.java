@@ -11,7 +11,7 @@ package frc.robot.subsystems.elevator;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class StubElevatorSubsystem extends BaseElevatorSubsystem {
+class StubElevatorSubsystem extends BaseElevatorSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(StubElevatorSubsystem.class.getName());
@@ -67,6 +67,16 @@ public class StubElevatorSubsystem extends BaseElevatorSubsystem {
     }
 
     @Override
+    public void increment() {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void stopIncrement() {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
     public boolean isFull() {
         // Stub doesn't implement this
         return false;
@@ -82,18 +92,6 @@ public class StubElevatorSubsystem extends BaseElevatorSubsystem {
         setTlmSpeed(speed);
 
         // Stub doesn't implement this
-    }
-
-    @Override
-    public void increment() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void stopIncrement() {
-        // TODO Auto-generated method stub
-
     }
 
 }

@@ -8,10 +8,12 @@
 
 package frc.robot.subsystems.intake;
 
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class StubIntakeSubsystem extends BaseIntakeSubsystem {
+
+class StubIntakeSubsystem extends BaseIntakeSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(StubIntakeSubsystem.class.getName());

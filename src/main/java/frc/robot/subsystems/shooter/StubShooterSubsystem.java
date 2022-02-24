@@ -8,10 +8,12 @@
 
 package frc.robot.subsystems.shooter;
 
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class StubShooterSubsystem extends BaseShooterSubsystem {
+
+class StubShooterSubsystem extends BaseShooterSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(StubShooterSubsystem.class.getName());
@@ -23,7 +25,8 @@ public class StubShooterSubsystem extends BaseShooterSubsystem {
     }
 
     @Override
-    public void stop() {
+    public void updateTelemetry() {
+        super.updateTelemetry();
         // Stub doesn't implement this
     }
 
@@ -43,26 +46,23 @@ public class StubShooterSubsystem extends BaseShooterSubsystem {
     }
 
     @Override
-    public void updateTelemetry() {
+    public void stop() {
         // Stub doesn't implement this
     }
 
     @Override
     public void setTargetRpm(double rpm) {
         // Stub doesn't implement this
-
     }
 
     @Override
     public void shoot() {
         // Stub doesn't implement this
-
     }
 
     @Override
     public void setSpeed(int canID, double speed) {
         // Stub doesn't implement this
-
     }
 
     @Override

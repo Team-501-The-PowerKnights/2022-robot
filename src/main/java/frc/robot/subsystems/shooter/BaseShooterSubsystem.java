@@ -12,12 +12,14 @@ package frc.robot.subsystems.shooter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import frc.robot.commands.shooter.ShooterDoNothing;
 import frc.robot.properties.PKProperties;
 import frc.robot.properties.PropertiesManager;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -65,4 +67,24 @@ abstract class BaseShooterSubsystem extends SubsystemBase implements IShooterSub
         SmartDashboard.putString(TelemetryNames.Shooter.defCommand, ourCommand.getClass().getSimpleName());
     }
     
+    // Current speed of motor
+    private double tlmSpeed = 0.0;
+    // Setting for speed of motor (target or direct)
+    private double tlmSetSpeed = 0.0;
+
+    protected void setTlmSpeed(double speed) {
+        tlmSpeed = speed;
+    }
+
+    protected void setTlmSetSpeed(double speed) {
+        tlmSetSpeed = speed;
+    }
+    
+    @Override
+    public void updateTelemetry()
+    {
+        SmartDashboard.putNumber(TelemetryNames.Shooter.speed, tlmSpeed);
+        SmartDashboard.putNumber(TelemetryNames.Shooter.setSpeed, tlmSetSpeed);
+     }
+
 }

@@ -11,7 +11,7 @@
         "vgap": 8.0,
         "titleType": 0,
         "tiles": {
-          "22,11": {
+          "21,11": {
             "size": [
               11,
               2
@@ -19,23 +19,23 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Misc.codeVersion",
-              "_title": "SmartDashboard/Misc.codeVersion"
+              "_title": "Misc.codeVersion"
             }
           },
           "35,9": {
             "size": [
-              4,
+              3,
               2
             ],
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/Misc.fmsConnected",
-              "_title": "SmartDashboard/Misc.fmsConnected",
+              "_title": "Misc.fmsConnected",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "33,11": {
+          "32,11": {
             "size": [
               3,
               2
@@ -43,10 +43,10 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Misc.robotImpl",
-              "_title": "SmartDashboard/Misc.robotImpl"
+              "_title": "Misc.robotImpl"
             }
           },
-          "36,11": {
+          "35,11": {
             "size": [
               3,
               2
@@ -54,10 +54,10 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Misc.robotName",
-              "_title": "SmartDashboard/Misc.robotName"
+              "_title": "Misc.robotName"
             }
           },
-          "27,0": {
+          "26,0": {
             "size": [
               9,
               3
@@ -68,7 +68,7 @@
               "_title": "Auto Mode"
             }
           },
-          "36,0": {
+          "35,0": {
             "size": [
               3,
               2
@@ -1168,7 +1168,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Elevator.status",
-              "_title": "SmartDashboard/Elevator.status"
+              "_title": "Elevator.status"
             }
           },
           "9,1": {
@@ -1179,7 +1179,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/HMI.elevatorSpeed",
-              "_title": "SmartDashboard/HMI.elevatorSpeed"
+              "_title": "HMI.elevatorSpeed"
             }
           },
           "21,0": {
@@ -1290,7 +1290,7 @@
               "_title": "Shooter.defCommand"
             }
           },
-          "14,0": {
+          "16,0": {
             "size": [
               4,
               2
@@ -1303,7 +1303,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "19,4": {
+          "21,4": {
             "size": [
               4,
               2
@@ -1316,7 +1316,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "19,2": {
+          "21,2": {
             "size": [
               4,
               2
@@ -1327,7 +1327,7 @@
               "_title": "Shooter.rpm"
             }
           },
-          "19,0": {
+          "21,0": {
             "size": [
               4,
               2
@@ -1336,6 +1336,28 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Shooter.targetRpm",
               "_title": "Shooter.targetRpm"
+            }
+          },
+          "9,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.setSpeed",
+              "_title": "Shooter.setSpeed"
+            }
+          },
+          "9,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.speed",
+              "_title": "Shooter.speed"
             }
           }
         }
@@ -1374,7 +1396,7 @@
               "_title": "Turret.implClass"
             }
           },
-          "15,0": {
+          "25,0": {
             "size": [
               5,
               2
@@ -1387,7 +1409,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "10,0": {
+          "20,0": {
             "size": [
               5,
               2
@@ -1398,7 +1420,7 @@
               "_title": "TurretLocation.implClass"
             }
           },
-          "10,2": {
+          "20,2": {
             "size": [
               5,
               2
@@ -1418,6 +1440,28 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Turret.defCommand",
               "_title": "Turret.defCommand"
+            }
+          },
+          "9,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.setSpeed",
+              "_title": "Turret.setSpeed"
+            }
+          },
+          "9,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.speed",
+              "_title": "Turret.speed"
             }
           }
         }
@@ -2646,6 +2690,39 @@
               "_source0": "network_table:///SmartDashboard/Turret.speed",
               "_title": "Turret.speed"
             }
+          },
+          "66,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climber.speed",
+              "_title": "Climber.speed"
+            }
+          },
+          "68,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.speed",
+              "_title": "Shooter.speed"
+            }
+          },
+          "62,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.setSpeed",
+              "_title": "Shooter.setSpeed"
+            }
           }
         }
       }
@@ -2879,9 +2956,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -7.0,
-    "y": 0.0,
-    "width": 1614.0,
-    "height": 666.0
+    "x": -5.599999904632568,
+    "y": 4.0,
+    "width": 1553.5999755859375,
+    "height": 666.4000244140625
   }
 }

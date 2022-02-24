@@ -20,7 +20,7 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
+class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ZesterElevatorSubsystem.class.getName());
@@ -85,6 +85,16 @@ public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
     }
 
     @Override
+    public void increment() {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void stopIncrement() {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
     public boolean isFull() {
         return limit.get();
     }
@@ -104,18 +114,6 @@ public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
         setTlmSpeed(speed);
 
         motor.set(ControlMode.PercentOutput, speed);
-    }
-
-    @Override
-    public void increment() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void stopIncrement() {
-        // TODO Auto-generated method stub
-
     }
 
 }

@@ -24,7 +24,7 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ZesterTurretSubsystem extends BaseTurretSubsystem {
+class ZesterTurretSubsystem extends BaseTurretSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ZesterTurretSubsystem.class.getName());
@@ -80,6 +80,9 @@ public class ZesterTurretSubsystem extends BaseTurretSubsystem {
 
     @Override
     public void updateTelemetry() {
+        setTlmSpeed(motor.get());  // get current actual speed
+        super.updateTelemetry();
+
         SmartDashboard.putNumber(TelemetryNames.Turret.angle, getAngle());
         SmartDashboard.putNumber(TelemetryNames.Turret.position, encoder.getPosition());
     }
@@ -109,7 +112,7 @@ public class ZesterTurretSubsystem extends BaseTurretSubsystem {
     @Override
     public void stop() {
         pid.setReference(0, CANSparkMax.ControlType.kVoltage);
-        motor.set(0.0);
+        setSpeed(0.0);
     }
 
     @Override
@@ -162,52 +165,52 @@ public class ZesterTurretSubsystem extends BaseTurretSubsystem {
             logger.debug("gross test");
             while (!(location.get())) {
                 logger.debug("sensor = {}", location.get());
-                motor.set(0.55);
+                setSpeed(0.55);
                 if (getAngle() - firstAngle >= 100) {
                     return;
                 }
                 try {
                     Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                } catch (InterruptedException ex) {
+                    logger.warn("interrupted sleep: ", ex);
+                    // TODO Should this do something?
                 }
             }
-            motor.set(0.0);
+            setSpeed(0.0);
             logger.debug("found set point (gross)");
 
             logger.debug("back off");
             while ((location.get())) {
                 logger.debug("sensor = {}", location.get());
-                motor.set(-0.05);
+                setSpeed(-0.05);
                 if (getAngle() - firstAngle >= 100) {
                     return;
                 }
                 try {
                     Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                } catch (InterruptedException ex) {
+                    logger.warn("interrupted sleep: ", ex);
+                    // TODO Should this do something?
                 }
             }
-            motor.set(0.0);
+            setSpeed(0.0);
             logger.debug("backed off set point");
 
             logger.debug("fine test");
             while (!(location.get())) {
                 logger.debug("sensor = {}", location.get());
-                motor.set(0.03);
+                setSpeed(0.03);
                 if (getAngle() - firstAngle >= 100) {
                     return;
                 }
                 try {
                     Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                } catch (InterruptedException ex) {
+                    logger.warn("interrupted sleep: ", ex);
+                    // TODO Should this do something?
                 }
             }
-            motor.set(0.0);
+            setSpeed(0.0);
             logger.debug("found set point (fine)");
 
             encoder.setPosition(55);
@@ -239,7 +242,7 @@ public class ZesterTurretSubsystem extends BaseTurretSubsystem {
     public void setSpeed(int canID, double speed) {
         switch (canID) {
             case 20:
-                motor.set(speed);
+                setSpeed(speed);
                 break;
             default:
                 break;
@@ -266,6 +269,12 @@ public class ZesterTurretSubsystem extends BaseTurretSubsystem {
     @Override
     public boolean isAtAngle(double targetAngle) {
         return getAngle() >= targetAngle;
+    }
+
+    private void setSpeed(double speed) {
+        setTlmSetSpeed(speed);
+
+        motor.set(speed);
     }
 
 }
