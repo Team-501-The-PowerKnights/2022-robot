@@ -89,4 +89,24 @@ abstract class BaseTurretSubsystem extends SubsystemBase implements ITurretSubsy
         pid_F = v;
     }
 
+    // Current speed of motor
+    private double tlmSpeed = 0.0;
+    // Setting for speed of motor (target or direct)
+    private double tlmSetSpeed = 0.0;
+
+    protected void setTlmSpeed(double speed) {
+        tlmSpeed = speed;
+    }
+
+    protected void setTlmSetSpeed(double speed) {
+        tlmSetSpeed = speed;
+    }
+    
+    @Override
+    public void updateTelemetry()
+    {
+        SmartDashboard.putNumber(TelemetryNames.Turret.speed, tlmSpeed);
+        SmartDashboard.putNumber(TelemetryNames.Turret.setSpeed, tlmSetSpeed);
+     }
+
 }
