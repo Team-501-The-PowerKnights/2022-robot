@@ -27,7 +27,8 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimberSubsystem.class.getName());
 
-    private final CANSparkMax motor;
+    private final CANSparkMax leftMotor;
+    private final CANSparkMax rightMotor;
 
     private final AnalogInput limitUp;
     private final AnalogInput limitDown;
@@ -35,9 +36,14 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     ClimberSubsystem() {
         logger.info("constructing");
 
-        motor = new CANSparkMax(55, MotorType.kBrushless);
-        motor.restoreFactoryDefaults();
-        motor.setIdleMode(IdleMode.kBrake);
+        leftMotor = new CANSparkMax(56, MotorType.kBrushless);
+        leftMotor.restoreFactoryDefaults();
+        leftMotor.setIdleMode(IdleMode.kBrake);
+
+        rightMotor = new CANSparkMax(55, MotorType.kBrushless);
+        rightMotor.restoreFactoryDefaults();
+        rightMotor.setIdleMode(IdleMode.kBrake);
+        rightMotor.follow(leftMotor, true); // TODO - should this be inverted or not?
 
         limitUp = new AnalogInput(0);
         limitDown = new AnalogInput(1);
@@ -59,7 +65,7 @@ class ClimberSubsystem extends BaseClimberSubsystem {
 
     @Override
     public void updatePreferences() {
-        // No preferences for climber
+        // Real doesn't implement this
     }
 
     @Override

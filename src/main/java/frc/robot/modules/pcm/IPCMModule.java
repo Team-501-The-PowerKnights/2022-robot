@@ -6,16 +6,18 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.modules;
+package frc.robot.modules.pcm;
 
-/**
- * Provides a standard way of defining names for the <i>Modules</i> used in the
- * program. No code should define or use a hard-coded string outside of the ones
- * defined in this class.
- **/
-public class ModuleNames {
+import frc.robot.modules.IModule;
 
-    public static final String pdpName = "PDP";
-    public static final String pcmName = "PCM";
+public interface IPCMModule extends IModule {
+
+    public void extendIntake();
+
+    public void retractIntake();
+
+    public void extendClimber();
+
+    public void retractClimber();
 
 }

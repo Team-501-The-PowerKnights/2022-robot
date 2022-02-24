@@ -116,6 +116,14 @@ public final class TelemetryNames {
         public static final String totalEnergy = name + ".totalEnergy";
     }
 
+    public final class PCM {
+        public static final String name = ModuleNames.pdpName;
+
+        public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+        public static final String defCommand = name + "defCommand";
+    }
+
     /***************
      * Sensors
      ***************/
@@ -138,7 +146,7 @@ public final class TelemetryNames {
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
-       
+
         public static final String isFound = name + ".isFound";
     }
 
