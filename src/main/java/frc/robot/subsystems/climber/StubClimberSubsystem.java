@@ -26,6 +26,7 @@ public class StubClimberSubsystem extends BaseClimberSubsystem {
 
     @Override
     public void updateTelemetry() {
+        super.updateTelemetry();
         // Stub doesn't implement this
     }
 
@@ -52,7 +53,6 @@ public class StubClimberSubsystem extends BaseClimberSubsystem {
     @Override
     public void extend() {
         // Stub doesn't implement this
-
     }
 
     @Override
