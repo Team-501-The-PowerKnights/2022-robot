@@ -18,10 +18,10 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-StubDriveSubsystem extends BaseDriveSubsystem {
+class StubDriveSubsystem extends BaseDriveSubsystem {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(SuitcaseDriveSubsystem.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(StubDriveSubsystem.class.getName());
 
     StubDriveSubsystem() {
         logger.info("constructing");

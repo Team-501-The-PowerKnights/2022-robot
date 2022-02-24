@@ -212,6 +212,9 @@ public final class TelemetryNames {
         public static final String rpm = name + ".rpm";
         public static final String targetRpm = name + ".targetRpm";
         public static final String atTarget = name + ".atTarget";
+        
+        public static final String setSpeed = name + ".setSpeed";
+        public static final String speed = name + ".speed";
     }
 
     public final class Turret {

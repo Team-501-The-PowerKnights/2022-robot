@@ -25,7 +25,8 @@ class StubShooterSubsystem extends BaseShooterSubsystem {
     }
 
     @Override
-    public void stop() {
+    public void updateTelemetry() {
+        super.updateTelemetry();
         // Stub doesn't implement this
     }
 
@@ -45,26 +46,23 @@ class StubShooterSubsystem extends BaseShooterSubsystem {
     }
 
     @Override
-    public void updateTelemetry() {
+    public void stop() {
         // Stub doesn't implement this
     }
 
     @Override
     public void setTargetRpm(double rpm) {
         // Stub doesn't implement this
-
     }
 
     @Override
     public void shoot() {
         // Stub doesn't implement this
-
     }
 
     @Override
     public void setSpeed(int canID, double speed) {
         // Stub doesn't implement this
-
     }
 
     @Override
