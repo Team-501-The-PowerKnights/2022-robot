@@ -24,7 +24,7 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ZesterTurretSubsystem extends BaseTurretSubsystem {
+class ZesterTurretSubsystem extends BaseTurretSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ZesterTurretSubsystem.class.getName());

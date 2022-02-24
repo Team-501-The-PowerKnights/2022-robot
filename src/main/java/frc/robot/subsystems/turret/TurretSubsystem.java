@@ -27,7 +27,7 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class TurretSubsystem extends BaseTurretSubsystem {
+class TurretSubsystem extends BaseTurretSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(TurretSubsystem.class.getName());

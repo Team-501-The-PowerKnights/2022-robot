@@ -8,19 +8,23 @@
 
 package frc.robot.subsystems.shooter;
 
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.OI;
 import frc.robot.commands.CommandingNames;
 import frc.robot.telemetry.TelemetryNames;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ZesterShooterSubsystem extends BaseShooterSubsystem {
+
+class ZesterShooterSubsystem extends BaseShooterSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ZesterShooterSubsystem.class.getName());

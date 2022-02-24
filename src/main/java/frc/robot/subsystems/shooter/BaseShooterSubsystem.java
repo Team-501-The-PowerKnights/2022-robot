@@ -12,12 +12,14 @@ package frc.robot.subsystems.shooter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import frc.robot.commands.shooter.ShooterDoNothing;
 import frc.robot.properties.PKProperties;
 import frc.robot.properties.PropertiesManager;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 

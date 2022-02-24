@@ -16,7 +16,7 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class IntakeSubsystem extends BaseIntakeSubsystem {
+class IntakeSubsystem extends BaseIntakeSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(IntakeSubsystem.class.getName());

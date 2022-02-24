@@ -20,7 +20,7 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
+class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ZesterElevatorSubsystem.class.getName());

@@ -8,10 +8,12 @@
 
 package frc.robot.subsystems.shooter;
 
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class StubShooterSubsystem extends BaseShooterSubsystem {
+
+class StubShooterSubsystem extends BaseShooterSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(StubShooterSubsystem.class.getName());

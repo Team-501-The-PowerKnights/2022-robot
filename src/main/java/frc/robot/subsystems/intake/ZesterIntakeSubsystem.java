@@ -16,7 +16,7 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class ZesterIntakeSubsystem extends BaseIntakeSubsystem {
+class ZesterIntakeSubsystem extends BaseIntakeSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ZesterIntakeSubsystem.class.getName());

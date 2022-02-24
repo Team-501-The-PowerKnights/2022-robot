@@ -13,7 +13,7 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class StubTurretSubsystem extends BaseTurretSubsystem {
+class StubTurretSubsystem extends BaseTurretSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(StubTurretSubsystem.class.getName());

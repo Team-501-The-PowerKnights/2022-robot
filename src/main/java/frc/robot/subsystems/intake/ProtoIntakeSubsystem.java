@@ -13,7 +13,7 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class ProtoIntakeSubsystem extends StubIntakeSubsystem {
+class ProtoIntakeSubsystem extends StubIntakeSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ProtoIntakeSubsystem.class.getName());

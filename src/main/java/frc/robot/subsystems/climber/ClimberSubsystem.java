@@ -22,7 +22,7 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class ClimberSubsystem extends BaseClimberSubsystem {
+class ClimberSubsystem extends BaseClimberSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimberSubsystem.class.getName());

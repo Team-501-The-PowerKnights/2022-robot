@@ -13,7 +13,7 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class ProtoClimberSubsystem extends StubClimberSubsystem {
+class ProtoClimberSubsystem extends StubClimberSubsystem {
     
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ProtoClimberSubsystem.class.getName());

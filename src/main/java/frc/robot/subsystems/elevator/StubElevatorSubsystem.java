@@ -11,7 +11,7 @@ package frc.robot.subsystems.elevator;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class StubElevatorSubsystem extends BaseElevatorSubsystem {
+class StubElevatorSubsystem extends BaseElevatorSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(StubElevatorSubsystem.class.getName());
