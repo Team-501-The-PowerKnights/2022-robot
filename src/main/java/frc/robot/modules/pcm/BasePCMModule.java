@@ -6,16 +6,15 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.modules;
+package frc.robot.modules.pcm;
 
-/**
- * Provides a standard way of defining names for the <i>Modules</i> used in the
- * program. No code should define or use a hard-coded string outside of the ones
- * defined in this class.
- **/
-public class ModuleNames {
+import riolog.PKLogger;
+import riolog.RioLogger;
 
-    public static final String pdpName = "PDP";
-    public static final String pcmName = "PCM";
+abstract class BasePCMModule implements IPCMModule {
+
+    /** Our classes' logger **/
+    @SuppressWarnings("unused")
+    private static final PKLogger logger = RioLogger.getLogger(BasePCMModule.class.getName());
 
 }
