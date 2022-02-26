@@ -39,6 +39,8 @@ public final class ShooterPreferences {
     static final String pid_I = name + ".I";
     static final String pid_D = name + ".D";
     static final String pid_F = name + ".F";
+    // Scale applied to shooter speed when in manual
+    static final String scale = name + ".scale";
 
     private ShooterPreferences() {}
 
@@ -62,6 +64,11 @@ public final class ShooterPreferences {
         if (!Preferences.containsKey(pid_F)) {
             logger.warn("{} doesn't exist; creating with default", pid_F);
             Preferences.setDouble(pid_F, 0.0);
+        }
+
+        if (!Preferences.containsKey(scale)) {
+            logger.warn("{} doesn't exist; creating with default", scale);
+            Preferences.setDouble(scale, 1.0);
         }
     }
 
