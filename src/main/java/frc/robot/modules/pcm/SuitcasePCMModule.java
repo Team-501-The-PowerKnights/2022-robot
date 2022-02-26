@@ -13,12 +13,12 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-class StubPCMModule extends BasePCMModule {
-
+class SuitcasePCMModule extends BasePCMModule {
+ 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(StubPCMModule.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(SuitcasePCMModule.class.getName());
 
-    public StubPCMModule() {
+    public SuitcasePCMModule() {
         logger.info("constructing");
 
         logger.info("constructed");
@@ -26,56 +26,56 @@ class StubPCMModule extends BasePCMModule {
 
     @Override
     public void updateTelemetry() {
-        // Stub doesn't implement this
-
+        // TODO Auto-generated method stub
+        
     }
 
     @Override
     public void updatePreferences() {
-        // Stub doesn't implement this
-
-    }
-
-    @Override
-    public void enable() {
-        // Stub doesn't implement this
-
+        // TODO Auto-generated method stub
+        
     }
 
     @Override
     public void disable() {
-        // Stub doesn't implement this
+        // TODO Auto-generated method stub
+        
+    }
 
+    @Override
+    public void enable() {
+        // TODO Auto-generated method stub
+        
     }
 
     @Override
     public void extendIntake() {
-        // Stub doesn't implement this
-
+        // TODO Auto-generated method stub
+        
     }
 
     @Override
     public void retractIntake() {
-        // Stub doesn't implement this
-
+        // TODO Auto-generated method stub
+        
     }
 
     @Override
     public boolean isIntakeExtended() {
-        // Stub doesn't implement this
+        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public void extendClimber() {
-        // Stub doesn't implement this
-
+        // TODO Auto-generated method stub
+        
     }
 
     @Override
     public void retractClimber() {
-        // Stub doesn't implement this
-
+        // TODO Auto-generated method stub
+        
     }
 
 }

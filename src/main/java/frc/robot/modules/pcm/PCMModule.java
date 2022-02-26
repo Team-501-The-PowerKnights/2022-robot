@@ -8,15 +8,19 @@
 
 package frc.robot.modules.pcm;
 
+
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.telemetry.TelemetryNames;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class PCMModule extends BasePCMModule {
+
+class PCMModule extends BasePCMModule {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(PCMModule.class.getName());
@@ -48,9 +52,15 @@ public class PCMModule extends BasePCMModule {
     }
 
     @Override
-    public void updatePreferences() {
-        // Real doesn't implement this
+    public void updateTelemetry() {
+        SmartDashboard.putBoolean(TelemetryNames.PCM.compressorEnabled, module.enabled());
+        SmartDashboard.putBoolean(TelemetryNames.PCM.pressureGood, module.getPressureSwitchValue());
+        SmartDashboard.putBoolean(TelemetryNames.PCM.intakeExtended, isIntakeExtended());
+    }
 
+    @Override
+    public void updatePreferences() {
+        // Nothing here
     }
 
     // TODO - should we also have an enable method to enable the compressor?
@@ -62,10 +72,8 @@ public class PCMModule extends BasePCMModule {
     }
 
     @Override
-    public void updateTelemetry() {
-        SmartDashboard.putBoolean(TelemetryNames.PCM.compressorEnabled, module.enabled());
-        SmartDashboard.putBoolean(TelemetryNames.PCM.pressureGood, module.getPressureSwitchValue());
-        SmartDashboard.putBoolean(TelemetryNames.PCM.intakeExtended, isIntakeExtended());
+    public void enable() {
+        module.enableDigital();
     }
 
     @Override
@@ -91,11 +99,6 @@ public class PCMModule extends BasePCMModule {
     @Override
     public void retractClimber() {
         climberSolenoid.set(false);
-    }
-
-    @Override
-    public void enable() {
-        module.enableDigital();
     }
 
 }
