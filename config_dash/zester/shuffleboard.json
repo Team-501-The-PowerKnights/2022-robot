@@ -1037,6 +1037,39 @@
               "_source0": "network_table:///SmartDashboard/Drive.defCommand",
               "_title": "Drive.defCommand"
             }
+          },
+          "29,0": {
+            "size": [
+              4,
+              8
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Preferences",
+              "Layout/Label position": "TOP",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Drive.P",
+                  "_title": "Drive.P"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Drive.I",
+                  "_title": "Drive.I"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Drive.D",
+                  "_title": "Drive.D"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Drive.F",
+                  "_title": "Drive.F"
+                }
+              ]
+            }
           }
         }
       }
@@ -1359,6 +1392,44 @@
               "_source0": "network_table:///SmartDashboard/Shooter.speed",
               "_title": "Shooter.speed"
             }
+          },
+          "29,0": {
+            "size": [
+              4,
+              10
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Preferences",
+              "Layout/Label position": "TOP",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Shooter.P",
+                  "_title": "Shooter.P"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Shooter.I",
+                  "_title": "Shooter.I"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Shooter.D",
+                  "_title": "Shooter.D"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Shooter.F",
+                  "_title": "Shooter.F"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Shooter.scale",
+                  "_title": "Shooter.scale"
+                }
+              ]
+            }
           }
         }
       }
@@ -1396,7 +1467,7 @@
               "_title": "Turret.implClass"
             }
           },
-          "25,0": {
+          "22,0": {
             "size": [
               5,
               2
@@ -1409,7 +1480,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "20,0": {
+          "17,0": {
             "size": [
               5,
               2
@@ -1420,7 +1491,7 @@
               "_title": "TurretLocation.implClass"
             }
           },
-          "20,2": {
+          "17,2": {
             "size": [
               5,
               2
@@ -1462,6 +1533,39 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Turret.speed",
               "_title": "Turret.speed"
+            }
+          },
+          "29,0": {
+            "size": [
+              4,
+              8
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Preferences",
+              "Layout/Label position": "TOP",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Turret.P",
+                  "_title": "Turret.P"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Turret.I",
+                  "_title": "Turret.I"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Turret.D",
+                  "_title": "Turret.D"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///Preferences/Turret.F",
+                  "_title": "Turret.F"
+                }
+              ]
             }
           }
         }
@@ -2956,9 +3060,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -5.599999904632568,
+    "x": -6.0,
     "y": 4.0,
-    "width": 1553.5999755859375,
-    "height": 666.4000244140625
+    "width": 1554.0,
+    "height": 667.0
   }
 }
