@@ -6,37 +6,18 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.subsystems.elevator;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import frc.robot.telemetry.TelemetryNames;
+package frc.robot.subsystems.incrementer;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
+class StubIncrementerSubsystem extends BaseIncrementerSubsystem {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ZesterElevatorSubsystem.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(StubIncrementerSubsystem.class.getName());
 
-    private final TalonSRX motor;
-
-    private final DigitalInput limit;
-
-    ZesterElevatorSubsystem() {
+    StubIncrementerSubsystem() {
         logger.info("constructing");
-
-        motor = new TalonSRX(51);
-        motor.configFactoryDefault();
-        motor.setNeutralMode(NeutralMode.Brake);
-
-        limit = new DigitalInput(9);
 
         logger.info("constructed");
     }
@@ -44,8 +25,7 @@ class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
     @Override
     public void updateTelemetry() {
         super.updateTelemetry();
-
-        SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit, limit.get());
+        // Stub doesn't implement this
     }
 
     @Override
@@ -71,39 +51,26 @@ class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
     }
 
     @Override
-    public void lift() {
-        super.lift();
-
-        setSpeed(-0.85);
-    }
-
-    @Override
-    public void lower() {
-        super.lower();
-
-        setSpeed(1.0);
+    public void increment() {
+        // TODO Auto-generated method stub
     }
 
     @Override
     public boolean isFull() {
-        return limit.get();
+        // Stub doesn't implement this
+        return false;
     }
 
     @Override
-    public void liftToLimit() {
-        super.liftToLimit();
-
-        if (!isFull()) {
-            lift();
-        } else {
-            stop();
-        }
+    public void incrementToLimit() {
+        super.incrementToLimit();
+        // Stub doesn't implement this
     }
 
     private void setSpeed(double speed) {
         setTlmSpeed(speed);
 
-        motor.set(ControlMode.PercentOutput, speed);
+        // Stub doesn't implement this
     }
 
 }

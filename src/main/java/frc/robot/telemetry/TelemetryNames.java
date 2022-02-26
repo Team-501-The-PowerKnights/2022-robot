@@ -213,6 +213,21 @@ public final class TelemetryNames {
         public static final String full = name + ".full";
     }
 
+    public final class Incrementer {
+        public static final String name = SubsystemNames.incrementerName;
+
+        public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+        public static final String defCommand = name + ".defCommand";
+
+        public static final String speed = name + ".speed";
+        public static final String atLimit = name + ".atLimit";
+        public static final String stopped = name + ".stopped";
+        public static final String lifting = name + ".lifting";
+        public static final String lowering = name + ".lowering";
+        public static final String full = name + ".full";
+    }
+
     public final class Shooter {
         public static final String name = SubsystemNames.shooterName;
 

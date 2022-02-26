@@ -6,35 +6,34 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.elevator;
+package frc.robot.commands.incrementer;
+
+import frc.robot.commands.PKCommandBase;
+import frc.robot.subsystems.incrementer.IIncrementerSubsystem;
+import frc.robot.subsystems.incrementer.IncrementerFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ElevatorManualControl extends ElevatorOICommandBase {
+/**
+ * Add your docs here.
+ */
+abstract class IncrementerCommandBase extends PKCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ElevatorManualControl.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IncrementerCommandBase.class.getName());
 
-    /**
-     * Creates a new DriveJoystickControl.
-     */
-    public ElevatorManualControl() {
+    // Handle to our subsystem
+    protected IIncrementerSubsystem incrementer;
+
+    public IncrementerCommandBase() {
         logger.info("constructing {}", getName());
+
+        incrementer = IncrementerFactory.getInstance();
+
+        addRequirements(incrementer);
 
         logger.info("constructed");
     }
 
-    // Called every time the scheduler runs while the command is scheduled.
-    @Override
-    public void execute() {
-        super.execute();
-
-        double liftSpeed = oi.getIntakeSpeed();
-        if (liftSpeed == 0) {
-            elevator.stop();
-        } else if (liftSpeed > 0) {
-            elevator.lift();
-        }
-    }
 }

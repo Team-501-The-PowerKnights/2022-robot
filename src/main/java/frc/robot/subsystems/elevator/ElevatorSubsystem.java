@@ -9,7 +9,6 @@
 package frc.robot.subsystems.elevator;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -25,21 +24,17 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ElevatorSubsystem.class.getName());
 
-    private final VictorSPX lowerStage;
-    private final TalonSRX upperStage;
+    private final VictorSPX motor;
 
-    private final DigitalInput limit;
+    private final DigitalInput sensor;
 
     ElevatorSubsystem() {
         logger.info("constructing");
 
-        lowerStage = new VictorSPX(50);
-        lowerStage.configFactoryDefault();
+        motor = new VictorSPX(50);
+        motor.configFactoryDefault();
 
-        upperStage = new TalonSRX(51);
-        upperStage.configFactoryDefault();
-
-        limit = new DigitalInput(9);
+        sensor = new DigitalInput(1);
 
         logger.info("constructed");
     }
@@ -48,7 +43,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     public void updateTelemetry() {
         super.updateTelemetry();
 
-        SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit, limit.get());
+        SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit, sensor.get());
     }
 
     @Override
@@ -88,18 +83,8 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     }
 
     @Override
-    public void increment() {
-        upperStage.set(ControlMode.PercentOutput, 0.4);
-    }
-
-    @Override
-    public void stopIncrement() {
-        upperStage.set(ControlMode.PercentOutput, 0.0);
-    }
-
-    @Override
     public boolean isFull() {
-        return limit.get();
+        return sensor.get();
     }
 
     @Override
@@ -116,7 +101,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     private void setSpeed(double speed) {
         setTlmSpeed(speed);
 
-        lowerStage.set(ControlMode.PercentOutput, speed);
+        motor.set(ControlMode.PercentOutput, speed);
     }
 
 }

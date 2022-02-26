@@ -6,26 +6,20 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.subsystems.elevator;
+package frc.robot.commands.incrementer;
 
-import frc.robot.subsystems.ISubsystem;
+import riolog.PKLogger;
+import riolog.RioLogger;
 
-/**
- * Add your docs here.
- **/
-public interface IElevatorSubsystem extends ISubsystem {
+public class IncrementerDoNothing extends IncrementerCommandBase {
 
-    /**
-     * Stop the elevator from any motion it may have been running under.
-     */
-    public void stop();
+    /** Our classes' logger **/
+    private static final PKLogger logger = RioLogger.getLogger(IncrementerDoNothing.class.getName());
 
-    public void lift();
+    public IncrementerDoNothing() {
+        logger.info("constructing {}", getName());
 
-    public void lower();
-
-    public boolean isFull();
-
-    public void liftToLimit();
+        logger.info("constructed");
+    }
 
 }
