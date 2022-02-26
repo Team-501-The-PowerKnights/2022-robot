@@ -27,7 +27,7 @@ PDP.className = StubPDPModule
 # PCM
 #####################
 #PCM.className = StubPCMModule
-PCM.className =
+PCM.className = PCMModule
 
 
 #########################################
