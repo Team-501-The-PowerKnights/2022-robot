@@ -12,6 +12,7 @@
 
 package frc.robot;
 
+
 import java.util.List;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -21,6 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+
 import frc.robot.commands.DoNothing;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.PKSequentialCommandGroup;
@@ -47,6 +49,7 @@ import frc.robot.subsystems.SubsystemFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -142,7 +145,6 @@ public class Robot extends TimedRobot {
      * data, which holds the run-spinTime configuration.
      **/
     private void waitForDriverStationData() {
-
         long count = 0;
         while (!DriverStation.isNewControlData()) {
             if ((count % 100) == 0) {

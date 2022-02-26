@@ -122,5 +122,10 @@ abstract class BaseShooterSubsystem extends SubsystemBase implements IShooterSub
         SmartDashboard.putNumber(TelemetryNames.Shooter.speed, tlmSpeed);
         SmartDashboard.putNumber(TelemetryNames.Shooter.setSpeed, tlmSetSpeed);
      }
+        
+    @Override
+    public void updatePreferences() {
+        loadPreferences();
+    }
 
 }

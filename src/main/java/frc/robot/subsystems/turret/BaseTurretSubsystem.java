@@ -118,4 +118,9 @@ abstract class BaseTurretSubsystem extends SubsystemBase implements ITurretSubsy
         SmartDashboard.putNumber(TelemetryNames.Turret.setSpeed, tlmSetSpeed);
      }
 
+     @Override
+     public void updatePreferences() {
+        loadPreferences();
+     }
+
 }

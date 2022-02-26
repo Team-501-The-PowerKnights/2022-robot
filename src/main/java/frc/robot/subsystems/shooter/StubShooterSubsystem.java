@@ -27,22 +27,25 @@ class StubShooterSubsystem extends BaseShooterSubsystem {
     @Override
     public void updateTelemetry() {
         super.updateTelemetry();
-        // Stub doesn't implement this
+
+        // Nothing extra here
     }
 
     @Override
     public void validateCalibration() {
-        // Stub doesn't implement this
+        // Nothing here
     }
 
     @Override
     public void updatePreferences() {
-        // Stub doesn't implement this
+        super.updateTelemetry();
+
+        // Nothing extra here
     }
 
     @Override
     public void disable() {
-        // Stub doesn't implement this
+        // 
     }
 
     @Override

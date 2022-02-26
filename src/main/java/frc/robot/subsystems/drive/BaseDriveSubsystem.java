@@ -109,5 +109,10 @@ abstract class BaseDriveSubsystem extends SubsystemBase implements IDriveSubsyst
         SmartDashboard.putNumber(TelemetryNames.Drive.leftSpeed, leftSpeed);
         SmartDashboard.putNumber(TelemetryNames.Drive.rightSpeed, rightSpeed);
     }
+    
+    @Override
+    public void updatePreferences() {
+        loadPreferences();
+    }
 
 }
