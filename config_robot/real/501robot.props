@@ -53,8 +53,8 @@ Vision.className = VisionSensor
 #####################
 # TurretLocation
 #####################
-#TurretLocation.className = StubTurretLocationSensor
-TurretLocation.className = TurretLocationSensor
+TurretLocation.className = StubTurretLocationSensor
+#TurretLocation.className = TurretLocationSensor
 
 
 
