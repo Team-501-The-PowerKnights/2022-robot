@@ -89,6 +89,13 @@ Elevator.defaultCommandName = ElevatorDoNothing
 
 
 #####################
+# Incrementer
+#####################
+Incrementer.className = 
+Incrementer.defaultCommandName = IncrementerDoNothing
+
+
+#####################
 # Shooter
 #####################
 Shooter.className = StubShooterSubsystem

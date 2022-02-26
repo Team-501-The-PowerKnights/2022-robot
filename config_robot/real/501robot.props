@@ -92,6 +92,13 @@ Elevator.defaultCommandName = ElevatorManualControl
 
 
 #####################
+# Incrementer
+#####################
+Incrementer.className = 
+Incrementer.defaultCommandName = IncrementerManualControl
+
+
+#####################
 # Shooter
 #####################
 #Shooter.className = StubShooterSubsystem
