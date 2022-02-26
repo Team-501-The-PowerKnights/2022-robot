@@ -9,6 +9,8 @@
 package frc.robot.modules.pcm;
 
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -16,7 +18,24 @@ import riolog.RioLogger;
 abstract class BasePCMModule implements IPCMModule {
 
     /** Our classes' logger **/
-    @SuppressWarnings("unused")
     private static final PKLogger logger = RioLogger.getLogger(BasePCMModule.class.getName());
+
+    BasePCMModule() {
+        logger.info("constructing");
+
+        logger.info("constructed");
+    }
+
+    // Module state
+    protected boolean tlmEnabled = false;
+
+    protected void setTlmEnabled(boolean enabled) {
+        tlmEnabled = enabled;
+    }
+
+    @Override
+    public void updateTelemetry() {
+        SmartDashboard.putBoolean(TelemetryNames.PCM.compressorEnabled, tlmEnabled);
+    }
 
 }

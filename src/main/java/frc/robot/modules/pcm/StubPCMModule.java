@@ -26,6 +26,8 @@ class StubPCMModule extends BasePCMModule {
 
     @Override
     public void updateTelemetry() {
+        super.updateTelemetry();
+
         // Stub doesn't implement this
 
     }

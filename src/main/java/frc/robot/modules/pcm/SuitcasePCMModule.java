@@ -9,6 +9,9 @@
 package frc.robot.modules.pcm;
 
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -17,15 +20,23 @@ class SuitcasePCMModule extends BasePCMModule {
  
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(SuitcasePCMModule.class.getName());
+    
+    private final Compressor module;
 
     public SuitcasePCMModule() {
         logger.info("constructing");
+
+        module = new Compressor(0, PneumaticsModuleType.CTREPCM);
+        module.enableDigital();
+        setTlmEnabled(module.enabled());
 
         logger.info("constructed");
     }
 
     @Override
     public void updateTelemetry() {
+        super.updateTelemetry();
+
         // TODO Auto-generated method stub
         
     }

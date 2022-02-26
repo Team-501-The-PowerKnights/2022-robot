@@ -39,6 +39,7 @@ class PCMModule extends BasePCMModule {
 
         module = new Compressor(0, PneumaticsModuleType.CTREPCM);
         module.enableDigital();
+        setTlmEnabled(module.enabled());
 
         intakeSolenoidChannel = 3;
         climberSolenoidChannel = 1; // TODO - This isn't implemented mechanically yet
@@ -53,8 +54,9 @@ class PCMModule extends BasePCMModule {
 
     @Override
     public void updateTelemetry() {
-        SmartDashboard.putBoolean(TelemetryNames.PCM.compressorEnabled, module.enabled());
-        SmartDashboard.putBoolean(TelemetryNames.PCM.pressureGood, module.getPressureSwitchValue());
+        super.updateTelemetry();
+
+       SmartDashboard.putBoolean(TelemetryNames.PCM.pressureGood, module.getPressureSwitchValue());
         SmartDashboard.putBoolean(TelemetryNames.PCM.intakeExtended, isIntakeExtended());
     }
 
@@ -63,17 +65,17 @@ class PCMModule extends BasePCMModule {
         // Nothing here
     }
 
-    // TODO - should we also have an enable method to enable the compressor?
-
     @Override
     public void disable() {
         module.disable();
-
+        setTlmEnabled(module.enabled());
     }
 
+    // TODO - should we also have an enable method to enable the compressor?
     @Override
     public void enable() {
         module.enableDigital();
+        setTlmEnabled(module.enabled());
     }
 
     @Override
