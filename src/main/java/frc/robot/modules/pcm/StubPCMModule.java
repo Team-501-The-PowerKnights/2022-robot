@@ -64,4 +64,16 @@ class StubPCMModule extends BasePCMModule {
 
     }
 
+    @Override
+    public void enable() {
+        // Stub doesn't implement this
+
+    }
+
+    @Override
+    public boolean isIntakeExtended() {
+        // Stub doesn't implement this
+        return false;
+    }
+
 }

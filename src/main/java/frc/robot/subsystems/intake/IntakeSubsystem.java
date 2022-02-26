@@ -8,13 +8,11 @@
 
 package frc.robot.subsystems.intake;
 
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class IntakeSubsystem extends BaseIntakeSubsystem {
 
@@ -31,6 +29,7 @@ class IntakeSubsystem extends BaseIntakeSubsystem {
         logger.info("constructing");
 
         motor = new TalonSRX(41);
+        motor.setInverted(true);
         motor.configFactoryDefault();
 
         logger.info("constructed");
