@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.climber.ClimberFactory;
 import frc.robot.subsystems.drive.DriveFactory;
 import frc.robot.subsystems.elevator.ElevatorFactory;
+import frc.robot.subsystems.incrementer.IncrementerFactory;
 import frc.robot.subsystems.intake.IntakeFactory;
 import frc.robot.subsystems.shooter.ShooterFactory;
 import frc.robot.subsystems.turret.TurretFactory;
@@ -25,7 +25,6 @@ import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * 
@@ -55,7 +54,7 @@ public class SubsystemFactory {
         SmartDashboard.putNumber(TelemetryNames.Intake.status, PKStatus.unknown.tlmValue);
         {
             IntakeFactory.constructInstance();
-            ISubsystem ss =IntakeFactory.getInstance();
+            ISubsystem ss = IntakeFactory.getInstance();
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
         }
@@ -64,7 +63,16 @@ public class SubsystemFactory {
         SmartDashboard.putNumber(TelemetryNames.Elevator.status, PKStatus.unknown.tlmValue);
         {
             ElevatorFactory.constructInstance();
-            ISubsystem ss =ElevatorFactory.getInstance();
+            ISubsystem ss = ElevatorFactory.getInstance();
+            tlmMgr.addProvider(ss);
+            subsystems.add(ss);
+        }
+
+        // ** Incrementer **
+        SmartDashboard.putNumber(TelemetryNames.Incrementer.status, PKStatus.unknown.tlmValue);
+        {
+            IncrementerFactory.constructInstance();
+            ISubsystem ss = IncrementerFactory.getInstance();
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
         }
@@ -73,7 +81,7 @@ public class SubsystemFactory {
         SmartDashboard.putNumber(TelemetryNames.Shooter.status, PKStatus.unknown.tlmValue);
         {
             ShooterFactory.constructInstance();
-            ISubsystem ss =ShooterFactory.getInstance();
+            ISubsystem ss = ShooterFactory.getInstance();
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
         }
@@ -82,7 +90,7 @@ public class SubsystemFactory {
         SmartDashboard.putNumber(TelemetryNames.Turret.status, PKStatus.unknown.tlmValue);
         {
             TurretFactory.constructInstance();
-            ISubsystem ss =TurretFactory.getInstance();
+            ISubsystem ss = TurretFactory.getInstance();
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
         }
@@ -91,7 +99,7 @@ public class SubsystemFactory {
         SmartDashboard.putNumber(TelemetryNames.Climber.status, PKStatus.unknown.tlmValue);
         {
             ClimberFactory.constructInstance();
-            ISubsystem ss =ClimberFactory.getInstance();
+            ISubsystem ss = ClimberFactory.getInstance();
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
         }
