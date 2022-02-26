@@ -33,10 +33,10 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     ElevatorSubsystem() {
         logger.info("constructing");
 
-        lowerStage = new VictorSPX(51);
+        lowerStage = new VictorSPX(50);
         lowerStage.configFactoryDefault();
 
-        upperStage = new TalonSRX(52);
+        upperStage = new TalonSRX(51);
         upperStage.configFactoryDefault();
 
         limit = new DigitalInput(9);
