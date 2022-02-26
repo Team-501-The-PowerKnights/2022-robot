@@ -34,7 +34,7 @@ public final class TurretPreferences {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(TurretPreferences.class.getName());
 
-    static private final String name = SubsystemNames.driveName;
+    static private final String name = SubsystemNames.turretName;
     static final String pid_P = name + ".P";
     static final String pid_I = name + ".I";
     static final String pid_D = name + ".D";

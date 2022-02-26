@@ -67,26 +67,25 @@ class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
     @Override
     public void updateTelemetry() {
         super.updateTelemetry();
-        // TODO Auto-generated method stub
 
-    }
+        // Nothing extra here
+   }
 
     @Override
     public void validateCalibration() {
-        // TODO Auto-generated method stub
-
+        // Nothing here
     }
 
     @Override
     public void updatePreferences() {
-        // TODO Auto-generated method stub
+        super.updateTelemetry();
 
+        // Nothing extra here
     }
 
     @Override
     public void disable() {
         // TODO Auto-generated method stub
-
     }
 
     @Override

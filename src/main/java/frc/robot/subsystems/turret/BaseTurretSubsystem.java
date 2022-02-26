@@ -8,19 +8,22 @@
 
 package frc.robot.subsystems.turret;
 
+
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import frc.robot.commands.turret.TurretDoNothing;
-import frc.robot.preferences.PreferenceNames;
 import frc.robot.properties.PKProperties;
 import frc.robot.properties.PropertiesManager;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Add your docs here.
@@ -33,10 +36,16 @@ abstract class BaseTurretSubsystem extends SubsystemBase implements ITurretSubsy
     /** Our subsystem's name **/
     protected static final String myName = SubsystemNames.turretName;
 
-    /** Turret PID defaults for subystem **/
-    protected double pid_P = 0.5;
-    protected double pid_I = 0.005;
-    protected double pid_D = 1;
+    /** Default preferences for subystem **/
+    private final double default_pid_P = 0.5;
+    private final double default_pid_I = 0.005;
+    private final double default_pid_D = 1.0;
+    private final double default_pid_F = 0.0;
+
+    /** PID for subystem **/
+    protected double pid_P = 0;
+    protected double pid_I = 0;
+    protected double pid_D = 0;
     protected double pid_F = 0;
 
     BaseTurretSubsystem() {
@@ -75,17 +84,17 @@ abstract class BaseTurretSubsystem extends SubsystemBase implements ITurretSubsy
         double v;
 
         logger.info("new preferences for {}:", myName);
-        v = Preferences.getDouble(PreferenceNames.Turret.pid_P, 0.5);
-        logger.info("{} = {}", PreferenceNames.Turret.pid_P, v);
+        v = Preferences.getDouble(TurretPreferences.pid_P, default_pid_P);
+        logger.info("{} = {}", TurretPreferences.pid_P, v);
         pid_P = v;
-        v = Preferences.getDouble(PreferenceNames.Turret.pid_I, 0.005);
-        logger.info("{} = {}", PreferenceNames.Turret.pid_I, v);
+        v = Preferences.getDouble(TurretPreferences.pid_I, default_pid_I);
+        logger.info("{} = {}", TurretPreferences.pid_I, v);
         pid_I = v;
-        v = Preferences.getDouble(PreferenceNames.Turret.pid_D, 1);
-        logger.info("{} = {}", PreferenceNames.Turret.pid_D, v);
+        v = Preferences.getDouble(TurretPreferences.pid_D, default_pid_D);
+        logger.info("{} = {}", TurretPreferences.pid_D, v);
         pid_D = v;
-        v = Preferences.getDouble(PreferenceNames.Turret.pid_F, 0.0);
-        logger.info("{} = {}", PreferenceNames.Turret.pid_F, v);
+        v = Preferences.getDouble(TurretPreferences.pid_F, default_pid_F);
+        logger.info("{} = {}", TurretPreferences.pid_F, v);
         pid_F = v;
     }
 
@@ -107,6 +116,11 @@ abstract class BaseTurretSubsystem extends SubsystemBase implements ITurretSubsy
     {
         SmartDashboard.putNumber(TelemetryNames.Turret.speed, tlmSpeed);
         SmartDashboard.putNumber(TelemetryNames.Turret.setSpeed, tlmSetSpeed);
+     }
+
+     @Override
+     public void updatePreferences() {
+        loadPreferences();
      }
 
 }

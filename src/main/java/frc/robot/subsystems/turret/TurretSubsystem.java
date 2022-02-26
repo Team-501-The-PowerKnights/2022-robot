@@ -92,12 +92,12 @@ class TurretSubsystem extends BaseTurretSubsystem {
 
     @Override
     public void validateCalibration() {
-        // Zester doens't implement this
+        // Nothing here
     }
 
     @Override
     public void updatePreferences() {
-        loadPreferences();
+        super.updatePreferences();
 
         if (pid != null) {
             pid.setP(pid_P, 1);

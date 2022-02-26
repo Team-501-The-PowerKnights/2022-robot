@@ -93,16 +93,14 @@ class ZesterShooterSubsystem extends BaseShooterSubsystem {
 
     @Override
     public void validateCalibration() {
-        // Zester doesn't implement this
+        // Nothing here
     }
 
     @Override
     public void updatePreferences() {
-        // FIXME: Why is this? Isn't this updateTelemetry()?
-        SmartDashboard.putBoolean(TelemetryNames.Shooter.isActive, isActive);
-        SmartDashboard.putNumber(TelemetryNames.Shooter.rpm, encoder.getVelocity());
-        SmartDashboard.putNumber(TelemetryNames.Shooter.targetRpm, targetRpm);
-        SmartDashboard.putBoolean(TelemetryNames.Shooter.atTarget, atTargetVelocity());
+        super.updateTelemetry();
+
+        // Nothing extra here
     }
     
     @Override
