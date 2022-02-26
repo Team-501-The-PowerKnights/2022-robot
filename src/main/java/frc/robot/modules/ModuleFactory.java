@@ -8,12 +8,11 @@
 
 package frc.robot.modules;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.robot.modules.pcm.PCMFactory;
 import frc.robot.modules.pdp.PDPFactory;
 import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
@@ -21,7 +20,6 @@ import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Add your docs here.
@@ -42,6 +40,14 @@ public class ModuleFactory {
         {
             PDPFactory.constructInstance();
             IModule m = PDPFactory.getInstance();
+            tlmMgr.addProvider(m);
+            modules.add(m);
+        }
+
+        SmartDashboard.putNumber(TelemetryNames.PCM.status, PKStatus.unknown.tlmValue);
+        {
+            PCMFactory.constructInstance();
+            IModule m = PCMFactory.getInstance();
             tlmMgr.addProvider(m);
             modules.add(m);
         }
