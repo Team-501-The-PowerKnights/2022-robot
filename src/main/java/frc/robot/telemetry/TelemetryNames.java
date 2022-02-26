@@ -117,11 +117,15 @@ public final class TelemetryNames {
     }
 
     public final class PCM {
-        public static final String name = ModuleNames.pdpName;
+        public static final String name = ModuleNames.pcmName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
         public static final String defCommand = name + "defCommand";
+
+        public static final String compressorEnabled = name + ".compressorEnabled";
+        public static final String pressureGood = name + ".pressureGood";
+        public static final String intakeExtended = name + ".intakeExtended";
     }
 
     /***************
@@ -220,7 +224,7 @@ public final class TelemetryNames {
         public static final String rpm = name + ".rpm";
         public static final String targetRpm = name + ".targetRpm";
         public static final String atTarget = name + ".atTarget";
-        
+
         public static final String setSpeed = name + ".setSpeed";
         public static final String speed = name + ".speed";
     }

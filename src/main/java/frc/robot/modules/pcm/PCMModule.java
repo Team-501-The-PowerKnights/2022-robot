@@ -8,8 +8,11 @@
 
 package frc.robot.modules.pcm;
 
-import edu.wpi.first.wpilibj.PneumaticsControlModule;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -18,7 +21,7 @@ public class PCMModule extends BasePCMModule {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(PCMModule.class.getName());
 
-    private final PneumaticsControlModule module;
+    private final Compressor module;
 
     // TODO - are there only two solenoids? or two per subsystem using them?
     private final int intakeSolenoidChannel;
@@ -30,14 +33,16 @@ public class PCMModule extends BasePCMModule {
     public PCMModule() {
         logger.info("constructing");
 
-        module = new PneumaticsControlModule(10); // TODO - is this the right way to access?
-        // TODO - what is the type of compressor?
+        module = new Compressor(0, PneumaticsModuleType.CTREPCM);
+        module.enableDigital();
 
-        intakeSolenoidChannel = 0; // TODO - Figure out real channel
-        climberSolenoidChannel = 1; // TODO - Figure out real channel
+        intakeSolenoidChannel = 3;
+        climberSolenoidChannel = 1; // TODO - This isn't implemented mechanically yet
 
-        intakeSolenoid = module.makeSolenoid(intakeSolenoidChannel);
-        climberSolenoid = module.makeSolenoid(climberSolenoidChannel);
+        intakeSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, intakeSolenoidChannel);
+        intakeSolenoid.set(false);
+
+        climberSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, climberSolenoidChannel);
 
         logger.info("constructed");
     }
@@ -52,14 +57,15 @@ public class PCMModule extends BasePCMModule {
 
     @Override
     public void disable() {
-        module.disableCompressor();
-        // TODO - should we set a solenoid state here?
+        module.disable();
 
     }
 
     @Override
     public void updateTelemetry() {
-        // TODO - what states do we want to collect?
+        SmartDashboard.putBoolean(TelemetryNames.PCM.compressorEnabled, module.enabled());
+        SmartDashboard.putBoolean(TelemetryNames.PCM.pressureGood, module.getPressureSwitchValue());
+        SmartDashboard.putBoolean(TelemetryNames.PCM.intakeExtended, isIntakeExtended());
     }
 
     @Override
@@ -73,6 +79,11 @@ public class PCMModule extends BasePCMModule {
     }
 
     @Override
+    public boolean isIntakeExtended() {
+        return intakeSolenoid.get();
+    }
+
+    @Override
     public void extendClimber() {
         climberSolenoid.set(true);
     }
@@ -80,6 +91,11 @@ public class PCMModule extends BasePCMModule {
     @Override
     public void retractClimber() {
         climberSolenoid.set(false);
+    }
+
+    @Override
+    public void enable() {
+        module.enableDigital();
     }
 
 }
