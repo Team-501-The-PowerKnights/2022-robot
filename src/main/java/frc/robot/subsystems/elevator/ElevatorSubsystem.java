@@ -10,6 +10,7 @@ package frc.robot.subsystems.elevator;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,7 +25,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ElevatorSubsystem.class.getName());
 
-    private final TalonSRX lowerStage;
+    private final VictorSPX lowerStage;
     private final TalonSRX upperStage;
 
     private final DigitalInput limit;
@@ -32,7 +33,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     ElevatorSubsystem() {
         logger.info("constructing");
 
-        lowerStage = new TalonSRX(51);
+        lowerStage = new VictorSPX(51);
         lowerStage.configFactoryDefault();
 
         upperStage = new TalonSRX(52);
