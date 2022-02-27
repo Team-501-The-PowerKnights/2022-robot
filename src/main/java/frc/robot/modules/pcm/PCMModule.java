@@ -9,8 +9,7 @@
 package frc.robot.modules.pcm;
 
 
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -25,11 +24,12 @@ class PCMModule extends BasePCMModule {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(PCMModule.class.getName());
 
-    private final Compressor module;
+    /** My module */
+    private final PneumaticsControlModule module;
 
     // TODO - are there only two solenoids? or two per subsystem using them?
-    private final int intakeSolenoidChannel;
-    private final int climberSolenoidChannel;
+    private static final int climberSolenoidChannel = 1;
+    private static final int intakeSolenoidChannel = 3;
 
     private final Solenoid intakeSolenoid;
     private final Solenoid climberSolenoid;
@@ -37,17 +37,14 @@ class PCMModule extends BasePCMModule {
     public PCMModule() {
         logger.info("constructing");
 
-        module = new Compressor(0, PneumaticsModuleType.CTREPCM);
-        module.enableDigital();
-        setTlmEnabled(module.enabled());
+        module = new  PneumaticsControlModule(0);
+        enable();
 
-        intakeSolenoidChannel = 3;
-        climberSolenoidChannel = 1; // TODO - This isn't implemented mechanically yet
-
-        intakeSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, intakeSolenoidChannel);
+        intakeSolenoid = module.makeSolenoid(intakeSolenoidChannel);
         intakeSolenoid.set(false);
 
-        climberSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, climberSolenoidChannel);
+        climberSolenoid = module.makeSolenoid(climberSolenoidChannel);
+        // TODO - This isn't implemented mechanically yet
 
         logger.info("constructed");
     }
@@ -56,7 +53,7 @@ class PCMModule extends BasePCMModule {
     public void updateTelemetry() {
         super.updateTelemetry();
 
-       SmartDashboard.putBoolean(TelemetryNames.PCM.pressureGood, module.getPressureSwitchValue());
+        SmartDashboard.putBoolean(TelemetryNames.PCM.pressureGood, module.getPressureSwitch());
         SmartDashboard.putBoolean(TelemetryNames.PCM.intakeExtended, isIntakeExtended());
     }
 
@@ -67,15 +64,15 @@ class PCMModule extends BasePCMModule {
 
     @Override
     public void disable() {
-        module.disable();
-        setTlmEnabled(module.enabled());
+        module.disableCompressor();
+        setTlmEnabled(false);
     }
 
     // TODO - should we also have an enable method to enable the compressor?
     @Override
     public void enable() {
-        module.enableDigital();
-        setTlmEnabled(module.enabled());
+        module.enableCompressorDigital();
+        setTlmEnabled(true);
     }
 
     @Override

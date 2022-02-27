@@ -21,13 +21,15 @@ class SuitcasePCMModule extends BasePCMModule {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(SuitcasePCMModule.class.getName());
     
+    /** My module */
+    @SuppressWarnings("unused")
     private final PneumaticsControlModule module;
 
     public SuitcasePCMModule() {
         logger.info("constructing");
 
         module = new PneumaticsControlModule(0);
-        module.enableCompressorDigital();
+        enable();
 
         logger.info("constructed");
     }
