@@ -35,7 +35,7 @@ abstract class BasePCMModule implements IPCMModule {
 
     @Override
     public void updateTelemetry() {
-        SmartDashboard.putBoolean(TelemetryNames.PCM.compressorEnabled, tlmEnabled);
+        SmartDashboard.putBoolean(TelemetryNames.PCM.enabled, tlmEnabled);
     }
 
 }

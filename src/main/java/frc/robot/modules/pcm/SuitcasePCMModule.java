@@ -9,7 +9,7 @@
 package frc.robot.modules.pcm;
 
 
-import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
 import riolog.PKLogger;
@@ -21,14 +21,13 @@ class SuitcasePCMModule extends BasePCMModule {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(SuitcasePCMModule.class.getName());
     
-    private final Compressor module;
+    private final PneumaticsControlModule module;
 
     public SuitcasePCMModule() {
         logger.info("constructing");
 
-        module = new Compressor(0, PneumaticsModuleType.CTREPCM);
-        module.enableDigital();
-        setTlmEnabled(module.enabled());
+        module = new PneumaticsControlModule(0);
+        module.enableCompressorDigital();
 
         logger.info("constructed");
     }
@@ -49,12 +48,16 @@ class SuitcasePCMModule extends BasePCMModule {
 
     @Override
     public void disable() {
+        // module.disableCompressor();
+        setTlmEnabled(false);
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void enable() {
+        // module.enableCompressorDigital();
+        setTlmEnabled(true);
         // TODO Auto-generated method stub
         
     }
