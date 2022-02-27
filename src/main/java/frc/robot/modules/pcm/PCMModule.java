@@ -51,9 +51,9 @@ class PCMModule extends BasePCMModule {
 
     @Override
     public void updateTelemetry() {
+        setTlmPressureGood(module.getPressureSwitch());
         super.updateTelemetry();
 
-        SmartDashboard.putBoolean(TelemetryNames.PCM.pressureGood, module.getPressureSwitch());
         SmartDashboard.putBoolean(TelemetryNames.PCM.intakeExtended, isIntakeExtended());
     }
 

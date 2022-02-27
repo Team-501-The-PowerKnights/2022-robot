@@ -10,7 +10,9 @@ package frc.robot.modules.pcm;
 
 
 import edu.wpi.first.wpilibj.PneumaticsControlModule;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -38,8 +40,7 @@ class SuitcasePCMModule extends BasePCMModule {
     public void updateTelemetry() {
         super.updateTelemetry();
 
-        // TODO Auto-generated method stub
-        
+         SmartDashboard.putBoolean(TelemetryNames.PCM.intakeExtended, isIntakeExtended());
     }
 
     @Override

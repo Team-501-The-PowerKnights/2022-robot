@@ -30,14 +30,22 @@ abstract class BasePCMModule implements IPCMModule {
 
     // Module state
     protected boolean tlmEnabled = false;
+    // Enough pressure? Compressor should be running if not ...
+    protected boolean tlmPressure = false;
 
     protected void setTlmEnabled(boolean enabled) {
         tlmEnabled = enabled;
     }
 
+    protected void setTlmPressureGood(boolean pressure) {
+        tlmPressure = pressure;
+    }
+
+
     @Override
     public void updateTelemetry() {
         SmartDashboard.putBoolean(TelemetryNames.PCM.enabled, tlmEnabled);
+        SmartDashboard.putBoolean(TelemetryNames.PCM.pressureGood, tlmPressure);
     }
 
 }
