@@ -8,8 +8,10 @@
 
 package frc.robot.modules.pcm;
 
+
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class StubPCMModule extends BasePCMModule {
 
@@ -20,6 +22,32 @@ class StubPCMModule extends BasePCMModule {
         logger.info("constructing");
 
         logger.info("constructed");
+    }
+
+    @Override
+    public void updateTelemetry() {
+        super.updateTelemetry();
+
+        // Stub doesn't implement this
+
+    }
+
+    @Override
+    public void updatePreferences() {
+        // Stub doesn't implement this
+
+    }
+
+    @Override
+    public void enable() {
+        // Stub doesn't implement this
+
+    }
+
+    @Override
+    public void disable() {
+        // Stub doesn't implement this
+
     }
 
     @Override
@@ -44,36 +72,6 @@ class StubPCMModule extends BasePCMModule {
     public void retractClimber() {
         // Stub doesn't implement this
 
-    }
-
-    @Override
-    public void updatePreferences() {
-        // Stub doesn't implement this
-
-    }
-
-    @Override
-    public void disable() {
-        // Stub doesn't implement this
-
-    }
-
-    @Override
-    public void updateTelemetry() {
-        // Stub doesn't implement this
-
-    }
-
-    @Override
-    public void enable() {
-        // Stub doesn't implement this
-
-    }
-
-    @Override
-    public boolean isIntakeExtended() {
-        // Stub doesn't implement this
-        return false;
     }
 
 }

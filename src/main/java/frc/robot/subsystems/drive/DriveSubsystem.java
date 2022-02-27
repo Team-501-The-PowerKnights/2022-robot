@@ -146,12 +146,14 @@ class DriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void validateCalibration() {
-        // TODO Auto-generated method stub
+        // Nothing here
     }
 
     @Override
     public void updatePreferences() {
-        // TODO Auto-generated method stub
+        super.loadPreferences();
+
+        // Nothing extra here
     }
 
     @Override

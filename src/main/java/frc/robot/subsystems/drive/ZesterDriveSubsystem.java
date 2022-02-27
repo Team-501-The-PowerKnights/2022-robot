@@ -147,12 +147,14 @@ class ZesterDriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void validateCalibration() {
-        // TODO Auto-generated method stub
+        // Not implemented
     }
 
     @Override
     public void updatePreferences() {
-        // TODO Auto-generated method stub
+        super.updateTelemetry();
+
+        // Nothing extra here
     }
 
     @Override

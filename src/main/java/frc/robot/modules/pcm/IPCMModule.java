@@ -8,7 +8,9 @@
 
 package frc.robot.modules.pcm;
 
+
 import frc.robot.modules.IModule;
+
 
 public interface IPCMModule extends IModule {
 
@@ -17,8 +19,6 @@ public interface IPCMModule extends IModule {
     public void extendIntake();
 
     public void retractIntake();
-
-    public boolean isIntakeExtended();
 
     public void extendClimber();
 

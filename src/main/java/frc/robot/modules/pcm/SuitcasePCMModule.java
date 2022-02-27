@@ -10,7 +10,6 @@ package frc.robot.modules.pcm;
 
 
 import edu.wpi.first.wpilibj.PneumaticsControlModule;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.telemetry.TelemetryNames;
@@ -19,85 +18,75 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-class PCMModule extends BasePCMModule {
-
+class SuitcasePCMModule extends BasePCMModule {
+ 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(PCMModule.class.getName());
-
+    private static final PKLogger logger = RioLogger.getLogger(SuitcasePCMModule.class.getName());
+    
     /** My module */
+    @SuppressWarnings("unused")
     private final PneumaticsControlModule module;
 
-    private static final int climberSolenoidChannel = 1;
-    private static final int intakeSolenoidChannel = 3;
-
-    private final Solenoid intakeSolenoid;
-    private final Solenoid climberSolenoid;
-
-    public PCMModule() {
+    public SuitcasePCMModule() {
         logger.info("constructing");
 
-        module = new  PneumaticsControlModule(0);
+        module = new PneumaticsControlModule(0);
         enable();
-
-        intakeSolenoid = module.makeSolenoid(intakeSolenoidChannel);
-        intakeSolenoid.set(false);
-
-        climberSolenoid = module.makeSolenoid(climberSolenoidChannel);
-        // TODO - This isn't implemented mechanically yet
 
         logger.info("constructed");
     }
 
     @Override
     public void updateTelemetry() {
-        setTlmPressureGood(module.getPressureSwitch());
         super.updateTelemetry();
 
-        SmartDashboard.putBoolean(TelemetryNames.PCM.intakeExtended, isIntakeExtended());
+         SmartDashboard.putBoolean(TelemetryNames.PCM.intakeExtended, false);
     }
 
     @Override
     public void updatePreferences() {
-        // Nothing here
+        // TODO Auto-generated method stub
+        
     }
 
     @Override
     public void disable() {
-        module.disableCompressor();
+        // module.disableCompressor();
         setTlmEnabled(false);
+        // TODO Auto-generated method stub
+
     }
 
-    // TODO - should we also have an enable method to enable the compressor?
     @Override
     public void enable() {
-        module.enableCompressorDigital();
+        // module.enableCompressorDigital();
         setTlmEnabled(true);
+        // TODO Auto-generated method stub
+        
     }
 
     @Override
     public void extendIntake() {
-        // Not testing - just do it (could change)
-        intakeSolenoid.set(true);
+        // TODO Auto-generated method stub
+        
     }
 
     @Override
     public void retractIntake() {
-        // Not testing - just do it (could change)
-        intakeSolenoid.set(false);
-    }
-
-    private boolean isIntakeExtended() {
-        return intakeSolenoid.get();
+        // TODO Auto-generated method stub
+        
     }
 
     @Override
     public void extendClimber() {
-        climberSolenoid.set(true);
+        // TODO Auto-generated method stub
+        
     }
 
     @Override
     public void retractClimber() {
-        climberSolenoid.set(false);
+        // TODO Auto-generated method stub
+        
     }
 
 }

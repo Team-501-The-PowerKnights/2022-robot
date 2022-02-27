@@ -31,6 +31,7 @@ PCM.className = StubPCMModule
 #PCM.className =
 
 
+
 #########################################
 #########################################
 # Sensor Defines
@@ -43,11 +44,13 @@ PCM.className = StubPCMModule
 Gyro.className = StubGyroSensor
 #Gyro.className =
 
+
 #####################
 # Vision
 #####################
 Vision.className = StubVisionSensor
 #Vision.className =
+
 
 #####################
 # Turret Location

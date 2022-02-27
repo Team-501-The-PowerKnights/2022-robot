@@ -8,10 +8,13 @@
 
 package frc.robot.commands.intake;
 
+
 import frc.robot.modules.pcm.IPCMModule;
 import frc.robot.modules.pcm.PCMFactory;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 public class IntakeManualControl extends IntakeOICommandBase {
 
@@ -37,24 +40,15 @@ public class IntakeManualControl extends IntakeOICommandBase {
         super.execute();
 
         double speed = oi.getIntakeSpeed();
-        if (speed == 0) {
-            intake.stop();
-
-            if (pcm.isIntakeExtended()) {
-                pcm.retractIntake();
-            }
-        } else if (speed > 0) {
+        if (speed > 0) {
             intake.pullIn();
-
-            if (!pcm.isIntakeExtended()) {
-                pcm.extendIntake();
-            }
+            pcm.extendIntake();
         } else if (speed < 0) {
             intake.pushOut();
-
-            if (!pcm.isIntakeExtended()) {
-                pcm.extendIntake();
-            }
+            pcm.extendIntake();
+        } else {  // == 0
+            intake.stop();
+            pcm.retractIntake();
         }
     }
 

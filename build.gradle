@@ -94,13 +94,11 @@ javadoc {
     source = sourceSets.main.allJava
 }
 
-//deployroborio.dependsOn 'writeBuildInfo'
-//deployroborio.dependsOn 'build'
+deploy.targets.roborio.artifacts.frcStaticFileDeploy.dependsOn('writeBuildInfo')
 build.dependsOn 'writeBuildInfo'
 
-task writeBuildInfo {
-    doFirst {
-        def name = "git config --get user.name".execute().text.trim()
+tasks.register('writeBuildInfo') {
+    def name = "git config --get user.name".execute().text.trim()
         def sha = "git log --pretty=format:'%h' -n 1".execute().text.trim().replaceAll("'", "")
 
         def now = new Date()
@@ -138,5 +136,4 @@ class BuildVersionInfo {
     public static final String timeStamp = "${time}";
 }
 """
-    }
 }

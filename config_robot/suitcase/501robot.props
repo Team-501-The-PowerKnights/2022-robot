@@ -23,12 +23,12 @@ Robot.implementation = Suitcase
 PDP.className = StubPDPModule
 #PDP.className =
 
+
 #####################
 # PCM
 #####################
-PCM.className = StubPCMModule
-#PCM.className =
-
+#PCM.className = StubPCMModule
+PCM.className = SuitcasePCMModule
 
 
 
@@ -115,7 +115,6 @@ Turret.className = StubTurretSubsystem
 #Turret.className =
 Turret.defaultCommandName = TurretDoNothing
 #Turret.defaultCommandName = TurretManualControlJog
-
 
 
 #####################
