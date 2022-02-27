@@ -123,7 +123,7 @@ public final class TelemetryNames {
         public static final String implClass = name + ".implClass";
         public static final String defCommand = name + "defCommand";
 
-        public static final String compressorEnabled = name + ".compressorEnabled";
+        public static final String enabled = name + ".enabled";
         public static final String pressureGood = name + ".pressureGood";
         public static final String intakeExtended = name + ".intakeExtended";
     }
