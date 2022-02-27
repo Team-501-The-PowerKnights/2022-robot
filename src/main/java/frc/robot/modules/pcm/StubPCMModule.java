@@ -63,12 +63,6 @@ class StubPCMModule extends BasePCMModule {
     }
 
     @Override
-    public boolean isIntakeExtended() {
-        // Stub doesn't implement this
-        return false;
-    }
-
-    @Override
     public void extendClimber() {
         // Stub doesn't implement this
 

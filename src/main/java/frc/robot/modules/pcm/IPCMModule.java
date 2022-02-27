@@ -20,8 +20,6 @@ public interface IPCMModule extends IModule {
 
     public void retractIntake();
 
-    public boolean isIntakeExtended();
-
     public void extendClimber();
 
     public void retractClimber();

@@ -40,7 +40,7 @@ class SuitcasePCMModule extends BasePCMModule {
     public void updateTelemetry() {
         super.updateTelemetry();
 
-         SmartDashboard.putBoolean(TelemetryNames.PCM.intakeExtended, isIntakeExtended());
+         SmartDashboard.putBoolean(TelemetryNames.PCM.intakeExtended, false);
     }
 
     @Override
@@ -75,12 +75,6 @@ class SuitcasePCMModule extends BasePCMModule {
     public void retractIntake() {
         // TODO Auto-generated method stub
         
-    }
-
-    @Override
-    public boolean isIntakeExtended() {
-        // TODO Auto-generated method stub
-        return false;
     }
 
     @Override

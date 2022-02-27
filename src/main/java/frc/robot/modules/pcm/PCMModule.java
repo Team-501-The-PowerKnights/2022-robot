@@ -27,7 +27,6 @@ class PCMModule extends BasePCMModule {
     /** My module */
     private final PneumaticsControlModule module;
 
-    // TODO - are there only two solenoids? or two per subsystem using them?
     private static final int climberSolenoidChannel = 1;
     private static final int intakeSolenoidChannel = 3;
 
@@ -77,16 +76,17 @@ class PCMModule extends BasePCMModule {
 
     @Override
     public void extendIntake() {
+        // Not testing - just do it (could change)
         intakeSolenoid.set(true);
     }
 
     @Override
     public void retractIntake() {
+        // Not testing - just do it (could change)
         intakeSolenoid.set(false);
     }
 
-    @Override
-    public boolean isIntakeExtended() {
+    private boolean isIntakeExtended() {
         return intakeSolenoid.get();
     }
 
