@@ -8,33 +8,36 @@
 
 package frc.robot.commands.incrementer;
 
+import frc.robot.subsystems.incrementer.IIncrementerSubsystem;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class IncrementerManualControl extends IncrementerOICommandBase {
+/**
+ * Add your docs here.
+ */
+public class IncrementerIncrement extends IncrementerCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IncrementerManualControl.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IncrementerIncrement.class.getName());
 
-    /**
-     * Creates a new DriveJoystickControl.
-     */
-    public IncrementerManualControl() {
+    // Handle to our subsystem
+    protected IIncrementerSubsystem incrementer;
+
+    public IncrementerIncrement() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
     }
 
-    // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        super.execute();
-
-        double incrementSpeed = oi.getIntakeSpeed();
-        if (incrementSpeed == 0) {
-            incrementer.stop();
-        } else if (incrementSpeed > 0) {
-            incrementer.incrementToLimit();
-        }
+        incrementer.increment();
     }
+
+    @Override
+    public void end(boolean interrupted) {
+        incrementer.stop();
+    }
+
 }
