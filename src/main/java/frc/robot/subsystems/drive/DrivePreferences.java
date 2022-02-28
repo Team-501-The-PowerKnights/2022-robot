@@ -37,6 +37,7 @@ public final class DrivePreferences {
     static final String pid_I = name + ".I";
     static final String pid_D = name + ".D";
     static final String pid_F = name + ".F";
+    static final String ramp = name + ".ramp";
 
     private DrivePreferences() {}
 
@@ -60,6 +61,11 @@ public final class DrivePreferences {
         if (!Preferences.containsKey(pid_F)) {
             logger.warn("{} doesn't exist; creating with default", pid_F);
             Preferences.setDouble(pid_F, 0.0);
+        }
+        
+        if (!Preferences.containsKey(ramp)) {
+            logger.warn("{} doesn't exist; creating with default", ramp);
+            Preferences.setDouble(ramp, 0.0);
         }
     }
 

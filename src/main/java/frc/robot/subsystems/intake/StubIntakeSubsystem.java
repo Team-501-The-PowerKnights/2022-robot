@@ -8,10 +8,8 @@
 
 package frc.robot.subsystems.intake;
 
-
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class StubIntakeSubsystem extends BaseIntakeSubsystem {
 
@@ -60,7 +58,7 @@ class StubIntakeSubsystem extends BaseIntakeSubsystem {
     @Override
     public void pullIn(double speed) {
         super.pullIn(speed);
-        
+
         setSpeed(speed);
     }
 
@@ -82,5 +80,21 @@ class StubIntakeSubsystem extends BaseIntakeSubsystem {
 
         // Stub doesn't implement this
     }
-    
+
+    @Override
+    public void retract() {
+        super.retract();
+
+        // Stub doesn't implement this
+
+    }
+
+    @Override
+    public void extend() {
+        super.extend();
+
+        // Stub doesn't implement this
+
+    }
+
 }
