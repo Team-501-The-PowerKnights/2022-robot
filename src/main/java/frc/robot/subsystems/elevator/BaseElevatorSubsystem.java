@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.elevator;
 
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,7 +21,6 @@ import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Add your docs here.
@@ -45,6 +43,10 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
     public void loadDefaultCommand() {
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
         String myClassName = props.getString("defaultCommandName");
+        if (myClassName.isEmpty()) {
+            logger.info("no class specified; go with subsystem default (do nothing)");
+            myClassName = new StringBuilder().append(myName).append("DoNothing").toString();
+        }
         String myPkgName = ElevatorDoNothing.class.getPackage().getName();
         String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
         logger.debug("class to load: {}", classToLoad);
@@ -74,8 +76,7 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
     private boolean tlmFull = false;
 
     @Override
-    public void updateTelemetry()
-    {
+    public void updateTelemetry() {
         SmartDashboard.putNumber(TelemetryNames.Elevator.speed, tlmSpeed);
         SmartDashboard.putBoolean(TelemetryNames.Elevator.stopped, tlmStopped);
         SmartDashboard.putBoolean(TelemetryNames.Elevator.lifting, tlmLifting);
@@ -90,7 +91,7 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
 
     @Override
     public void stop() {
-        tlmStopped = true;    
+        tlmStopped = true;
         tlmLifting = false;
         tlmLowering = false;
     }

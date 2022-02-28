@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.climber;
 
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,7 +21,6 @@ import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Add your docs here.
@@ -45,6 +43,10 @@ abstract class BaseClimberSubsystem extends SubsystemBase implements IClimberSub
     public void loadDefaultCommand() {
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
         String myClassName = props.getString("defaultCommandName");
+        if (myClassName.isEmpty()) {
+            logger.info("no class specified; go with subsystem default (do nothing)");
+            myClassName = new StringBuilder().append(myName).append("DoNothing").toString();
+        }
         String myPkgName = ClimberDoNothing.class.getPackage().getName();
         String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
         logger.debug("class to load: {}", classToLoad);
@@ -66,16 +68,15 @@ abstract class BaseClimberSubsystem extends SubsystemBase implements IClimberSub
         setDefaultCommand(ourCommand);
         SmartDashboard.putString(TelemetryNames.Climber.defCommand, ourCommand.getClass().getSimpleName());
     }
-    
+
     private double tlmSpeed = 0.0;
 
     protected void setTlmSpeed(double speed) {
         tlmSpeed = speed;
     }
-    
+
     @Override
-    public void updateTelemetry()
-    {
+    public void updateTelemetry() {
         SmartDashboard.putNumber(TelemetryNames.Climber.speed, tlmSpeed);
     }
 

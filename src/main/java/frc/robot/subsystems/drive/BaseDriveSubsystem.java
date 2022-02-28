@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.drive;
 
-
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -23,7 +22,6 @@ import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Add your docs here.
@@ -61,6 +59,10 @@ abstract class BaseDriveSubsystem extends SubsystemBase implements IDriveSubsyst
     public void loadDefaultCommand() {
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
         String myClassName = props.getString("defaultCommandName");
+        if (myClassName.isEmpty()) {
+            logger.info("no class specified; go with subsystem default (do nothing)");
+            myClassName = new StringBuilder().append(myName).append("DoNothing").toString();
+        }
         String myPkgName = DriveDoNothing.class.getPackage().getName();
         String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
         logger.debug("class to load: {}", classToLoad);
@@ -82,7 +84,7 @@ abstract class BaseDriveSubsystem extends SubsystemBase implements IDriveSubsyst
         setDefaultCommand(ourCommand);
         SmartDashboard.putString(TelemetryNames.Drive.defCommand, ourCommand.getClass().getSimpleName());
     }
-    
+
     protected void loadPreferences() {
         double v;
 
@@ -110,12 +112,11 @@ abstract class BaseDriveSubsystem extends SubsystemBase implements IDriveSubsyst
     protected double rightSpeed = 0.0;
 
     @Override
-    public void updateTelemetry()
-    {
+    public void updateTelemetry() {
         SmartDashboard.putNumber(TelemetryNames.Drive.leftSpeed, leftSpeed);
         SmartDashboard.putNumber(TelemetryNames.Drive.rightSpeed, rightSpeed);
     }
-    
+
     @Override
     public void updatePreferences() {
         loadPreferences();

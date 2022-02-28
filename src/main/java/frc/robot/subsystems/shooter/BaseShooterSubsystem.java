@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.shooter;
 
-
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -23,7 +22,6 @@ import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Add your docs here.
@@ -61,6 +59,10 @@ abstract class BaseShooterSubsystem extends SubsystemBase implements IShooterSub
     public void loadDefaultCommand() {
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
         String myClassName = props.getString("defaultCommandName");
+        if (myClassName.isEmpty()) {
+            logger.info("no class specified; go with subsystem default (do nothing)");
+            myClassName = new StringBuilder().append(myName).append("DoNothing").toString();
+        }
         String myPkgName = ShooterDoNothing.class.getPackage().getName();
         String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
         logger.debug("class to load: {}", classToLoad);
@@ -82,7 +84,7 @@ abstract class BaseShooterSubsystem extends SubsystemBase implements IShooterSub
         setDefaultCommand(ourCommand);
         SmartDashboard.putString(TelemetryNames.Shooter.defCommand, ourCommand.getClass().getSimpleName());
     }
-    
+
     protected void loadPreferences() {
         double v;
 
@@ -115,14 +117,13 @@ abstract class BaseShooterSubsystem extends SubsystemBase implements IShooterSub
     protected void setTlmSetSpeed(double speed) {
         tlmSetSpeed = speed;
     }
-    
+
     @Override
-    public void updateTelemetry()
-    {
+    public void updateTelemetry() {
         SmartDashboard.putNumber(TelemetryNames.Shooter.speed, tlmSpeed);
         SmartDashboard.putNumber(TelemetryNames.Shooter.setSpeed, tlmSetSpeed);
-     }
-        
+    }
+
     @Override
     public void updatePreferences() {
         loadPreferences();
