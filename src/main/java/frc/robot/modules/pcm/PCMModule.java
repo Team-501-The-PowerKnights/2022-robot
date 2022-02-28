@@ -8,7 +8,6 @@
 
 package frc.robot.modules.pcm;
 
-
 import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -18,7 +17,6 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-
 class PCMModule extends BasePCMModule {
 
     /** Our classes' logger **/
@@ -27,7 +25,7 @@ class PCMModule extends BasePCMModule {
     /** My module */
     private final PneumaticsControlModule module;
 
-    private static final int climberSolenoidChannel = 1;
+    private static final int climberSolenoidChannel = 1; // TODO - unsure what this will be
     private static final int intakeSolenoidChannel = 3;
 
     private final Solenoid intakeSolenoid;
@@ -36,7 +34,7 @@ class PCMModule extends BasePCMModule {
     public PCMModule() {
         logger.info("constructing");
 
-        module = new  PneumaticsControlModule(0);
+        module = new PneumaticsControlModule(0);
         enable();
 
         intakeSolenoid = module.makeSolenoid(intakeSolenoidChannel);
@@ -67,7 +65,6 @@ class PCMModule extends BasePCMModule {
         setTlmEnabled(false);
     }
 
-    // TODO - should we also have an enable method to enable the compressor?
     @Override
     public void enable() {
         module.enableCompressorDigital();

@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.intake;
 
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,7 +21,6 @@ import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Add your docs here.
@@ -71,14 +69,17 @@ abstract class BaseIntakeSubsystem extends SubsystemBase implements IIntakeSubsy
     private boolean tlmStopped = false;
     private boolean tlmPullingIn = false;
     private boolean tlmPushingOut = false;
- 
+    private boolean tlmExtended = false;
+    private boolean tlmRetracted = false;
+
     @Override
-    public void updateTelemetry()
-    {
+    public void updateTelemetry() {
         SmartDashboard.putNumber(TelemetryNames.Intake.speed, tlmSpeed);
         SmartDashboard.putBoolean(TelemetryNames.Intake.stopped, tlmStopped);
         SmartDashboard.putBoolean(TelemetryNames.Intake.pullingIn, tlmPullingIn);
         SmartDashboard.putBoolean(TelemetryNames.Intake.pushingOut, tlmPushingOut);
+        SmartDashboard.putBoolean(TelemetryNames.Intake.extended, tlmExtended);
+        SmartDashboard.putBoolean(TelemetryNames.Intake.retracted, tlmRetracted);
     }
 
     protected void setTlmSpeed(double speed) {
@@ -104,6 +105,16 @@ abstract class BaseIntakeSubsystem extends SubsystemBase implements IIntakeSubsy
         tlmStopped = false;
         tlmPullingIn = false;
         tlmPushingOut = true;
+    }
+
+    @Override
+    public void retract() {
+
+    }
+
+    @Override
+    public void extend() {
+
     }
 
 }

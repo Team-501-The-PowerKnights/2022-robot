@@ -8,28 +8,19 @@
 
 package frc.robot.commands.intake;
 
-
-import frc.robot.modules.pcm.IPCMModule;
-import frc.robot.modules.pcm.PCMFactory;
-
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 public class IntakeManualControl extends IntakeOICommandBase {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(IntakeManualControl.class.getName());
 
-    private final IPCMModule pcm;
-
     /**
      * Creates a new IntakeManualControl.
      */
     public IntakeManualControl() {
         logger.info("constructing {}", getName());
-
-        pcm = PCMFactory.getInstance();
 
         logger.info("constructed");
     }
@@ -42,13 +33,13 @@ public class IntakeManualControl extends IntakeOICommandBase {
         double speed = oi.getIntakeSpeed();
         if (speed > 0) {
             intake.pullIn();
-            pcm.extendIntake();
+            intake.extend();
         } else if (speed < 0) {
             intake.pushOut();
-            pcm.extendIntake();
-        } else {  // == 0
+            intake.extend();
+        } else { // == 0
             intake.stop();
-            pcm.retractIntake();
+            intake.retract();
         }
     }
 
