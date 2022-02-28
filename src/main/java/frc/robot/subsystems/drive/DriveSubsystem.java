@@ -37,6 +37,7 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.sensors.gyro.GyroFactory;
 import frc.robot.sensors.gyro.IGyroSensor;
 import frc.robot.telemetry.TelemetryNames;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -102,10 +103,15 @@ class DriveSubsystem extends BaseDriveSubsystem {
         rightRearMotor = new CANSparkMax(14, MotorType.kBrushless);
         rightRearMotor.restoreFactoryDefaults();
 
+        // FIXME: Use MotorControllerGroup (see Proto ...)
+
         rightFrontMotor.setInverted(true);
 
         leftRearMotor.follow(leftFrontMotor);
         rightRearMotor.follow(rightFrontMotor);
+
+        leftFrontMotor.setOpenLoopRampRate(ramp);
+        rightFrontMotor.setOpenLoopRampRate(ramp);
 
         leftEncoder = leftFrontMotor.getEncoder();
         leftEncoder.setPosition(0.0);
@@ -151,9 +157,12 @@ class DriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void updatePreferences() {
-        super.loadPreferences();
+        super.updatePreferences();
 
-        // Nothing extra here
+        // TODO: Update the PID values based on preferences
+
+        leftFrontMotor.setOpenLoopRampRate(ramp);
+        rightFrontMotor.setOpenLoopRampRate(ramp);
     }
 
     @Override

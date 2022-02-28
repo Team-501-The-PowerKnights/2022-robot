@@ -47,7 +47,7 @@ class StubDriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void updatePreferences() {
-        super.updateTelemetry();
+        super.updatePreferences();
         // Stub doesn't implement this
     }
 
