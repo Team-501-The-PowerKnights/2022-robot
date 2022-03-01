@@ -33,6 +33,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
 
         motor = new VictorSPX(50);
         motor.configFactoryDefault();
+        motor.setInverted(true);
 
         sensor = new DigitalInput(1);
 

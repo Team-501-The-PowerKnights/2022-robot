@@ -34,7 +34,8 @@ public class ElevatorManualControl extends ElevatorOICommandBase {
         if (liftSpeed == 0) {
             elevator.stop();
         } else if (liftSpeed > 0) {
-            elevator.liftToLimit();
+            elevator.lift();
+            // elevator.liftToLimit(); FIXME - Once limit is added
         }
     }
 }
