@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.drive;
 
-
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -23,7 +22,6 @@ import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Add your docs here.
@@ -54,32 +52,68 @@ abstract class BaseDriveSubsystem extends SubsystemBase implements IDriveSubsyst
         logger.info("constructed");
     }
 
+    /** Objects to hold loaded default commands **/
+    private static Command defaultAutoCommand;
+    private static Command defaultTeleCommand;
+
     @Override
     public void loadDefaultCommand() {
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
-        String myClassName = props.getString("defaultCommandName");
+        String myClassName = props.getString("autoCommandName");
         String myPkgName = DriveDoNothing.class.getPackage().getName();
         String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
         logger.debug("class to load: {}", classToLoad);
 
         logger.info("constructing {} for {} subsystem", myClassName, myName);
-        Command ourCommand;
+        Command ourAutoCommand;
         try {
             @SuppressWarnings("rawtypes")
             Class myClass = Class.forName(classToLoad);
             @SuppressWarnings("deprecation")
             Object myObject = myClass.newInstance();
-            ourCommand = (Command) myObject;
+            ourAutoCommand = (Command) myObject;
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for: {}", myName);
-            ourCommand = (Command) new DriveDoNothing();
+            ourAutoCommand = (Command) new DriveDoNothing();
             SmartDashboard.putNumber(TelemetryNames.Drive.status, PKStatus.degraded.tlmValue);
         }
 
-        setDefaultCommand(ourCommand);
-        SmartDashboard.putString(TelemetryNames.Drive.defCommand, ourCommand.getClass().getSimpleName());
+        defaultAutoCommand = ourAutoCommand;
+        SmartDashboard.putString(TelemetryNames.Drive.autoCommand, ourAutoCommand.getClass().getSimpleName());
+
+        myClassName = props.getString("teleCommandName");
+        myPkgName = DriveDoNothing.class.getPackage().getName();
+        classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
+        logger.debug("class to load: {}", classToLoad);
+
+        logger.info("constructing {} for {} subsystem", myClassName, myName);
+        Command ourTeleCommand;
+        try {
+            @SuppressWarnings("rawtypes")
+            Class myClass = Class.forName(classToLoad);
+            @SuppressWarnings("deprecation")
+            Object myObject = myClass.newInstance();
+            ourTeleCommand = (Command) myObject;
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            logger.error("failed to load class; instantiating default stub for: {}", myName);
+            ourTeleCommand = (Command) new DriveDoNothing();
+            SmartDashboard.putNumber(TelemetryNames.Drive.status, PKStatus.degraded.tlmValue);
+        }
+
+        defaultTeleCommand = ourTeleCommand;
+        SmartDashboard.putString(TelemetryNames.Drive.teleCommand, ourTeleCommand.getClass().getSimpleName());
     }
-    
+
+    @Override
+    public void loadDefaultAutoCommand() {
+        setDefaultCommand(defaultAutoCommand);
+    }
+
+    @Override
+    public void loadDefaultTeleCommand() {
+        setDefaultCommand(defaultTeleCommand);
+    }
+
     protected void loadPreferences() {
         double v;
 
@@ -104,12 +138,11 @@ abstract class BaseDriveSubsystem extends SubsystemBase implements IDriveSubsyst
     protected double rightSpeed = 0.0;
 
     @Override
-    public void updateTelemetry()
-    {
+    public void updateTelemetry() {
         SmartDashboard.putNumber(TelemetryNames.Drive.leftSpeed, leftSpeed);
         SmartDashboard.putNumber(TelemetryNames.Drive.rightSpeed, rightSpeed);
     }
-    
+
     @Override
     public void updatePreferences() {
         loadPreferences();

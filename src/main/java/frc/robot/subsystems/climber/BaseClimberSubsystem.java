@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.climber;
 
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,7 +21,6 @@ import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Add your docs here.
@@ -41,41 +39,76 @@ abstract class BaseClimberSubsystem extends SubsystemBase implements IClimberSub
         logger.info("constructed");
     }
 
+    /** Objects to hold loaded default commands **/
+    private static Command defaultAutoCommand;
+    private static Command defaultTeleCommand;
+
     @Override
     public void loadDefaultCommand() {
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
-        String myClassName = props.getString("defaultCommandName");
+        String myClassName = props.getString("autoCommandName");
         String myPkgName = ClimberDoNothing.class.getPackage().getName();
         String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
         logger.debug("class to load: {}", classToLoad);
 
         logger.info("constructing {} for {} subsystem", myClassName, myName);
-        Command ourCommand;
+        Command ourAutoCommand;
         try {
             @SuppressWarnings("rawtypes")
             Class myClass = Class.forName(classToLoad);
             @SuppressWarnings("deprecation")
             Object myObject = myClass.newInstance();
-            ourCommand = (Command) myObject;
+            ourAutoCommand = (Command) myObject;
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for: {}", myName);
-            ourCommand = (Command) new ClimberDoNothing();
+            ourAutoCommand = (Command) new ClimberDoNothing();
             SmartDashboard.putNumber(TelemetryNames.Climber.status, PKStatus.degraded.tlmValue);
         }
 
-        setDefaultCommand(ourCommand);
-        SmartDashboard.putString(TelemetryNames.Climber.defCommand, ourCommand.getClass().getSimpleName());
+        defaultAutoCommand = ourAutoCommand;
+        SmartDashboard.putString(TelemetryNames.Climber.autoCommand, ourAutoCommand.getClass().getSimpleName());
+
+        myClassName = props.getString("teleCommandName");
+        myPkgName = ClimberDoNothing.class.getPackage().getName();
+        classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
+        logger.debug("class to load: {}", classToLoad);
+
+        logger.info("constructing {} for {} subsystem", myClassName, myName);
+        Command ourTeleCommand;
+        try {
+            @SuppressWarnings("rawtypes")
+            Class myClass = Class.forName(classToLoad);
+            @SuppressWarnings("deprecation")
+            Object myObject = myClass.newInstance();
+            ourTeleCommand = (Command) myObject;
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            logger.error("failed to load class; instantiating default stub for: {}", myName);
+            ourTeleCommand = (Command) new ClimberDoNothing();
+            SmartDashboard.putNumber(TelemetryNames.Climber.status, PKStatus.degraded.tlmValue);
+        }
+
+        defaultTeleCommand = ourTeleCommand;
+        SmartDashboard.putString(TelemetryNames.Climber.teleCommand, ourTeleCommand.getClass().getSimpleName());
     }
-    
+
+    @Override
+    public void loadDefaultAutoCommand() {
+        setDefaultCommand(defaultAutoCommand);
+    }
+
+    @Override
+    public void loadDefaultTeleCommand() {
+        setDefaultCommand(defaultTeleCommand);
+    }
+
     private double tlmSpeed = 0.0;
 
     protected void setTlmSpeed(double speed) {
         tlmSpeed = speed;
     }
-    
+
     @Override
-    public void updateTelemetry()
-    {
+    public void updateTelemetry() {
         SmartDashboard.putNumber(TelemetryNames.Climber.speed, tlmSpeed);
     }
 

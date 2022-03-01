@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.shooter;
 
-
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -23,7 +22,6 @@ import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Add your docs here.
@@ -57,32 +55,68 @@ abstract class BaseShooterSubsystem extends SubsystemBase implements IShooterSub
         logger.info("constructed");
     }
 
+    /** Objects to hold loaded default commands **/
+    private static Command defaultAutoCommand;
+    private static Command defaultTeleCommand;
+
     @Override
     public void loadDefaultCommand() {
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
-        String myClassName = props.getString("defaultCommandName");
+        String myClassName = props.getString("autoCommandName");
         String myPkgName = ShooterDoNothing.class.getPackage().getName();
         String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
         logger.debug("class to load: {}", classToLoad);
 
         logger.info("constructing {} for {} subsystem", myClassName, myName);
-        Command ourCommand;
+        Command ourAutoCommand;
         try {
             @SuppressWarnings("rawtypes")
             Class myClass = Class.forName(classToLoad);
             @SuppressWarnings("deprecation")
             Object myObject = myClass.newInstance();
-            ourCommand = (Command) myObject;
+            ourAutoCommand = (Command) myObject;
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for: {}", myName);
-            ourCommand = (Command) new ShooterDoNothing();
+            ourAutoCommand = (Command) new ShooterDoNothing();
             SmartDashboard.putNumber(TelemetryNames.Shooter.status, PKStatus.degraded.tlmValue);
         }
 
-        setDefaultCommand(ourCommand);
-        SmartDashboard.putString(TelemetryNames.Shooter.defCommand, ourCommand.getClass().getSimpleName());
+        defaultAutoCommand = ourAutoCommand;
+        SmartDashboard.putString(TelemetryNames.Shooter.autoCommand, ourAutoCommand.getClass().getSimpleName());
+
+        myClassName = props.getString("teleCommandName");
+        myPkgName = ShooterDoNothing.class.getPackage().getName();
+        classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
+        logger.debug("class to load: {}", classToLoad);
+
+        logger.info("constructing {} for {} subsystem", myClassName, myName);
+        Command ourTeleCommand;
+        try {
+            @SuppressWarnings("rawtypes")
+            Class myClass = Class.forName(classToLoad);
+            @SuppressWarnings("deprecation")
+            Object myObject = myClass.newInstance();
+            ourTeleCommand = (Command) myObject;
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            logger.error("failed to load class; instantiating default stub for: {}", myName);
+            ourTeleCommand = (Command) new ShooterDoNothing();
+            SmartDashboard.putNumber(TelemetryNames.Shooter.status, PKStatus.degraded.tlmValue);
+        }
+
+        defaultTeleCommand = ourTeleCommand;
+        SmartDashboard.putString(TelemetryNames.Shooter.teleCommand, ourTeleCommand.getClass().getSimpleName());
     }
-    
+
+    @Override
+    public void loadDefaultAutoCommand() {
+        setDefaultCommand(defaultAutoCommand);
+    }
+
+    @Override
+    public void loadDefaultTeleCommand() {
+        setDefaultCommand(defaultTeleCommand);
+    }
+
     protected void loadPreferences() {
         double v;
 
@@ -115,14 +149,13 @@ abstract class BaseShooterSubsystem extends SubsystemBase implements IShooterSub
     protected void setTlmSetSpeed(double speed) {
         tlmSetSpeed = speed;
     }
-    
+
     @Override
-    public void updateTelemetry()
-    {
+    public void updateTelemetry() {
         SmartDashboard.putNumber(TelemetryNames.Shooter.speed, tlmSpeed);
         SmartDashboard.putNumber(TelemetryNames.Shooter.setSpeed, tlmSetSpeed);
-     }
-        
+    }
+
     @Override
     public void updatePreferences() {
         loadPreferences();
