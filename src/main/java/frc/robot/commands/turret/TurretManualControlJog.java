@@ -34,22 +34,7 @@ public class TurretManualControlJog extends TurretOICommandBase {
         super.execute();
 
         double speed = oi.getTurretJog();
-        // if ( speed == 0 ) {
-        // turret.stop();
-        // started = false;
-        // }
-        // else if ( !started ) {
-        // if ( speed > 0 )
-        // {
-        // turret.jogCCW();
-        // }
-        // else if ( speed < 0 )
-        // {
-        // turret.jogCW();
-        // }
-        // started = true;
-        // }
-        turret.setSpeed(20, speed);
+         turret.setSpeed(20, speed);
     }
 
 }
