@@ -54,6 +54,8 @@ class IntakeSubsystem extends BaseIntakeSubsystem {
 
     @Override
     public void updatePreferences() {
+        super.updatePreferences();
+
         // Zester doesn't implement this
     }
 

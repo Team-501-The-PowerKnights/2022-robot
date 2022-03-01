@@ -38,7 +38,7 @@ class StubShooterSubsystem extends BaseShooterSubsystem {
 
     @Override
     public void updatePreferences() {
-        super.updateTelemetry();
+        super.updatePreferences();
 
         // Nothing extra here
     }

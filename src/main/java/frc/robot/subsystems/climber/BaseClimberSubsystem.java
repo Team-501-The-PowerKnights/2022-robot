@@ -69,6 +69,14 @@ abstract class BaseClimberSubsystem extends SubsystemBase implements IClimberSub
         SmartDashboard.putString(TelemetryNames.Climber.defCommand, ourCommand.getClass().getSimpleName());
     }
 
+    
+    protected void loadPreferences() {
+        @SuppressWarnings("unused")
+        double v;
+
+        logger.info("new preferences for {}:", myName);
+    }
+
     private double tlmSpeed = 0.0;
 
     protected void setTlmSpeed(double speed) {
@@ -79,5 +87,10 @@ abstract class BaseClimberSubsystem extends SubsystemBase implements IClimberSub
     public void updateTelemetry() {
         SmartDashboard.putNumber(TelemetryNames.Climber.speed, tlmSpeed);
     }
+
+    @Override
+    public void updatePreferences() {
+        loadPreferences();
+     }
 
 }

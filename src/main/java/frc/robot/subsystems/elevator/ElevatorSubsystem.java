@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.elevator;
 
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -19,6 +20,7 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class ElevatorSubsystem extends BaseElevatorSubsystem {
 
@@ -58,6 +60,8 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
 
     @Override
     public void updatePreferences() {
+        super.updatePreferences();
+
         // Stub doesn't implement this
     }
 

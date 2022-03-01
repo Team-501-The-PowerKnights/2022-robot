@@ -69,6 +69,13 @@ abstract class BaseIntakeSubsystem extends SubsystemBase implements IIntakeSubsy
         SmartDashboard.putString(TelemetryNames.Intake.defCommand, ourCommand.getClass().getSimpleName());
     }
 
+    protected void loadPreferences() {
+        @SuppressWarnings("unused")
+        double v;
+
+        logger.info("new preferences for {}:", myName);
+    }
+
     private double tlmSpeed = 0.0;
     private boolean tlmStopped = false;
     private boolean tlmPullingIn = false;
@@ -119,6 +126,11 @@ abstract class BaseIntakeSubsystem extends SubsystemBase implements IIntakeSubsy
     @Override
     public void extend() {
 
+    }
+
+    @Override
+    public void updatePreferences() {
+        loadPreferences();
     }
 
 }

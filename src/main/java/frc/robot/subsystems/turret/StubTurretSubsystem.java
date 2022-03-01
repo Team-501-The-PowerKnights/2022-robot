@@ -38,7 +38,7 @@ class StubTurretSubsystem extends BaseTurretSubsystem {
 
     @Override
     public void updatePreferences() {
-        super.updateTelemetry();
+        super.updatePreferences();
 
         // Nothing extra here
     }

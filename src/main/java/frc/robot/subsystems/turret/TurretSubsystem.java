@@ -242,7 +242,7 @@ class TurretSubsystem extends BaseTurretSubsystem {
 
     @Override
     public void setSpeed(int canID, double speed) {
-        speed *= 0.25;
+        speed *= 0.45;
         switch (canID) {
             case 20:
                 setSpeed(speed);

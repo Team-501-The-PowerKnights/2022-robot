@@ -151,6 +151,7 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
 
         // TODO: Update the PID values based on preferences
 
+        logger.info("setting OpenLoopRate={}", ramp);
         leftFrontMotor.setOpenLoopRampRate(ramp);
         rightFrontMotor.setOpenLoopRampRate(ramp);
     }
