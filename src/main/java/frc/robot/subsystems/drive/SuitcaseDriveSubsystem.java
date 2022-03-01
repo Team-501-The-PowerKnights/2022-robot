@@ -78,7 +78,7 @@ class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void updatePreferences() {
-        super.updateTelemetry();
+        super.updatePreferences();
 
         // Nothing extra here
     }

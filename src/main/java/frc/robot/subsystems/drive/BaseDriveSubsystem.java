@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.drive;
 
-
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -23,7 +22,6 @@ import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Add your docs here.
@@ -41,12 +39,15 @@ abstract class BaseDriveSubsystem extends SubsystemBase implements IDriveSubsyst
     private final double default_pid_I = 0.0;
     private final double default_pid_D = 0.0;
     private final double default_pid_F = 0.0;
+    private final double default_ramp = 0.0;
 
     /** PID for subystem **/
     protected double pid_P = 0;
     protected double pid_I = 0;
     protected double pid_D = 0;
     protected double pid_F = 0;
+    /** Speed controller ramping between 0 and max (sec) */
+    protected double ramp = 0;
 
     BaseDriveSubsystem() {
         logger.info("constructing");
@@ -58,6 +59,10 @@ abstract class BaseDriveSubsystem extends SubsystemBase implements IDriveSubsyst
     public void loadDefaultCommand() {
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
         String myClassName = props.getString("defaultCommandName");
+        if (myClassName.isEmpty()) {
+            logger.info("no class specified; go with subsystem default (do nothing)");
+            myClassName = new StringBuilder().append(myName).append("DoNothing").toString();
+        }
         String myPkgName = DriveDoNothing.class.getPackage().getName();
         String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
         logger.debug("class to load: {}", classToLoad);
@@ -79,7 +84,7 @@ abstract class BaseDriveSubsystem extends SubsystemBase implements IDriveSubsyst
         setDefaultCommand(ourCommand);
         SmartDashboard.putString(TelemetryNames.Drive.defCommand, ourCommand.getClass().getSimpleName());
     }
-    
+
     protected void loadPreferences() {
         double v;
 
@@ -96,6 +101,9 @@ abstract class BaseDriveSubsystem extends SubsystemBase implements IDriveSubsyst
         v = Preferences.getDouble(DrivePreferences.pid_F, default_pid_F);
         logger.info("{} = {}", DrivePreferences.pid_F, v);
         pid_F = v;
+        v = Preferences.getDouble(DrivePreferences.ramp, default_ramp);
+        logger.info("{} = {}", DrivePreferences.ramp, v);
+        ramp = v;
     }
 
     protected double speed = 0.0;
@@ -104,12 +112,11 @@ abstract class BaseDriveSubsystem extends SubsystemBase implements IDriveSubsyst
     protected double rightSpeed = 0.0;
 
     @Override
-    public void updateTelemetry()
-    {
+    public void updateTelemetry() {
         SmartDashboard.putNumber(TelemetryNames.Drive.leftSpeed, leftSpeed);
         SmartDashboard.putNumber(TelemetryNames.Drive.rightSpeed, rightSpeed);
     }
-    
+
     @Override
     public void updatePreferences() {
         loadPreferences();

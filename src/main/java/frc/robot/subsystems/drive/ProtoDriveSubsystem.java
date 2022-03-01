@@ -99,6 +99,9 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
         rightFrontMotor = new CANSparkMax(20, MotorType.kBrushless);
         rightRearMotor = new CANSparkMax(21, MotorType.kBrushless);
 
+        leftFrontMotor.setOpenLoopRampRate(ramp);
+        rightFrontMotor.setOpenLoopRampRate(ramp);
+
         left = new MotorControllerGroup(leftFrontMotor, leftRearMotor);
         right = new MotorControllerGroup(rightFrontMotor, rightRearMotor);
 
@@ -144,9 +147,12 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void updatePreferences() {
-        super.updateTelemetry();
+        super.updatePreferences();
 
-        // Nothing extra here
+        // TODO: Update the PID values based on preferences
+
+        leftFrontMotor.setOpenLoopRampRate(ramp);
+        rightFrontMotor.setOpenLoopRampRate(ramp);
     }
 
     @Override

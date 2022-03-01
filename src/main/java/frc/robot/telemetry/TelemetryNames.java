@@ -194,7 +194,9 @@ public final class TelemetryNames {
         public static final String speed = name + ".speed";
         public static final String stopped = name + ".stopped";
         public static final String pullingIn = name + ".pullingIn";
-        public static final String pushingOut = name + "pushingOut";
+        public static final String pushingOut = name + ".pushingOut";
+        public static final String extended = name + ".extended";
+        public static final String retracted = name + "retracted";
 
     }
 
