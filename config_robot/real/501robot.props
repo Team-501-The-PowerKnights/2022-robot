@@ -87,10 +87,10 @@ Intake.defaultCommandName = IntakeManualControl
 #####################
 # Elevator
 #####################
-#Elevator.className = StubElevatorSubsystem
-Elevator.className = ElevatorSubsystem
-#Elevator.defaultCommandName = ElevatorDoNothing
-Elevator.defaultCommandName = ElevatorManualControl
+Elevator.className = StubElevatorSubsystem
+#Elevator.className = ElevatorSubsystem
+Elevator.defaultCommandName = ElevatorDoNothing
+#Elevator.defaultCommandName = ElevatorManualControl
 
 
 #####################
@@ -107,6 +107,7 @@ Shooter.defaultCommandName = ShooterIdle
 #####################
 #Turret.className = StubTurretSubsystem
 Turret.className = TurretSubsystem
+#Turret.defaultCommandName = TurretDoNothing
 Turret.defaultCommandName = TurretManualControlJog
 
 
