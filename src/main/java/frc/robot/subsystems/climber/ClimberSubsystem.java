@@ -68,6 +68,8 @@ class ClimberSubsystem extends BaseClimberSubsystem {
 
     @Override
     public void updatePreferences() {
+        super.updatePreferences();
+        
         // Real doesn't implement this
     }
 

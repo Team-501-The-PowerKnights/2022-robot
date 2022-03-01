@@ -162,7 +162,7 @@ class ZesterDriveSubsystem extends BaseDriveSubsystem {
 
         // TODO: Update the PID values based on preferences
 
-        logger.info("ramp={}", ramp);
+        logger.info("setting OpenLoopRate={}", ramp);
         leftFrontMotor.setOpenLoopRampRate(ramp);
         rightFrontMotor.setOpenLoopRampRate(ramp);
     }
