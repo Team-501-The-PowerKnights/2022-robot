@@ -16,23 +16,36 @@ import riolog.RioLogger;
 /**
  * Add your docs here.
  */
-public class IncrementerIncrement extends IncrementerCommandBase {
+public class IncrementerIncrementToLimitForHMI extends IncrementerCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IncrementerIncrement.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IncrementerIncrementToLimitForHMI.class.getName());
 
     // Handle to our subsystem
     protected IIncrementerSubsystem incrementer;
 
-    public IncrementerIncrement() {
+    public IncrementerIncrementToLimitForHMI() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
     }
 
+    private static double counts;
+
+    @Override
+    public void initialize() {
+        counts = 0;
+    }
+
     @Override
     public void execute() {
-        incrementer.increment();
+        incrementer.incrementToLimit();
+        counts++;
+    }
+
+    @Override
+    public boolean isFinished() {
+        return incrementer.isFull() || counts >= 10;
     }
 
     @Override

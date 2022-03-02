@@ -32,9 +32,10 @@ public class IncrementerManualControl extends IncrementerOICommandBase {
 
         double incrementSpeed = oi.getIntakeSpeed();
         if (incrementSpeed == 0) {
-            incrementer.stop();
+            (new IncrementerIncrementToLimitForHMI()).schedule();
         } else if (incrementSpeed > 0) {
             incrementer.incrementToLimit();
         }
     }
+
 }
