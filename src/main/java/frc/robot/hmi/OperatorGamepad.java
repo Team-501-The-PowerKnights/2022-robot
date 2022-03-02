@@ -60,7 +60,8 @@ public class OperatorGamepad extends F310Gamepad {
         visionTargettingButton
                 .whenHeld(new TurretVisionAlign());
         homeTurretButton.whenHeld(new TurretHome());
-        firePoseButton.whenHeld(new FirePoseVision());
+        // firePoseButton.whenHeld(new FirePoseVision());
+        firePoseButton.whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(), new FirePoseVision()));
 
         logger.info("configured");
     }
@@ -68,7 +69,8 @@ public class OperatorGamepad extends F310Gamepad {
     @Override
     public void updateTelemetry() {
         // SmartDashboard.putBoolean(TelemetryNames.HMI.firePose, firePoseButton.get());
-        SmartDashboard.putBoolean(TelemetryNames.HMI.visionTargetting, visionTargettingButton.get());
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.visionTargetting,
+        // visionTargettingButton.get());
         // SmartDashboard.putBoolean(TelemetryNames.HMI.revShooter,
         // revShooterButton.get());
         SmartDashboard.putBoolean(TelemetryNames.HMI.homeTurret, homeTurretButton.get());
