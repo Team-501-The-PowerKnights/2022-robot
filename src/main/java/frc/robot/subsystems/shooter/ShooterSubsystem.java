@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.shooter;
 
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
@@ -21,7 +20,6 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class ShooterSubsystem extends BaseShooterSubsystem {
 
@@ -160,7 +158,7 @@ class ShooterSubsystem extends BaseShooterSubsystem {
         // Dashboard provides scale for shooter speed
         // double scale = Preferences.getDouble(Shooter.scale, 1.0);
         // speed *= scale;
-        //speed = Math.min(0.20, speed);
+        // speed = Math.min(0.20, speed);
         // FIXME: Need to get commands to handle idle and spin up again this year
         return speed;
     }
@@ -180,7 +178,7 @@ class ShooterSubsystem extends BaseShooterSubsystem {
     public String getActivePosition() {
         return activePosition;
     }
-    
+
     private void setSpeed(double speed) {
         setTlmSetSpeed(speed);
 

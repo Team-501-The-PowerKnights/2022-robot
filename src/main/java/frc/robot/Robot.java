@@ -12,7 +12,6 @@
 
 package frc.robot;
 
-
 import java.util.List;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -49,7 +48,6 @@ import frc.robot.subsystems.SubsystemFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -189,9 +187,9 @@ public class Robot extends TimedRobot {
         autoChooser.addOption("Drive Forward (4 sec)", new DriveForwardTimed());
         autoChooser.addOption("Drive Forward (3 feet)", new DriveForwardDistance(3));
         autoChooser.addOption("Shoot and Drive Forward (3 feet)",
-            new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardDistance(3)));
+                new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardDistance(3)));
         autoChooser.addOption("Shoot and Drive Forward (4 sec)",
-            new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardTimed()));
+                new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardTimed()));
 
         autoChooser.addOption("Drive Backward (4 sec)", new DriveBackwardTimed());
         autoChooser.addOption("Drive Backward (3 feet)", new DriveBackwardDistance(3));
@@ -203,8 +201,8 @@ public class Robot extends TimedRobot {
         autoChooser.addOption("Full Auto (Driving Forward)",
                 new PKParallelCommandGroup(new ElevatorLift(), new IntakeIngest(), new DriveForwardTimed()));
         autoChooser.addOption("Full Auto (Driving Forward Delay)",
-                new PKParallelCommandGroup(new ElevatorLift(), new IntakeIngest(), 
-                new PKSequentialCommandGroup( new WaitCommand(1.0), new DriveForwardTimed())));
+                new PKParallelCommandGroup(new ElevatorLift(), new IntakeIngest(),
+                        new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed())));
 
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
@@ -338,6 +336,7 @@ public class Robot extends TimedRobot {
         }
         for (ISubsystem s : subsystems) {
             s.updatePreferences();
+            s.loadDefaultAutoCommand();
         }
 
         // CommandScheduler.getInstance().schedule(true, new DriveForwardTimed());
@@ -397,6 +396,7 @@ public class Robot extends TimedRobot {
         }
         for (ISubsystem s : subsystems) {
             s.updatePreferences();
+            s.loadDefaultTeleCommand();
         }
 
         logger.info("initialized teleop");
