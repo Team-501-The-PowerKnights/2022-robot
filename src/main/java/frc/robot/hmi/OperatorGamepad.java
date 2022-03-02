@@ -32,7 +32,7 @@ public class OperatorGamepad extends F310Gamepad {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(OperatorGamepad.class.getName());
 
-    // private final Button firePoseButton;
+    private final Button firePoseButton;
     private final Button visionTargettingButton;
     // private final Button revShooterButton;
     private final Button homeTurretButton;
@@ -41,7 +41,7 @@ public class OperatorGamepad extends F310Gamepad {
         super(1);
         logger.info("constructing {}");
 
-        // firePoseButton = new JoystickButton(stick, greenButton);
+        firePoseButton = new JoystickButton(stick, greenButton);
         // visionTargettingButton = new JoystickButton(stick, rightBumper);
         visionTargettingButton = new JoystickButton(stick, greenButton);
         // revShooterButton = new JoystickButton(stick, redButton);
@@ -60,7 +60,7 @@ public class OperatorGamepad extends F310Gamepad {
         visionTargettingButton
                 .whenHeld(new TurretVisionAlign());
         homeTurretButton.whenHeld(new TurretHome());
-        // firePoseButton.whenHeld(new FirePoseVision());
+        firePoseButton.whenHeld(new FirePoseVision());
 
         logger.info("configured");
     }

@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.elevator;
 
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -20,7 +19,6 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-
 class ElevatorSubsystem extends BaseElevatorSubsystem {
 
     /** Our classes' logger **/
@@ -29,6 +27,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     private final VictorSPX motor;
 
     private final DigitalInput sensor;
+    private final DigitalInput incremSensor; // FIXME - messy
 
     ElevatorSubsystem() {
         logger.info("constructing");
@@ -38,6 +37,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
         motor.setInverted(true);
 
         sensor = new DigitalInput(0);
+        incremSensor = new DigitalInput(1);
 
         logger.info("constructed");
     }
@@ -89,7 +89,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
 
     @Override
     public boolean isFull() {
-        return sensor.get();
+        return (sensor.get() && incremSensor.get());
     }
 
     @Override
