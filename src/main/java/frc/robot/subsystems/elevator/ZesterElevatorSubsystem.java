@@ -55,6 +55,8 @@ class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
 
     @Override
     public void updatePreferences() {
+        super.updatePreferences();
+
         // Stub doesn't implement this
     }
 

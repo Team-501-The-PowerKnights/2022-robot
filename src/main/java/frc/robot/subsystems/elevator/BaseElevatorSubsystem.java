@@ -47,6 +47,10 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
     public void loadDefaultCommand() {
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
         String myClassName = props.getString("autoCommandName");
+        if (myClassName.isEmpty()) {
+            logger.info("no class specified; go with subsystem default (do nothing)");
+            myClassName = new StringBuilder().append(myName).append("DoNothing").toString();
+        }
         String myPkgName = ElevatorDoNothing.class.getPackage().getName();
         String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
         logger.debug("class to load: {}", classToLoad);
@@ -101,6 +105,13 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
         setDefaultCommand(defaultTeleCommand);
     }
 
+    protected void loadPreferences() {
+        @SuppressWarnings("unused")
+        double v;
+
+        logger.info("new preferences for {}:", myName);
+    }
+
     private double tlmSpeed = 0.0;
     private boolean tlmStopped = false;
     private boolean tlmLifting = false;
@@ -120,6 +131,8 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
     protected void setTlmSpeed(double speed) {
         tlmSpeed = speed;
     }
+
+    // FIXME: Make these methods to just set telemetry so not calling "super."
 
     @Override
     public void stop() {
@@ -147,6 +160,11 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
         tlmStopped = false;
         tlmLifting = true;
         tlmLowering = false;
+    }
+
+    @Override
+    public void updatePreferences() {
+        loadPreferences();
     }
 
 }

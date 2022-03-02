@@ -63,6 +63,10 @@ abstract class BaseShooterSubsystem extends SubsystemBase implements IShooterSub
     public void loadDefaultCommand() {
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
         String myClassName = props.getString("autoCommandName");
+        if (myClassName.isEmpty()) {
+            logger.info("no class specified; go with subsystem default (do nothing)");
+            myClassName = new StringBuilder().append(myName).append("DoNothing").toString();
+        }
         String myPkgName = ShooterDoNothing.class.getPackage().getName();
         String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
         logger.debug("class to load: {}", classToLoad);

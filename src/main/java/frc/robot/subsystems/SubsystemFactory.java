@@ -96,6 +96,11 @@ public class SubsystemFactory {
             subsystems.add(ss);
         }
 
+        // Load and update the preferences now that all the subsystems are created
+        for (ISubsystem ss : subsystems) {
+            ss.updatePreferences();
+        }
+
         // Load the default commands now that all subsystems are created
         for (ISubsystem ss : subsystems) {
             ss.loadDefaultCommand();

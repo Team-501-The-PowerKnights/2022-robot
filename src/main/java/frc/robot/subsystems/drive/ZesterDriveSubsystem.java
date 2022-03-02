@@ -105,8 +105,14 @@ class ZesterDriveSubsystem extends BaseDriveSubsystem {
 
         rightFrontMotor.setInverted(true);
 
+        // FIXME: Use MotorControllerGroup (see Zester ...)
+
         leftRearMotor.follow(leftFrontMotor);
         rightRearMotor.follow(rightFrontMotor);
+
+        logger.info("ramp={}", ramp);
+        leftFrontMotor.setOpenLoopRampRate(ramp);
+        rightFrontMotor.setOpenLoopRampRate(ramp);
 
         leftEncoder = leftFrontMotor.getEncoder();
         leftEncoder.setPosition(0.0);
@@ -152,9 +158,13 @@ class ZesterDriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void updatePreferences() {
-        super.updateTelemetry();
+        super.updatePreferences();
 
-        // Nothing extra here
+        // TODO: Update the PID values based on preferences
+
+        logger.info("setting OpenLoopRate={}", ramp);
+        leftFrontMotor.setOpenLoopRampRate(ramp);
+        rightFrontMotor.setOpenLoopRampRate(ramp);
     }
 
     @Override

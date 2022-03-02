@@ -48,6 +48,7 @@ class ZesterClimberSubsystem extends BaseClimberSubsystem {
     @Override
     public void updateTelemetry() {
         super.updateTelemetry();
+
         SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit, (limitUp.getValue() == 1));
         SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit, (limitDown.getValue() == 1));
     }
@@ -59,6 +60,8 @@ class ZesterClimberSubsystem extends BaseClimberSubsystem {
 
     @Override
     public void updatePreferences() {
+        super.updatePreferences();
+
         // No preferences for climber
     }
 

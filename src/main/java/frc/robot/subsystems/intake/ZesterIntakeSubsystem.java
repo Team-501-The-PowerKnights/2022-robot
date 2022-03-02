@@ -8,13 +8,11 @@
 
 package frc.robot.subsystems.intake;
 
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class ZesterIntakeSubsystem extends BaseIntakeSubsystem {
 
@@ -48,6 +46,8 @@ class ZesterIntakeSubsystem extends BaseIntakeSubsystem {
 
     @Override
     public void updatePreferences() {
+        super.updatePreferences();
+
         // Zester doesn't implement this
     }
 
@@ -91,6 +91,22 @@ class ZesterIntakeSubsystem extends BaseIntakeSubsystem {
         setTlmSpeed(speed);
 
         motor.set(ControlMode.PercentOutput, speed);
+    }
+
+    @Override
+    public void retract() {
+        super.retract();
+
+        // Zester doesn't implement this
+
+    }
+
+    @Override
+    public void extend() {
+        super.extend();
+
+        // Zester doesn't implement this
+
     }
 
 }

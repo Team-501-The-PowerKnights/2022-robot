@@ -47,6 +47,10 @@ abstract class BaseIntakeSubsystem extends SubsystemBase implements IIntakeSubsy
     public void loadDefaultCommand() {
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
         String myClassName = props.getString("autoCommandName");
+        if (myClassName.isEmpty()) {
+            logger.info("no class specified; go with subsystem default (do nothing)");
+            myClassName = new StringBuilder().append(myName).append("DoNothing").toString();
+        }
         String myPkgName = IntakeDoNothing.class.getPackage().getName();
         String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
         logger.debug("class to load: {}", classToLoad);
@@ -101,10 +105,19 @@ abstract class BaseIntakeSubsystem extends SubsystemBase implements IIntakeSubsy
         setDefaultCommand(defaultTeleCommand);
     }
 
+    protected void loadPreferences() {
+        @SuppressWarnings("unused")
+        double v;
+
+        logger.info("new preferences for {}:", myName);
+    }
+
     private double tlmSpeed = 0.0;
     private boolean tlmStopped = false;
     private boolean tlmPullingIn = false;
     private boolean tlmPushingOut = false;
+    private boolean tlmExtended = false;
+    private boolean tlmRetracted = false;
 
     @Override
     public void updateTelemetry() {
@@ -112,6 +125,8 @@ abstract class BaseIntakeSubsystem extends SubsystemBase implements IIntakeSubsy
         SmartDashboard.putBoolean(TelemetryNames.Intake.stopped, tlmStopped);
         SmartDashboard.putBoolean(TelemetryNames.Intake.pullingIn, tlmPullingIn);
         SmartDashboard.putBoolean(TelemetryNames.Intake.pushingOut, tlmPushingOut);
+        SmartDashboard.putBoolean(TelemetryNames.Intake.extended, tlmExtended);
+        SmartDashboard.putBoolean(TelemetryNames.Intake.retracted, tlmRetracted);
     }
 
     protected void setTlmSpeed(double speed) {
@@ -137,6 +152,21 @@ abstract class BaseIntakeSubsystem extends SubsystemBase implements IIntakeSubsy
         tlmStopped = false;
         tlmPullingIn = false;
         tlmPushingOut = true;
+    }
+
+    @Override
+    public void retract() {
+
+    }
+
+    @Override
+    public void extend() {
+
+    }
+
+    @Override
+    public void updatePreferences() {
+        loadPreferences();
     }
 
 }

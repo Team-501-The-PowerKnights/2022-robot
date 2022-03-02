@@ -70,11 +70,10 @@ class ShooterSubsystem extends BaseShooterSubsystem {
         pid = leftMotor.getPIDController();
         pid.setOutputRange(0.05, 1, slotID);
 
-        updatePreferences();
-
         targetRpm = 2000; // TODO - Make the values
         isActive = false;
 
+        // TODO: Is this really used anywhere? for anything?
         SmartDashboard.putNumber(CommandingNames.Shooter.tolerance, 0.012);
 
         logger.info("constructed");
@@ -98,7 +97,7 @@ class ShooterSubsystem extends BaseShooterSubsystem {
 
     @Override
     public void updatePreferences() {
-        super.updateTelemetry();
+        super.updatePreferences();
 
         // Nothing extra here.
     }

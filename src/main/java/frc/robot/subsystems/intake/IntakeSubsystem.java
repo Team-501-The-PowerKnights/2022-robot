@@ -11,6 +11,8 @@ package frc.robot.subsystems.intake;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import frc.robot.modules.pcm.IPCMModule;
+import frc.robot.modules.pcm.PCMFactory;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -22,6 +24,9 @@ class IntakeSubsystem extends BaseIntakeSubsystem {
     // Our motor to drive the intake in (up) & out (down)
     private final TalonSRX motor;
 
+    // Our pneumatics to extend/retract the intake
+    private final IPCMModule pcm;
+
     /**
      * Creates a new IntakeSubsystem.
      */
@@ -31,6 +36,8 @@ class IntakeSubsystem extends BaseIntakeSubsystem {
         motor = new TalonSRX(41);
         motor.setInverted(true);
         motor.configFactoryDefault();
+
+        pcm = PCMFactory.getInstance();
 
         logger.info("constructed");
     }
@@ -47,6 +54,8 @@ class IntakeSubsystem extends BaseIntakeSubsystem {
 
     @Override
     public void updatePreferences() {
+        super.updatePreferences();
+
         // Zester doesn't implement this
     }
 
@@ -91,6 +100,20 @@ class IntakeSubsystem extends BaseIntakeSubsystem {
         setTlmSpeed(speed);
 
         motor.set(ControlMode.PercentOutput, speed);
+    }
+
+    @Override
+    public void retract() {
+        super.retract();
+
+        pcm.retractIntake();
+    }
+
+    @Override
+    public void extend() {
+        super.extend();
+
+        pcm.extendIntake();
     }
 
 }

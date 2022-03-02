@@ -47,6 +47,10 @@ abstract class BaseClimberSubsystem extends SubsystemBase implements IClimberSub
     public void loadDefaultCommand() {
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
         String myClassName = props.getString("autoCommandName");
+        if (myClassName.isEmpty()) {
+            logger.info("no class specified; go with subsystem default (do nothing)");
+            myClassName = new StringBuilder().append(myName).append("DoNothing").toString();
+        }
         String myPkgName = ClimberDoNothing.class.getPackage().getName();
         String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
         logger.debug("class to load: {}", classToLoad);
@@ -101,6 +105,13 @@ abstract class BaseClimberSubsystem extends SubsystemBase implements IClimberSub
         setDefaultCommand(defaultTeleCommand);
     }
 
+    protected void loadPreferences() {
+        @SuppressWarnings("unused")
+        double v;
+
+        logger.info("new preferences for {}:", myName);
+    }
+
     private double tlmSpeed = 0.0;
 
     protected void setTlmSpeed(double speed) {
@@ -110,6 +121,11 @@ abstract class BaseClimberSubsystem extends SubsystemBase implements IClimberSub
     @Override
     public void updateTelemetry() {
         SmartDashboard.putNumber(TelemetryNames.Climber.speed, tlmSpeed);
+    }
+
+    @Override
+    public void updatePreferences() {
+        loadPreferences();
     }
 
 }

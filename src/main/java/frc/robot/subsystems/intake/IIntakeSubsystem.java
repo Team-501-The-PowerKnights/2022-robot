@@ -8,9 +8,7 @@
 
 package frc.robot.subsystems.intake;
 
-
 import frc.robot.subsystems.ISubsystem;
-
 
 /**
  * Add your docs here.
@@ -45,5 +43,15 @@ public interface IIntakeSubsystem extends ISubsystem {
      * @param speed
      */
     public void pushOut(double speed);
+
+    /**
+     * Pneumatically retracts intake forebar.
+     */
+    public void retract();
+
+    /**
+     * Pneumatically extends intake forebar.
+     */
+    public void extend();
 
 }
