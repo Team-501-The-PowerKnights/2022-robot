@@ -34,7 +34,7 @@ class IncrementerSubsystem extends BaseIncrementerSubsystem {
         motor = new TalonSRX(51);
         motor.configFactoryDefault();
 
-        sensor = new DigitalInput(0);
+        sensor = new DigitalInput(1);
 
         logger.info("constructed");
     }

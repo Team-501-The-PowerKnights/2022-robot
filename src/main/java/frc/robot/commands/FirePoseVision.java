@@ -69,6 +69,8 @@ public class FirePoseVision extends PKCommandBase {
             incrementer.increment();
             if (!incrementer.isFull()) {
                 elevator.lift();
+            } else {
+                elevator.stop();
             }
         } else {
             incrementer.stop();

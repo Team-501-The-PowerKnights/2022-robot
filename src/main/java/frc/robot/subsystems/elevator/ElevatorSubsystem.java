@@ -35,7 +35,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
         motor.configFactoryDefault();
         motor.setInverted(true);
 
-        sensor = new DigitalInput(1);
+        sensor = new DigitalInput(0);
 
         logger.info("constructed");
     }
