@@ -11,9 +11,11 @@ package frc.robot.subsystems.elevator;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.robot.sensors.elevator.ElevatorSensorFactory;
+import frc.robot.sensors.elevator.IElevatorSensor;
+import frc.robot.sensors.incrementer.IIncrementerSensor;
+import frc.robot.sensors.incrementer.IncrementerSensorFactory;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -26,8 +28,8 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
 
     private final VictorSPX motor;
 
-    private final DigitalInput sensor;
-    private final DigitalInput incremSensor; // FIXME - messy
+    private final IElevatorSensor elevatorSensor;
+    private final IIncrementerSensor incremSensor;
 
     ElevatorSubsystem() {
         logger.info("constructing");
@@ -36,8 +38,8 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
         motor.configFactoryDefault();
         motor.setInverted(true);
 
-        sensor = new DigitalInput(0);
-        incremSensor = new DigitalInput(1);
+        elevatorSensor = ElevatorSensorFactory.getInstance();
+        incremSensor = IncrementerSensorFactory.getInstance();
 
         logger.info("constructed");
     }
@@ -46,7 +48,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     public void updateTelemetry() {
         super.updateTelemetry();
 
-        SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit, sensor.get());
+        SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit, elevatorSensor.get());
     }
 
     @Override
@@ -89,7 +91,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
 
     @Override
     public boolean isFull() {
-        return (sensor.get() && incremSensor.get());
+        return (elevatorSensor.get() && incremSensor.get());
     }
 
     @Override

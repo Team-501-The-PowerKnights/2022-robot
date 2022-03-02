@@ -18,5 +18,7 @@ public class SensorNames {
     public static final String gyroName = "Gyro";
     public static final String turretLocationName = "TurretLocation";
     public static final String visionName = "Vision";
+    public static final String incrementerName = "Incrementer";
+    public static final String elevatorName = "Elevator";
 
 }
