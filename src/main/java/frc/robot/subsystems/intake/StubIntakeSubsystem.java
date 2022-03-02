@@ -34,6 +34,8 @@ class StubIntakeSubsystem extends BaseIntakeSubsystem {
 
     @Override
     public void updatePreferences() {
+        super.updatePreferences();
+
         // Stub doesn't implement this
     }
 

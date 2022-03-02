@@ -37,6 +37,8 @@ class StubClimberSubsystem extends BaseClimberSubsystem {
 
     @Override
     public void updatePreferences() {
+        super.updatePreferences();
+
         // Stub doesn't implement this
     }
 

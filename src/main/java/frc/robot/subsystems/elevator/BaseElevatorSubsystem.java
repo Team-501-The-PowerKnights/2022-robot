@@ -69,6 +69,13 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
         SmartDashboard.putString(TelemetryNames.Elevator.defCommand, ourCommand.getClass().getSimpleName());
     }
 
+    protected void loadPreferences() {
+        @SuppressWarnings("unused")
+        double v;
+
+        logger.info("new preferences for {}:", myName);
+    }
+
     private double tlmSpeed = 0.0;
     private boolean tlmStopped = false;
     private boolean tlmLifting = false;
@@ -88,6 +95,8 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
     protected void setTlmSpeed(double speed) {
         tlmSpeed = speed;
     }
+
+    // FIXME: Make these methods to just set telemetry so not calling "super."
 
     @Override
     public void stop() {
@@ -115,6 +124,11 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
         tlmStopped = false;
         tlmLifting = true;
         tlmLowering = false;
+    }
+
+    @Override
+    public void updatePreferences() {
+        loadPreferences();
     }
 
 }
