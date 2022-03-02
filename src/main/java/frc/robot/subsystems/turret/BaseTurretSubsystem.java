@@ -59,16 +59,16 @@ abstract class BaseTurretSubsystem extends SubsystemBase implements ITurretSubsy
     @Override
     public void loadDefaultCommand() {
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
-        String myClassName = props.getString("autoCommandName");
-        if (myClassName.isEmpty()) {
+        String myAutoClassName = props.getString("autoCommandName");
+        if (myAutoClassName.isEmpty()) {
             logger.info("no class specified; go with subsystem default (do nothing)");
-            myClassName = new StringBuilder().append(myName).append("DoNothing").toString();
+            myAutoClassName = new StringBuilder().append(myName).append("DoNothing").toString();
         }
         String myPkgName = TurretDoNothing.class.getPackage().getName();
-        String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
+        String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myAutoClassName).toString();
         logger.debug("class to load: {}", classToLoad);
 
-        logger.info("constructing {} for {} subsystem", myClassName, myName);
+        logger.info("constructing {} for {} subsystem", myAutoClassName, myName);
         Command ourAutoCommand;
         try {
             @SuppressWarnings("rawtypes")
@@ -85,12 +85,16 @@ abstract class BaseTurretSubsystem extends SubsystemBase implements ITurretSubsy
         defaultAutoCommand = ourAutoCommand;
         SmartDashboard.putString(TelemetryNames.Turret.autoCommand, ourAutoCommand.getClass().getSimpleName());
 
-        myClassName = props.getString("teleCommandName");
+        String myTeleClassName = props.getString("teleCommandName");
+        if (myTeleClassName.isEmpty()) {
+            logger.info("no class specified; go with subsystem default (do nothing)");
+            myTeleClassName = new StringBuilder().append(myName).append("DoNothing").toString();
+        }
         myPkgName = TurretDoNothing.class.getPackage().getName();
-        classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
+        classToLoad = new StringBuilder().append(myPkgName).append(".").append(myTeleClassName).toString();
         logger.debug("class to load: {}", classToLoad);
 
-        logger.info("constructing {} for {} subsystem", myClassName, myName);
+        logger.info("constructing {} for {} subsystem", myTeleClassName, myName);
         Command ourTeleCommand;
         try {
             @SuppressWarnings("rawtypes")
