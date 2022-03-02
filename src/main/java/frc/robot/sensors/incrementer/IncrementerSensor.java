@@ -27,14 +27,14 @@ class IncrementerSensor extends BaseIncrementerSensor {
     IncrementerSensor() {
         logger.info("constructing");
 
-        location = new DigitalInput(1);
+        location = new DigitalInput(0);
 
         logger.info("constructed");
     }
 
     @Override
     public boolean get() {
-        return !(location.get());
+        return (location.get());
     }
 
 }

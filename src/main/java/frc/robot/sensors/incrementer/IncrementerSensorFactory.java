@@ -38,7 +38,7 @@ public class IncrementerSensorFactory {
      * sequencing of the robot and all it's sensors.
      **/
     public static synchronized void constructInstance() {
-        SmartDashboard.putNumber(TelemetryNames.Incrementer.status, PKStatus.inProgress.tlmValue);
+        SmartDashboard.putNumber(TelemetryNames.IncrementerSensor.status, PKStatus.inProgress.tlmValue);
 
         if (ourInstance != null) {
             throw new IllegalStateException(myName + " Already Constructed");
@@ -67,13 +67,13 @@ public class IncrementerSensorFactory {
             @SuppressWarnings("deprecation")
             Object myObject = myClass.newInstance();
             ourInstance = (IIncrementerSensor) myObject;
-            SmartDashboard.putNumber(TelemetryNames.Incrementer.status, PKStatus.success.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.IncrementerSensor.status, PKStatus.success.tlmValue);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for {}", myName);
             ourInstance = new StubIncrementerSensor();
-            SmartDashboard.putNumber(TelemetryNames.Incrementer.status, PKStatus.degraded.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.IncrementerSensor.status, PKStatus.degraded.tlmValue);
         }
-        SmartDashboard.putString(TelemetryNames.Incrementer.implClass, ourInstance.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.IncrementerSensor.implClass, ourInstance.getClass().getSimpleName());
     }
 
     /**

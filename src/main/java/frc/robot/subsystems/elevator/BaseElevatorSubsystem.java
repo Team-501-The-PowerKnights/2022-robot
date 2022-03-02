@@ -120,7 +120,6 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
     private boolean tlmStopped = false;
     private boolean tlmLifting = false;
     private boolean tlmLowering = false;
-    private boolean tlmFull = false;
 
     @Override
     public void updateTelemetry() {
@@ -128,8 +127,6 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
         SmartDashboard.putBoolean(TelemetryNames.Elevator.stopped, tlmStopped);
         SmartDashboard.putBoolean(TelemetryNames.Elevator.lifting, tlmLifting);
         SmartDashboard.putBoolean(TelemetryNames.Elevator.lowering, tlmLowering);
-        tlmFull = isFull();
-        SmartDashboard.putBoolean(TelemetryNames.Elevator.full, tlmFull);
     }
 
     protected void setTlmSpeed(double speed) {

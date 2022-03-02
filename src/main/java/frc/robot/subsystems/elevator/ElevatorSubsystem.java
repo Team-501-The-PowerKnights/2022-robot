@@ -28,7 +28,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
 
     private final VictorSPX motor;
 
-    private final IElevatorSensor elevatorSensor;
+    // private final IElevatorSensor elevatorSensor;
     private final IIncrementerSensor incremSensor;
 
     ElevatorSubsystem() {
@@ -38,7 +38,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
         motor.configFactoryDefault();
         motor.setInverted(true);
 
-        elevatorSensor = ElevatorSensorFactory.getInstance();
+        // elevatorSensor = ElevatorSensorFactory.getInstance();
         incremSensor = IncrementerSensorFactory.getInstance();
 
         logger.info("constructed");
@@ -48,7 +48,8 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     public void updateTelemetry() {
         super.updateTelemetry();
 
-        SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit, elevatorSensor.get());
+        // SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit,
+        // elevatorSensor.get());
     }
 
     @Override
@@ -91,7 +92,8 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
 
     @Override
     public boolean isFull() {
-        return (elevatorSensor.get() && incremSensor.get());
+        // return (elevatorSensor.get() && incremSensor.get());
+        return incremSensor.get();
     }
 
     @Override

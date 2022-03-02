@@ -38,7 +38,7 @@ public class ElevatorSensorFactory {
      * sequencing of the robot and all it's sensors.
      **/
     public static synchronized void constructInstance() {
-        SmartDashboard.putNumber(TelemetryNames.Elevator.status, PKStatus.inProgress.tlmValue);
+        SmartDashboard.putNumber(TelemetryNames.ElevatorSensor.status, PKStatus.inProgress.tlmValue);
 
         if (ourInstance != null) {
             throw new IllegalStateException(myName + " Already Constructed");
@@ -67,13 +67,13 @@ public class ElevatorSensorFactory {
             @SuppressWarnings("deprecation")
             Object myObject = myClass.newInstance();
             ourInstance = (IElevatorSensor) myObject;
-            SmartDashboard.putNumber(TelemetryNames.Elevator.status, PKStatus.success.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.ElevatorSensor.status, PKStatus.success.tlmValue);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for {}", myName);
             ourInstance = new StubElevatorSensor();
-            SmartDashboard.putNumber(TelemetryNames.Elevator.status, PKStatus.degraded.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.ElevatorSensor.status, PKStatus.degraded.tlmValue);
         }
-        SmartDashboard.putString(TelemetryNames.Elevator.implClass, ourInstance.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.ElevatorSensor.implClass, ourInstance.getClass().getSimpleName());
     }
 
     /**

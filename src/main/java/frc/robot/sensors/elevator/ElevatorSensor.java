@@ -27,14 +27,14 @@ class ElevatorSensor extends BaseElevatorSensor {
     ElevatorSensor() {
         logger.info("constructing");
 
-        location = new DigitalInput(0);
+        location = new DigitalInput(1);
 
         logger.info("constructed");
     }
 
     @Override
     public boolean get() {
-        return !(location.get());
+        return (location.get());
     }
 
 }

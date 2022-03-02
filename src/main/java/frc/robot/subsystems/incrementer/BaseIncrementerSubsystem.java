@@ -39,37 +39,80 @@ abstract class BaseIncrementerSubsystem extends SubsystemBase implements IIncrem
         logger.info("constructed");
     }
 
+    /** Objects to hold loaded default commands **/
+    private static Command defaultAutoCommand;
+    private static Command defaultTeleCommand;
+
     @Override
     public void loadDefaultCommand() {
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
-        String myClassName = props.getString("defaultCommandName");
+        String myAutoClassName = props.getString("autoCommandName");
+        if (myAutoClassName.isEmpty()) {
+            logger.info("no class specified; go with subsystem default (do nothing)");
+            myAutoClassName = new StringBuilder().append(myName).append("DoNothing").toString();
+        }
         String myPkgName = IncrementerDoNothing.class.getPackage().getName();
-        String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
+        String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myAutoClassName).toString();
         logger.debug("class to load: {}", classToLoad);
 
-        logger.info("constructing {} for {} subsystem", myClassName, myName);
-        Command ourCommand;
+        logger.info("constructing {} for {} subsystem", myAutoClassName, myName);
+        Command ourAutoCommand;
         try {
             @SuppressWarnings("rawtypes")
             Class myClass = Class.forName(classToLoad);
             @SuppressWarnings("deprecation")
             Object myObject = myClass.newInstance();
-            ourCommand = (Command) myObject;
+            ourAutoCommand = (Command) myObject;
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for: {}", myName);
-            ourCommand = (Command) new IncrementerDoNothing();
+            ourAutoCommand = (Command) new IncrementerDoNothing();
             SmartDashboard.putNumber(TelemetryNames.Incrementer.status, PKStatus.degraded.tlmValue);
         }
 
-        setDefaultCommand(ourCommand);
-        SmartDashboard.putString(TelemetryNames.Incrementer.defCommand, ourCommand.getClass().getSimpleName());
+        defaultAutoCommand = ourAutoCommand;
+        SmartDashboard.putString(TelemetryNames.Incrementer.autoCommand, ourAutoCommand.getClass().getSimpleName());
+
+        String myTeleClassName = props.getString("teleCommandName");
+        if (myTeleClassName.isEmpty()) {
+            logger.info("no class specified; go with subsystem default (do nothing)");
+            myTeleClassName = new StringBuilder().append(myName).append("DoNothing").toString();
+        }
+        myPkgName = IncrementerDoNothing.class.getPackage().getName();
+        classToLoad = new StringBuilder().append(myPkgName).append(".").append(myTeleClassName).toString();
+        logger.debug("class to load: {}", classToLoad);
+
+        logger.info("constructing {} for {} subsystem", myTeleClassName, myName);
+        Command ourTeleCommand;
+        try {
+            @SuppressWarnings("rawtypes")
+            Class myClass = Class.forName(classToLoad);
+            @SuppressWarnings("deprecation")
+            Object myObject = myClass.newInstance();
+            ourTeleCommand = (Command) myObject;
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            logger.error("failed to load class; instantiating default stub for: {}", myName);
+            ourTeleCommand = (Command) new IncrementerDoNothing();
+            SmartDashboard.putNumber(TelemetryNames.Incrementer.status, PKStatus.degraded.tlmValue);
+        }
+
+        defaultTeleCommand = ourTeleCommand;
+        SmartDashboard.putString(TelemetryNames.Incrementer.teleCommand, ourTeleCommand.getClass().getSimpleName());
+    }
+
+    @Override
+    public void loadDefaultAutoCommand() {
+        setDefaultCommand(defaultAutoCommand);
+    }
+
+    @Override
+    public void loadDefaultTeleCommand() {
+        setDefaultCommand(defaultTeleCommand);
     }
 
     private double tlmSpeed = 0.0;
     private boolean tlmStopped = false;
     private boolean tlmLifting = false;
     private boolean tlmLowering = false;
-    private boolean tlmFull = false;
 
     @Override
     public void updateTelemetry() {
@@ -77,8 +120,6 @@ abstract class BaseIncrementerSubsystem extends SubsystemBase implements IIncrem
         SmartDashboard.putBoolean(TelemetryNames.Incrementer.stopped, tlmStopped);
         SmartDashboard.putBoolean(TelemetryNames.Incrementer.lifting, tlmLifting);
         SmartDashboard.putBoolean(TelemetryNames.Incrementer.lowering, tlmLowering);
-        tlmFull = isFull();
-        SmartDashboard.putBoolean(TelemetryNames.Incrementer.full, tlmFull);
     }
 
     protected void setTlmSpeed(double speed) {
