@@ -6,34 +6,31 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.elevator;
+package frc.robot.sensors.elevator;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ElevatorLift extends ElevatorCommandBase {
+/**
+ * Provides implementation of <code>ITurretHomeSensor</code> which has no sensor
+ * or other useful functionality; but which won't blow up if instantiated and
+ * 'used'.
+ */
+class StubElevatorSensor extends BaseElevatorSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ElevatorLift.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(StubElevatorSensor.class.getName());
 
-    public ElevatorLift() {
-        logger.info("constructing {}", getName());
+    StubElevatorSensor() {
+        logger.info("constructing");
 
         logger.info("constructed");
     }
 
     @Override
-    public void execute() {
-        super.execute();
-
-        elevator.lift();
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        super.end(interrupted);
-
-        elevator.stop();
+    public boolean get() {
+        // Stub doesn't implement this - returns false
+        return false;
     }
 
 }

@@ -96,6 +96,13 @@ Elevator.teleCommandName = ElevatorManualControl
 
 
 #####################
+# Incrementer
+#####################
+Incrementer.className = 
+Incrementer.defaultCommandName = IncrementerDoNothing
+
+
+#####################
 # Shooter
 #####################
 Shooter.className = StubShooterSubsystem

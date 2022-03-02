@@ -6,13 +6,13 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.subsystems.elevator;
+package frc.robot.subsystems.incrementer;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import frc.robot.commands.elevator.ElevatorDoNothing;
+import frc.robot.commands.incrementer.IncrementerDoNothing;
 import frc.robot.properties.PKProperties;
 import frc.robot.properties.PropertiesManager;
 import frc.robot.subsystems.SubsystemNames;
@@ -25,15 +25,15 @@ import riolog.RioLogger;
 /**
  * Add your docs here.
  */
-abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorSubsystem {
+abstract class BaseIncrementerSubsystem extends SubsystemBase implements IIncrementerSubsystem {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(BaseElevatorSubsystem.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(BaseIncrementerSubsystem.class.getName());
 
     /** Our subsystem's name **/
-    protected static final String myName = SubsystemNames.elevatorName;
+    protected static final String myName = SubsystemNames.incrementerName;
 
-    BaseElevatorSubsystem() {
+    BaseIncrementerSubsystem() {
         logger.info("constructing");
 
         logger.info("constructed");
@@ -51,7 +51,7 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
             logger.info("no class specified; go with subsystem default (do nothing)");
             myAutoClassName = new StringBuilder().append(myName).append("DoNothing").toString();
         }
-        String myPkgName = ElevatorDoNothing.class.getPackage().getName();
+        String myPkgName = IncrementerDoNothing.class.getPackage().getName();
         String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myAutoClassName).toString();
         logger.debug("class to load: {}", classToLoad);
 
@@ -65,19 +65,19 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
             ourAutoCommand = (Command) myObject;
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for: {}", myName);
-            ourAutoCommand = (Command) new ElevatorDoNothing();
-            SmartDashboard.putNumber(TelemetryNames.Elevator.status, PKStatus.degraded.tlmValue);
+            ourAutoCommand = (Command) new IncrementerDoNothing();
+            SmartDashboard.putNumber(TelemetryNames.Incrementer.status, PKStatus.degraded.tlmValue);
         }
 
         defaultAutoCommand = ourAutoCommand;
-        SmartDashboard.putString(TelemetryNames.Elevator.autoCommand, ourAutoCommand.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.Incrementer.autoCommand, ourAutoCommand.getClass().getSimpleName());
 
         String myTeleClassName = props.getString("teleCommandName");
         if (myTeleClassName.isEmpty()) {
             logger.info("no class specified; go with subsystem default (do nothing)");
             myTeleClassName = new StringBuilder().append(myName).append("DoNothing").toString();
         }
-        myPkgName = ElevatorDoNothing.class.getPackage().getName();
+        myPkgName = IncrementerDoNothing.class.getPackage().getName();
         classToLoad = new StringBuilder().append(myPkgName).append(".").append(myTeleClassName).toString();
         logger.debug("class to load: {}", classToLoad);
 
@@ -91,12 +91,12 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
             ourTeleCommand = (Command) myObject;
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for: {}", myName);
-            ourTeleCommand = (Command) new ElevatorDoNothing();
-            SmartDashboard.putNumber(TelemetryNames.Elevator.status, PKStatus.degraded.tlmValue);
+            ourTeleCommand = (Command) new IncrementerDoNothing();
+            SmartDashboard.putNumber(TelemetryNames.Incrementer.status, PKStatus.degraded.tlmValue);
         }
 
         defaultTeleCommand = ourTeleCommand;
-        SmartDashboard.putString(TelemetryNames.Elevator.teleCommand, ourTeleCommand.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.Incrementer.teleCommand, ourTeleCommand.getClass().getSimpleName());
     }
 
     @Override
@@ -109,13 +109,6 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
         setDefaultCommand(defaultTeleCommand);
     }
 
-    protected void loadPreferences() {
-        @SuppressWarnings("unused")
-        double v;
-
-        logger.info("new preferences for {}:", myName);
-    }
-
     private double tlmSpeed = 0.0;
     private boolean tlmStopped = false;
     private boolean tlmLifting = false;
@@ -123,17 +116,15 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
 
     @Override
     public void updateTelemetry() {
-        SmartDashboard.putNumber(TelemetryNames.Elevator.speed, tlmSpeed);
-        SmartDashboard.putBoolean(TelemetryNames.Elevator.stopped, tlmStopped);
-        SmartDashboard.putBoolean(TelemetryNames.Elevator.lifting, tlmLifting);
-        SmartDashboard.putBoolean(TelemetryNames.Elevator.lowering, tlmLowering);
+        SmartDashboard.putNumber(TelemetryNames.Incrementer.speed, tlmSpeed);
+        SmartDashboard.putBoolean(TelemetryNames.Incrementer.stopped, tlmStopped);
+        SmartDashboard.putBoolean(TelemetryNames.Incrementer.lifting, tlmLifting);
+        SmartDashboard.putBoolean(TelemetryNames.Incrementer.lowering, tlmLowering);
     }
 
     protected void setTlmSpeed(double speed) {
         tlmSpeed = speed;
     }
-
-    // FIXME: Make these methods to just set telemetry so not calling "super."
 
     @Override
     public void stop() {
@@ -143,29 +134,10 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
     }
 
     @Override
-    public void lift() {
+    public void incrementToLimit() {
         tlmStopped = false;
         tlmLifting = true;
         tlmLowering = false;
-    }
-
-    @Override
-    public void lower() {
-        tlmStopped = false;
-        tlmLifting = false;
-        tlmLowering = true;
-    }
-
-    @Override
-    public void liftToLimit() {
-        tlmStopped = false;
-        tlmLifting = true;
-        tlmLowering = false;
-    }
-
-    @Override
-    public void updatePreferences() {
-        loadPreferences();
     }
 
 }

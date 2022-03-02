@@ -94,6 +94,14 @@ Elevator.teleCommandName = ElevatorDoNothing
 
 
 #####################
+# Incrementer
+#####################
+Incrementer.className = 
+Incrementer.autoCommandName = IncrementerDoNothing
+Incrementer.teleCommandName = IncrementerDoNothing
+
+
+#####################
 # Shooter
 #####################
 Shooter.className = StubShooterSubsystem

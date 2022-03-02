@@ -6,34 +6,24 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.elevator;
+package frc.robot.subsystems.incrementer;
+
+import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ElevatorLift extends ElevatorCommandBase {
+public final class IncrementerProperties {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ElevatorLift.class.getName());
+    @SuppressWarnings("unused")
+    private static final PKLogger logger = RioLogger.getLogger(IncrementerProperties.class.getName());
 
-    public ElevatorLift() {
-        logger.info("constructing {}", getName());
-
-        logger.info("constructed");
+    private IncrementerProperties() {
     }
 
-    @Override
-    public void execute() {
-        super.execute();
-
-        elevator.lift();
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        super.end(interrupted);
-
-        elevator.stop();
-    }
+    static private final String name = SubsystemNames.driveName;
+    static final String className = name + ".className";
+    static final String defaultCommandName = name + ".defaultCommandName";
 
 }

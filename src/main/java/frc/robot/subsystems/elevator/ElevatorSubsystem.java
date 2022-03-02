@@ -8,40 +8,38 @@
 
 package frc.robot.subsystems.elevator;
 
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.robot.sensors.elevator.ElevatorSensorFactory;
+import frc.robot.sensors.elevator.IElevatorSensor;
+import frc.robot.sensors.incrementer.IIncrementerSensor;
+import frc.robot.sensors.incrementer.IncrementerSensorFactory;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class ElevatorSubsystem extends BaseElevatorSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ElevatorSubsystem.class.getName());
 
-    private final VictorSPX lowerStage;
-    private final TalonSRX upperStage;
+    private final VictorSPX motor;
 
-    private final DigitalInput limit;
+    // private final IElevatorSensor elevatorSensor;
+    private final IIncrementerSensor incremSensor;
 
     ElevatorSubsystem() {
         logger.info("constructing");
 
-        lowerStage = new VictorSPX(51);
-        lowerStage.configFactoryDefault();
+        motor = new VictorSPX(50);
+        motor.configFactoryDefault();
+        motor.setInverted(true);
 
-        upperStage = new TalonSRX(52);
-        upperStage.configFactoryDefault();
-
-        limit = new DigitalInput(9);
+        // elevatorSensor = ElevatorSensorFactory.getInstance();
+        incremSensor = IncrementerSensorFactory.getInstance();
 
         logger.info("constructed");
     }
@@ -50,7 +48,8 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     public void updateTelemetry() {
         super.updateTelemetry();
 
-        SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit, limit.get());
+        // SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit,
+        // elevatorSensor.get());
     }
 
     @Override
@@ -92,18 +91,9 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     }
 
     @Override
-    public void increment() {
-        upperStage.set(ControlMode.PercentOutput, 0.4);
-    }
-
-    @Override
-    public void stopIncrement() {
-        upperStage.set(ControlMode.PercentOutput, 0.0);
-    }
-
-    @Override
     public boolean isFull() {
-        return limit.get();
+        // return (elevatorSensor.get() && incremSensor.get());
+        return incremSensor.get();
     }
 
     @Override
@@ -120,7 +110,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     private void setSpeed(double speed) {
         setTlmSpeed(speed);
 
-        lowerStage.set(ControlMode.PercentOutput, speed);
+        motor.set(ControlMode.PercentOutput, speed);
     }
 
 }

@@ -6,34 +6,31 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.elevator;
+package frc.robot.sensors.elevator;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ElevatorLift extends ElevatorCommandBase {
+abstract class BaseElevatorSensor implements IElevatorSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ElevatorLift.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(BaseElevatorSensor.class.getName());
 
-    public ElevatorLift() {
-        logger.info("constructing {}", getName());
+    /** Our sensor's name **/
+    protected static final String myName = TelemetryNames.Elevator.name;
+
+    BaseElevatorSensor() {
+        logger.info("constructing");
 
         logger.info("constructed");
     }
 
     @Override
-    public void execute() {
-        super.execute();
-
-        elevator.lift();
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        super.end(interrupted);
-
-        elevator.stop();
+    public void updateTelemetry() {
+        SmartDashboard.putBoolean(TelemetryNames.Elevator.full, get());
     }
 
 }

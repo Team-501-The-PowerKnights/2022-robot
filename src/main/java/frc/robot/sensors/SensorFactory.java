@@ -12,8 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.robot.sensors.elevator.ElevatorSensorFactory;
 import frc.robot.sensors.gyro.GyroFactory;
+import frc.robot.sensors.incrementer.IncrementerSensorFactory;
 import frc.robot.sensors.turretlocation.TurretLocationFactory;
 import frc.robot.sensors.vision.VisionFactory;
 import frc.robot.telemetry.TelemetryManager;
@@ -58,6 +59,22 @@ public class SensorFactory {
         {
             TurretLocationFactory.constructInstance();
             ISensor s = TurretLocationFactory.getInstance();
+            tlmMgr.addProvider(s);
+            sensors.add(s);
+        }
+
+        SmartDashboard.putNumber(TelemetryNames.IncrementerSensor.status, PKStatus.unknown.tlmValue);
+        {
+            IncrementerSensorFactory.constructInstance();
+            ISensor s = IncrementerSensorFactory.getInstance();
+            tlmMgr.addProvider(s);
+            sensors.add(s);
+        }
+
+        SmartDashboard.putNumber(TelemetryNames.ElevatorSensor.status, PKStatus.unknown.tlmValue);
+        {
+            ElevatorSensorFactory.constructInstance();
+            ISensor s = ElevatorSensorFactory.getInstance();
             tlmMgr.addProvider(s);
             sensors.add(s);
         }

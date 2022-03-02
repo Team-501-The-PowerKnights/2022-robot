@@ -6,26 +6,15 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.subsystems.elevator;
+package frc.robot.sensors.elevator;
 
-import frc.robot.subsystems.ISubsystem;
+import frc.robot.sensors.ISensor;
 
 /**
  * Add your docs here.
  **/
-public interface IElevatorSubsystem extends ISubsystem {
+public interface IElevatorSensor extends ISensor {
 
-    /**
-     * Stop the elevator from any motion it may have been running under.
-     */
-    public void stop();
-
-    public void lift();
-
-    public void lower();
-
-    public boolean isFull();
-
-    public void liftToLimit();
+    public boolean get();
 
 }

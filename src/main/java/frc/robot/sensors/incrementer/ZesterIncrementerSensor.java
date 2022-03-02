@@ -6,26 +6,23 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.subsystems.elevator;
+package frc.robot.sensors.incrementer;
 
-import frc.robot.subsystems.ISubsystem;
+import riolog.PKLogger;
+import riolog.RioLogger;
 
 /**
- * Add your docs here.
- **/
-public interface IElevatorSubsystem extends ISubsystem {
+ * Provides implementation of <code>IIncrementerSensor</code> for the
+ * <i>Zester-Bot</i>.
+ */
+class ZesterIncrementerSensor extends StubIncrementerSensor {
 
-    /**
-     * Stop the elevator from any motion it may have been running under.
-     */
-    public void stop();
+    /** Our classes' logger **/
+    private static final PKLogger logger = RioLogger.getLogger(ZesterIncrementerSensor.class.getName());
 
-    public void lift();
+    ZesterIncrementerSensor() {
+        logger.info("constructing");
 
-    public void lower();
-
-    public boolean isFull();
-
-    public void liftToLimit();
-
+        logger.info("constructed");
+    }
 }

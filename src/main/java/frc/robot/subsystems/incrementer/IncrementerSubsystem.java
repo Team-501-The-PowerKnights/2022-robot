@@ -6,37 +6,35 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.subsystems.elevator;
+package frc.robot.subsystems.incrementer;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.robot.sensors.incrementer.IIncrementerSensor;
+import frc.robot.sensors.incrementer.IncrementerSensorFactory;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
+class IncrementerSubsystem extends BaseIncrementerSubsystem {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ZesterElevatorSubsystem.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IncrementerSubsystem.class.getName());
 
     private final TalonSRX motor;
 
-    private final DigitalInput limit;
+    private final IIncrementerSensor sensor;
 
-    ZesterElevatorSubsystem() {
+    IncrementerSubsystem() {
         logger.info("constructing");
 
         motor = new TalonSRX(51);
         motor.configFactoryDefault();
-        motor.setNeutralMode(NeutralMode.Brake);
 
-        limit = new DigitalInput(9);
+        sensor = IncrementerSensorFactory.getInstance();
 
         logger.info("constructed");
     }
@@ -45,7 +43,7 @@ class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
     public void updateTelemetry() {
         super.updateTelemetry();
 
-        SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit, limit.get());
+        SmartDashboard.putBoolean(TelemetryNames.Incrementer.atLimit, sensor.get());
     }
 
     @Override
@@ -55,8 +53,6 @@ class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
 
     @Override
     public void updatePreferences() {
-        super.updatePreferences();
-
         // Stub doesn't implement this
     }
 
@@ -73,30 +69,21 @@ class ZesterElevatorSubsystem extends BaseElevatorSubsystem {
     }
 
     @Override
-    public void lift() {
-        super.lift();
-
-        setSpeed(-0.85);
-    }
-
-    @Override
-    public void lower() {
-        super.lower();
-
-        setSpeed(1.0);
+    public void increment() {
+        setSpeed(0.4);
     }
 
     @Override
     public boolean isFull() {
-        return limit.get();
+        return sensor.get();
     }
 
     @Override
-    public void liftToLimit() {
-        super.liftToLimit();
+    public void incrementToLimit() {
+        super.incrementToLimit();
 
         if (!isFull()) {
-            lift();
+            increment();
         } else {
             stop();
         }

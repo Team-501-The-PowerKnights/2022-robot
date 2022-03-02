@@ -6,34 +6,35 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.elevator;
+package frc.robot.sensors.incrementer;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ElevatorLift extends ElevatorCommandBase {
+/**
+ * Provides implementation of <code>IIncrementerSensor</code> for the
+ * <i>Real-Bot</i>.
+ */
+class IncrementerSensor extends BaseIncrementerSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ElevatorLift.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IncrementerSensor.class.getName());
 
-    public ElevatorLift() {
-        logger.info("constructing {}", getName());
+    private DigitalInput location;
+
+    IncrementerSensor() {
+        logger.info("constructing");
+
+        location = new DigitalInput(0);
 
         logger.info("constructed");
     }
 
     @Override
-    public void execute() {
-        super.execute();
-
-        elevator.lift();
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        super.end(interrupted);
-
-        elevator.stop();
+    public boolean get() {
+        return (location.get());
     }
 
 }

@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems;
 
-
 /**
  * Provides a standard way of defining names for the <i>Subsystems</i> used in
  * the program. No code should define or use a hard-coded string outside of the
@@ -22,9 +21,10 @@ public class SubsystemNames {
 
     public static final String intakeName = "Intake";
     public static final String elevatorName = "Elevator";
+    public static final String incrementerName = "Incrementer";
     public static final String shooterName = "Shooter";
-     // Not really a subsystem ... next year - modules
-     public static final String turretName = "Turret";
+    // Not really a subsystem ... next year - modules
+    public static final String turretName = "Turret";
 
     public static final String climberName = "Climber";
 

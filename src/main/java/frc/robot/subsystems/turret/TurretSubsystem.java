@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.turret;
 
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
@@ -25,7 +24,6 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class TurretSubsystem extends BaseTurretSubsystem {
 
@@ -83,12 +81,12 @@ class TurretSubsystem extends BaseTurretSubsystem {
 
     @Override
     public void updateTelemetry() {
-        setTlmSpeed(motor.get());  // get current actual speed
+        setTlmSpeed(motor.get()); // get current actual speed
         super.updateTelemetry();
 
         SmartDashboard.putNumber(TelemetryNames.Turret.angle, getAngle());
         SmartDashboard.putNumber(TelemetryNames.Turret.position, encoder.getPosition());
-   }
+    }
 
     @Override
     public void validateCalibration() {
@@ -176,7 +174,7 @@ class TurretSubsystem extends BaseTurretSubsystem {
             } catch (InterruptedException ex) {
                 logger.warn("interrupted sleep: ", ex);
                 // TODO Should this do something?
-        }
+            }
         }
         setSpeed(0.0);
         logger.debug("found set point (gross)");
@@ -193,7 +191,7 @@ class TurretSubsystem extends BaseTurretSubsystem {
             } catch (InterruptedException ex) {
                 logger.warn("interrupted sleep: ", ex);
                 // TODO Should this do something?
-        }
+            }
         }
         setSpeed(0.0);
         logger.debug("backed off set point");
@@ -210,7 +208,7 @@ class TurretSubsystem extends BaseTurretSubsystem {
             } catch (InterruptedException ex) {
                 logger.warn("interrupted sleep: ", ex);
                 // TODO Should this do something?
-        }
+            }
         }
         setSpeed(0.0);
         logger.debug("found set point (fine)");
@@ -242,7 +240,7 @@ class TurretSubsystem extends BaseTurretSubsystem {
 
     @Override
     public void setSpeed(int canID, double speed) {
-        speed *= 0.45;
+        speed *= 0.55;
         switch (canID) {
             case 20:
                 setSpeed(speed);

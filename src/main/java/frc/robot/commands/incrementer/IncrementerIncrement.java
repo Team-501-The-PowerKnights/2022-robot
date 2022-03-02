@@ -6,17 +6,25 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.elevator;
+package frc.robot.commands.incrementer;
+
+import frc.robot.subsystems.incrementer.IIncrementerSubsystem;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ElevatorLift extends ElevatorCommandBase {
+/**
+ * Add your docs here.
+ */
+public class IncrementerIncrement extends IncrementerCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ElevatorLift.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IncrementerIncrement.class.getName());
 
-    public ElevatorLift() {
+    // Handle to our subsystem
+    protected IIncrementerSubsystem incrementer;
+
+    public IncrementerIncrement() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
@@ -24,16 +32,12 @@ public class ElevatorLift extends ElevatorCommandBase {
 
     @Override
     public void execute() {
-        super.execute();
-
-        elevator.lift();
+        incrementer.increment();
     }
 
     @Override
     public void end(boolean interrupted) {
-        super.end(interrupted);
-
-        elevator.stop();
+        incrementer.stop();
     }
 
 }

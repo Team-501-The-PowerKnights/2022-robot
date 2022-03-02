@@ -58,7 +58,15 @@ Vision.className = VisionSensor
 TurretLocation.className = StubTurretLocationSensor
 #TurretLocation.className = TurretLocationSensor
 
+#####################
+# ElevatorSensor
+#####################
+ElevatorSensor.className = StubElevatorSensor
 
+#####################
+# IncrementerSensor
+#####################
+IncrementerSensor.className = IncrementerSensor
 
 #########################################
 #########################################
@@ -94,6 +102,14 @@ Elevator.className = ElevatorSubsystem
 Elevator.autoCommandName = ElevatorDoNothing
 Elevator.teleCommandName = ElevatorManualControl
 #Elevator.teleCommandName = ElevatorDoNothing
+
+
+#####################
+# Incrementer
+#####################
+Incrementer.className = IncrementerSubsystem
+Incrementer.autoCommandName = IncrementerDoNothing
+Incrementer.teleCommandName = IncrementerManualControl
 
 
 #####################

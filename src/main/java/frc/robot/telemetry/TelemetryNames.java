@@ -154,6 +154,20 @@ public final class TelemetryNames {
         public static final String isFound = name + ".isFound";
     }
 
+    public final class ElevatorSensor {
+        public static final String name = SensorNames.elevatorName;
+
+        public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+    }
+
+    public final class IncrementerSensor {
+        public static final String name = SensorNames.incrementerName;
+
+        public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+    }
+
     public final class Vision {
         public static final String name = SensorNames.visionName;
 
@@ -204,6 +218,22 @@ public final class TelemetryNames {
 
     public final class Elevator {
         public static final String name = SubsystemNames.elevatorName;
+
+        public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+        public static final String autoCommand = name + ".autoCommand";
+        public static final String teleCommand = name + ".teleCommand";
+
+        public static final String speed = name + ".speed";
+        public static final String atLimit = name + ".atLimit";
+        public static final String stopped = name + ".stopped";
+        public static final String lifting = name + ".lifting";
+        public static final String lowering = name + ".lowering";
+        public static final String full = name + ".full";
+    }
+
+    public final class Incrementer {
+        public static final String name = SubsystemNames.incrementerName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";

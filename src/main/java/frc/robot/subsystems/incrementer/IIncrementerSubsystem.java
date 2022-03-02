@@ -6,26 +6,24 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.subsystems.elevator;
+package frc.robot.subsystems.incrementer;
 
 import frc.robot.subsystems.ISubsystem;
 
 /**
  * Add your docs here.
  **/
-public interface IElevatorSubsystem extends ISubsystem {
+public interface IIncrementerSubsystem extends ISubsystem {
 
     /**
-     * Stop the elevator from any motion it may have been running under.
+     * Stop the incrementer from any motion it may have been running under.
      */
     public void stop();
 
-    public void lift();
-
-    public void lower();
+    public void increment();
 
     public boolean isFull();
 
-    public void liftToLimit();
+    public void incrementToLimit();
 
 }
