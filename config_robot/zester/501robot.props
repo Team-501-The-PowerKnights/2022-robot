@@ -71,8 +71,9 @@ TurretLocation.className = StubTurretLocationSensor
 #####################
 #Drive.className = StubDriveSubsystem
 Drive.className =
-#Drive.defaultCommandName = DriveDoNothing
-Drive.defaultCommandName = DriveJoystickControl
+Drive.autoCommandName = DriveDoNothing
+Drive.teleCommandName = DriveJoystickControl
+#Drive.teleCommandName = DriveDoNothing
 
 
 #####################
@@ -80,16 +81,18 @@ Drive.defaultCommandName = DriveJoystickControl
 #####################
 Intake.className = StubIntakeSubsystem
 #Intake.className =
-Intake.defaultCommandName = IntakeDoNothing
+Intake.autoCommandName = IntakeDoNothing
+Intake.teleCommandName = IntakeDoNothing
 
 
 #####################
 # Elevator
 #####################
-Elevator.className = StubElevatorSubsystem
-#Elevator.className =
-Elevator.defaultCommandName = ElevatorDoNothing
-#Elevator.defaultCommandName = ElevatorManualControl
+#Elevator.className = StubElevatorSubsystem
+Elevator.className =
+Elevator.autoCommandName = ElevatorDoNothing
+Elevator.teleCommandName = ElevatorManualControl
+#Elevator.teleCommandName = ElevatorDoNothing
 
 
 #####################
@@ -104,7 +107,8 @@ Incrementer.defaultCommandName = IncrementerDoNothing
 #####################
 Shooter.className = StubShooterSubsystem
 #Shooter.className =
-Shooter.defaultCommandName = ShooterDoNothing
+Shooter.autoCommandName = ShooterDoNothing
+Shooter.teleCommandName = ShooterDoNothing
 
 
 #####################
@@ -112,7 +116,8 @@ Shooter.defaultCommandName = ShooterDoNothing
 #####################
 Turret.className = StubTurretSubsystem
 #Turret.className =
-Turret.defaultCommandName = TurretDoNothing
+Turret.autoCommandName = TurretDoNothing
+Turret.teleCommandName = TurretDoNothing
 
 
 #####################
@@ -120,7 +125,8 @@ Turret.defaultCommandName = TurretDoNothing
 #####################
 Climber.className = StubClimberSubsystem
 #Climber.className =
-Climber.defaultCommandName = ClimberDoNothing
+Shooter.autoCommandName = TurretDoNothing
+Shooter.teleCommandName = TurretDoNothing
 
 
 

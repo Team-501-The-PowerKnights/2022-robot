@@ -69,9 +69,10 @@ TurretLocation.className = StubTurretLocationSensor
 #####################
 # Drive
 #####################
-Drive.className = StubDriveSubsystem
+Drive.className = DriveSubsystem
 #Drive.className =
-Drive.defaultCommandName = DriveDoNothing
+Drive.autoCommandName = DriveDoNothing
+Drive.teleCommandName = DriveDoNothing
 
 
 #####################
@@ -79,7 +80,8 @@ Drive.defaultCommandName = DriveDoNothing
 #####################
 Intake.className = StubIntakeSubsystem
 #Intake.className =
-Intake.defaultCommandName = IntakeDoNothing
+Intake.autoCommandName = IntakeDoNothing
+Intake.teleCommandName = IntakeDoNothing
 
 
 #####################
@@ -87,14 +89,16 @@ Intake.defaultCommandName = IntakeDoNothing
 #####################
 Elevator.className = StubElevatorSubsystem
 #Elevator.className =
-Elevator.defaultCommandName = ElevatorDoNothing
+Elevator.autoCommandName = ElevatorDoNothing
+Elevator.teleCommandName = ElevatorDoNothing
 
 
 #####################
 # Incrementer
 #####################
 Incrementer.className = 
-Incrementer.defaultCommandName = IncrementerDoNothing
+Incrementer.autoCommandName = IncrementerDoNothing
+Incrementer.teleCommandName = IncrementerDoNothing
 
 
 #####################
@@ -102,7 +106,8 @@ Incrementer.defaultCommandName = IncrementerDoNothing
 #####################
 Shooter.className = StubShooterSubsystem
 #Shooter.className =
-Shooter.defaultCommandName = ShooterDoNothing
+Shooter.autoCommandName = ShooterDoNothing
+Shooter.teleCommandName = ShooterDoNothing
 
 
 #####################
@@ -110,7 +115,8 @@ Shooter.defaultCommandName = ShooterDoNothing
 #####################
 Turret.className = StubTurretSubsystem
 #Turret.className =
-Turret.defaultCommandName = TurretDoNothing
+Turret.autoCommandName = TurretDoNothing
+Turret.teleCommandName = TurretDoNothing
 
 
 #####################
@@ -118,7 +124,8 @@ Turret.defaultCommandName = TurretDoNothing
 #####################
 Climber.className = StubClimberSubsystem
 #Climber.className =
-Climber.defaultCommandName = ClimberDoNothing
+Climber.autoCommandName = ClimberDoNothing
+Climber.teleCommandName = ClimberDoNothing
 
 
 
