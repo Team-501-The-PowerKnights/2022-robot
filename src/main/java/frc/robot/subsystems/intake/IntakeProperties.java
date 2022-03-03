@@ -23,7 +23,7 @@ public final class IntakeProperties {
 
     private IntakeProperties() {}
 
-    static private final String name = SubsystemNames.driveName;
+    static private final String name = SubsystemNames.intakeName;
     static final String className = name + ".className";
     static final String defaultCommandName = name + ".defaultCommandName";
     

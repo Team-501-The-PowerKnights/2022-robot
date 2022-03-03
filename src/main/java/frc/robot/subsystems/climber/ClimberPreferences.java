@@ -34,7 +34,7 @@ public final class ClimberPreferences {
     private static final PKLogger logger = RioLogger.getLogger(ClimberPreferences.class.getName());
 
     @SuppressWarnings("unused")
-    static private final String name = SubsystemNames.driveName;
+    static private final String name = SubsystemNames.climberName;
 
     private ClimberPreferences() {}
 

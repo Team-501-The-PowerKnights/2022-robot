@@ -23,7 +23,7 @@ public final class ClimberProperties {
 
     private ClimberProperties() {}
 
-    static private final String name = SubsystemNames.driveName;
+    static private final String name = SubsystemNames.climberName;
     static final String className = name + ".className";
     static final String defaultCommandName = name + ".defaultCommandName";
     

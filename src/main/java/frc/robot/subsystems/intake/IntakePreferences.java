@@ -34,7 +34,7 @@ public final class IntakePreferences {
     private static final PKLogger logger = RioLogger.getLogger(IntakePreferences.class.getName());
 
     @SuppressWarnings("unused")
-    static private final String name = SubsystemNames.driveName;
+    static private final String name = SubsystemNames.intakeName;
 
     private IntakePreferences() {}
 
