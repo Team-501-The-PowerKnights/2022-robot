@@ -31,9 +31,7 @@ public class DriveBackwardDistance extends DriveCommandBase {
     public DriveBackwardDistance(double distanceInFeet) {
         logger.info("constructing {}", getName());
 
-        distanceClicks = distanceInFeet * 6.849; // motor revolutions per foot
-        // FIXME: this seems better than 2x's the distance
-        distanceClicks /= 2;
+        distanceClicks = -1 * drive.convertInchesToEncoderClicks(distanceInFeet * 12);
         SmartDashboard.putNumber(TelemetryNames.Drive.distanceClicks, distanceClicks);
 
         logger.info("constructed");
@@ -59,7 +57,7 @@ public class DriveBackwardDistance extends DriveCommandBase {
 
     @Override
     public boolean isFinished() {
-        return (Math.abs(drive.getEncoderClicks()) >= targetClicks);
+        return (Math.abs(drive.getEncoderClicks()) <= targetClicks);
     }
 
     @Override

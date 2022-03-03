@@ -8,7 +8,6 @@
 
 package frc.robot.commands.drive;
 
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.telemetry.TelemetryNames;
@@ -24,6 +23,8 @@ public class DriveForwardDistance extends DriveCommandBase {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(DriveForwardDistance.class.getName());
 
+    private double distanceInFeet;
+
     // Distance to drive (from current position) in clicks
     private double distanceClicks;
     // Target position in clicks (current + distance)
@@ -32,10 +33,7 @@ public class DriveForwardDistance extends DriveCommandBase {
     public DriveForwardDistance(double distanceInFeet) {
         logger.info("constructing {}", getName());
 
-        distanceClicks = distanceInFeet * 6.849; // motor revolutions per foot
-        // FIXME: this seems better than 2x's the distance
-        distanceClicks /= 2;
-        SmartDashboard.putNumber(TelemetryNames.Drive.distanceClicks, distanceClicks);
+        this.distanceInFeet = distanceInFeet;
 
         logger.info("constructed");
     }
@@ -44,7 +42,11 @@ public class DriveForwardDistance extends DriveCommandBase {
     public void initialize() {
         super.initialize();
 
-        targetClicks = drive.getEncoderClicks() - distanceClicks;
+        distanceClicks = drive.convertInchesToEncoderClicks(distanceInFeet * 12);
+        logger.info("distance clicks = {}", distanceClicks);
+        SmartDashboard.putNumber(TelemetryNames.Drive.distanceClicks, distanceClicks);
+
+        targetClicks = drive.getEncoderClicks() + distanceClicks;
         SmartDashboard.putNumber(TelemetryNames.Drive.targetClicks, targetClicks);
     }
 
@@ -60,7 +62,7 @@ public class DriveForwardDistance extends DriveCommandBase {
 
     @Override
     public boolean isFinished() {
-        return (drive.getEncoderClicks() <= targetClicks);
+        return (drive.getEncoderClicks() >= targetClicks);
     }
 
     @Override

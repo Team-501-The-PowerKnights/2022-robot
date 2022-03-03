@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.drive;
 
-
 import java.util.List;
 
 import com.revrobotics.RelativeEncoder;
@@ -39,7 +38,6 @@ import frc.robot.sensors.gyro.IGyroSensor;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class ProtoDriveSubsystem extends BaseDriveSubsystem {
 
@@ -204,9 +202,10 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
                         new PIDController(p, 0, 0), new PIDController(p, 0, 0), this::tankDriveVolts, this));
     }
 
-    protected double convertInchesToEncoderClicks(double inches) {
+    @Override
+    public double convertInchesToEncoderClicks(double inches) {
         return inches * (1 / 12) // Conversion to feet
-                * 3.281 // Conversion to meters
+                * (1 / 3.281) // Conversion to meters
                 * (1 / (2 * Math.PI * wheelRadius)) // Convert to wheel revolutions (Circumference)
                 * (beltGearing) // Convert to output shaft revolutions (Belt gearing)
                 * (1 / gearboxGearing); // Convert to motor revolutions (TB Mini gearing)
@@ -246,25 +245,25 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void setSpeed(int canID, double speed) {
-        // TODO Auto-generated method stub
+        // Not impemented
 
     }
 
     @Override
     public void swap() {
-        // TODO Auto-generated method stub
+        // Not impemented
 
     }
 
     @Override
     public double getEncoderClicks() {
-        // TODO Auto-generated method stub
+        // Not impemented
         return 0;
     }
 
     @Override
     public double getEncoderVelocity() {
-        // TODO Auto-generated method stub
+        // Not impemented
         return 0;
     }
 

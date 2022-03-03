@@ -18,6 +18,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -78,6 +79,9 @@ class DriveSubsystem extends BaseDriveSubsystem {
     private final CANSparkMax rightFrontMotor;
     private final CANSparkMax rightRearMotor;
 
+    private final MotorControllerGroup left;
+    private final MotorControllerGroup right;
+
     private final RelativeEncoder leftEncoder;
     private final RelativeEncoder rightEncoder;
 
@@ -101,24 +105,21 @@ class DriveSubsystem extends BaseDriveSubsystem {
         rightRearMotor = new CANSparkMax(14, MotorType.kBrushless);
         rightRearMotor.restoreFactoryDefaults();
 
-        // FIXME: Use MotorControllerGroup (see Proto ...)
+        left = new MotorControllerGroup(leftFrontMotor, leftRearMotor);
+        right = new MotorControllerGroup(rightFrontMotor, rightRearMotor);
 
-        rightFrontMotor.setInverted(true);
-
-        leftRearMotor.follow(leftFrontMotor);
-        rightRearMotor.follow(rightFrontMotor);
+        left.setInverted(false);
+        right.setInverted(true);
 
         leftFrontMotor.setOpenLoopRampRate(ramp);
         rightFrontMotor.setOpenLoopRampRate(ramp);
 
         leftEncoder = leftFrontMotor.getEncoder();
-        leftEncoder.setPosition(0.0);
         rightEncoder = rightFrontMotor.getEncoder();
-        rightEncoder.setPosition(0.0);
 
         nav = GyroFactory.getInstance();
 
-        drive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
+        drive = new DifferentialDrive(left, right);
         drive.setSafetyEnabled(false);
         driveKinematics = new DifferentialDriveKinematics(trackWidth);
         driveOdometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(nav.getAngle()));
@@ -165,7 +166,7 @@ class DriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void disable() {
-        // TODO Auto-generated method stub
+        // Not implemented
     }
 
     @Override
@@ -220,8 +221,8 @@ class DriveSubsystem extends BaseDriveSubsystem {
         leftSpeed = driveSignal.getLeft();
         rightSpeed = driveSignal.getRight();
 
-        leftFrontMotor.set(leftSpeed);
-        rightFrontMotor.set(rightSpeed);
+        left.set(leftSpeed);
+        right.set(rightSpeed);
     }
 
     @Override
@@ -238,7 +239,8 @@ class DriveSubsystem extends BaseDriveSubsystem {
                         new PIDController(p, 0, 0), new PIDController(p, 0, 0), this::tankDriveVolts, this));
     }
 
-    protected double convertInchesToEncoderClicks(double inches) {
+    @Override
+    public double convertInchesToEncoderClicks(double inches) {
         return inches * (1 / 12) // Conversion to feet
                 * (1 / 3.281) // Conversion to meters
                 * (1 / (2 * Math.PI * wheelRadius)) // Convert to wheel revolutions (Circumference)

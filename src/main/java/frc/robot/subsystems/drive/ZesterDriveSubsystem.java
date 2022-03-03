@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.drive;
 
-
 import java.util.List;
 
 import com.revrobotics.RelativeEncoder;
@@ -40,7 +39,6 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class ZesterDriveSubsystem extends BaseDriveSubsystem {
 
@@ -169,7 +167,7 @@ class ZesterDriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void disable() {
-        // TODO Auto-generated method stub
+        // Not implemented
     }
 
     @Override
@@ -242,7 +240,8 @@ class ZesterDriveSubsystem extends BaseDriveSubsystem {
                         new PIDController(p, 0, 0), new PIDController(p, 0, 0), this::tankDriveVolts, this));
     }
 
-    protected double convertInchesToEncoderClicks(double inches) {
+    @Override
+    public double convertInchesToEncoderClicks(double inches) {
         return inches * (1 / 12) // Conversion to feet
                 * (1 / 3.281) // Conversion to meters
                 * (1 / (2 * Math.PI * wheelRadius)) // Convert to wheel revolutions (Circumference)
