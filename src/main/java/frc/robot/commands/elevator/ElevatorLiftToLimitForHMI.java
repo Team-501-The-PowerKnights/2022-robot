@@ -8,8 +8,10 @@
 
 package frc.robot.commands.elevator;
 
+
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Add your docs here.
@@ -34,6 +36,8 @@ public class ElevatorLiftToLimitForHMI extends ElevatorCommandBase {
 
     @Override
     public void execute() {
+        super.execute();
+
         elevator.liftToLimit();
         counts++;
     }
@@ -45,6 +49,8 @@ public class ElevatorLiftToLimitForHMI extends ElevatorCommandBase {
 
     @Override
     public void end(boolean interrupted) {
+        super.end(interrupted);
+
         elevator.stop();
     }
 

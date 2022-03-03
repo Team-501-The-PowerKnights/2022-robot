@@ -34,6 +34,8 @@ public class IncrementerIncrementToLimitForHMI extends IncrementerCommandBase {
 
     @Override
     public void execute() {
+        super.execute();
+
         incrementer.incrementToLimit();
         counts++;
     }
@@ -45,6 +47,8 @@ public class IncrementerIncrementToLimitForHMI extends IncrementerCommandBase {
 
     @Override
     public void end(boolean interrupted) {
+        super.end(interrupted);
+
         incrementer.stop();
     }
 
