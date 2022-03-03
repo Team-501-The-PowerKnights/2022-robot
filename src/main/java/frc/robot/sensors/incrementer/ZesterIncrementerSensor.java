@@ -8,8 +8,10 @@
 
 package frc.robot.sensors.incrementer;
 
+
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Provides implementation of <code>IIncrementerSensor</code> for the
@@ -25,4 +27,5 @@ class ZesterIncrementerSensor extends StubIncrementerSensor {
 
         logger.info("constructed");
     }
+
 }

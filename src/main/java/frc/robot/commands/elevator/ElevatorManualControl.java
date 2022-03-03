@@ -8,17 +8,16 @@
 
 package frc.robot.commands.elevator;
 
+
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 public class ElevatorManualControl extends ElevatorOICommandBase {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ElevatorManualControl.class.getName());
 
-    /**
-     * Creates a new DriveJoystickControl.
-     */
     public ElevatorManualControl() {
         logger.info("constructing {}", getName());
 

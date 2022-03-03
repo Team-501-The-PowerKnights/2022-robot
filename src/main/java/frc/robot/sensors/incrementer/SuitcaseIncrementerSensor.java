@@ -6,25 +6,26 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.subsystems.intake;
+package frc.robot.sensors.incrementer;
 
-
-import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public final class IntakeProperties {
-    
+/**
+ * Provides implementation of <code>IIncrementerSensor</code> for the
+ * <i>Suitcase-Bot</i>.
+ */
+class SuitcaseIncrementerSensor extends StubIncrementerSensor {
+
     /** Our classes' logger **/
-    @SuppressWarnings("unused")
-    private static final PKLogger logger = RioLogger.getLogger(IntakeProperties.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(SuitcaseIncrementerSensor.class.getName());
 
-    private IntakeProperties() {}
+    SuitcaseIncrementerSensor() {
+        logger.info("constructing");
 
-    static private final String name = SubsystemNames.intakeName;
-    static final String className = name + ".className";
-    static final String defaultCommandName = name + ".defaultCommandName";
-    
+        logger.info("constructed");
+    }
+
 }

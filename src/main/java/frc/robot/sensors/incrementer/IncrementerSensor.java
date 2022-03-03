@@ -8,10 +8,12 @@
 
 package frc.robot.sensors.incrementer;
 
+
 import edu.wpi.first.wpilibj.DigitalInput;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Provides implementation of <code>IIncrementerSensor</code> for the
@@ -22,7 +24,7 @@ class IncrementerSensor extends BaseIncrementerSensor {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(IncrementerSensor.class.getName());
 
-    private DigitalInput location;
+    private final DigitalInput location;
 
     IncrementerSensor() {
         logger.info("constructing");

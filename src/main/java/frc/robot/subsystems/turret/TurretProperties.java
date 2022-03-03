@@ -23,7 +23,7 @@ public final class TurretProperties {
 
     private TurretProperties() {}
 
-    static private final String name = SubsystemNames.driveName;
+    static private final String name = SubsystemNames.turretName;
     static final String className = name + ".className";
     static final String defaultCommandName = name + ".defaultCommandName";
     

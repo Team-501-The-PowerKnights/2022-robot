@@ -34,7 +34,7 @@ public final class ElevatorPreferences {
     private static final PKLogger logger = RioLogger.getLogger(ElevatorPreferences.class.getName());
 
     @SuppressWarnings("unused")
-    static private final String name = SubsystemNames.driveName;
+    static private final String name = SubsystemNames.elevatorName;
 
     private ElevatorPreferences() {}
 

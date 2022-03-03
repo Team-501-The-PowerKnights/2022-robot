@@ -8,10 +8,12 @@
 
 package frc.robot.subsystems.incrementer;
 
+
 import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Defines the names and a set of values of preferences for this subsystem.
@@ -32,7 +34,7 @@ public final class IncrementerPreferences {
     private static final PKLogger logger = RioLogger.getLogger(IncrementerPreferences.class.getName());
 
     @SuppressWarnings("unused")
-    static private final String name = SubsystemNames.driveName;
+    static private final String name = SubsystemNames.incrementerName;
 
     private IncrementerPreferences() {
     }

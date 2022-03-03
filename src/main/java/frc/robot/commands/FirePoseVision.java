@@ -8,7 +8,6 @@
 
 package frc.robot.commands;
 
-import org.slf4j.Logger;
 
 import frc.robot.sensors.vision.IVisionSensor;
 import frc.robot.sensors.vision.VisionFactory;
@@ -19,12 +18,14 @@ import frc.robot.subsystems.incrementer.IncrementerFactory;
 import frc.robot.subsystems.shooter.IShooterSubsystem;
 import frc.robot.subsystems.shooter.ShooterFactory;
 
+import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 public class FirePoseVision extends PKCommandBase {
 
     /** Our classes' logger **/
-    private static final Logger logger = RioLogger.getLogger(FirePoseVision.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(FirePoseVision.class.getName());
 
     private final IVisionSensor vision;
 
