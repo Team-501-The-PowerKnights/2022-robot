@@ -12,6 +12,7 @@
 
 package frc.robot;
 
+
 import java.util.List;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -31,7 +32,6 @@ import frc.robot.commands.drive.DriveForwardDistance;
 import frc.robot.commands.drive.DriveForwardTimed;
 import frc.robot.commands.elevator.ElevatorLift;
 import frc.robot.commands.intake.IntakeIngest;
-import frc.robot.commands.turret.TurretHome;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModuleFactory;
 import frc.robot.preferences.PreferencesInitializer;
@@ -48,6 +48,7 @@ import frc.robot.subsystems.SubsystemFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -81,10 +82,13 @@ public class Robot extends TimedRobot {
     // Flag for having run first operator control loop
     private boolean teleopFirstRun;
 
-    // Chooser from Dashboard
+    // Chooser for autonomous command from Dashboard
     private SendableChooser<Command> autoChooser;
     // Command that was selected
     private Command autoCommand;
+
+    // Chooser for overriding field connection in pit
+    private static SendableChooser<Boolean> fmsOverrideChooser;
 
     /**
      * This function is run when the robot is first started up and should be used
@@ -134,6 +138,9 @@ public class Robot extends TimedRobot {
         autonomousFirstRun = false;
         teleopComplete = false;
         teleopFirstRun = false;
+
+        // Create the chooser for FMS connected override
+        createFmsOverrideChooser();
 
         logger.info("initialized");
     }
@@ -449,6 +456,30 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void testPeriodic() {
+    }
+
+    private static void createFmsOverrideChooser() {
+        fmsOverrideChooser = new SendableChooser<>();
+
+        fmsOverrideChooser.setDefaultOption("Use Real FMS Connect", Boolean.FALSE);
+        fmsOverrideChooser.addOption("Override FMS Connect", Boolean.TRUE);
+
+        SmartDashboard.putData("FMS Override", fmsOverrideChooser);
+    }
+    
+    static public boolean isFieldConnected() {
+        if ( DriverStation.isFMSAttached()) {
+            return true;
+        }
+        else {
+            return fmsOverrideChooser.getSelected();
+        }
+
+        // // For Field Running
+        // return DriverStation.isFMSAttached();
+
+        // // For Pit Testing (be careful)
+        // // return true; // FOR pit testing
     }
 
 }
