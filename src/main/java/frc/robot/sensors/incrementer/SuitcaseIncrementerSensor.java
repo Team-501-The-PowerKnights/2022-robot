@@ -15,14 +15,14 @@ import riolog.RioLogger;
 
 /**
  * Provides implementation of <code>IIncrementerSensor</code> for the
- * <i>Zester-Bot</i>.
+ * <i>Suitcase-Bot</i>.
  */
-class ZesterIncrementerSensor extends StubIncrementerSensor {
+class SuitcaseIncrementerSensor extends StubIncrementerSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ZesterIncrementerSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(SuitcaseIncrementerSensor.class.getName());
 
-    ZesterIncrementerSensor() {
+    SuitcaseIncrementerSensor() {
         logger.info("constructing");
 
         logger.info("constructed");

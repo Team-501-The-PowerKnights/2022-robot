@@ -8,11 +8,13 @@
 
 package frc.robot.sensors.elevator;
 
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
+
 /**
- * Provides implementation of <code>ITurretHomeSensor</code> which has no sensor
+ * Provides implementation of <code>IElevatorSensor</code> which has no sensor
  * or other useful functionality; but which won't blow up if instantiated and
  * 'used'.
  */

@@ -8,10 +8,12 @@
 
 package frc.robot.sensors.elevator;
 
+
 import edu.wpi.first.wpilibj.DigitalInput;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Provides implementation of <code>IElevatorSensor</code> for the
@@ -22,7 +24,7 @@ class ElevatorSensor extends BaseElevatorSensor {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ElevatorSensor.class.getName());
 
-    private DigitalInput location;
+    private final DigitalInput location;
 
     ElevatorSensor() {
         logger.info("constructing");

@@ -6,7 +6,7 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.incrementer;
+package frc.robot.sensors.elevator;
 
 
 import riolog.PKLogger;
@@ -14,18 +14,17 @@ import riolog.RioLogger;
 
 
 /**
- * Provides implementation of <code>IIncrementerSensor</code> for the
- * <i>Zester-Bot</i>.
+ * Provides implementation of <code>IElevatorSensor</code> for the
+ * <i>Suitcase-Bot</i>.
  */
-class ZesterIncrementerSensor extends StubIncrementerSensor {
+class SuitcaseElevatorSensor extends StubElevatorSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ZesterIncrementerSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(SuitcaseElevatorSensor.class.getName());
 
-    ZesterIncrementerSensor() {
+    SuitcaseElevatorSensor() {
         logger.info("constructing");
 
         logger.info("constructed");
     }
-
 }
