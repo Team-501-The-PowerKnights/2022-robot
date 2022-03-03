@@ -22,9 +22,9 @@
               "_title": "Misc.codeVersion"
             }
           },
-          "35,9": {
+          "34,9": {
             "size": [
-              3,
+              4,
               2
             ],
             "content": {
@@ -57,7 +57,7 @@
               "_title": "Misc.robotName"
             }
           },
-          "26,0": {
+          "25,0": {
             "size": [
               9,
               3
@@ -68,9 +68,9 @@
               "_title": "Auto Mode"
             }
           },
-          "35,0": {
+          "34,0": {
             "size": [
-              3,
+              4,
               2
             ],
             "content": {
@@ -155,9 +155,9 @@
         "vgap": 8.0,
         "titleType": 0,
         "tiles": {
-          "2,9": {
+          "9,7": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
@@ -166,9 +166,9 @@
               "_title": "Drive.implClass"
             }
           },
-          "2,7": {
+          "9,5": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
@@ -177,7 +177,7 @@
               "_title": "Drive.status"
             }
           },
-          "14,5": {
+          "3,3": {
             "size": [
               5,
               2
@@ -188,9 +188,9 @@
               "_title": "Gyro.implClass"
             }
           },
-          "14,3": {
+          "0,3": {
             "size": [
-              5,
+              3,
               2
             ],
             "content": {
@@ -199,7 +199,7 @@
               "_title": "Gyro.status"
             }
           },
-          "2,0": {
+          "0,0": {
             "size": [
               12,
               2
@@ -210,7 +210,7 @@
               "_title": "Misc.codeVersion"
             }
           },
-          "18,0": {
+          "12,2": {
             "size": [
               4,
               2
@@ -221,7 +221,7 @@
               "_title": "Misc.robotImpl"
             }
           },
-          "14,0": {
+          "12,0": {
             "size": [
               4,
               2
@@ -232,9 +232,9 @@
               "_title": "Misc.robotName"
             }
           },
-          "2,5": {
+          "18,2": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
@@ -243,9 +243,9 @@
               "_title": "PDP.implClass"
             }
           },
-          "2,3": {
+          "18,0": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
@@ -254,9 +254,9 @@
               "_title": "PDP.status"
             }
           },
-          "22,9": {
+          "25,7": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
@@ -265,9 +265,9 @@
               "_title": "Turret.implClass"
             }
           },
-          "22,7": {
+          "25,5": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
@@ -276,9 +276,9 @@
               "_title": "Turret.status"
             }
           },
-          "25,0": {
+          "28,0": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
@@ -287,9 +287,9 @@
               "_title": "Scheduler.status"
             }
           },
-          "7,9": {
+          "13,7": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
@@ -298,9 +298,9 @@
               "_title": "Intake.implClass"
             }
           },
-          "7,7": {
+          "13,5": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
@@ -309,9 +309,9 @@
               "_title": "Intake.status"
             }
           },
-          "12,9": {
+          "17,7": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
@@ -320,9 +320,9 @@
               "_title": "Elevator.implClass"
             }
           },
-          "12,7": {
+          "17,5": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
@@ -331,20 +331,9 @@
               "_title": "Elevator.status"
             }
           },
-          "17,9": {
+          "29,5": {
             "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter.defCommand",
-              "_title": "Shooter.implClass"
-            }
-          },
-          "17,7": {
-            "size": [
-              5,
+              4,
               2
             ],
             "content": {
@@ -353,9 +342,9 @@
               "_title": "Shooter.status"
             }
           },
-          "27,9": {
+          "33,7": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
@@ -364,9 +353,9 @@
               "_title": "Climber.implClass"
             }
           },
-          "27,7": {
+          "33,5": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
@@ -375,7 +364,7 @@
               "_title": "Climber.status"
             }
           },
-          "32,0": {
+          "33,0": {
             "size": [
               4,
               2
@@ -386,7 +375,7 @@
               "_title": "Properties.status"
             }
           },
-          "32,2": {
+          "33,2": {
             "size": [
               4,
               2
@@ -397,7 +386,7 @@
               "_title": "Preferences.status"
             }
           },
-          "19,5": {
+          "3,5": {
             "size": [
               5,
               2
@@ -408,9 +397,9 @@
               "_title": "Vision.implClass"
             }
           },
-          "19,3": {
+          "0,5": {
             "size": [
-              5,
+              3,
               2
             ],
             "content": {
@@ -419,7 +408,7 @@
               "_title": "Vision.status"
             }
           },
-          "24,5": {
+          "3,11": {
             "size": [
               5,
               2
@@ -430,9 +419,9 @@
               "_title": "TurretLocation.implClass"
             }
           },
-          "24,3": {
+          "0,11": {
             "size": [
-              5,
+              3,
               2
             ],
             "content": {
@@ -441,75 +430,9 @@
               "_title": "TurretLocation.status"
             }
           },
-          "27,11": {
+          "22,0": {
             "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Climber.defCommand",
-              "_title": "Climber.defCommand"
-            }
-          },
-          "2,11": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.defCommand",
-              "_title": "Drive.defCommand"
-            }
-          },
-          "7,11": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake.defCommand",
-              "_title": "Intake.defCommand"
-            }
-          },
-          "22,11": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turret.defCommand",
-              "_title": "Turret.defCommand"
-            }
-          },
-          "17,11": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter.defCommand",
-              "_title": "Shooter.defCommand"
-            }
-          },
-          "12,11": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Elevator.defCommand",
-              "_title": "Elevator.defCommand"
-            }
-          },
-          "7,3": {
-            "size": [
-              5,
+              4,
               2
             ],
             "content": {
@@ -518,15 +441,246 @@
               "_title": "PCM.status"
             }
           },
-          "7,5": {
+          "22,2": {
             "size": [
-              5,
+              4,
               2
             ],
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/PCM.implClass",
               "_title": "PCM.implClass"
+            }
+          },
+          "21,5": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Incrementer.status",
+              "_title": "Incrementer.status"
+            }
+          },
+          "21,7": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Incrementer.implClass",
+              "_title": "Incrementer.implClass"
+            }
+          },
+          "29,7": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.implClass",
+              "_title": "Shooter.implClass"
+            }
+          },
+          "33,9": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climber.autoCommand",
+              "_title": "Climber.autoCommand"
+            }
+          },
+          "33,11": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climber.teleCommand",
+              "_title": "Climber.teleCommand"
+            }
+          },
+          "9,9": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drive.autoCommand",
+              "_title": "Drive.autoCommand"
+            }
+          },
+          "9,11": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drive.teleCommand",
+              "_title": "Drive.teleCommand"
+            }
+          },
+          "17,9": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Elevator.autoCommand",
+              "_title": "Elevator.autoCommand"
+            }
+          },
+          "17,11": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Elevator.teleCommand",
+              "_title": "Elevator.teleCommand"
+            }
+          },
+          "13,11": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Intake.teleCommand",
+              "_title": "Intake.teleCommand"
+            }
+          },
+          "13,9": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Intake.autoCommand",
+              "_title": "Intake.autoCommand"
+            }
+          },
+          "29,9": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.autoCommand",
+              "_title": "Shooter.autoCommand"
+            }
+          },
+          "29,11": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.teleCommand",
+              "_title": "Shooter.teleCommand"
+            }
+          },
+          "25,9": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.autoCommand",
+              "_title": "Turret.autoCommand"
+            }
+          },
+          "25,11": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.teleCommand",
+              "_title": "Turret.teleCommand"
+            }
+          },
+          "21,9": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Incrementer.autoCommand",
+              "_title": "Incrementer.autoCommand"
+            }
+          },
+          "21,11": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Incrementer.teleCommand",
+              "_title": "Incrementer.teleCommand"
+            }
+          },
+          "3,7": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ElevatorSensor.implClass",
+              "_title": "ElevatorSensor.implClass"
+            }
+          },
+          "0,7": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ElevatorSensor.status",
+              "_title": "ElevatorSensor.status"
+            }
+          },
+          "3,9": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IncrementerSensor.implClass",
+              "_title": "IncrementerSensor.implClass"
+            }
+          },
+          "0,9": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IncrementerSensor.status",
+              "_title": "IncrementerSensor.status"
             }
           }
         }
@@ -639,7 +793,7 @@
               "_title": "TurretLocation.status"
             }
           },
-          "14,0": {
+          "31,0": {
             "size": [
               5,
               2
@@ -650,7 +804,7 @@
               "_title": "Gyro.implClass"
             }
           },
-          "14,2": {
+          "31,2": {
             "size": [
               5,
               2
@@ -661,7 +815,7 @@
               "_title": "Gyro.status"
             }
           },
-          "14,5": {
+          "31,5": {
             "size": [
               3,
               2
@@ -672,7 +826,7 @@
               "_title": "Gyro.angle"
             }
           },
-          "17,5": {
+          "34,5": {
             "size": [
               3,
               2
@@ -683,7 +837,7 @@
               "_title": "Gyro.heading"
             }
           },
-          "14,7": {
+          "31,7": {
             "size": [
               5,
               2
@@ -694,7 +848,7 @@
               "_title": "Gyro.roll"
             }
           },
-          "14,9": {
+          "31,9": {
             "size": [
               5,
               2
@@ -705,7 +859,7 @@
               "_title": "Gyro.pitch"
             }
           },
-          "14,11": {
+          "31,11": {
             "size": [
               5,
               2
@@ -714,6 +868,76 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Gyro.yaw",
               "_title": "Gyro.yaw"
+            }
+          },
+          "14,5": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Elevator.full",
+              "_title": "Elevator.full",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "20,5": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Incrementer.full",
+              "_title": "Incrementer.full",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "14,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ElevatorSensor.implClass",
+              "_title": "ElevatorSensor.implClass"
+            }
+          },
+          "14,2": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ElevatorSensor.status",
+              "_title": "ElevatorSensor.status"
+            }
+          },
+          "20,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IncrementerSensor.implClass",
+              "_title": "IncrementerSensor.implClass"
+            }
+          },
+          "20,2": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IncrementerSensor.status",
+              "_title": "IncrementerSensor.status"
             }
           }
         }
@@ -947,9 +1171,9 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "6,7": {
+          "2,9": {
             "size": [
-              27,
+              35,
               2
             ],
             "content": {
@@ -1174,17 +1398,6 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "2,4": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.defCommand",
-              "_title": "Drive.defCommand"
-            }
-          },
           "29,0": {
             "size": [
               4,
@@ -1243,6 +1456,28 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/HMI.rawTurn",
               "_title": "HMI.rawTurn"
+            }
+          },
+          "2,4": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drive.autoCommand",
+              "_title": "Drive.autoCommand"
+            }
+          },
+          "2,6": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drive.teleCommand",
+              "_title": "Drive.teleCommand"
             }
           }
         }
@@ -1331,17 +1566,6 @@
               "_title": "Intake.implClass"
             }
           },
-          "2,4": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake.defCommand",
-              "_title": "Intake.defCommand"
-            }
-          },
           "21,5": {
             "size": [
               4,
@@ -1354,12 +1578,34 @@
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
+          },
+          "2,6": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Intake.teleCommand",
+              "_title": "Intake.teleCommand"
+            }
+          },
+          "2,4": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Intake.autoCommand",
+              "_title": "Intake.autoCommand"
+            }
           }
         }
       }
     },
     {
-      "title": "Elevator",
+      "title": "Elevator \u0026 Incrementer",
       "autoPopulate": false,
       "autoPopulatePrefix": "",
       "widgetPane": {
@@ -1382,7 +1628,7 @@
           },
           "2,2": {
             "size": [
-              3,
+              4,
               2
             ],
             "content": {
@@ -1391,7 +1637,7 @@
               "_title": "Elevator.status"
             }
           },
-          "9,1": {
+          "16,1": {
             "size": [
               4,
               2
@@ -1402,7 +1648,7 @@
               "_title": "HMI.elevatorSpeed"
             }
           },
-          "21,0": {
+          "28,0": {
             "size": [
               4,
               2
@@ -1415,7 +1661,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "21,2": {
+          "28,2": {
             "size": [
               4,
               2
@@ -1428,7 +1674,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "17,1": {
+          "24,1": {
             "size": [
               4,
               2
@@ -1441,7 +1687,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "13,1": {
+          "20,1": {
             "size": [
               4,
               2
@@ -1452,15 +1698,146 @@
               "_title": "Elevator.speed"
             }
           },
-          "2,4": {
+          "7,0": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Elevator.autoCommand",
+              "_title": "Elevator.autoCommand"
+            }
+          },
+          "7,2": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Elevator.teleCommand",
+              "_title": "Elevator.teleCommand"
+            }
+          },
+          "20,7": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Incrementer.speed",
+              "_title": "Incrementer.speed"
+            }
+          },
+          "24,7": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Incrementer.stopped",
+              "_title": "Incrementer.stopped",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "28,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Incrementer.lifting",
+              "_title": "Incrementer.lifting",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "28,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Incrementer.lowering",
+              "_title": "Incrementer.lowering",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "33,1": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Elevator.full",
+              "_title": "Elevator.full",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "33,7": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Incrementer.full",
+              "_title": "Incrementer.full",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "7,8": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Incrementer.teleCommand",
+              "_title": "Incrementer.teleCommand"
+            }
+          },
+          "7,6": {
+            "size": [
+              6,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Incrementer.autoCommand",
+              "_title": "Incrementer.autoCommand"
+            }
+          },
+          "2,6": {
             "size": [
               5,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Elevator.defCommand",
-              "_title": "Elevator.defCommand"
+              "_source0": "network_table:///SmartDashboard/Incrementer.implClass",
+              "_title": "Incrementer.implClass"
+            }
+          },
+          "2,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Incrementer.status",
+              "_title": "Incrementer.status"
             }
           }
         }
@@ -1497,17 +1874,6 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Shooter.status",
               "_title": "Shooter.status"
-            }
-          },
-          "2,4": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter.defCommand",
-              "_title": "Shooter.defCommand"
             }
           },
           "16,0": {
@@ -1617,6 +1983,28 @@
                 }
               ]
             }
+          },
+          "2,4": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.autoCommand",
+              "_title": "Shooter.autoCommand"
+            }
+          },
+          "2,6": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.teleCommand",
+              "_title": "Shooter.teleCommand"
+            }
           }
         }
       }
@@ -1689,17 +2077,6 @@
               "_title": "TurretLocation.status"
             }
           },
-          "2,4": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turret.defCommand",
-              "_title": "Turret.defCommand"
-            }
-          },
           "9,0": {
             "size": [
               4,
@@ -1753,6 +2130,28 @@
                   "_title": "Turret.F"
                 }
               ]
+            }
+          },
+          "2,4": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.autoCommand",
+              "_title": "Turret.autoCommand"
+            }
+          },
+          "2,6": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.teleCommand",
+              "_title": "Turret.teleCommand"
             }
           }
         }
@@ -3088,6 +3487,352 @@
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
+          },
+          "64,5": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Intake.pushingOut",
+              "_title": "Intake.pushingOut",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "68,5": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Intakeretracted",
+              "_title": "Intakeretracted",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "72,5": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Intake.extended",
+              "_title": "Intake.extended",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "72,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Incrementer.status",
+              "_title": "Incrementer.status"
+            }
+          },
+          "74,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Incrementer.implClass",
+              "_title": "Incrementer.implClass"
+            }
+          },
+          "74,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Incrementer.defCommand",
+              "_title": "Incrementer.defCommand"
+            }
+          },
+          "64,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Incrementer.speed",
+              "_title": "Incrementer.speed"
+            }
+          },
+          "18,6": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Incrementer.stopped",
+              "_title": "Incrementer.stopped",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "46,6": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Incrementer.lifting",
+              "_title": "Incrementer.lifting",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "56,6": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Incrementer.lowering",
+              "_title": "Incrementer.lowering",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "60,6": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Incrementer.full",
+              "_title": "Incrementer.full",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "76,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Intake.teleCommand",
+              "_title": "Intake.teleCommand"
+            }
+          },
+          "78,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drive.teleCommand",
+              "_title": "Drive.teleCommand"
+            }
+          },
+          "76,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drive.autoCommand",
+              "_title": "Drive.autoCommand"
+            }
+          },
+          "78,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Intake.autoCommand",
+              "_title": "Intake.autoCommand"
+            }
+          },
+          "74,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Elevator.teleCommand",
+              "_title": "Elevator.teleCommand"
+            }
+          },
+          "76,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Elevator.autoCommand",
+              "_title": "Elevator.autoCommand"
+            }
+          },
+          "78,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.teleCommand",
+              "_title": "Turret.teleCommand"
+            }
+          },
+          "16,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Turret.autoCommand",
+              "_title": "Turret.autoCommand"
+            }
+          },
+          "22,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.teleCommand",
+              "_title": "Shooter.teleCommand"
+            }
+          },
+          "32,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter.autoCommand",
+              "_title": "Shooter.autoCommand"
+            }
+          },
+          "46,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climber.teleCommand",
+              "_title": "Climber.teleCommand"
+            }
+          },
+          "64,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climber.autoCommand",
+              "_title": "Climber.autoCommand"
+            }
+          },
+          "80,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Incrementer.autoCommand",
+              "_title": "Incrementer.autoCommand"
+            }
+          },
+          "82,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Incrementer.teleCommand",
+              "_title": "Incrementer.teleCommand"
+            }
+          },
+          "80,1": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Incrementer.atLimit",
+              "_title": "Incrementer.atLimit",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "74,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IncrementerSensor.status",
+              "_title": "IncrementerSensor.status"
+            }
+          },
+          "76,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ElevatorSensor.status",
+              "_title": "ElevatorSensor.status"
+            }
+          },
+          "78,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IncrementerSensor.implClass",
+              "_title": "IncrementerSensor.implClass"
+            }
+          },
+          "46,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ElevatorSensor.implClass",
+              "_title": "ElevatorSensor.implClass"
+            }
           }
         }
       }
@@ -3313,6 +4058,41 @@
                   "_title": "Compressor[0]/Pressure switch",
                   "Colors/Color when true": "#7CFC00FF",
                   "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Solenoid[0,3]/Value",
+                  "_title": "LiveWindow/Ungrouped/Solenoid[0,3]/Value",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Solenoid[0,1]/Value",
+                  "_title": "LiveWindow/Ungrouped/Solenoid[0,1]/Value",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[1]/Value",
+                  "_title": "LiveWindow/Ungrouped/DigitalInput[1]/Value",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[0]/Value",
+                  "_title": "DigitalInput[0]/Value",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[2]/Value",
+                  "_title": "DigitalInput[2]/Value",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
                 }
               ]
             }
@@ -3337,7 +4117,7 @@
   "windowGeometry": {
     "x": -6.0,
     "y": 4.0,
-    "width": 1554.0,
-    "height": 667.0
+    "width": 1549.0,
+    "height": 668.0
   }
 }
