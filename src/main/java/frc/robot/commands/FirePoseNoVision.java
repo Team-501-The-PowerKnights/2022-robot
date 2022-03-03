@@ -10,6 +10,8 @@ package frc.robot.commands;
 
 import org.slf4j.Logger;
 
+import frc.robot.sensors.vision.IVisionSensor;
+import frc.robot.sensors.vision.VisionFactory;
 import frc.robot.subsystems.elevator.ElevatorFactory;
 import frc.robot.subsystems.elevator.IElevatorSubsystem;
 import frc.robot.subsystems.incrementer.IIncrementerSubsystem;
@@ -24,12 +26,16 @@ public class FirePoseNoVision extends PKCommandBase {
     /** Our classes' logger **/
     private static final Logger logger = RioLogger.getLogger(FirePoseNoVision.class.getName());
 
+    private final IVisionSensor vision;
+
     private final IShooterSubsystem shooter;
     private final IIncrementerSubsystem incrementer;
     private final IElevatorSubsystem elevator;
 
     public FirePoseNoVision() {
         logger.info("constructing {}", getName());
+
+        vision = VisionFactory.getInstance();
 
         shooter = ShooterFactory.getInstance();
         incrementer = IncrementerFactory.getInstance();
@@ -41,10 +47,22 @@ public class FirePoseNoVision extends PKCommandBase {
     }
 
     @Override
+    public void initialize() {
+        vision.enable();
+    }
+
+    @Override
     public void execute() {
         super.execute();
 
-        shooter.setSpeed(29, 0.50);
+        super.execute();
+
+        double y = vision.getY();
+        double speed = 0.489 + (-0.0116 * y) + (0.0107 * (Math.pow(y, 2))) + ((-4.32E-03) * (Math.pow(y, 3)))
+                + (2.07E-04 * Math.pow(y, 4)) + (2.34E-04 * Math.pow(y, 5)) + (-5.47E-05 * Math.pow(y, 6))
+                + (4.68E-06 * Math.pow(y, 7)) + -1.41E-07 * (Math.pow(y, 8));
+        speed += 0.015;
+        shooter.setSpeed(29, speed);
 
         incrementer.increment();
         elevator.liftToLimit();
@@ -54,6 +72,7 @@ public class FirePoseNoVision extends PKCommandBase {
     public void end(boolean interrupted) {
         super.end(interrupted);
 
+        vision.disable();
         incrementer.stop();
         elevator.stop();
     }

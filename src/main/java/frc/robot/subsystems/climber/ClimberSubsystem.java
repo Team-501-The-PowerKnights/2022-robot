@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.climber;
 
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -21,14 +20,12 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-
 class ClimberSubsystem extends BaseClimberSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimberSubsystem.class.getName());
 
-    private final CANSparkMax leftMotor;
-    private final CANSparkMax rightMotor;
+    private final CANSparkMax motor;
 
     private final AnalogInput limitUp;
     private final AnalogInput limitDown;
@@ -36,16 +33,9 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     ClimberSubsystem() {
         logger.info("constructing");
 
-        leftMotor = new CANSparkMax(56, MotorType.kBrushless);
-        leftMotor.restoreFactoryDefaults();
-        leftMotor.setIdleMode(IdleMode.kBrake);
-
-        rightMotor = new CANSparkMax(55, MotorType.kBrushless);
-        rightMotor.restoreFactoryDefaults();
-        rightMotor.setIdleMode(IdleMode.kBrake);
-
-        // Slaved and inverted?
-        rightMotor.follow(leftMotor, true); // TODO - should this be inverted or not?
+        motor = new CANSparkMax(56, MotorType.kBrushless);
+        motor.restoreFactoryDefaults();
+        motor.setIdleMode(IdleMode.kBrake);
 
         limitUp = new AnalogInput(0);
         limitDown = new AnalogInput(1);
@@ -69,7 +59,7 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     @Override
     public void updatePreferences() {
         super.updatePreferences();
-        
+
         // Real doesn't implement this
     }
 
@@ -100,7 +90,7 @@ class ClimberSubsystem extends BaseClimberSubsystem {
 
     private void setSpeed(double speed) {
         setTlmSpeed(speed);
-        leftMotor.set(speed);
+        motor.set(speed);
     }
 
 }

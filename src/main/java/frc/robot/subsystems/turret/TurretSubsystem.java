@@ -70,7 +70,6 @@ class TurretSubsystem extends BaseTurretSubsystem {
         location = TurretLocationFactory.getInstance();
 
         vision = VisionFactory.getInstance();
-        vision.disable();
 
         SmartDashboard.putBoolean(TelemetryNames.Turret.isHomed, false);
 
