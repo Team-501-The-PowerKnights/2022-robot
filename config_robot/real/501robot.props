@@ -53,20 +53,26 @@ Vision.className = VisionSensor
 
 
 #####################
-# TurretLocation
+# Elevator Loaded
+#####################
+ElevatorSensor.className = StubElevatorSensor
+#ElevatorSensor.className = ElevatorSensor
+
+
+#####################
+# Incrementer Loaded
+#####################
+#IncrementerSensor.className = StubIncrementerSensor
+IncrementerSensor.className = IncrementerSensor
+
+
+#####################
+# Turret Location
 #####################
 TurretLocation.className = StubTurretLocationSensor
 #TurretLocation.className = TurretLocationSensor
 
-#####################
-# ElevatorSensor
-#####################
-ElevatorSensor.className = StubElevatorSensor
 
-#####################
-# IncrementerSensor
-#####################
-IncrementerSensor.className = IncrementerSensor
 
 #########################################
 #########################################
@@ -80,8 +86,8 @@ IncrementerSensor.className = IncrementerSensor
 # Drive.className = StubDriveSubsystem
 Drive.className = DriveSubsystem
 Drive.autoCommandName = DriveDoNothing
-Drive.teleCommandName = DriveJoystickControl
 #Drive.teleCommandName = DriveDoNothing
+Drive.teleCommandName = DriveJoystickControl
 
 
 #####################
@@ -90,8 +96,8 @@ Drive.teleCommandName = DriveJoystickControl
 #Intake.className = StubIntakeSubsystem
 Intake.className = IntakeSubsystem
 Intake.autoCommandName = IntakeDoNothing
-Intake.teleCommandName = IntakeManualControl
 #Intake.teleCommandName = IntakeDoNothing
+Intake.teleCommandName = IntakeManualControl
 
 
 #####################
@@ -100,8 +106,8 @@ Intake.teleCommandName = IntakeManualControl
 #Elevator.className = StubElevatorSubsystem
 Elevator.className = ElevatorSubsystem
 Elevator.autoCommandName = ElevatorDoNothing
-Elevator.teleCommandName = ElevatorManualControl
 #Elevator.teleCommandName = ElevatorDoNothing
+Elevator.teleCommandName = ElevatorManualControl
 
 
 #####################
@@ -109,6 +115,7 @@ Elevator.teleCommandName = ElevatorManualControl
 #####################
 Incrementer.className = IncrementerSubsystem
 Incrementer.autoCommandName = IncrementerDoNothing
+#Incrementer.teleCommandName = IncrementerDoNothing
 Incrementer.teleCommandName = IncrementerManualControl
 
 
@@ -117,10 +124,10 @@ Incrementer.teleCommandName = IncrementerManualControl
 #####################
 #Shooter.className = StubShooterSubsystem
 Shooter.className = ShooterSubsystem
-Shooter.autoCommandName = ShooterIdle
 #Shooter.autoCommandName = ShooterDoNothing
-Shooter.teleCommandName = ShooterIdle
+Shooter.autoCommandName = ShooterIdle
 #Shooter.teleCommandName = ShooterDoNothing
+Shooter.teleCommandName = ShooterIdle
 
 
 #####################
@@ -129,8 +136,8 @@ Shooter.teleCommandName = ShooterIdle
 #Turret.className = StubTurretSubsystem
 Turret.className = TurretSubsystem
 Turret.autoCommandName = TurretDoNothing
-Turret.teleCommandName = TurretManualControlJog
 #Turret.teleCommandName = TurretDoNothing
+Turret.teleCommandName = TurretManualControlJog
 
 
 #####################

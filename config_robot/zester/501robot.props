@@ -53,6 +53,20 @@ Vision.className = StubVisionSensor
 
 
 #####################
+# Elevator Loaded
+#####################
+ElevatorSensor.className = StubElevatorSensor
+#ElevatorSensor.className = ElevatorSensor
+
+
+#####################
+# Incrementer Loaded
+#####################
+IncrementerSensor.className = StubIncrementerSensor
+#IncrementerSensor.className = IncrementerSensor
+
+
+#####################
 # Turret Location
 #####################
 TurretLocation.className = StubTurretLocationSensor
@@ -69,11 +83,10 @@ TurretLocation.className = StubTurretLocationSensor
 #####################
 # Drive
 #####################
-#Drive.className = StubDriveSubsystem
-Drive.className =
+Drive.className = StubDriveSubsystem
+#Drive.className =
 Drive.autoCommandName = DriveDoNothing
-Drive.teleCommandName = DriveJoystickControl
-#Drive.teleCommandName = DriveDoNothing
+Drive.teleCommandName = DriveDoNothing
 
 
 #####################
@@ -88,18 +101,19 @@ Intake.teleCommandName = IntakeDoNothing
 #####################
 # Elevator
 #####################
-#Elevator.className = StubElevatorSubsystem
-Elevator.className =
+Elevator.className = StubElevatorSubsystem
+#Elevator.className =
 Elevator.autoCommandName = ElevatorDoNothing
-Elevator.teleCommandName = ElevatorManualControl
-#Elevator.teleCommandName = ElevatorDoNothing
+Elevator.teleCommandName = ElevatorDoNothing
 
 
 #####################
 # Incrementer
 #####################
-Incrementer.className = 
-Incrementer.defaultCommandName = IncrementerDoNothing
+Incrementer.className = StubIncrementerSubsystem
+#Incrementer.className =
+Incrementer.autoCommandName = IncrementerDoNothing
+Incrementer.teleCommandName = IncrementerDoNothing
 
 
 #####################
@@ -125,8 +139,8 @@ Turret.teleCommandName = TurretDoNothing
 #####################
 Climber.className = StubClimberSubsystem
 #Climber.className =
-Shooter.autoCommandName = TurretDoNothing
-Shooter.teleCommandName = TurretDoNothing
+Climber.autoCommandName = ClimberDoNothing
+Climber.teleCommandName = ClimberDoNothing
 
 
 
