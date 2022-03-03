@@ -130,6 +130,29 @@ class TurretSubsystem extends BaseTurretSubsystem {
 
     @Override
     public void setAngleFromVision() {
+        // float Kp = -0.15f;
+        // float min_command = 0.05f;
+        // double max_output = 0.5;
+
+        // double heading_error = vision.getError();
+        // double steering_adjust = 0.0f;
+
+        // if (heading_error < 0.5) {
+        // steering_adjust = Kp * heading_error - min_command;
+        // } else if (heading_error > 0.5) {
+        // steering_adjust = Kp * heading_error + min_command;
+        // }
+
+        // if (Math.abs(steering_adjust) > 1) {
+        // steering_adjust = steering_adjust > 0 ? max_output : -max_output;
+        // }
+
+        // SmartDashboard.putNumber(TelemetryNames.Turret.visionPIDOutput,
+        // steering_adjust);
+
+        // // pid.setReference(steering_adjust, CANSparkMax.ControlType.kVoltage, 1);
+        // motor.set(steering_adjust);
+
         float Kp = -0.75f;
         float min_command = 0.05f;
 

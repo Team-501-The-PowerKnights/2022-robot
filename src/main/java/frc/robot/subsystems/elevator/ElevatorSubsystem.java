@@ -80,7 +80,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     public void lift() {
         super.lift();
 
-        setSpeed(-0.85);
+        setSpeed(-1);
     }
 
     @Override

@@ -11,6 +11,7 @@ package frc.robot.hmi;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.FirePoseNoVision;
 import frc.robot.commands.FirePoseVision;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.shooter.ShooterSpinUpFormula;
@@ -43,7 +44,7 @@ public class OperatorGamepad extends F310Gamepad {
 
         firePoseButton = new JoystickButton(stick, greenButton);
         // visionTargettingButton = new JoystickButton(stick, rightBumper);
-        visionTargettingButton = new JoystickButton(stick, greenButton);
+        visionTargettingButton = new JoystickButton(stick, rightBumper);
         // revShooterButton = new JoystickButton(stick, redButton);
         homeTurretButton = new JoystickButton(stick, startButton);
 
@@ -57,11 +58,12 @@ public class OperatorGamepad extends F310Gamepad {
         // visionTargettingButton
         // .whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(), new
         // ShooterSpinUpFormula()));
-        visionTargettingButton
-                .whenHeld(new TurretVisionAlign());
+        // visionTargettingButton
+        // .whenHeld(new TurretVisionAlign());
         homeTurretButton.whenHeld(new TurretHome());
         // firePoseButton.whenHeld(new FirePoseVision());
-        firePoseButton.whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(), new FirePoseVision()));
+        visionTargettingButton.whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(), new FirePoseVision()));
+        firePoseButton.whenHeld(new FirePoseNoVision());
 
         logger.info("configured");
     }

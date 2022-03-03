@@ -29,7 +29,7 @@ public class ShooterIdle extends ShooterCommandBase {
     logger.info("constructed");
   }
 
-  public ShooterIdle( double speed ) {
+  public ShooterIdle(double speed) {
     logger.info("constructing {} w/ speed = ", getName(), speed);
 
     this.speed = speed;

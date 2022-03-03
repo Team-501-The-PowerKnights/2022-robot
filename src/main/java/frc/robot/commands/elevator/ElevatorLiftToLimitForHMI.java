@@ -11,39 +11,41 @@ package frc.robot.commands.elevator;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ElevatorManualControl extends ElevatorOICommandBase {
+/**
+ * Add your docs here.
+ */
+public class ElevatorLiftToLimitForHMI extends ElevatorCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ElevatorManualControl.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ElevatorLiftToLimitForHMI.class.getName());
 
-    /**
-     * Creates a new DriveJoystickControl.
-     */
-    public ElevatorManualControl() {
+    public ElevatorLiftToLimitForHMI() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
     }
 
-    private boolean wasEnabled = false;
+    private static double counts = 0;
 
-    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void initialize() {
+        counts = 0;
+    }
+
     @Override
     public void execute() {
-        super.execute();
+        elevator.liftToLimit();
+        counts++;
+    }
 
-        double liftSpeed = oi.getIntakeSpeed();
-        if (liftSpeed > 0) {
-            wasEnabled = true;
-            elevator.liftToLimit();
-        } else {
-            if (wasEnabled) {
-                wasEnabled = false;
-                (new ElevatorLiftToLimitForHMI()).schedule();
-            } else {
-                elevator.stop();
-            }
-        }
+    @Override
+    public boolean isFinished() {
+        return elevator.isFull() || counts >= 250;
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        elevator.stop();
     }
 
 }

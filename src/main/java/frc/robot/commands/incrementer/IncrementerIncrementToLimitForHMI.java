@@ -8,8 +8,6 @@
 
 package frc.robot.commands.incrementer;
 
-import frc.robot.subsystems.incrementer.IIncrementerSubsystem;
-
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -21,16 +19,13 @@ public class IncrementerIncrementToLimitForHMI extends IncrementerCommandBase {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(IncrementerIncrementToLimitForHMI.class.getName());
 
-    // Handle to our subsystem
-    protected IIncrementerSubsystem incrementer;
-
     public IncrementerIncrementToLimitForHMI() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
     }
 
-    private static double counts;
+    private static double counts = 0;
 
     @Override
     public void initialize() {
@@ -45,7 +40,7 @@ public class IncrementerIncrementToLimitForHMI extends IncrementerCommandBase {
 
     @Override
     public boolean isFinished() {
-        return incrementer.isFull() || counts >= 10;
+        return incrementer.isFull() || counts >= 50;
     }
 
     @Override

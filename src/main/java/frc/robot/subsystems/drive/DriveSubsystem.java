@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.drive;
 
-
 import java.util.List;
 
 import com.revrobotics.RelativeEncoder;
@@ -41,7 +40,6 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-
 class DriveSubsystem extends BaseDriveSubsystem {
 
     /** Our classes' logger **/
@@ -61,9 +59,9 @@ class DriveSubsystem extends BaseDriveSubsystem {
     private static final double maxAcceleration = 0.5; // Meters Per Second Squared
     private static final boolean leftReversed = false;
     private static final boolean rightReversed = false;
-    private static final double wheelRadius = 0.1524; // Meters
+    private static final double wheelRadius = 0.0762; // Meters
     private static final double beltGearing = 1;
-    private static final double gearboxGearing = 10.71; // Standard AndyMark KoP chassis Toughbox Mini gearing
+    private static final double gearboxGearing = 8.45; // Standard AndyMark KoP chassis Toughbox Mini gearing
 
     // Voltage constraint for trajectory following
     private final DifferentialDriveVoltageConstraint autoVoltageConstraint;

@@ -8,10 +8,8 @@
 
 package frc.robot.sensors.vision;
 
-
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Provides implementation of <code>IVisionSensor</code> for the
@@ -28,13 +26,14 @@ class VisionSensor extends BaseVisionSensor {
         logger.info("constructing");
 
         mySensor = new LimelightVision();
+        mySensor.disable();
 
         logger.info("constructed");
     }
 
     @Override
     public void updateTelemetry() {
-       super.updateTelemetry();
+        super.updateTelemetry();
     }
 
     @Override
