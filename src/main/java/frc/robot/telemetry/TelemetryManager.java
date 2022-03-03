@@ -12,7 +12,8 @@ package frc.robot.telemetry;
 import java.util.ArrayList;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.OI;
+
+import frc.robot.Robot;
 import frc.robot.telemetry.TelemetryNames.Misc;
 import frc.robot.utils.PKStatus;
 
@@ -77,7 +78,7 @@ public class TelemetryManager {
         if (counter >= 10) {
             counter = 0;
 
-            SmartDashboard.putBoolean(Misc.fmsConnected, OI.getInstance().isFieldConnected());
+            SmartDashboard.putBoolean(Misc.fmsConnected, Robot.isFieldConnected());
 
             for (ITelemetryProvider provider : providerList) {
                 // logger.trace("calling w/ provider {}", provider);

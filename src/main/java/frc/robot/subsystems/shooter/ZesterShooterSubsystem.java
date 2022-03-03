@@ -16,7 +16,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.OI;
+import frc.robot.Robot;
 import frc.robot.commands.CommandingNames;
 import frc.robot.telemetry.TelemetryNames;
 
@@ -152,7 +152,7 @@ class ZesterShooterSubsystem extends BaseShooterSubsystem {
 
     private double idleShooter(double speed) {
         // Have to be connected to the field to idle
-        if (!OI.getInstance().isFieldConnected()) {
+        if (!Robot.isFieldConnected()) {
             return 0.0;
         }
 
