@@ -8,11 +8,13 @@
 
 package frc.robot.sensors.incrementer;
 
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
+
 /**
- * Provides implementation of <code>ITurretHomeSensor</code> which has no sensor
+ * Provides implementation of <code>IIncrementerSensor</code> which has no sensor
  * or other useful functionality; but which won't blow up if instantiated and
  * 'used'.
  */

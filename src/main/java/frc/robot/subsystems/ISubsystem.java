@@ -22,21 +22,19 @@ public interface ISubsystem extends Subsystem, ITelemetryProvider {
 
     /**
      * Called to load the default commands for the subsystem; the values are
-     * determined
-     * from the properties file and loaded dynamically.
+     * determined from the properties file and loaded dynamically.
      **/
     public void loadDefaultCommand();
 
     /**
-     * Loads the default auto command. Should be called from the Robot class during
-     * autonomousInit().
+     * Loads the default auto command. Needs to be called prior to starting to
+     * execute the actual autonomous periodic code.
      */
     public void loadDefaultAutoCommand();
 
     /**
-     * Loads the default teleoperated command. Should be called from the Robot class
-     * during
-     * teleoperatedInit().
+     * Loads the default teleoperated command. Needs tp be called prior to starting
+     * to execute the actual teleoperated periodic code.
      */
     public void loadDefaultTeleCommand();
 

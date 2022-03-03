@@ -23,7 +23,7 @@ public final class ElevatorProperties {
 
     private ElevatorProperties() {}
 
-    static private final String name = SubsystemNames.driveName;
+    static private final String name = SubsystemNames.elevatorName;
     static final String className = name + ".className";
     static final String defaultCommandName = name + ".defaultCommandName";
     

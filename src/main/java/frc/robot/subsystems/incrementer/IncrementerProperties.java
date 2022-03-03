@@ -22,7 +22,7 @@ public final class IncrementerProperties {
     private IncrementerProperties() {
     }
 
-    static private final String name = SubsystemNames.driveName;
+    static private final String name = SubsystemNames.incrementerName;
     static final String className = name + ".className";
     static final String defaultCommandName = name + ".defaultCommandName";
 

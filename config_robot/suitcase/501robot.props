@@ -53,6 +53,20 @@ Vision.className = StubVisionSensor
 
 
 #####################
+# Elevator Loaded
+#####################
+ElevatorSensor.className = StubElevatorSensor
+#ElevatorSensor.className = ElevatorSensor
+
+
+#####################
+# Incrementer Loaded
+#####################
+IncrementerSensor.className = StubIncrementerSensor
+#IncrementerSensor.className = IncrementerSensor
+
+
+#####################
 # Turret Location
 #####################
 TurretLocation.className = StubTurretLocationSensor
@@ -96,8 +110,10 @@ Elevator.teleCommandName = ElevatorDoNothing
 #####################
 # Incrementer
 #####################
-Incrementer.className = 
-Incrementer.defaultCommandName = IncrementerDoNothing
+Incrementer.className = StubIncrementerSubsystem
+#Incrementer.className =
+Incrementer.autoCommandName = IncrementerDoNothing
+Incrementer.teleCommandName = IncrementerDoNothing
 
 
 #####################
