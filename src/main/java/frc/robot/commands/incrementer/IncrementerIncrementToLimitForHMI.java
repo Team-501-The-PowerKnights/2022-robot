@@ -8,10 +8,10 @@
 
 package frc.robot.commands.incrementer;
 
-import frc.robot.subsystems.incrementer.IIncrementerSubsystem;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Add your docs here.
@@ -20,9 +20,6 @@ public class IncrementerIncrementToLimitForHMI extends IncrementerCommandBase {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(IncrementerIncrementToLimitForHMI.class.getName());
-
-    // Handle to our subsystem
-    protected IIncrementerSubsystem incrementer;
 
     public IncrementerIncrementToLimitForHMI() {
         logger.info("constructing {}", getName());
