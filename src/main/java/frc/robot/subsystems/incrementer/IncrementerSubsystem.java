@@ -70,7 +70,7 @@ class IncrementerSubsystem extends BaseIncrementerSubsystem {
 
     @Override
     public void increment() {
-        setSpeed(0.4);
+        setSpeed(0.8);
     }
 
     @Override

@@ -24,16 +24,24 @@ public class ElevatorManualControl extends ElevatorOICommandBase {
         logger.info("constructed");
     }
 
+    private boolean wasEnabled = false;
+
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
         super.execute();
 
         double liftSpeed = oi.getIntakeSpeed();
-        if (liftSpeed == 0) {
-            elevator.stop();
-        } else if (liftSpeed > 0) {
+        if (liftSpeed > 0) {
+            wasEnabled = true;
             elevator.liftToLimit();
+        } else {
+            if (wasEnabled) {
+                wasEnabled = false;
+                (new ElevatorLiftToLimitForHMI()).schedule();
+            } else {
+                elevator.stop();
+            }
         }
     }
 

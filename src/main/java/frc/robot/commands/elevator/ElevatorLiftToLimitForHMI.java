@@ -6,7 +6,7 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.incrementer;
+package frc.robot.commands.elevator;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -14,12 +14,12 @@ import riolog.RioLogger;
 /**
  * Add your docs here.
  */
-public class IncrementerIncrementToLimitForHMI extends IncrementerCommandBase {
+public class ElevatorLiftToLimitForHMI extends ElevatorCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IncrementerIncrementToLimitForHMI.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ElevatorLiftToLimitForHMI.class.getName());
 
-    public IncrementerIncrementToLimitForHMI() {
+    public ElevatorLiftToLimitForHMI() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
@@ -34,18 +34,18 @@ public class IncrementerIncrementToLimitForHMI extends IncrementerCommandBase {
 
     @Override
     public void execute() {
-        incrementer.incrementToLimit();
+        elevator.liftToLimit();
         counts++;
     }
 
     @Override
     public boolean isFinished() {
-        return incrementer.isFull() || counts >= 50;
+        return elevator.isFull() || counts >= 250;
     }
 
     @Override
     public void end(boolean interrupted) {
-        incrementer.stop();
+        elevator.stop();
     }
 
 }
