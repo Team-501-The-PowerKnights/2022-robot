@@ -62,12 +62,6 @@ class StubClimberSubsystem extends BaseClimberSubsystem {
     }
 
     @Override
-    public void extend() {
-        tlmIsExtending = true;
-        // Stub doesn't implement this
-    }
-
-    @Override
     public void climb() {
         tlmIsClimbing = true;
         // Stub doesn't implement this

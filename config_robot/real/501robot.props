@@ -144,7 +144,8 @@ Turret.teleCommandName = TurretManualControlJog
 #Climber.className = StubClimberSubsystem
 Climber.className = ClimberSubsystem
 Climber.autoCommandName = ClimberDoNothing
-Climber.teleCommandName = ClimberSimpleManual
+#Climber.teleCommandName = ClimberSimpleManual
+Climber.teleCommandName = ClimberDoNothing
 
 
 

@@ -17,7 +17,7 @@ import frc.robot.commands.FirePoseNoVision;
 import frc.robot.commands.FirePoseVision;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.climber.ClimberClimb;
-import frc.robot.commands.climber.ClimberExtend;
+import frc.robot.commands.climber.ClimberRetract;
 import frc.robot.commands.shooter.ShooterSpinUpFormula;
 import frc.robot.commands.turret.TurretHome;
 import frc.robot.commands.turret.TurretVisionAlign;
@@ -40,7 +40,7 @@ public class OperatorGamepad extends F310Gamepad {
 
     private final Button firePoseButton;
     private final Button visionTargettingButton;
-    private final Button climberExtendButton;
+    private final Button climberRetractButton;
     private final Button climberClimbButton;
     // private final Button revShooterButton;
     // private final Button homeTurretButton;
@@ -54,8 +54,8 @@ public class OperatorGamepad extends F310Gamepad {
         visionTargettingButton = new JoystickButton(stick, rightBumper);
         // revShooterButton = new JoystickButton(stick, redButton);
         // homeTurretButton = new JoystickButton(stick, startButton);
-        climberExtendButton = new JoystickButton(stick, startButton);
-        climberClimbButton = new JoystickButton(stick, backButton);
+        climberRetractButton = new JoystickButton(stick, backButton);
+        climberClimbButton = new JoystickButton(stick, startButton);
 
         logger.info("constructed");
     }
@@ -73,7 +73,7 @@ public class OperatorGamepad extends F310Gamepad {
         // firePoseButton.whenHeld(new FirePoseVision());
         visionTargettingButton.whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(), new FirePoseVision()));
         firePoseButton.whenHeld(new FirePoseNoVision());
-        climberExtendButton.whenHeld(new ClimberExtend());
+        climberRetractButton.whenHeld(new ClimberRetract());
         climberClimbButton.whenHeld(new ClimberClimb());
 
         logger.info("configured");

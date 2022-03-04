@@ -21,11 +21,6 @@ public interface IClimberSubsystem extends ISubsystem {
     public void stop();
 
     /**
-     * Extend in preparation for the climb
-     **/
-    public void extend();
-
-    /**
      * Pull in to actually lift robot and climb
      **/
     public void climb();

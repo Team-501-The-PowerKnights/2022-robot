@@ -76,11 +76,6 @@ class ZesterClimberSubsystem extends BaseClimberSubsystem {
     }
 
     @Override
-    public void extend() {
-        setSpeed(0.40);
-    }
-
-    @Override
     public void climb() {
         setSpeed(1.0);
     }

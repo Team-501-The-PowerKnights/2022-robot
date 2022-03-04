@@ -13,12 +13,12 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class ClimberExtend extends ClimberCommandBase {
+public class ClimberRetract extends ClimberCommandBase {
     
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ClimberExtend.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ClimberRetract.class.getName());
 
-    public ClimberExtend() {
+    public ClimberRetract() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
@@ -29,7 +29,7 @@ public class ClimberExtend extends ClimberCommandBase {
     public void execute() {
         super.execute();
 
-        climber.extend();
+        climber.retract();
     }
 
     // Called once when either the Command finishes normally, or when it

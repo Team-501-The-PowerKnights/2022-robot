@@ -46,7 +46,6 @@ class ClimberSubsystem extends BaseClimberSubsystem {
 
     }
 
-    boolean tlmIsExtending = false;
     boolean tlmIsClimbing = false;
         
 
@@ -57,7 +56,6 @@ class ClimberSubsystem extends BaseClimberSubsystem {
         // SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit, (limitDown.getValue() == 1));
         // SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit, false);
         // SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit, false);
-        SmartDashboard.putBoolean(TelemetryNames.Climber.extending, tlmIsExtending);
         SmartDashboard.putBoolean(TelemetryNames.Climber.climbing, tlmIsClimbing);
     }
 
@@ -81,20 +79,13 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     @Override
     public void stop() {
         tlmIsClimbing = false;
-        tlmIsExtending = false;
         setSpeed(0.0);
     }
 
     @Override
-    public void extend() {
-        tlmIsExtending = true;
-        setSpeed(0.40);
-    }
-
-    @Override
     public void climb() {
-        tlmIsClimbing = false;
-        setSpeed(1.0);
+        tlmIsClimbing = true;
+        setSpeed(0.5);
     }
 
     @Override
