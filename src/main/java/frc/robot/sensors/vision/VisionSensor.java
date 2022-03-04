@@ -8,10 +8,12 @@
 
 package frc.robot.sensors.vision;
 
-import java.util.LinkedList;
+
+import java.util.ArrayDeque;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Provides implementation of <code>IVisionSensor</code> for the
@@ -44,7 +46,7 @@ class VisionSensor extends BaseVisionSensor {
     public void enable() {
         super.enable();
 
-        empty();
+        initialize();
 
         mySensor.enable();
     }
@@ -76,30 +78,30 @@ class VisionSensor extends BaseVisionSensor {
         return locked;
     }
 
-    private LinkedList<Double> list;
+    private final ArrayDeque<Double> list = new ArrayDeque<>();
+    private final int size = 10;
     private double sum;
-    int size;
 
     private void initialize() {
+        list.clear();
         sum = 0.0;
-        size = 10;
-        list = new LinkedList<>();
     }
 
     private double next(double value) {
         sum += value;
-        list.offer(value);
+        list.addFirst(value);
         if (list.size() <= size) {
             return sum / list.size();
         }
         else {
-            sum -= list.poll();
+            sum -= list.removeLast();
             return sum / size;
         }
     }
 
     private void empty() {
         list.clear();
+        sum = 0.0;
     }
 
 }
