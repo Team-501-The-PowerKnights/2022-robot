@@ -2178,7 +2178,78 @@
         "hgap": 8.0,
         "vgap": 8.0,
         "titleType": 0,
-        "tiles": {}
+        "tiles": {
+          "2,4": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climber.autoCommand",
+              "_title": "Climber.autoCommand"
+            }
+          },
+          "2,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climber.implClass",
+              "_title": "Climber.implClass"
+            }
+          },
+          "2,6": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climber.teleCommand",
+              "_title": "Climber.teleCommand"
+            }
+          },
+          "2,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climber.status",
+              "_title": "Climber.status"
+            }
+          },
+          "11,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Climber.extending",
+              "_title": "Climber.extending",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "11,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Climber.climbing",
+              "_title": "Climber.climbing",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          }
+        }
       }
     },
     {
@@ -3867,6 +3938,58 @@
               "_source0": "network_table:///SmartDashboard/FMS Override",
               "_title": "FMS Override"
             }
+          },
+          "86,0": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Climber.extending",
+              "_title": "Climber.extending",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "76,4": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Climber.climbing",
+              "_title": "Climber.climbing",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "84,4": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Climber.topLimit",
+              "_title": "Climber.topLimit",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "80,5": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Climber.bottomLimit",
+              "_title": "Climber.bottomLimit",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
           }
         }
       }
@@ -4149,9 +4272,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -5.599999904632568,
+    "x": -6.400000095367432,
     "y": 4.0,
-    "width": 1549.5999755859375,
+    "width": 1548.800048828125,
     "height": 668.0
   }
 }
