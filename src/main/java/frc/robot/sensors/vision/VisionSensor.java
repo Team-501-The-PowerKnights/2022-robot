@@ -8,6 +8,8 @@
 
 package frc.robot.sensors.vision;
 
+import java.util.LinkedList;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -28,6 +30,8 @@ class VisionSensor extends BaseVisionSensor {
         mySensor = new LimelightVision();
         mySensor.disable();
 
+        initialize();
+
         logger.info("constructed");
     }
 
@@ -40,6 +44,8 @@ class VisionSensor extends BaseVisionSensor {
     public void enable() {
         super.enable();
 
+        empty();
+
         mySensor.enable();
     }
 
@@ -47,12 +53,15 @@ class VisionSensor extends BaseVisionSensor {
     public void disable() {
         super.disable();
 
+        empty();
+
         mySensor.disable();
     }
 
     @Override
     public double getError() {
-        return mySensor.getError();
+        // return mySensor.getError();
+        return next(mySensor.getError());
     }
 
     @Override
@@ -65,6 +74,32 @@ class VisionSensor extends BaseVisionSensor {
         boolean locked = mySensor.isLocked();
         setTlmLocked(locked);
         return locked;
+    }
+
+    private LinkedList<Double> list;
+    private double sum;
+    int size;
+
+    private void initialize() {
+        sum = 0.0;
+        size = 10;
+        list = new LinkedList<>();
+    }
+
+    private double next(double value) {
+        sum += value;
+        list.offer(value);
+        if (list.size() <= size) {
+            return sum / list.size();
+        }
+        else {
+            sum -= list.poll();
+            return sum / size;
+        }
+    }
+
+    private void empty() {
+        list.clear();
     }
 
 }
