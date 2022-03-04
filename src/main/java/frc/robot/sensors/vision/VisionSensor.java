@@ -62,8 +62,8 @@ class VisionSensor extends BaseVisionSensor {
 
     @Override
     public double getError() {
-        // return mySensor.getError();
-        return next(mySensor.getError());
+        return mySensor.getError();
+        //return next(mySensor.getError());
     }
 
     @Override
