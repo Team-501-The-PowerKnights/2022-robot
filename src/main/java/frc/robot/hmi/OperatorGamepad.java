@@ -8,12 +8,16 @@
 
 package frc.robot.hmi;
 
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
 import frc.robot.commands.FirePoseNoVision;
 import frc.robot.commands.FirePoseVision;
 import frc.robot.commands.PKParallelCommandGroup;
+import frc.robot.commands.climber.ClimberClimb;
+import frc.robot.commands.climber.ClimberExtend;
 import frc.robot.commands.shooter.ShooterSpinUpFormula;
 import frc.robot.commands.turret.TurretHome;
 import frc.robot.commands.turret.TurretVisionAlign;
@@ -21,6 +25,7 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * This class implements the Operator's gamepad.
@@ -35,8 +40,10 @@ public class OperatorGamepad extends F310Gamepad {
 
     private final Button firePoseButton;
     private final Button visionTargettingButton;
+    private final Button climberExtendButton;
+    private final Button climberClimbButton;
     // private final Button revShooterButton;
-    private final Button homeTurretButton;
+    // private final Button homeTurretButton;
 
     public OperatorGamepad() {
         super(1);
@@ -46,7 +53,9 @@ public class OperatorGamepad extends F310Gamepad {
         // visionTargettingButton = new JoystickButton(stick, rightBumper);
         visionTargettingButton = new JoystickButton(stick, rightBumper);
         // revShooterButton = new JoystickButton(stick, redButton);
-        homeTurretButton = new JoystickButton(stick, startButton);
+        // homeTurretButton = new JoystickButton(stick, startButton);
+        climberExtendButton = new JoystickButton(stick, startButton);
+        climberClimbButton = new JoystickButton(stick, backButton);
 
         logger.info("constructed");
     }
@@ -60,10 +69,12 @@ public class OperatorGamepad extends F310Gamepad {
         // ShooterSpinUpFormula()));
         // visionTargettingButton
         // .whenHeld(new TurretVisionAlign());
-        homeTurretButton.whenHeld(new TurretHome());
+        // homeTurretButton.whenHeld(new TurretHome());
         // firePoseButton.whenHeld(new FirePoseVision());
         visionTargettingButton.whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(), new FirePoseVision()));
         firePoseButton.whenHeld(new FirePoseNoVision());
+        climberExtendButton.whenHeld(new ClimberExtend());
+        climberClimbButton.whenHeld(new ClimberClimb());
 
         logger.info("configured");
     }
@@ -75,7 +86,7 @@ public class OperatorGamepad extends F310Gamepad {
         // visionTargettingButton.get());
         // SmartDashboard.putBoolean(TelemetryNames.HMI.revShooter,
         // revShooterButton.get());
-        SmartDashboard.putBoolean(TelemetryNames.HMI.homeTurret, homeTurretButton.get());
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.homeTurret, homeTurretButton.get());
         SmartDashboard.putNumber(TelemetryNames.HMI.elevatorSpeed, getElevatorSpeed());
         SmartDashboard.putNumber(TelemetryNames.HMI.turretJog, getTurretJog());
     }
@@ -104,6 +115,20 @@ public class OperatorGamepad extends F310Gamepad {
         } else {
             return -getRightTrigger();
         }
+    }
+
+    /*********************
+     * Climber
+     *********************/
+
+    public boolean getClimberExtend() {
+        // return isPov0();
+        return getStartButton();
+    }
+
+    public boolean getClimberClimb() {
+        // return isPov180();
+        return getBackButton();
     }
 
 }

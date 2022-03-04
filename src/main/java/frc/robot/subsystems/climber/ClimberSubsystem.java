@@ -35,7 +35,7 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     ClimberSubsystem() {
         logger.info("constructing");
 
-        motor = new CANSparkMax(56, MotorType.kBrushless);
+        motor = new CANSparkMax(55, MotorType.kBrushless);
         motor.restoreFactoryDefaults();
         motor.setIdleMode(IdleMode.kBrake);
 
@@ -43,16 +43,22 @@ class ClimberSubsystem extends BaseClimberSubsystem {
         // limitDown = new AnalogInput(1);
 
         logger.info("constructed");
+
     }
+
+    boolean tlmIsExtending = false;
+    boolean tlmIsClimbing = false;
+        
 
     @Override
     public void updateTelemetry() {
         super.updateTelemetry();
-
         // SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit, (limitUp.getValue() == 1));
         // SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit, (limitDown.getValue() == 1));
-        SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit, false);
-        SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit, false);
+        // SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit, false);
+        // SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit, false);
+        SmartDashboard.putBoolean(TelemetryNames.Climber.extending, tlmIsExtending);
+        SmartDashboard.putBoolean(TelemetryNames.Climber.climbing, tlmIsClimbing);
     }
 
     @Override
@@ -74,16 +80,20 @@ class ClimberSubsystem extends BaseClimberSubsystem {
 
     @Override
     public void stop() {
+        tlmIsClimbing = false;
+        tlmIsExtending = false;
         setSpeed(0.0);
     }
 
     @Override
     public void extend() {
+        tlmIsExtending = true;
         setSpeed(0.40);
     }
 
     @Override
     public void climb() {
+        tlmIsClimbing = false;
         setSpeed(1.0);
     }
 

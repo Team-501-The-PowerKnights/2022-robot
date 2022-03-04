@@ -115,11 +115,24 @@ public class OI implements ITelemetryProvider {
     }
 
     /*****************
-     * Elevator
+     * Turret
      *****************/
 
     public double getTurretJog() {
         return operatorPad.getTurretJog();
     }
+
+    /*****************
+     * Climber
+     *****************/
+
+     public boolean getClimberExtend() {
+         return false;
+     }
+
+     public boolean getClimberClimb() {
+         return false;
+     }
+    
 
 }
