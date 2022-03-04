@@ -151,6 +151,19 @@
               "_source0": "network_table:///SmartDashboard/FMS Override",
               "_title": "FMS Override"
             }
+          },
+          "17,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Climber.climbing",
+              "_title": "Climber.climbing",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
           }
         }
       }
@@ -2223,20 +2236,7 @@
               "_title": "Climber.status"
             }
           },
-          "11,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Climber.extending",
-              "_title": "Climber.extending",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "11,2": {
+          "15,0": {
             "size": [
               4,
               2
@@ -2245,6 +2245,30 @@
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/Climber.climbing",
               "_title": "Climber.climbing",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "11,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climber.speed",
+              "_title": "Climber.speed"
+            }
+          },
+          "20,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Climber.retracting",
+              "_title": "Climber.retracting",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
@@ -3990,6 +4014,19 @@
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
+          },
+          "88,4": {
+            "size": [
+              4,
+              4
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Climber.retracting",
+              "_title": "Climber.retracting",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
           }
         }
       }
@@ -4265,6 +4302,17 @@
               "_title": "StubShooterSubsystem",
               "Layout/Label position": "BOTTOM",
               "_children": []
+            }
+          },
+          "0,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Basic Subsystem",
+              "_source0": "network_table:///LiveWindow/IncrementerSubsystem",
+              "_title": "IncrementerSubsystem"
             }
           }
         }
