@@ -325,6 +325,13 @@ public class Robot extends TimedRobot {
     }
 
     /**
+     * This function is called once each time the robot exits Disabled mode.
+     */
+    @Override
+    public void disabledExit() {
+    }
+
+    /**
      * This autonomous runs the autonomous command selected by your
      * frc.robot.RobotContainer class.
      */
@@ -378,6 +385,13 @@ public class Robot extends TimedRobot {
     }
 
     /**
+     * This function is called once each time the robot exits Autonomous mode.
+     */
+    @Override
+    public void autonomousExit() {
+    }
+
+    /**
      * This function is called once each time the robot enters Teleop mode.
      */
     @Override
@@ -428,6 +442,13 @@ public class Robot extends TimedRobot {
     }
 
     /**
+     * This function is called once each time the robot exits Teleop mode.
+     */
+    @Override
+    public void teleopExit() {
+    }
+
+    /**
      * This function is called once each time the robot enters Test mode.
      */
     @Override
@@ -452,10 +473,18 @@ public class Robot extends TimedRobot {
     }
 
     /**
-     * This function is called periodically during test mode.
+     * This function is called periodically during Test mode.
      */
     @Override
     public void testPeriodic() {
+    }
+
+    
+    /**
+     * This function is called once each time the robot exits Test mode.
+     */
+    @Override
+    public void testExit() {
     }
 
     private static void createFmsOverrideChooser() {
