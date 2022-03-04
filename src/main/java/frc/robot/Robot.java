@@ -73,14 +73,21 @@ public class Robot extends TimedRobot {
     //
     private List<ISubsystem> subsystems;
 
-    // Flag for having completed autonomous part of match
-    private boolean autonomousComplete;
+    // Flag for started/running autonomous part of match
+    @SuppressWarnings("unused")
+    private boolean autonomousRunning;
     // Flag for having run first autonomous loop
     private boolean autonomousFirstRun;
-    // Flag for having completed operator control part of match
-    private boolean teleopComplete;
-    // Flag for having run first operator control loop
+    // Flag for having completed autonomous part of match
+    private boolean autonomousComplete;
+
+    // Flag for having started/running teleop part of match
+    @SuppressWarnings("unused")
+    private boolean teleopRunning;
+    // Flag for having run first teleop loop
     private boolean teleopFirstRun;
+    // Flag for having completed teleop part of match
+    private boolean teleopComplete;
 
     // Chooser for autonomous command from Dashboard
     private SendableChooser<Command> autoChooser;
@@ -134,10 +141,12 @@ public class Robot extends TimedRobot {
         createAutoChooser();
 
         // Initialize state variables
-        autonomousComplete = false;
+        autonomousRunning = false;
         autonomousFirstRun = false;
-        teleopComplete = false;
+        autonomousComplete = false;
+        teleopRunning = false;
         teleopFirstRun = false;
+        teleopComplete = false;
 
         // Create the chooser for FMS connected override
         createFmsOverrideChooser();
@@ -338,8 +347,9 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousInit() {
         logger.info("initializing autonomous");
-        autonomousComplete = true;
+        autonomousRunning = true;
         autonomousFirstRun = false;
+        autonomousComplete = false;
 
         // Update the preferences
         for (IModule m : modules) {
@@ -389,6 +399,12 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousExit() {
+        logger.info("exiting autonomous");
+
+        autonomousRunning = false;
+        autonomousComplete = true;
+
+        logger.info("exited autonomous");
     }
 
     /**
@@ -397,8 +413,9 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         logger.info("initializing teleop");
-        teleopComplete = true;
+        teleopRunning = true;
         teleopFirstRun = false;
+        teleopComplete = false; 
 
         // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to
@@ -446,6 +463,12 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopExit() {
+        logger.info("exiting teleop");
+
+        teleopRunning = false;
+        teleopComplete = true;
+
+        logger.info("exited teleop");
     }
 
     /**
@@ -485,6 +508,9 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void testExit() {
+        logger.info("exiting test");
+
+        logger.info("exited test");
     }
 
     private static void createFmsOverrideChooser() {
