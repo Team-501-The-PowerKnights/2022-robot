@@ -33,6 +33,7 @@ import frc.robot.commands.drive.DriveForwardDistance;
 import frc.robot.commands.drive.DriveForwardTimed;
 import frc.robot.commands.elevator.ElevatorLift;
 import frc.robot.commands.intake.IntakeIngest;
+import frc.robot.commands.intake.IntakeRetract;
 import frc.robot.commands.turret.TurretVisionAlign;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModuleFactory;
@@ -221,7 +222,7 @@ public class Robot extends TimedRobot {
         // FIXME: This works because TurrentVisionAlign is going in parallel
         autoChooser.addOption("Full Auto (Driving Forward Delay)",
                 new PKParallelCommandGroup(new IntakeIngest(), new TurretVisionAlign(),
-                new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(), new FirePoseVision())));
+                new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(), (new FirePoseVision()))));
 
         SmartDashboard.putData("Auto Mode", autoChooser);
     }

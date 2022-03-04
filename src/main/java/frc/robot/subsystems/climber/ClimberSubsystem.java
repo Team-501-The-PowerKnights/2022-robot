@@ -36,6 +36,7 @@ class ClimberSubsystem extends BaseClimberSubsystem {
         motor.restoreFactoryDefaults();
         motor.setIdleMode(IdleMode.kBrake);
         motor.setOpenLoopRampRate(0.5);  //1.0
+        motor.setSmartCurrentLimit(55);
 
         // limitUp = new AnalogInput(0);
         // limitDown = new AnalogInput(1);

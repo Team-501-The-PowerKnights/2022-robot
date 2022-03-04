@@ -9,6 +9,7 @@
 package frc.robot.commands.drive;
 
 
+import frc.robot.commands.intake.IntakeRetract;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -35,7 +36,7 @@ public class DriveForwardTimed extends DriveCommandBase {
         super.initialize();
 
         // 4 seconds = 200 * 20 msec (@ 50 Hz)
-        executeCount = 180;
+        executeCount = 120;
     }
 
     @Override
@@ -59,6 +60,7 @@ public class DriveForwardTimed extends DriveCommandBase {
     public void end(boolean interrupted) {
         // Stop the drive
         drive.stop();
+        (new IntakeRetract()).schedule();
 
         super.end(interrupted);
     }

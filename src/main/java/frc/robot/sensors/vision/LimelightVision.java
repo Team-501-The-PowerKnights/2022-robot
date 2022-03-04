@@ -41,7 +41,7 @@ class LimelightVision {
 
     protected boolean isLocked() {
         return (table.getEntry("tv").getDouble(0.0) == 1)
-                && (Math.abs((table.getEntry("tx").getDouble(0.15))) < 0.15);
+                && (Math.abs((table.getEntry("tx").getDouble(0.135))) < 0.135);
     }
 
     protected boolean isEnabled() {
