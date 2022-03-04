@@ -28,6 +28,7 @@ public class IntakeIngest extends IntakeCommandBase {
     public void execute() {
         super.execute();
 
+        intake.extend();
         intake.pullIn();
     }
 

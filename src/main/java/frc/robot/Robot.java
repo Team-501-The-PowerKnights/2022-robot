@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 import frc.robot.commands.DoNothing;
+import frc.robot.commands.FirePoseVision;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.PKSequentialCommandGroup;
 import frc.robot.commands.drive.DriveBackwardDistance;
@@ -32,6 +33,7 @@ import frc.robot.commands.drive.DriveForwardDistance;
 import frc.robot.commands.drive.DriveForwardTimed;
 import frc.robot.commands.elevator.ElevatorLift;
 import frc.robot.commands.intake.IntakeIngest;
+import frc.robot.commands.turret.TurretVisionAlign;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModuleFactory;
 import frc.robot.preferences.PreferencesInitializer;
@@ -217,8 +219,8 @@ public class Robot extends TimedRobot {
         autoChooser.addOption("Full Auto (Driving Forward)",
                 new PKParallelCommandGroup(new ElevatorLift(), new IntakeIngest(), new DriveForwardTimed()));
         autoChooser.addOption("Full Auto (Driving Forward Delay)",
-                new PKParallelCommandGroup(new ElevatorLift(), new IntakeIngest(),
-                        new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed())));
+                new PKParallelCommandGroup(new IntakeIngest(),
+                new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(), new PKParallelCommandGroup(new TurretVisionAlign(), new FirePoseVision()))));
 
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
