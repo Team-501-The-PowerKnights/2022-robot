@@ -46,17 +46,14 @@ class ClimberSubsystem extends BaseClimberSubsystem {
 
     }
 
-    boolean tlmIsClimbing = false;
-        
-
     @Override
     public void updateTelemetry() {
         super.updateTelemetry();
+
         // SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit, (limitUp.getValue() == 1));
         // SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit, (limitDown.getValue() == 1));
         // SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit, false);
         // SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit, false);
-        SmartDashboard.putBoolean(TelemetryNames.Climber.climbing, tlmIsClimbing);
     }
 
     @Override
@@ -78,18 +75,22 @@ class ClimberSubsystem extends BaseClimberSubsystem {
 
     @Override
     public void stop() {
-        tlmIsClimbing = false;
+        super.stop();
+
         setSpeed(0.0);
     }
 
     @Override
     public void climb() {
-        tlmIsClimbing = true;
+        super.climb();
+
         setSpeed(0.5);
     }
 
     @Override
     public void retract() {
+        super.retract();
+        
         setSpeed(-0.20);
     }
 

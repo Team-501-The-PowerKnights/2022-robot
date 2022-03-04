@@ -9,8 +9,6 @@
 package frc.robot.subsystems.climber;
 
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -26,15 +24,9 @@ class StubClimberSubsystem extends BaseClimberSubsystem {
         logger.info("constructed");
     }
 
-    boolean tlmIsExtending = false;
-    boolean tlmIsClimbing = false;
-
     @Override
     public void updateTelemetry() {
         super.updateTelemetry();
-        // Stub doesn't implement this
-        SmartDashboard.putBoolean(TelemetryNames.Climber.extending, tlmIsExtending);
-        SmartDashboard.putBoolean(TelemetryNames.Climber.climbing, tlmIsClimbing);
     }
 
     @Override
@@ -56,19 +48,21 @@ class StubClimberSubsystem extends BaseClimberSubsystem {
 
     @Override
     public void stop() {
-        tlmIsExtending = false;
-        tlmIsClimbing = false;
+        super.stop();
+
         // Stub doesn't implement this
     }
 
     @Override
     public void climb() {
-        tlmIsClimbing = true;
+        super.climb();
+
         // Stub doesn't implement this
     }
 
     @Override
     public void retract() {
+        super.retract();
         // Stub doesn't implement this
     }
 
