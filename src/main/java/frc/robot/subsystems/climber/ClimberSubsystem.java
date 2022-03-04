@@ -8,17 +8,19 @@
 
 package frc.robot.subsystems.climber;
 
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.AnalogInput;
+//import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class ClimberSubsystem extends BaseClimberSubsystem {
 
@@ -27,8 +29,8 @@ class ClimberSubsystem extends BaseClimberSubsystem {
 
     private final CANSparkMax motor;
 
-    private final AnalogInput limitUp;
-    private final AnalogInput limitDown;
+    // private final AnalogInput limitUp;
+    // private final AnalogInput limitDown;
 
     ClimberSubsystem() {
         logger.info("constructing");
@@ -37,8 +39,8 @@ class ClimberSubsystem extends BaseClimberSubsystem {
         motor.restoreFactoryDefaults();
         motor.setIdleMode(IdleMode.kBrake);
 
-        limitUp = new AnalogInput(0);
-        limitDown = new AnalogInput(1);
+        // limitUp = new AnalogInput(0);
+        // limitDown = new AnalogInput(1);
 
         logger.info("constructed");
     }
@@ -47,8 +49,10 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     public void updateTelemetry() {
         super.updateTelemetry();
 
-        SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit, (limitUp.getValue() == 1));
-        SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit, (limitDown.getValue() == 1));
+        // SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit, (limitUp.getValue() == 1));
+        // SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit, (limitDown.getValue() == 1));
+        SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit, false);
+        SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit, false);
     }
 
     @Override
