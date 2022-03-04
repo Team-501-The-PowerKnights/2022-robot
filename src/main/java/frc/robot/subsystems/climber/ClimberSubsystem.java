@@ -14,9 +14,6 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 //import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -38,6 +35,7 @@ class ClimberSubsystem extends BaseClimberSubsystem {
         motor = new CANSparkMax(55, MotorType.kBrushless);
         motor.restoreFactoryDefaults();
         motor.setIdleMode(IdleMode.kBrake);
+        motor.setOpenLoopRampRate(1.0);
 
         // limitUp = new AnalogInput(0);
         // limitDown = new AnalogInput(1);
@@ -84,7 +82,7 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     public void climb() {
         super.climb();
 
-        setSpeed(0.5);
+        setSpeed(1.0);
     }
 
     @Override
