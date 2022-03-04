@@ -32,4 +32,10 @@ public class IntakeIngest extends IntakeCommandBase {
         intake.pullIn();
     }
 
+    @Override
+    public void end(boolean interrupted) {
+        intake.stop();
+        intake.retract();
+    }
+
 }

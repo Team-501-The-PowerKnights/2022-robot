@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.shooter;
 
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
@@ -20,6 +21,7 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class ShooterSubsystem extends BaseShooterSubsystem {
 
@@ -59,6 +61,7 @@ class ShooterSubsystem extends BaseShooterSubsystem {
         rightMotor.restoreFactoryDefaults();
         leftMotor.enableVoltageCompensation(11.0);
         rightMotor.enableVoltageCompensation(11.0);
+        
         // + spin out, - spin in
         leftMotor.setInverted(true);
 
