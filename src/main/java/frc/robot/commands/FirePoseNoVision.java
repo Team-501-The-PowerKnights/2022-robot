@@ -69,7 +69,8 @@ public class FirePoseNoVision extends PKCommandBase {
         shooter.setSpeed(29, speed);
 
         incrementer.increment();
-        elevator.liftToLimit();
+        // elevator.liftToLimit();
+        elevator.lift();
     }
 
     @Override

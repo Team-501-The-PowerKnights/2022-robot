@@ -62,8 +62,9 @@ ElevatorSensor.className = StubElevatorSensor
 #####################
 # Incrementer Loaded
 #####################
-IncrementerSensor.className = IncrementerSensor
-#IncrementerSensor.className = StubIncrementerSensor
+#IncrementerSensor.className = IncrementerSensor
+IncrementerSensor.className = StubIncrementerSensor
+
 
 #####################
 # Turret Location

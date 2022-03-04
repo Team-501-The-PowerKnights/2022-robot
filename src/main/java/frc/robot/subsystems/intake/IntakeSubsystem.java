@@ -85,7 +85,7 @@ class IntakeSubsystem extends BaseIntakeSubsystem {
 
     @Override
     public void pushOut() {
-        setSpeed(-0.2);
+        setSpeed(-0.8);
     }
 
     @Override

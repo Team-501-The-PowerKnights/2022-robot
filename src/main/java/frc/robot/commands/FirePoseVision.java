@@ -59,7 +59,8 @@ public class FirePoseVision extends PKCommandBase {
         boolean visionGood = (vision.isActive() && vision.isLocked()) || !(vision.isActive());
         if (visionGood) {
             incrementer.increment();
-            elevator.liftToLimit();
+            // elevator.liftToLimit();
+            elevator.lift();
         } else {
             incrementer.stop();
             elevator.stop();

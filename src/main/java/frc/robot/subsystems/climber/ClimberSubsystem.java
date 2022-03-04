@@ -35,7 +35,7 @@ class ClimberSubsystem extends BaseClimberSubsystem {
         motor = new CANSparkMax(55, MotorType.kBrushless);
         motor.restoreFactoryDefaults();
         motor.setIdleMode(IdleMode.kBrake);
-        motor.setOpenLoopRampRate(1.0);
+        motor.setOpenLoopRampRate(0.5);  //1.0
 
         // limitUp = new AnalogInput(0);
         // limitDown = new AnalogInput(1);

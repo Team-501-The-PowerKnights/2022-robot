@@ -34,7 +34,8 @@ public class ElevatorManualControl extends ElevatorOICommandBase {
         double liftSpeed = oi.getIntakeSpeed();
         if (liftSpeed > 0) {
             wasEnabled = true;
-            elevator.liftToLimit();
+            // elevator.liftToLimit();
+            elevator.lift();
         } else {
             if (wasEnabled) {
                 wasEnabled = false;

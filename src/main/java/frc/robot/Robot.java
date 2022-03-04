@@ -218,9 +218,10 @@ public class Robot extends TimedRobot {
 
         autoChooser.addOption("Full Auto (Driving Forward)",
                 new PKParallelCommandGroup(new ElevatorLift(), new IntakeIngest(), new DriveForwardTimed()));
+        // FIXME: This works because TurrentVisionAlign is going in parallel
         autoChooser.addOption("Full Auto (Driving Forward Delay)",
-                new PKParallelCommandGroup(new IntakeIngest(),
-                new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(), new PKParallelCommandGroup(new TurretVisionAlign(), new FirePoseVision()))));
+                new PKParallelCommandGroup(new IntakeIngest(), new TurretVisionAlign(),
+                new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(), new FirePoseVision())));
 
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
