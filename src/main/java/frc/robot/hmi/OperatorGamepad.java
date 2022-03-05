@@ -8,6 +8,7 @@
 
 package frc.robot.hmi;
 
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -16,14 +17,12 @@ import frc.robot.commands.FirePoseNoVision;
 import frc.robot.commands.FirePoseVision;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.PKSequentialCommandGroup;
-import frc.robot.commands.climber.ClimberClimb;
 import frc.robot.commands.climber.ClimberClimbTimed;
 import frc.robot.commands.climber.ClimberRetract;
 import frc.robot.commands.drive.DriveForwardTimed;
-import frc.robot.commands.shooter.ShooterSpinUpFormula;
-import frc.robot.commands.turret.TurretHome;
 import frc.robot.commands.turret.TurretVisionAlign;
 import frc.robot.telemetry.TelemetryNames;
+
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -76,8 +75,9 @@ public class OperatorGamepad extends F310Gamepad {
         firePoseButton.whenHeld(new FirePoseNoVision());
         climberRetractButton.whenHeld(new ClimberRetract());
         // climberClimbButton.whenHeld(new ClimberClimb());
-        climberClimbButton.whenHeld(new PKSequentialCommandGroup(new ClimberClimbTimed(2), new DriveForwardTimed(),
-                new ClimberClimbTimed(2))); // TODO - add parameter once DriveForwardTimed(double seconds) comes back
+        // FIXME - add parameter once DriveForwardTimed(double seconds) comes back
+        climberClimbButton.whenHeld(new PKSequentialCommandGroup(new ClimberClimbTimed(2.0), new DriveForwardTimed(0.0),
+                new ClimberClimbTimed(2)));
         // TODO - do this with encoders / actually time how long these climbers should
         // run for: this is a stopgap solution
 
