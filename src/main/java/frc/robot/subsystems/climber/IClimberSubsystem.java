@@ -30,4 +30,9 @@ public interface IClimberSubsystem extends ISubsystem {
      **/
     public void retract();
 
+    /**
+     * Returns the value of the climber's encoder (if present)
+     */
+    public double getPosition();
+
 }
