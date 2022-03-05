@@ -95,4 +95,10 @@ class ZesterClimberSubsystem extends BaseClimberSubsystem {
         return 0;
     }
 
+    @Override
+    public void zeroPosition() {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

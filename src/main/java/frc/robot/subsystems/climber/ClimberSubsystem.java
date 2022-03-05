@@ -94,7 +94,7 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     public void retract() {
         super.retract();
 
-        setSpeed(-0.20);
+        setSpeed(-0.40);
     }
 
     private void setSpeed(double speed) {
@@ -105,6 +105,11 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     @Override
     public double getPosition() {
         return encoder.getPosition();
+    }
+
+    @Override
+    public void zeroPosition() {
+        encoder.setPosition(0.0);
     }
 
 }

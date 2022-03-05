@@ -35,4 +35,9 @@ public interface IClimberSubsystem extends ISubsystem {
      */
     public double getPosition();
 
+    /**
+     * Zeros the climber's encoder (if present)
+     */
+    public void zeroPosition();
+
 }

@@ -26,6 +26,13 @@ public class ClimberRunToLimit extends ClimberCommandBase {
         logger.info("constructed");
     }
 
+    @Override
+    public void initialize() {
+        super.initialize();
+
+        climber.zeroPosition();
+    }
+
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
@@ -36,7 +43,7 @@ public class ClimberRunToLimit extends ClimberCommandBase {
 
     @Override
     public boolean isFinished() {
-        return climber.getPosition() == limit;
+        return climber.getPosition() >= limit;
     }
 
     // Called once when either the Command finishes normally, or when it
