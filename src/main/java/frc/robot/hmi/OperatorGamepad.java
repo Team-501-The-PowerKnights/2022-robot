@@ -8,7 +8,6 @@
 
 package frc.robot.hmi;
 
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -16,8 +15,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.FirePoseNoVision;
 import frc.robot.commands.FirePoseVision;
 import frc.robot.commands.PKParallelCommandGroup;
+import frc.robot.commands.PKSequentialCommandGroup;
 import frc.robot.commands.climber.ClimberClimb;
+import frc.robot.commands.climber.ClimberClimbTimed;
 import frc.robot.commands.climber.ClimberRetract;
+import frc.robot.commands.drive.DriveForwardTimed;
 import frc.robot.commands.shooter.ShooterSpinUpFormula;
 import frc.robot.commands.turret.TurretHome;
 import frc.robot.commands.turret.TurretVisionAlign;
@@ -25,7 +27,6 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * This class implements the Operator's gamepad.
@@ -74,7 +75,11 @@ public class OperatorGamepad extends F310Gamepad {
         visionTargettingButton.whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(), new FirePoseVision()));
         firePoseButton.whenHeld(new FirePoseNoVision());
         climberRetractButton.whenHeld(new ClimberRetract());
-        climberClimbButton.whenHeld(new ClimberClimb());
+        // climberClimbButton.whenHeld(new ClimberClimb());
+        climberClimbButton.whenHeld(new PKSequentialCommandGroup(new ClimberClimbTimed(2), new DriveForwardTimed(),
+                new ClimberClimbTimed(2))); // TODO - add parameter once DriveForwardTimed(double seconds) comes back
+        // TODO - do this with encoders / actually time how long these climbers should
+        // run for: this is a stopgap solution
 
         logger.info("configured");
     }
@@ -86,7 +91,8 @@ public class OperatorGamepad extends F310Gamepad {
         // visionTargettingButton.get());
         // SmartDashboard.putBoolean(TelemetryNames.HMI.revShooter,
         // revShooterButton.get());
-        // SmartDashboard.putBoolean(TelemetryNames.HMI.homeTurret, homeTurretButton.get());
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.homeTurret,
+        // homeTurretButton.get());
         SmartDashboard.putNumber(TelemetryNames.HMI.elevatorSpeed, getElevatorSpeed());
         SmartDashboard.putNumber(TelemetryNames.HMI.turretJog, getTurretJog());
     }
