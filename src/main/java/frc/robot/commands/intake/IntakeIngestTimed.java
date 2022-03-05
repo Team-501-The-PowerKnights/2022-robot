@@ -6,32 +6,31 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.climber;
+package frc.robot.commands.intake;
 
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class ClimberClimbTimed extends ClimberCommandBase {
-
+public class IntakeIngestTimed extends IntakeCommandBase {
+    
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ClimberClimbTimed.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IntakeIngestTimed.class.getName());
 
     // 
     private final double timeInSeconds;
     //
     private long executeCount;
 
-    public ClimberClimbTimed(double seconds) {
+    public IntakeIngestTimed(double seconds) {
         logger.info("constructing {} for {}", getName(), seconds);
 
         timeInSeconds = seconds;
 
-
         logger.info("constructed");
     }
-    
+
     // FIXME: make this a base class or something
     private long secondsToClicks (double seconds) {
         return (long)(seconds * 50.0);  // @ 50 Hz
@@ -44,12 +43,13 @@ public class ClimberClimbTimed extends ClimberCommandBase {
         executeCount = secondsToClicks(timeInSeconds);
     }
 
-    // Called every time the scheduler runs while the command is scheduled.
+    
     @Override
     public void execute() {
         super.execute();
 
-        climber.climb();
+        intake.extend();
+        intake.pullIn();
 
         --executeCount;
     }
@@ -59,11 +59,10 @@ public class ClimberClimbTimed extends ClimberCommandBase {
         return (executeCount > 0 ? false : true);
     }
 
-    // Called once when either the Command finishes normally, or when it
-    // is interrupted/canceled.
     @Override
     public void end(boolean interrupted) {
-        climber.stop();
+        intake.stop();
+        intake.retract();
 
         super.end(interrupted);
     }
