@@ -12,6 +12,7 @@ package frc.robot.subsystems.shooter;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -67,6 +68,9 @@ class ShooterSubsystem extends BaseShooterSubsystem {
 
         // Slaved and inverted
         rightMotor.follow(leftMotor, true);
+
+        leftMotor.setSoftLimit(SoftLimitDirection.kReverse, 0.0f);
+        rightMotor.setSoftLimit(SoftLimitDirection.kReverse, 0.0f);
 
         encoder = leftMotor.getEncoder();
 
