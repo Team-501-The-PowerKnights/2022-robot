@@ -53,7 +53,7 @@ public class FirePoseVision extends PKCommandBase {
         double speed = 0.489 + (-0.0116 * y) + (0.0107 * (Math.pow(y, 2))) + ((-4.32E-03) * (Math.pow(y, 3)))
                 + (2.07E-04 * Math.pow(y, 4)) + (2.34E-04 * Math.pow(y, 5)) + (-5.47E-05 * Math.pow(y, 6))
                 + (4.68E-06 * Math.pow(y, 7)) + -1.41E-07 * (Math.pow(y, 8));
-        speed += 0.015;
+        // speed += 0.015;
         shooter.setSpeed(29, speed);
 
         boolean visionGood = (vision.isActive() && vision.isLocked()) || !(vision.isActive());

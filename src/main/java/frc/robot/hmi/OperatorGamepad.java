@@ -77,7 +77,7 @@ public class OperatorGamepad extends F310Gamepad {
         // FIXME - add parameter once DriveForwardTimed(double seconds) comes back
         // climberClimbButton.whenHeld(new PKSequentialCommandGroup(new ClimberClimbTimed(2.0), new DriveForwardTimed(0.0),
         //         new ClimberClimbTimed(2)));
-        climberClimbButton.whenPressed(new PKSequentialCommandGroup(new ClimberRunToTarget(275)));
+        climberClimbButton.whenPressed(new PKSequentialCommandGroup(new ClimberRunToTarget(265)));
         // TODO - do this with encoders / actually time how long these climbers should
         // run for: this is a stopgap solution
 
