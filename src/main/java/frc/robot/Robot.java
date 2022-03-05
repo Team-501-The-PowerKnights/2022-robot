@@ -209,12 +209,12 @@ public class Robot extends TimedRobot {
         autoChooser.addOption("Shoot and Drive Forward (4 sec)",
                 new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardTimed()));
 
-        autoChooser.addOption("Drive Backward (4 sec)", new DriveBackwardTimed());
+        autoChooser.addOption("Drive Backward (4 sec)", new DriveBackwardTimed(4.0));
         autoChooser.addOption("Drive Backward (3 feet)", new DriveBackwardDistance(3));
         autoChooser.addOption("Shoot and Drive Backward (3 feet)",
                 new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardDistance(3)));
         autoChooser.addOption("Shoot and Drive Backward (4 sec)",
-                new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardTimed()));
+                new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardTimed(4.0)));
 
         autoChooser.addOption("Full Auto (Driving Forward)",
                 new PKParallelCommandGroup(new ElevatorLift(), new IntakeIngest(), new DriveForwardTimed()));
