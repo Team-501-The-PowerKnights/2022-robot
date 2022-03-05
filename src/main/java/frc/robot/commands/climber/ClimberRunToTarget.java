@@ -8,20 +8,26 @@
 
 package frc.robot.commands.climber;
 
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ClimberRunToLimit extends ClimberCommandBase {
+
+public class ClimberRunToTarget extends ClimberCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ClimberRunToLimit.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ClimberRunToTarget.class.getName());
 
-    private final double limit;
+    //
+    private final double target;
 
-    public ClimberRunToLimit(double limit) {
-        logger.info("constructing {}", getName());
+    public ClimberRunToTarget(double target) {
+        logger.info("constructing {} for {}", getName(), target);
 
-        this.limit = limit;
+        this.target = target;
+        SmartDashboard.putNumber(TelemetryNames.Climber.targetPos, target);
 
         logger.info("constructed");
     }
@@ -31,6 +37,7 @@ public class ClimberRunToLimit extends ClimberCommandBase {
         super.initialize();
 
         climber.zeroPosition();
+        SmartDashboard.putBoolean(TelemetryNames.Climber.atTarget, false);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -43,16 +50,17 @@ public class ClimberRunToLimit extends ClimberCommandBase {
 
     @Override
     public boolean isFinished() {
-        return climber.getPosition() >= limit;
+        return climber.getPosition() >= target;
     }
 
     // Called once when either the Command finishes normally, or when it
     // is interrupted/canceled.
     @Override
     public void end(boolean interrupted) {
-        super.end(interrupted);
-
+        SmartDashboard.putBoolean(TelemetryNames.Climber.atTarget, true);
         climber.stop();
+
+        super.end(interrupted);
     }
 
 }

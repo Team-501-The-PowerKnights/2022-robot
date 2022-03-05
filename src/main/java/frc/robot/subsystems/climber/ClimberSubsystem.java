@@ -14,6 +14,9 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -36,13 +39,17 @@ class ClimberSubsystem extends BaseClimberSubsystem {
         motor.restoreFactoryDefaults();
         motor.setIdleMode(IdleMode.kBrake);
         motor.setOpenLoopRampRate(0.5); // 1.0
-        motor.setSmartCurrentLimit(45);
+        motor.setSmartCurrentLimit(35);
 
         encoder = motor.getEncoder();
         encoder.setPosition(0.0);
 
         // limitUp = new AnalogInput(0);
         // limitDown = new AnalogInput(1);
+
+        // TODO: Put these into subsystem?
+        SmartDashboard.putNumber(TelemetryNames.Climber.targetPos, 0);
+        SmartDashboard.putBoolean(TelemetryNames.Climber.atTarget, false);
 
         logger.info("constructed");
 

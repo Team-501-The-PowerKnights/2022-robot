@@ -17,10 +17,8 @@ import frc.robot.commands.FirePoseNoVision;
 import frc.robot.commands.FirePoseVision;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.PKSequentialCommandGroup;
-import frc.robot.commands.climber.ClimberClimbTimed;
 import frc.robot.commands.climber.ClimberRetract;
-import frc.robot.commands.climber.ClimberRunToLimit;
-import frc.robot.commands.drive.DriveForwardTimed;
+import frc.robot.commands.climber.ClimberRunToTarget;
 import frc.robot.commands.turret.TurretVisionAlign;
 import frc.robot.telemetry.TelemetryNames;
 
@@ -79,7 +77,7 @@ public class OperatorGamepad extends F310Gamepad {
         // FIXME - add parameter once DriveForwardTimed(double seconds) comes back
         // climberClimbButton.whenHeld(new PKSequentialCommandGroup(new ClimberClimbTimed(2.0), new DriveForwardTimed(0.0),
         //         new ClimberClimbTimed(2)));
-        climberClimbButton.whenPressed(new PKSequentialCommandGroup(new ClimberRunToLimit(275)));
+        climberClimbButton.whenPressed(new PKSequentialCommandGroup(new ClimberRunToTarget(275)));
         // TODO - do this with encoders / actually time how long these climbers should
         // run for: this is a stopgap solution
 

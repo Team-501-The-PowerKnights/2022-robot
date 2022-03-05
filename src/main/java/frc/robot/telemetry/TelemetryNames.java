@@ -297,6 +297,8 @@ public final class TelemetryNames {
         public static final String retracting = name + ".retracting";
 
         public static final String position = name + ".position";
+        public static final String targetPos = name + ".targetPosition";
+        public static final String atTarget = name + ".atTarget";
     }
 
 }

@@ -30,7 +30,7 @@ public class DriveForwardDistance extends DriveCommandBase {
     private double targetClicks;
 
     public DriveForwardDistance(double distanceInFeet) {
-        logger.info("constructing {}", getName());
+        logger.info("constructing {} for {}", getName(), distanceInFeet);
 
         distanceClicks = distanceInFeet * 6.849; // motor revolutions per foot
         // FIXME: this seems better than 2x's the distance
