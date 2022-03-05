@@ -8,15 +8,15 @@
 
 package frc.robot.subsystems.climber;
 
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-//import edu.wpi.first.wpilibj.AnalogInput;
-
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class ClimberSubsystem extends BaseClimberSubsystem {
 

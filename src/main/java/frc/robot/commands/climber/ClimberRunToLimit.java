@@ -16,7 +16,7 @@ public class ClimberRunToLimit extends ClimberCommandBase {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimberRunToLimit.class.getName());
 
-    private double limit = 0;
+    private final double limit;
 
     public ClimberRunToLimit(double limit) {
         logger.info("constructing {}", getName());
