@@ -8,8 +8,8 @@
 
 package frc.robot.subsystems.climber;
 
-
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -18,13 +18,13 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-
 class ClimberSubsystem extends BaseClimberSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimberSubsystem.class.getName());
 
     private final CANSparkMax motor;
+    private final RelativeEncoder encoder;
 
     // private final AnalogInput limitUp;
     // private final AnalogInput limitDown;
@@ -35,8 +35,11 @@ class ClimberSubsystem extends BaseClimberSubsystem {
         motor = new CANSparkMax(55, MotorType.kBrushless);
         motor.restoreFactoryDefaults();
         motor.setIdleMode(IdleMode.kBrake);
-        motor.setOpenLoopRampRate(0.5);  //1.0
+        motor.setOpenLoopRampRate(0.5); // 1.0
         motor.setSmartCurrentLimit(45);
+
+        encoder = motor.getEncoder();
+        encoder.setPosition(0.0);
 
         // limitUp = new AnalogInput(0);
         // limitDown = new AnalogInput(1);
@@ -48,9 +51,10 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     @Override
     public void updateTelemetry() {
         super.updateTelemetry();
-
-        // SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit, (limitUp.getValue() == 1));
-        // SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit, (limitDown.getValue() == 1));
+        // SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit,
+        // (limitUp.getValue() == 1));
+        // SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit,
+        // (limitDown.getValue() == 1));
         // SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit, false);
         // SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit, false);
     }
@@ -89,13 +93,18 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     @Override
     public void retract() {
         super.retract();
-        
+
         setSpeed(-0.20);
     }
 
     private void setSpeed(double speed) {
         setTlmSpeed(speed);
         motor.set(speed);
+    }
+
+    @Override
+    public double getPosition() {
+        return encoder.getPosition();
     }
 
 }
