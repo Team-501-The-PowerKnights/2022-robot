@@ -50,7 +50,7 @@ public class DriveBackwardTimed extends DriveCommandBase {
     public void execute() {
         super.execute();
 
-        double speed = -0.4;
+        double speed = -0.3;
         double turn = 0.0;
 
         drive.drive(speed, turn);

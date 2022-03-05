@@ -22,28 +22,36 @@ public class DriveForwardTimed extends DriveCommandBase {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(DriveForwardTimed.class.getName());
 
+    // 
+    private final double timeInSeconds;
     //
     private long executeCount;
 
-    public DriveForwardTimed() {
-        logger.info("constructing {}", getName());
+    public DriveForwardTimed(double seconds) {
+        logger.info("constructing {} for {}", getName(), seconds);
+
+        timeInSeconds = seconds;
 
         logger.info("constructed");
+    }
+
+    // FIXME: make this a base class or something
+    private long secondsToClicks (double seconds) {
+        return (long)(seconds * 50.0);  // @ 50 Hz
     }
 
     @Override
     public void initialize() {
         super.initialize();
 
-        // 4 seconds = 200 * 20 msec (@ 50 Hz)
-        executeCount = 90;
+        executeCount = secondsToClicks(timeInSeconds);
     }
 
     @Override
     public void execute() {
         super.execute();
 
-        double speed = 0.3; //0.4
+        double speed = 0.3;
         double turn = 0.0;
 
         drive.drive(speed, turn);
@@ -60,7 +68,6 @@ public class DriveForwardTimed extends DriveCommandBase {
     public void end(boolean interrupted) {
         // Stop the drive
         drive.stop();
-        (new IntakeDoNothing()).schedule();
 
         super.end(interrupted);
     }

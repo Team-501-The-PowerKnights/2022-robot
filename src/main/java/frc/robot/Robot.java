@@ -33,6 +33,7 @@ import frc.robot.commands.drive.DriveForwardDistance;
 import frc.robot.commands.drive.DriveForwardTimed;
 import frc.robot.commands.elevator.ElevatorLift;
 import frc.robot.commands.intake.IntakeIngest;
+import frc.robot.commands.intake.IntakeIngestTimed;
 import frc.robot.commands.turret.TurretVisionAlign;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModuleFactory;
@@ -202,12 +203,12 @@ public class Robot extends TimedRobot {
         // FIXME: This only works because default shooter command is idle
 
         // FIXME: Make parameterized like distance
-        autoChooser.addOption("Drive Forward (4 sec)", new DriveForwardTimed());
-        autoChooser.addOption("Drive Forward (3 feet)", new DriveForwardDistance(3));
+        autoChooser.addOption("Drive Forward (4 sec)", new DriveForwardTimed(4.0));
+        autoChooser.addOption("Drive Forward (3 feet)", new DriveForwardDistance(3.0));
         autoChooser.addOption("Shoot and Drive Forward (3 feet)",
                 new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardDistance(3)));
         autoChooser.addOption("Shoot and Drive Forward (4 sec)",
-                new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardTimed()));
+                new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardTimed(4.0)));
 
         autoChooser.addOption("Drive Backward (4 sec)", new DriveBackwardTimed(4.0));
         autoChooser.addOption("Drive Backward (3 feet)", new DriveBackwardDistance(3));
@@ -216,12 +217,11 @@ public class Robot extends TimedRobot {
         autoChooser.addOption("Shoot and Drive Backward (4 sec)",
                 new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardTimed(4.0)));
 
-        autoChooser.addOption("Full Auto (Driving Forward)",
-                new PKParallelCommandGroup(new ElevatorLift(), new IntakeIngest(), new DriveForwardTimed()));
-        // FIXME: This works because TurrentVisionAlign is going in parallel
         autoChooser.addOption("Full Auto (Driving Forward Delay)",
-                new PKParallelCommandGroup(new IntakeIngest(), new TurretVisionAlign(),
-                new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(), new FirePoseVision())));
+            new PKParallelCommandGroup(new TurretVisionAlign(),
+                                       new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(4.0),
+                                                                                               new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(3.0)),
+                                                                    new FirePoseVision()))));
 
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
