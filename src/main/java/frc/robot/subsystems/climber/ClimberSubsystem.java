@@ -8,17 +8,18 @@
 
 package frc.robot.subsystems.climber;
 
+
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.telemetry.TelemetryNames;
-
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class ClimberSubsystem extends BaseClimberSubsystem {
 
@@ -26,29 +27,43 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     private static final PKLogger logger = RioLogger.getLogger(ClimberSubsystem.class.getName());
 
     private final CANSparkMax motor;
+    private final RelativeEncoder encoder;
 
-    private final AnalogInput limitUp;
-    private final AnalogInput limitDown;
+    // private final AnalogInput limitUp;
+    // private final AnalogInput limitDown;
 
     ClimberSubsystem() {
         logger.info("constructing");
 
-        motor = new CANSparkMax(56, MotorType.kBrushless);
+        motor = new CANSparkMax(55, MotorType.kBrushless);
         motor.restoreFactoryDefaults();
         motor.setIdleMode(IdleMode.kBrake);
+        motor.setOpenLoopRampRate(0.5); // 1.0
+        motor.setSmartCurrentLimit(35);
 
-        limitUp = new AnalogInput(0);
-        limitDown = new AnalogInput(1);
+        encoder = motor.getEncoder();
+        encoder.setPosition(0.0);
+
+        // limitUp = new AnalogInput(0);
+        // limitDown = new AnalogInput(1);
+
+        // TODO: Put these into subsystem?
+        SmartDashboard.putNumber(TelemetryNames.Climber.targetPos, 0);
+        SmartDashboard.putBoolean(TelemetryNames.Climber.atTarget, false);
 
         logger.info("constructed");
+
     }
 
     @Override
     public void updateTelemetry() {
         super.updateTelemetry();
-
-        SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit, (limitUp.getValue() == 1));
-        SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit, (limitDown.getValue() == 1));
+        // SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit,
+        // (limitUp.getValue() == 1));
+        // SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit,
+        // (limitDown.getValue() == 1));
+        // SmartDashboard.putBoolean(TelemetryNames.Climber.topLimit, false);
+        // SmartDashboard.putBoolean(TelemetryNames.Climber.bottomLimit, false);
     }
 
     @Override
@@ -70,27 +85,38 @@ class ClimberSubsystem extends BaseClimberSubsystem {
 
     @Override
     public void stop() {
+        super.stop();
+
         setSpeed(0.0);
     }
 
     @Override
-    public void extend() {
-        setSpeed(0.40);
-    }
-
-    @Override
     public void climb() {
+        super.climb();
+
         setSpeed(1.0);
     }
 
     @Override
     public void retract() {
-        setSpeed(-0.20);
+        super.retract();
+
+        setSpeed(-0.40);
     }
 
     private void setSpeed(double speed) {
         setTlmSpeed(speed);
         motor.set(speed);
+    }
+
+    @Override
+    public double getPosition() {
+        return encoder.getPosition();
+    }
+
+    @Override
+    public void zeroPosition() {
+        encoder.setPosition(0.0);
     }
 
 }

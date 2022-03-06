@@ -6,28 +6,24 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.drive;
+package frc.robot.commands.intake;
 
 
-import frc.robot.commands.intake.IntakeDoNothing;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-/**
- * Add your docs here.
- */
-public class DriveForwardTimed extends DriveCommandBase {
-
+public class IntakeIngestTimed extends IntakeCommandBase {
+    
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(DriveForwardTimed.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IntakeIngestTimed.class.getName());
 
     // 
     private final double timeInSeconds;
     //
     private long executeCount;
 
-    public DriveForwardTimed(double seconds) {
+    public IntakeIngestTimed(double seconds) {
         logger.info("constructing {} for {}", getName(), seconds);
 
         timeInSeconds = seconds;
@@ -47,14 +43,13 @@ public class DriveForwardTimed extends DriveCommandBase {
         executeCount = secondsToClicks(timeInSeconds);
     }
 
+    
     @Override
     public void execute() {
         super.execute();
 
-        double speed = 0.3;
-        double turn = 0.0;
-
-        drive.drive(speed, turn);
+        intake.extend();
+        intake.pullIn();
 
         --executeCount;
     }
@@ -66,8 +61,8 @@ public class DriveForwardTimed extends DriveCommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        // Stop the drive
-        drive.stop();
+        intake.stop();
+        intake.retract();
 
         super.end(interrupted);
     }

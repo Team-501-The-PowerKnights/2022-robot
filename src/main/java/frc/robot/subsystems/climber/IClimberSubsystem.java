@@ -21,11 +21,6 @@ public interface IClimberSubsystem extends ISubsystem {
     public void stop();
 
     /**
-     * Extend in preparation for the climb
-     **/
-    public void extend();
-
-    /**
      * Pull in to actually lift robot and climb
      **/
     public void climb();
@@ -34,5 +29,15 @@ public interface IClimberSubsystem extends ISubsystem {
      * Run the motors in reverse to retract and arm. Should only be run in the pit.
      **/
     public void retract();
+
+    /**
+     * Returns the value of the climber's encoder (if present)
+     */
+    public double getPosition();
+
+    /**
+     * Zeros the climber's encoder (if present)
+     */
+    public void zeroPosition();
 
 }

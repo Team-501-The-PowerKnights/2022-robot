@@ -1,4 +1,3 @@
-/*-----------------------------------------------------------------------*/
 /* Copyright (c) Team 501 - The PowerKnights. All Rights Reserved.       */
 /* Open Source Software - may be modified and shared by other FRC teams  */
 /* under the terms of the Team501 license. The code must be accompanied  */
@@ -6,38 +5,49 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.intake;
+package frc.robot.commands.climber;
 
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class IntakeIngest extends IntakeCommandBase {
-
+public class ClimberSimpleManual extends ClimberOICommandBase {
+        
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IntakeIngest.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ClimberSimpleManual.class.getName());
 
-    public IntakeIngest() {
+    public ClimberSimpleManual() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
     }
-
+    
+    // Called repeatedly when this Command is scheduled to run
     @Override
     public void execute() {
         super.execute();
 
-        intake.extend();
-        intake.pullIn();
+        // // FIXME - Get Climber Command re-implemented
+        // if (oi.getClimberExtend()) {
+        //     climber.extend();
+        // }
+        // else if (oi.getClimberClimb()) {
+        //     climber.climb();
+        // }
+        // else {
+        //     climber.stop();
+        // }
+        climber.stop();
     }
 
+    // Called once when either the Command finishes normally, or when it
+    // is interrupted/canceled.
     @Override
     public void end(boolean interrupted) {
-        intake.stop();
-        intake.retract();
-
         super.end(interrupted);
+
+        climber.stop();
     }
 
 }

@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.climber;
 
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,7 +21,6 @@ import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Add your docs here.
@@ -119,6 +117,8 @@ abstract class BaseClimberSubsystem extends SubsystemBase implements IClimberSub
     }
 
     private double tlmSpeed = 0.0;
+    private boolean tlmClimbing = false;
+    private boolean tlmRetracting = false;
 
     protected void setTlmSpeed(double speed) {
         tlmSpeed = speed;
@@ -126,12 +126,33 @@ abstract class BaseClimberSubsystem extends SubsystemBase implements IClimberSub
 
     @Override
     public void updateTelemetry() {
+        SmartDashboard.putNumber(TelemetryNames.Climber.position, getPosition());
         SmartDashboard.putNumber(TelemetryNames.Climber.speed, tlmSpeed);
+        SmartDashboard.putBoolean(TelemetryNames.Climber.climbing, tlmClimbing);
+        SmartDashboard.putBoolean(TelemetryNames.Climber.retracting, tlmRetracting);
     }
 
     @Override
     public void updatePreferences() {
         loadPreferences();
+    }
+
+    @Override
+    public void stop() {
+        tlmClimbing = false;
+        tlmRetracting = false;
+    }
+
+    @Override
+    public void climb() {
+        tlmClimbing = true;
+        tlmRetracting = false;
+    }
+
+    @Override
+    public void retract() {
+        tlmClimbing = false;
+        tlmRetracting = true;
     }
 
 }

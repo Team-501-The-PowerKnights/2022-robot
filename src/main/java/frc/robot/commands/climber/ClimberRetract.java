@@ -6,38 +6,39 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.intake;
+package frc.robot.commands.climber;
 
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class IntakeIngest extends IntakeCommandBase {
-
+public class ClimberRetract extends ClimberCommandBase {
+    
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IntakeIngest.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ClimberRetract.class.getName());
 
-    public IntakeIngest() {
+    public ClimberRetract() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
     }
 
+    // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
         super.execute();
 
-        intake.extend();
-        intake.pullIn();
+        climber.retract();
     }
 
+    // Called once when either the Command finishes normally, or when it
+    // is interrupted/canceled.
     @Override
     public void end(boolean interrupted) {
-        intake.stop();
-        intake.retract();
-
         super.end(interrupted);
+
+        climber.stop();
     }
 
 }

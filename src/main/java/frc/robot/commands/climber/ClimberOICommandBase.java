@@ -6,15 +6,29 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.config;
+package frc.robot.commands.climber;
 
-/**
- * This class provides a code versioning string that can be used to determine the
- * build pedigree of a robot as loaded on the roboRIO.
- **/
-class CodeVersionInfo {
 
-    // Provides a version string that gets incorporated into build
-    public static final String version = "2022.1.2.0";
+import frc.robot.OI;
 
+import riolog.PKLogger;
+import riolog.RioLogger;
+
+
+public class ClimberOICommandBase extends ClimberCommandBase {
+
+    /** Our classes' logger **/
+    private static final PKLogger logger = RioLogger.getLogger(ClimberOICommandBase.class.getName());
+
+    // Handle to the OI
+    protected OI oi;
+
+    public ClimberOICommandBase() {
+        logger.info("constructing {}", getName());
+
+        oi = OI.getInstance();
+
+        logger.info("constructed");
+    }
+    
 }

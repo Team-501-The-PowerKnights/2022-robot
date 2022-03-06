@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.climber;
 
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -21,7 +20,6 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-
 class ZesterClimberSubsystem extends BaseClimberSubsystem {
 
     /** Our classes' logger **/
@@ -32,7 +30,7 @@ class ZesterClimberSubsystem extends BaseClimberSubsystem {
     private final AnalogInput limitUp;
     private final AnalogInput limitDown;
 
-     ZesterClimberSubsystem() {
+    ZesterClimberSubsystem() {
         logger.info("constructing");
 
         motor = new CANSparkMax(55, MotorType.kBrushless);
@@ -76,11 +74,6 @@ class ZesterClimberSubsystem extends BaseClimberSubsystem {
     }
 
     @Override
-    public void extend() {
-        setSpeed(0.40);
-    }
-
-    @Override
     public void climb() {
         setSpeed(1.0);
     }
@@ -91,8 +84,21 @@ class ZesterClimberSubsystem extends BaseClimberSubsystem {
     }
 
     private void setSpeed(double speed) {
-        setTlmSpeed(speed);;
+        setTlmSpeed(speed);
+        ;
         motor.set(speed);
+    }
+
+    @Override
+    public double getPosition() {
+        // Zester doesn't implement this
+        return 0;
+    }
+
+    @Override
+    public void zeroPosition() {
+        // TODO Auto-generated method stub
+        
     }
 
 }

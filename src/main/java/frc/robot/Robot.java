@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 import frc.robot.commands.DoNothing;
+import frc.robot.commands.FirePoseVision;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.PKSequentialCommandGroup;
 import frc.robot.commands.drive.DriveBackwardDistance;
@@ -32,6 +33,8 @@ import frc.robot.commands.drive.DriveForwardDistance;
 import frc.robot.commands.drive.DriveForwardTimed;
 import frc.robot.commands.elevator.ElevatorLift;
 import frc.robot.commands.intake.IntakeIngest;
+import frc.robot.commands.intake.IntakeIngestTimed;
+import frc.robot.commands.turret.TurretVisionAlign;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModuleFactory;
 import frc.robot.preferences.PreferencesInitializer;
@@ -73,14 +76,21 @@ public class Robot extends TimedRobot {
     //
     private List<ISubsystem> subsystems;
 
-    // Flag for having completed autonomous part of match
-    private boolean autonomousComplete;
+    // Flag for started/running autonomous part of match
+    @SuppressWarnings("unused")
+    private boolean autonomousRunning;
     // Flag for having run first autonomous loop
     private boolean autonomousFirstRun;
-    // Flag for having completed operator control part of match
-    private boolean teleopComplete;
-    // Flag for having run first operator control loop
+    // Flag for having completed autonomous part of match
+    private boolean autonomousComplete;
+
+    // Flag for having started/running teleop part of match
+    @SuppressWarnings("unused")
+    private boolean teleopRunning;
+    // Flag for having run first teleop loop
     private boolean teleopFirstRun;
+    // Flag for having completed teleop part of match
+    private boolean teleopComplete;
 
     // Chooser for autonomous command from Dashboard
     private SendableChooser<Command> autoChooser;
@@ -134,10 +144,12 @@ public class Robot extends TimedRobot {
         createAutoChooser();
 
         // Initialize state variables
-        autonomousComplete = false;
+        autonomousRunning = false;
         autonomousFirstRun = false;
-        teleopComplete = false;
+        autonomousComplete = false;
+        teleopRunning = false;
         teleopFirstRun = false;
+        teleopComplete = false;
 
         // Create the chooser for FMS connected override
         createFmsOverrideChooser();
@@ -191,25 +203,25 @@ public class Robot extends TimedRobot {
         // FIXME: This only works because default shooter command is idle
 
         // FIXME: Make parameterized like distance
-        autoChooser.addOption("Drive Forward (4 sec)", new DriveForwardTimed());
-        autoChooser.addOption("Drive Forward (3 feet)", new DriveForwardDistance(3));
+        autoChooser.addOption("Drive Forward (4 sec)", new DriveForwardTimed(4.0));
+        autoChooser.addOption("Drive Forward (3 feet)", new DriveForwardDistance(3.0));
         autoChooser.addOption("Shoot and Drive Forward (3 feet)",
                 new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardDistance(3)));
         autoChooser.addOption("Shoot and Drive Forward (4 sec)",
-                new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardTimed()));
+                new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardTimed(4.0)));
 
-        autoChooser.addOption("Drive Backward (4 sec)", new DriveBackwardTimed());
+        autoChooser.addOption("Drive Backward (4 sec)", new DriveBackwardTimed(4.0));
         autoChooser.addOption("Drive Backward (3 feet)", new DriveBackwardDistance(3));
         autoChooser.addOption("Shoot and Drive Backward (3 feet)",
                 new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardDistance(3)));
         autoChooser.addOption("Shoot and Drive Backward (4 sec)",
-                new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardTimed()));
+                new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardTimed(4.0)));
 
-        autoChooser.addOption("Full Auto (Driving Forward)",
-                new PKParallelCommandGroup(new ElevatorLift(), new IntakeIngest(), new DriveForwardTimed()));
         autoChooser.addOption("Full Auto (Driving Forward Delay)",
-                new PKParallelCommandGroup(new ElevatorLift(), new IntakeIngest(),
-                        new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed())));
+            new PKParallelCommandGroup(new TurretVisionAlign(),
+                                       new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(4.0),
+                                                                                               new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(3.0)),
+                                                                    new FirePoseVision()))));
 
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
@@ -325,14 +337,22 @@ public class Robot extends TimedRobot {
     }
 
     /**
+     * This function is called once each time the robot exits Disabled mode.
+     */
+    @Override
+    public void disabledExit() {
+    }
+
+    /**
      * This autonomous runs the autonomous command selected by your
      * frc.robot.RobotContainer class.
      */
     @Override
     public void autonomousInit() {
         logger.info("initializing autonomous");
-        autonomousComplete = true;
+        autonomousRunning = true;
         autonomousFirstRun = false;
+        autonomousComplete = false;
 
         // Update the preferences
         for (IModule m : modules) {
@@ -378,13 +398,27 @@ public class Robot extends TimedRobot {
     }
 
     /**
+     * This function is called once each time the robot exits Autonomous mode.
+     */
+    @Override
+    public void autonomousExit() {
+        logger.info("exiting autonomous");
+
+        autonomousRunning = false;
+        autonomousComplete = true;
+
+        logger.info("exited autonomous");
+    }
+
+    /**
      * This function is called once each time the robot enters Teleop mode.
      */
     @Override
     public void teleopInit() {
         logger.info("initializing teleop");
-        teleopComplete = true;
+        teleopRunning = true;
         teleopFirstRun = false;
+        teleopComplete = false; 
 
         // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to
@@ -428,6 +462,19 @@ public class Robot extends TimedRobot {
     }
 
     /**
+     * This function is called once each time the robot exits Teleop mode.
+     */
+    @Override
+    public void teleopExit() {
+        logger.info("exiting teleop");
+
+        teleopRunning = false;
+        teleopComplete = true;
+
+        logger.info("exited teleop");
+    }
+
+    /**
      * This function is called once each time the robot enters Test mode.
      */
     @Override
@@ -452,10 +499,21 @@ public class Robot extends TimedRobot {
     }
 
     /**
-     * This function is called periodically during test mode.
+     * This function is called periodically during Test mode.
      */
     @Override
     public void testPeriodic() {
+    }
+
+    
+    /**
+     * This function is called once each time the robot exits Test mode.
+     */
+    @Override
+    public void testExit() {
+        logger.info("exiting test");
+
+        logger.info("exited test");
     }
 
     private static void createFmsOverrideChooser() {

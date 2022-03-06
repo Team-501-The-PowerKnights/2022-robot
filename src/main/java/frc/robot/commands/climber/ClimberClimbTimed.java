@@ -6,35 +6,32 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.drive;
+package frc.robot.commands.climber;
 
 
-import frc.robot.commands.intake.IntakeDoNothing;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-/**
- * Add your docs here.
- */
-public class DriveForwardTimed extends DriveCommandBase {
+public class ClimberClimbTimed extends ClimberCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(DriveForwardTimed.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ClimberClimbTimed.class.getName());
 
     // 
     private final double timeInSeconds;
     //
     private long executeCount;
 
-    public DriveForwardTimed(double seconds) {
+    public ClimberClimbTimed(double seconds) {
         logger.info("constructing {} for {}", getName(), seconds);
 
         timeInSeconds = seconds;
 
+
         logger.info("constructed");
     }
-
+    
     // FIXME: make this a base class or something
     private long secondsToClicks (double seconds) {
         return (long)(seconds * 50.0);  // @ 50 Hz
@@ -47,14 +44,12 @@ public class DriveForwardTimed extends DriveCommandBase {
         executeCount = secondsToClicks(timeInSeconds);
     }
 
+    // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
         super.execute();
 
-        double speed = 0.3;
-        double turn = 0.0;
-
-        drive.drive(speed, turn);
+        climber.climb();
 
         --executeCount;
     }
@@ -64,10 +59,11 @@ public class DriveForwardTimed extends DriveCommandBase {
         return (executeCount > 0 ? false : true);
     }
 
+    // Called once when either the Command finishes normally, or when it
+    // is interrupted/canceled.
     @Override
     public void end(boolean interrupted) {
-        // Stop the drive
-        drive.stop();
+        climber.stop();
 
         super.end(interrupted);
     }
