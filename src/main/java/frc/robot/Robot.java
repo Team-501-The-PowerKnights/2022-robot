@@ -363,7 +363,7 @@ public class Robot extends TimedRobot {
         }
         for (ISubsystem s : subsystems) {
             s.updatePreferences();
-            s.loadDefaultAutoCommand();
+            s.setDefaultAutoCommand();
         }
 
         // CommandScheduler.getInstance().schedule(true, new DriveForwardTimed());
@@ -437,7 +437,7 @@ public class Robot extends TimedRobot {
         }
         for (ISubsystem s : subsystems) {
             s.updatePreferences();
-            s.loadDefaultTeleCommand();
+            s.setDefaultTeleCommand();
         }
 
         logger.info("initialized teleop");

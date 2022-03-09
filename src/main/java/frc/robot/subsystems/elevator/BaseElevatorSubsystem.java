@@ -46,7 +46,7 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
     private static Command defaultTeleCommand;
 
     @Override
-    public void loadDefaultCommand() {
+    public void loadDefaultCommands() {
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
         String myAutoClassName = props.getString("autoCommandName");
         if (myAutoClassName.isEmpty()) {
@@ -102,12 +102,12 @@ abstract class BaseElevatorSubsystem extends SubsystemBase implements IElevatorS
     }
 
     @Override
-    public void loadDefaultAutoCommand() {
+    public void setDefaultAutoCommand() {
         setDefaultCommand(defaultAutoCommand);
     }
 
     @Override
-    public void loadDefaultTeleCommand() {
+    public void setDefaultTeleCommand() {
         setDefaultCommand(defaultTeleCommand);
     }
 

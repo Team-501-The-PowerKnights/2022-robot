@@ -8,9 +8,11 @@
 
 package frc.robot.subsystems;
 
+
 import edu.wpi.first.wpilibj2.command.Subsystem;
 
 import frc.robot.telemetry.ITelemetryProvider;
+
 
 /**
  * Note that this now extends the official <i>WPILib</i> interface of
@@ -21,22 +23,27 @@ import frc.robot.telemetry.ITelemetryProvider;
 public interface ISubsystem extends Subsystem, ITelemetryProvider {
 
     /**
-     * Called to load the default commands for the subsystem; the values are
-     * determined from the properties file and loaded dynamically.
+     * Called to load the default commands for the subsystem (both
+     * autonomous and teleop); the values are determined from the
+     * properties file and loaded dynamically.
      **/
-    public void loadDefaultCommand();
+    public void loadDefaultCommands();
 
     /**
-     * Loads the default auto command. Needs to be called prior to starting to
-     * execute the actual autonomous periodic code.
+     * Sets the default command for the subsystem to be the previously
+     * loaded auto command. Called at the initialization of the mode;
+     * must be prior to actually starting to execute the actual autonomous
+     * periodic code.
      */
-    public void loadDefaultAutoCommand();
+    public void setDefaultAutoCommand();
 
     /**
-     * Loads the default teleoperated command. Needs tp be called prior to starting
-     * to execute the actual teleoperated periodic code.
+     * Sets the default command for the subsystem to be the previously
+     * loaded teleop command. Called at the initialization of the mode;
+     * must be prior to actually starting to execute the actual teleop
+     * periodic code.
      */
-    public void loadDefaultTeleCommand();
+    public void setDefaultTeleCommand();
 
     /**
      * Called to validate that the calibration values in the properties match the

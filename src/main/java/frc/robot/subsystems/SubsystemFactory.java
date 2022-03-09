@@ -111,7 +111,7 @@ public class SubsystemFactory {
 
         // Load the default commands now that all subsystems are created
         for (ISubsystem ss : subsystems) {
-            ss.loadDefaultCommand();
+            ss.loadDefaultCommands();
         }
 
         logger.info("constructed");

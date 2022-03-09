@@ -44,7 +44,7 @@ abstract class BaseClimberSubsystem extends SubsystemBase implements IClimberSub
     private static Command defaultTeleCommand;
 
     @Override
-    public void loadDefaultCommand() {
+    public void loadDefaultCommands() {
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
         String myAutoClassName = props.getString("autoCommandName");
         if (myAutoClassName.isEmpty()) {
@@ -100,12 +100,12 @@ abstract class BaseClimberSubsystem extends SubsystemBase implements IClimberSub
     }
 
     @Override
-    public void loadDefaultAutoCommand() {
+    public void setDefaultAutoCommand() {
         setDefaultCommand(defaultAutoCommand);
     }
 
     @Override
-    public void loadDefaultTeleCommand() {
+    public void setDefaultTeleCommand() {
         setDefaultCommand(defaultTeleCommand);
     }
 
