@@ -31,15 +31,40 @@ import riolog.RioLogger;
 /**
  * Add your docs here.
  */
-public final class PreferencesInitializer {
+public final class PreferencesManager {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(PreferencesInitializer.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(PreferencesManager.class.getName());
+    
+    private static PreferencesManager ourInstance;
 
-    public static void initialize() {
-        logger.info("initializing");
+    private static String myName = "Prefs";
+
+    public static void constructInstance() {
+        SmartDashboard.putNumber(TelemetryNames.Properties.status, PKStatus.unknown.tlmValue);
+
+        if (ourInstance != null) {
+            throw new IllegalStateException(myName + " already constructed");
+        }
+
         SmartDashboard.putNumber(TelemetryNames.Preferences.status, PKStatus.inProgress.tlmValue);
 
+        ourInstance = new PreferencesManager();
+
+        SmartDashboard.putNumber(TelemetryNames.Preferences.status, PKStatus.success.tlmValue);
+
+        logger.info("initialized");
+    }
+
+    public static PreferencesManager getInstance() {
+        if (ourInstance == null) {
+            throw new IllegalStateException(myName + " not constructed yet");
+        }
+        return ourInstance;
+    }
+
+    private PreferencesManager() {
+        logger.info("constructing");
 
         DrivePreferences.initialize();
 
@@ -51,12 +76,10 @@ public final class PreferencesInitializer {
 
         ClimberPreferences.initialize();
 
-        SmartDashboard.putNumber(TelemetryNames.Preferences.status, PKStatus.success.tlmValue);
-
-        logger.info("initialized");
+        logger.info("constructed");
     }
 
-    public static void logPreferences(PKLogger logger) {
+    public void logPreferences(PKLogger logger) {
         StringBuilder buf = new StringBuilder();
         buf.append(" preferences:");
         for (String key : Preferences.getKeys().stream().collect(Collectors.toCollection(ArrayList::new))) {

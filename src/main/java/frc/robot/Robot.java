@@ -37,7 +37,7 @@ import frc.robot.commands.intake.IntakeIngestTimed;
 import frc.robot.commands.turret.TurretVisionAlign;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModuleFactory;
-import frc.robot.preferences.PreferencesInitializer;
+import frc.robot.preferences.PreferencesManager;
 import frc.robot.properties.PropertiesManager;
 import frc.robot.sensors.ISensor;
 import frc.robot.sensors.SensorFactory;
@@ -176,16 +176,17 @@ public class Robot extends TimedRobot {
 
     private void intializePreferences() {
         // Reads and initializes all subsystems preferences
-        PreferencesInitializer.initialize();
+        PreferencesManager.constructInstance();
 
         logger.info("Preferences as initialized:");
-        PreferencesInitializer.logPreferences(logger);
+        PreferencesManager.getInstance().logPreferences(logger);
     }
 
     private void initializeProperties() {
         // Reads and stores all the properties
         PropertiesManager.constructInstance();
 
+        logger.info("Properties as initialized:");
         PropertiesManager.getInstance().logProperties(logger);
     }
 
@@ -300,7 +301,7 @@ public class Robot extends TimedRobot {
      **/
     private void logPreferences() {
         logger.info("preferences:");
-        PreferencesInitializer.logPreferences(logger);
+        PreferencesManager.getInstance().logPreferences(logger);
     }
 
     /**
