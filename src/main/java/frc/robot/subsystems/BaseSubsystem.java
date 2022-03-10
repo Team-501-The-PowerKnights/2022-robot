@@ -45,6 +45,16 @@ public abstract class BaseSubsystem implements ISubsystem {
         logger.info("constructed");
     }
 
+    @Override
+    public void setDefaultAutoCommand() {
+        setDefaultCommand(defaultAutoCommand);
+    }
+
+    @Override
+    public void setDefaultTeleCommand() {
+        setDefaultCommand(defaultTeleCommand);
+    }
+    
     /**
      * Called to load the default commands for the subsystem (both
      * autonomous and teleop); the values are determined from the
@@ -52,7 +62,7 @@ public abstract class BaseSubsystem implements ISubsystem {
      * 
      * @param doNothingClass - class to default to if not found or errors
      **/
-    protected void loadDefaultCommands(Class<PKCommandBase> doNothingClass) {
+    protected void loadDefaultCommands(Class<? extends PKCommandBase> doNothingClass) {
         logger.debug("loading for {}", myName);
 
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);

@@ -10,16 +10,11 @@ package frc.robot.subsystems.climber;
 
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.commands.climber.ClimberDoNothing;
-import frc.robot.properties.PKProperties;
-import frc.robot.properties.PropertiesManager;
 import frc.robot.subsystems.BaseSubsystem;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.telemetry.TelemetryNames;
-import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -42,17 +37,7 @@ abstract class BaseClimberSubsystem extends BaseSubsystem implements IClimberSub
 
     @Override
     public void loadDefaultCommands() {
-        loadDefaultCommands(ClimberDoNothing);
-    }
-
-    @Override
-    public void setDefaultAutoCommand() {
-        setDefaultCommand(defaultAutoCommand);
-    }
-
-    @Override
-    public void setDefaultTeleCommand() {
-        setDefaultCommand(defaultTeleCommand);
+        loadDefaultCommands(ClimberDoNothing.class);
     }
 
     protected void loadPreferences() {
