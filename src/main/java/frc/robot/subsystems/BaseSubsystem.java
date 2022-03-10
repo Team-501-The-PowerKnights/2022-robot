@@ -66,69 +66,59 @@ public abstract class BaseSubsystem implements ISubsystem {
         logger.debug("loading for {}", myName);
 
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
+
         String myAutoClassName = props.getString("autoCommandName");
         if (myAutoClassName.isEmpty()) {
             logger.info("no class specified; go with subsystem default (do nothing)");
             myAutoClassName = new StringBuilder().append(myName).append("DoNothing").toString();
         }
-        String myPkgName = doNothingClass.getPackage().getName();
-        String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myAutoClassName).toString();
-        logger.debug("class to load: {}", classToLoad);
-
-        logger.info("constructing {} for {} subsystem", myAutoClassName, myName);
-        Command ourAutoCommand;
-        try {
-            @SuppressWarnings("rawtypes")
-            Class myClass = Class.forName(classToLoad);
-            @SuppressWarnings("deprecation")
-            Object myObject = myClass.newInstance();
-            ourAutoCommand = (Command) myObject;
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            logger.error("failed to load class; instantiating default stub for: {}", myName);
-            try {
-                ourAutoCommand = (Command) doNothingClass.getDeclaredConstructor().newInstance();
-            } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-                    | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-                logger.error("failed to load do nothing class; instantiating stub for: {}", myName);
-                ourAutoCommand = new DoNothing();
-            }
-            SmartDashboard.putNumber(TelemetryNames.Climber.status, PKStatus.degraded.tlmValue);
-        }
-
-        defaultAutoCommand = ourAutoCommand;
-        SmartDashboard.putString(TelemetryNames.Climber.autoCommand, ourAutoCommand.getClass().getSimpleName());
+        defaultAutoCommand = loadCommandClass(myAutoClassName, doNothingClass);
+        SmartDashboard.putString(TelemetryNames.Climber.autoCommand, defaultAutoCommand.getClass().getSimpleName());
 
         String myTeleClassName = props.getString("teleCommandName");
         if (myTeleClassName.isEmpty()) {
             logger.info("no class specified; go with subsystem default (do nothing)");
             myTeleClassName = new StringBuilder().append(myName).append("DoNothing").toString();
         }
-        myPkgName = doNothingClass.getPackage().getName();
-        classToLoad = new StringBuilder().append(myPkgName).append(".").append(myTeleClassName).toString();
+        defaultTeleCommand = loadCommandClass(myTeleClassName, doNothingClass);
+        SmartDashboard.putString(TelemetryNames.Climber.teleCommand, defaultTeleCommand.getClass().getSimpleName());
+    }
+
+    /**
+     * Dynamically load and instantiate an object of the specified class,
+     * returning an instance of the <code>doNothingClass</code> in case of
+     * any errors. If all else fails, then return an instance of the base
+     * <code>DoNothingClass</code>.
+     * 
+     * @param nameOfClass
+     * @param doNothingClass
+     * @return
+     */
+    private PKCommandBase loadCommandClass(String nameOfClass, Class<? extends PKCommandBase> doNothingClass) {
+        String myPkgName = doNothingClass.getPackage().getName();
+        String classToLoad = new StringBuilder().append(myPkgName).append(".").append(nameOfClass).toString();
         logger.debug("class to load: {}", classToLoad);
 
-        logger.info("constructing {} for {} subsystem", myTeleClassName, myName);
-        Command ourTeleCommand;
+        logger.info("constructing {} for {} subsystem", nameOfClass, myName);
+        PKCommandBase loadedCommand;
         try {
             @SuppressWarnings("rawtypes")
             Class myClass = Class.forName(classToLoad);
             @SuppressWarnings("deprecation")
             Object myObject = myClass.newInstance();
-            ourTeleCommand = (Command) myObject;
+            loadedCommand = (PKCommandBase) myObject;
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for: {}", myName);
             try {
-                ourTeleCommand = (Command) doNothingClass.getDeclaredConstructor().newInstance();
+                loadedCommand = (PKCommandBase) doNothingClass.getDeclaredConstructor().newInstance();
             } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
                     | InvocationTargetException | NoSuchMethodException | SecurityException e) {
                 logger.error("failed to load do nothing class; instantiating stub for: {}", myName);
-                ourTeleCommand = new DoNothing();
+                loadedCommand = new DoNothing();
             }
             SmartDashboard.putNumber(TelemetryNames.Climber.status, PKStatus.degraded.tlmValue);
         }
-
-        defaultTeleCommand = ourTeleCommand;
-        SmartDashboard.putString(TelemetryNames.Climber.teleCommand, ourTeleCommand.getClass().getSimpleName());
+        return loadedCommand;
     }
     
 }
