@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.subsystems.climber.ClimberPreferences;
 import frc.robot.subsystems.drive.DrivePreferences;
@@ -20,6 +21,8 @@ import frc.robot.subsystems.elevator.ElevatorPreferences;
 import frc.robot.subsystems.intake.IntakePreferences;
 import frc.robot.subsystems.shooter.ShooterPreferences;
 import frc.robot.subsystems.turret.TurretPreferences;
+import frc.robot.telemetry.TelemetryNames;
+import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -35,6 +38,8 @@ public final class PreferencesInitializer {
 
     public static void initialize() {
         logger.info("initializing");
+        SmartDashboard.putNumber(TelemetryNames.Preferences.status, PKStatus.inProgress.tlmValue);
+
 
         DrivePreferences.initialize();
 
@@ -45,6 +50,8 @@ public final class PreferencesInitializer {
         TurretPreferences.initialize();
 
         ClimberPreferences.initialize();
+
+        SmartDashboard.putNumber(TelemetryNames.Preferences.status, PKStatus.success.tlmValue);
 
         logger.info("initialized");
     }
