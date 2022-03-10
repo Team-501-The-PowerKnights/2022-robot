@@ -34,8 +34,8 @@ public abstract class BaseSubsystem implements ISubsystem {
     protected final String myName;
 
     /** Objects to hold loaded default commands **/
-    protected static Command defaultAutoCommand;
-    protected static Command defaultTeleCommand;
+    protected Command defaultAutoCommand;
+    protected Command defaultTeleCommand;
 
     public BaseSubsystem(String name) {
         logger.info("constructing");
@@ -47,11 +47,13 @@ public abstract class BaseSubsystem implements ISubsystem {
 
     @Override
     public void setDefaultAutoCommand() {
+        logger.info("set default auto to {}", defaultAutoCommand.getName());
         setDefaultCommand(defaultAutoCommand);
     }
 
     @Override
     public void setDefaultTeleCommand() {
+        logger.info("set default teleop to {}", defaultTeleCommand.getName());
         setDefaultCommand(defaultTeleCommand);
     }
     
