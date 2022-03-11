@@ -38,6 +38,8 @@ abstract class BaseElevatorSubsystem extends BaseSubsystem implements IElevatorS
     @Override
     public void loadDefaultCommands() {
         loadDefaultCommands(ElevatorDoNothing.class);
+        SmartDashboard.putString(TelemetryNames.Elevator.autoCommand, defaultAutoCommand.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.Elevator.teleCommand, defaultTeleCommand.getClass().getSimpleName());
     }
 
     protected void loadPreferences() {

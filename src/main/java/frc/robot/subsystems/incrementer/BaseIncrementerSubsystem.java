@@ -38,6 +38,8 @@ abstract class BaseIncrementerSubsystem extends BaseSubsystem implements IIncrem
     @Override
     public void loadDefaultCommands() {
         loadDefaultCommands(IncrementerDoNothing.class);
+        SmartDashboard.putString(TelemetryNames.Incrementer.autoCommand, defaultAutoCommand.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.Incrementer.teleCommand, defaultTeleCommand.getClass().getSimpleName());
     }
 
     private double tlmSpeed = 0.0;

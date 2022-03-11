@@ -54,6 +54,8 @@ abstract class BaseShooterSubsystem extends BaseSubsystem implements IShooterSub
     @Override
     public void loadDefaultCommands() {
         loadDefaultCommands(ShooterDoNothing.class);
+        SmartDashboard.putString(TelemetryNames.Shooter.autoCommand, defaultAutoCommand.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.Shooter.teleCommand, defaultTeleCommand.getClass().getSimpleName());
     }
 
     protected void loadPreferences() {

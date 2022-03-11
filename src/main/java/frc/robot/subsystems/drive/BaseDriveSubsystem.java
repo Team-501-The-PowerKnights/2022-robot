@@ -54,6 +54,8 @@ abstract class BaseDriveSubsystem extends BaseSubsystem implements IDriveSubsyst
     @Override
     public void loadDefaultCommands() {
         loadDefaultCommands(DriveDoNothing.class);
+        SmartDashboard.putString(TelemetryNames.Drive.autoCommand, defaultAutoCommand.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.Drive.teleCommand, defaultTeleCommand.getClass().getSimpleName());
     }
 
     protected void loadPreferences() {

@@ -47,13 +47,13 @@ public abstract class BaseSubsystem implements ISubsystem {
 
     @Override
     public void setDefaultAutoCommand() {
-        logger.info("set default auto to {}", defaultAutoCommand.getName());
+        logger.info("{} set default auto to {}", myName, defaultAutoCommand.getName());
         setDefaultCommand(defaultAutoCommand);
     }
 
     @Override
     public void setDefaultTeleCommand() {
-        logger.info("set default teleop to {}", defaultTeleCommand.getName());
+        logger.info("{} set default teleop to {}", myName, defaultTeleCommand.getName());
         setDefaultCommand(defaultTeleCommand);
     }
     
@@ -65,25 +65,23 @@ public abstract class BaseSubsystem implements ISubsystem {
      * @param doNothingClass - class to default to if not found or errors
      **/
     protected void loadDefaultCommands(Class<? extends PKCommandBase> doNothingClass) {
-        logger.debug("loading for {}", myName);
-
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
 
         String myAutoClassName = props.getString("autoCommandName");
+        logger.debug("{} attempting load of default auto {}", myName, myAutoClassName);
         if (myAutoClassName.isEmpty()) {
             logger.info("no class specified; go with subsystem default (do nothing)");
             myAutoClassName = new StringBuilder().append(myName).append("DoNothing").toString();
         }
         defaultAutoCommand = loadCommandClass(myAutoClassName, doNothingClass);
-        SmartDashboard.putString(TelemetryNames.Climber.autoCommand, defaultAutoCommand.getClass().getSimpleName());
 
         String myTeleClassName = props.getString("teleCommandName");
+        logger.debug("{} attempting load of default teleop {}", myName, myTeleClassName);
         if (myTeleClassName.isEmpty()) {
             logger.info("no class specified; go with subsystem default (do nothing)");
             myTeleClassName = new StringBuilder().append(myName).append("DoNothing").toString();
         }
         defaultTeleCommand = loadCommandClass(myTeleClassName, doNothingClass);
-        SmartDashboard.putString(TelemetryNames.Climber.teleCommand, defaultTeleCommand.getClass().getSimpleName());
     }
 
     /**
@@ -92,9 +90,9 @@ public abstract class BaseSubsystem implements ISubsystem {
      * any errors. If all else fails, then return an instance of the base
      * <code>DoNothingClass</code>.
      * 
-     * @param nameOfClass
-     * @param doNothingClass
-     * @return
+     * @param nameOfClass - name of class to load
+     * @param doNothingClass - default command class to use ('do nothing')
+     * @return class successfully loaded
      */
     private PKCommandBase loadCommandClass(String nameOfClass, Class<? extends PKCommandBase> doNothingClass) {
         String myPkgName = doNothingClass.getPackage().getName();

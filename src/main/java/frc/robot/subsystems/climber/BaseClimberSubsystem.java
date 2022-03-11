@@ -38,6 +38,8 @@ abstract class BaseClimberSubsystem extends BaseSubsystem implements IClimberSub
     @Override
     public void loadDefaultCommands() {
         loadDefaultCommands(ClimberDoNothing.class);
+        SmartDashboard.putString(TelemetryNames.Climber.autoCommand, defaultAutoCommand.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.Climber.teleCommand, defaultTeleCommand.getClass().getSimpleName());
     }
 
     protected void loadPreferences() {

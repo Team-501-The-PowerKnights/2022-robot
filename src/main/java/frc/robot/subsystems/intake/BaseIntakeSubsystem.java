@@ -38,6 +38,8 @@ abstract class BaseIntakeSubsystem extends BaseSubsystem implements IIntakeSubsy
     @Override
     public void loadDefaultCommands() {
         loadDefaultCommands(IntakeDoNothing.class);
+        SmartDashboard.putString(TelemetryNames.Intake.autoCommand, defaultAutoCommand.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.Intake.teleCommand, defaultTeleCommand.getClass().getSimpleName());
     }
 
     protected void loadPreferences() {

@@ -51,6 +51,8 @@ abstract class BaseTurretSubsystem extends BaseSubsystem implements ITurretSubsy
     @Override
     public void loadDefaultCommands() {
         loadDefaultCommands(TurretDoNothing.class);
+        SmartDashboard.putString(TelemetryNames.Turret.autoCommand, defaultAutoCommand.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.Turret.teleCommand, defaultTeleCommand.getClass().getSimpleName());
     }
 
     protected void loadPreferences() {
