@@ -37,15 +37,13 @@ import frc.robot.commands.intake.IntakeIngestTimed;
 import frc.robot.commands.turret.TurretVisionAlign;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModuleFactory;
-import frc.robot.preferences.PreferencesInitializer;
+import frc.robot.preferences.PreferencesManager;
 import frc.robot.properties.PropertiesManager;
 import frc.robot.sensors.ISensor;
 import frc.robot.sensors.SensorFactory;
 import frc.robot.telemetry.SchedulerProvider;
 import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
-import frc.robot.telemetry.TelemetryNames.Preferences;
-import frc.robot.utils.PKStatus;
 import frc.robot.subsystems.ISubsystem;
 import frc.robot.subsystems.SubsystemFactory;
 
@@ -177,21 +175,18 @@ public class Robot extends TimedRobot {
     }
 
     private void intializePreferences() {
-        // Needs to be here or conflict with class from WPILib? wth?
-        SmartDashboard.putNumber(Preferences.status, PKStatus.inProgress.tlmValue);
-
-        PreferencesInitializer.initialize();
+        // Reads and initializes all subsystems preferences
+        PreferencesManager.constructInstance();
 
         logger.info("Preferences as initialized:");
-        PreferencesInitializer.logPreferences(logger);
-
-        SmartDashboard.putNumber(Preferences.status, PKStatus.success.tlmValue);
+        PreferencesManager.getInstance().logPreferences(logger);
     }
 
     private void initializeProperties() {
         // Reads and stores all the properties
         PropertiesManager.constructInstance();
 
+        logger.info("Properties as initialized:");
         PropertiesManager.getInstance().logProperties(logger);
     }
 
@@ -306,7 +301,7 @@ public class Robot extends TimedRobot {
      **/
     private void logPreferences() {
         logger.info("preferences:");
-        PreferencesInitializer.logPreferences(logger);
+        PreferencesManager.getInstance().logPreferences(logger);
     }
 
     /**
