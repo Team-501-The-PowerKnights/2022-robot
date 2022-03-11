@@ -47,13 +47,13 @@ public abstract class BaseSubsystem implements ISubsystem {
 
     @Override
     public void setDefaultAutoCommand() {
-        logger.info("{} set default auto to {}", myName, defaultAutoCommand.getName());
+        logger.info("{} set default auto command to {}", myName, defaultAutoCommand.getName());
         setDefaultCommand(defaultAutoCommand);
     }
 
     @Override
     public void setDefaultTeleCommand() {
-        logger.info("{} set default teleop to {}", myName, defaultTeleCommand.getName());
+        logger.info("{} set default teleop command to {}", myName, defaultTeleCommand.getName());
         setDefaultCommand(defaultTeleCommand);
     }
     

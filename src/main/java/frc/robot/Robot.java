@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-import frc.robot.commands.DoNothing;
+import frc.robot.commands.AutoDoNothing;
 import frc.robot.commands.FirePoseVision;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.PKSequentialCommandGroup;
@@ -198,7 +198,7 @@ public class Robot extends TimedRobot {
     private void createAutoChooser() {
         autoChooser = new SendableChooser<>();
 
-        autoChooser.setDefaultOption("Do Nothing", new DoNothing());
+        autoChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
 
         // FIXME: This only works because default shooter command is idle
 
