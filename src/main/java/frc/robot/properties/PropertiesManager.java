@@ -24,7 +24,6 @@ import static java.util.Map.Entry.*;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.properties.PropertyNames.Robot;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
@@ -70,9 +69,9 @@ public class PropertiesManager {
 
         // Put robot info into dashboard (tests successful access)
         PKProperties props = ourInstance.getProperties(PropertyNames.Robot.name);
-        robotName = props.getString(Robot.robotName);
+        robotName = props.getString(PropertyNames.Robot.robotName);
         SmartDashboard.putString(TelemetryNames.Misc.robotName, robotName);
-        robotImpl = props.getString(Robot.implementation);
+        robotImpl = props.getString(PropertyNames.Robot.implementation);
         SmartDashboard.putString(TelemetryNames.Misc.robotImpl, robotImpl);
 
         // Check to see if file exists and mark as failed if not
