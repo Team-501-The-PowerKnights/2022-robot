@@ -8,105 +8,38 @@
 
 package frc.robot.subsystems.climber;
 
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.commands.climber.ClimberDoNothing;
-import frc.robot.properties.PKProperties;
-import frc.robot.properties.PropertiesManager;
+import frc.robot.subsystems.BaseSubsystem;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.telemetry.TelemetryNames;
-import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
+
 /**
  * Add your docs here.
  */
-abstract class BaseClimberSubsystem extends SubsystemBase implements IClimberSubsystem {
+abstract class BaseClimberSubsystem extends BaseSubsystem implements IClimberSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(BaseClimberSubsystem.class.getName());
 
-    /** Our subsystem's name **/
-    protected static final String myName = SubsystemNames.climberName;
-
     BaseClimberSubsystem() {
+        super(SubsystemNames.climberName);
         logger.info("constructing");
 
         logger.info("constructed");
     }
 
-    /** Objects to hold loaded default commands **/
-    private static Command defaultAutoCommand;
-    private static Command defaultTeleCommand;
-
     @Override
-    public void loadDefaultCommand() {
-        PKProperties props = PropertiesManager.getInstance().getProperties(myName);
-        String myAutoClassName = props.getString("autoCommandName");
-        if (myAutoClassName.isEmpty()) {
-            logger.info("no class specified; go with subsystem default (do nothing)");
-            myAutoClassName = new StringBuilder().append(myName).append("DoNothing").toString();
-        }
-        String myPkgName = ClimberDoNothing.class.getPackage().getName();
-        String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myAutoClassName).toString();
-        logger.debug("class to load: {}", classToLoad);
-
-        logger.info("constructing {} for {} subsystem", myAutoClassName, myName);
-        Command ourAutoCommand;
-        try {
-            @SuppressWarnings("rawtypes")
-            Class myClass = Class.forName(classToLoad);
-            @SuppressWarnings("deprecation")
-            Object myObject = myClass.newInstance();
-            ourAutoCommand = (Command) myObject;
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            logger.error("failed to load class; instantiating default stub for: {}", myName);
-            ourAutoCommand = (Command) new ClimberDoNothing();
-            SmartDashboard.putNumber(TelemetryNames.Climber.status, PKStatus.degraded.tlmValue);
-        }
-
-        defaultAutoCommand = ourAutoCommand;
-        SmartDashboard.putString(TelemetryNames.Climber.autoCommand, ourAutoCommand.getClass().getSimpleName());
-
-        String myTeleClassName = props.getString("teleCommandName");
-        if (myTeleClassName.isEmpty()) {
-            logger.info("no class specified; go with subsystem default (do nothing)");
-            myTeleClassName = new StringBuilder().append(myName).append("DoNothing").toString();
-        }
-        myPkgName = ClimberDoNothing.class.getPackage().getName();
-        classToLoad = new StringBuilder().append(myPkgName).append(".").append(myTeleClassName).toString();
-        logger.debug("class to load: {}", classToLoad);
-
-        logger.info("constructing {} for {} subsystem", myTeleClassName, myName);
-        Command ourTeleCommand;
-        try {
-            @SuppressWarnings("rawtypes")
-            Class myClass = Class.forName(classToLoad);
-            @SuppressWarnings("deprecation")
-            Object myObject = myClass.newInstance();
-            ourTeleCommand = (Command) myObject;
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            logger.error("failed to load class; instantiating default stub for: {}", myName);
-            ourTeleCommand = (Command) new ClimberDoNothing();
-            SmartDashboard.putNumber(TelemetryNames.Climber.status, PKStatus.degraded.tlmValue);
-        }
-
-        defaultTeleCommand = ourTeleCommand;
-        SmartDashboard.putString(TelemetryNames.Climber.teleCommand, ourTeleCommand.getClass().getSimpleName());
-    }
-
-    @Override
-    public void loadDefaultAutoCommand() {
-        setDefaultCommand(defaultAutoCommand);
-    }
-
-    @Override
-    public void loadDefaultTeleCommand() {
-        setDefaultCommand(defaultTeleCommand);
+    public void loadDefaultCommands() {
+        loadDefaultCommands(ClimberDoNothing.class);
+        SmartDashboard.putString(TelemetryNames.Climber.autoCommand, defaultAutoCommand.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.Climber.teleCommand, defaultTeleCommand.getClass().getSimpleName());
     }
 
     protected void loadPreferences() {
