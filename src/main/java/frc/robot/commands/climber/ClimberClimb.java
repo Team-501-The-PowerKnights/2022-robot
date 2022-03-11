@@ -24,7 +24,6 @@ public class ClimberClimb extends ClimberCommandBase {
         logger.info("constructed");
     }
 
-        // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
         super.execute();
@@ -32,8 +31,6 @@ public class ClimberClimb extends ClimberCommandBase {
         climber.climb();
     }
 
-    // Called once when either the Command finishes normally, or when it
-    // is interrupted/canceled.
     @Override
     public void end(boolean interrupted) {
         super.end(interrupted);

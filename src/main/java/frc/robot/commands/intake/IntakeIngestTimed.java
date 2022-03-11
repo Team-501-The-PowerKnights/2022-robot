@@ -61,10 +61,10 @@ public class IntakeIngestTimed extends IntakeCommandBase {
 
     @Override
     public void end(boolean interrupted) {
+        super.end(interrupted);
+
         intake.stop();
         intake.retract();
-
-        super.end(interrupted);
     }
 
 }

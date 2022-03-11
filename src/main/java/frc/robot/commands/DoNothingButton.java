@@ -26,10 +26,9 @@ public class DoNothingButton extends PKCommandBase {
     private final String button;
 
     public DoNothingButton(String button) {
-        logger.info("constructing {}", getName());
+        logger.info("constructing {} for button {}", getName(), button);
 
         this.button = button;
-        logger.info("for button {}", button);
     }
 
 }

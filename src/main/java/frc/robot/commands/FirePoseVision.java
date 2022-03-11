@@ -8,6 +8,7 @@
 
 package frc.robot.commands;
 
+
 import frc.robot.sensors.vision.IVisionSensor;
 import frc.robot.sensors.vision.VisionFactory;
 import frc.robot.subsystems.elevator.ElevatorFactory;
@@ -19,6 +20,7 @@ import frc.robot.subsystems.shooter.ShooterFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 public class FirePoseVision extends PKCommandBase {
 
@@ -71,11 +73,9 @@ public class FirePoseVision extends PKCommandBase {
     public void end(boolean interrupted) {
         super.end(interrupted);
 
+        // shooter goes to default (idle) when command ends
         incrementer.stop();
         elevator.stop();
-
-        // Don't stop shooter (default is idle command)
-        // shooter.stop();
     }
 
 }

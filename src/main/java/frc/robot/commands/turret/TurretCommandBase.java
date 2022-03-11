@@ -26,13 +26,12 @@ abstract class TurretCommandBase extends PKCommandBase {
     private static final PKLogger logger = RioLogger.getLogger(TurretCommandBase.class.getName());
 
     // Handle to our subsystem
-    protected ITurretSubsystem turret;
+    protected final ITurretSubsystem turret;
 
     public TurretCommandBase() {
         logger.info("constructing {}", getName());
 
         turret = TurretFactory.getInstance();
-
         addRequirements(turret);
 
         logger.info("constructed");

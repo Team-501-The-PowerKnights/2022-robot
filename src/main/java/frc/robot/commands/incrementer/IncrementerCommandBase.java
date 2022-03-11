@@ -26,13 +26,12 @@ abstract class IncrementerCommandBase extends PKCommandBase {
     private static final PKLogger logger = RioLogger.getLogger(IncrementerCommandBase.class.getName());
 
     // Handle to our subsystem
-    protected IIncrementerSubsystem incrementer;
+    protected final IIncrementerSubsystem incrementer;
 
     public IncrementerCommandBase() {
         logger.info("constructing {}", getName());
 
         incrementer = IncrementerFactory.getInstance();
-
         addRequirements(incrementer);
 
         logger.info("constructed");

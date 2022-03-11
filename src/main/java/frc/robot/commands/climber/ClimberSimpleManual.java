@@ -23,7 +23,6 @@ public class ClimberSimpleManual extends ClimberOICommandBase {
         logger.info("constructed");
     }
     
-    // Called repeatedly when this Command is scheduled to run
     @Override
     public void execute() {
         super.execute();
@@ -41,8 +40,6 @@ public class ClimberSimpleManual extends ClimberOICommandBase {
         climber.stop();
     }
 
-    // Called once when either the Command finishes normally, or when it
-    // is interrupted/canceled.
     @Override
     public void end(boolean interrupted) {
         super.end(interrupted);

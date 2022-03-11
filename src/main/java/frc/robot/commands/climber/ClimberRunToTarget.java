@@ -10,7 +10,9 @@ package frc.robot.commands.climber;
 
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.telemetry.TelemetryNames;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -40,7 +42,6 @@ public class ClimberRunToTarget extends ClimberCommandBase {
         SmartDashboard.putBoolean(TelemetryNames.Climber.atTarget, false);
     }
 
-    // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
         super.execute();
@@ -53,14 +54,13 @@ public class ClimberRunToTarget extends ClimberCommandBase {
         return climber.getPosition() >= target;
     }
 
-    // Called once when either the Command finishes normally, or when it
-    // is interrupted/canceled.
     @Override
     public void end(boolean interrupted) {
-        SmartDashboard.putBoolean(TelemetryNames.Climber.atTarget, true);
+        super.end(interrupted);
+
         climber.stop();
 
-        super.end(interrupted);
+        SmartDashboard.putBoolean(TelemetryNames.Climber.atTarget, true);
     }
 
 }
