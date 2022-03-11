@@ -74,8 +74,18 @@ public abstract class PKCommandBase extends CommandBase {
             executedOnce = true;
     
             add(this);
+
+            firstExecution();
         }
     }
+
+    /**
+     * Provides hook to have something happen on the first time the
+     * <code>execute</code> method is called. Typicall for subsystem
+     * commands that are stateful and don't need to be called each
+     * time.
+     */
+    protected void firstExecution() {};
 
     @Override
     public void end(boolean interrupted) {
