@@ -8,8 +8,10 @@
 
 package frc.robot.commands.turret;
 
+
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 public class TurretManualControlJog extends TurretOICommandBase {
 
@@ -28,13 +30,12 @@ public class TurretManualControlJog extends TurretOICommandBase {
     // FIXME: This is a hack; use commands right
     boolean started = true;
 
-    // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
         super.execute();
 
         double speed = oi.getTurretJog();
-         turret.setSpeed(20, speed);
+        turret.setSpeed(20, speed);
     }
 
 }

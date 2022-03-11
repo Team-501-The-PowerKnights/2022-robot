@@ -44,7 +44,6 @@ public class ClimberClimbTimed extends ClimberCommandBase {
         executeCount = secondsToClicks(timeInSeconds);
     }
 
-    // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
         super.execute();
@@ -59,13 +58,11 @@ public class ClimberClimbTimed extends ClimberCommandBase {
         return (executeCount > 0 ? false : true);
     }
 
-    // Called once when either the Command finishes normally, or when it
-    // is interrupted/canceled.
     @Override
     public void end(boolean interrupted) {
-        climber.stop();
-
         super.end(interrupted);
+
+        climber.stop();
     }
 
 }

@@ -32,7 +32,6 @@ abstract class ElevatorCommandBase extends PKCommandBase {
         logger.info("constructing {}", getName());
 
         elevator = ElevatorFactory.getInstance();
-
         addRequirements(elevator);
 
         logger.info("constructed");

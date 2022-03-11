@@ -9,7 +9,6 @@
 package frc.robot.commands.drive;
 
 
-import frc.robot.commands.intake.IntakeDoNothing;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -66,10 +65,9 @@ public class DriveForwardTimed extends DriveCommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        // Stop the drive
-        drive.stop();
-
         super.end(interrupted);
+
+        drive.stop();
     }
 
 }

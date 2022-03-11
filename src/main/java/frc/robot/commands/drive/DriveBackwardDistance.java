@@ -8,12 +8,14 @@
 
 package frc.robot.commands.drive;
 
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Add your docs here.
@@ -64,10 +66,9 @@ public class DriveBackwardDistance extends DriveCommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        // Stop the drive
-        drive.stop();
-
         super.end(interrupted);
+
+        drive.stop();
     }
 
 }

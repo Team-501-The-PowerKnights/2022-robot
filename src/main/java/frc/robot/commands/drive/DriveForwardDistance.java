@@ -16,6 +16,7 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
+
 /**
  * Add your docs here.
  */
@@ -65,10 +66,10 @@ public class DriveForwardDistance extends DriveCommandBase {
 
     @Override
     public void end(boolean interrupted) {
+        super.end(interrupted);
+
         // Stop the drive
         drive.stop();
-
-        super.end(interrupted);
     }
 
 }

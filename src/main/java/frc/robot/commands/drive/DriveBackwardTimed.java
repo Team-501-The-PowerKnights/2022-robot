@@ -65,10 +65,9 @@ public class DriveBackwardTimed extends DriveCommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        // Stop the drive
-        drive.stop();
-
         super.end(interrupted);
+
+        drive.stop();
     }
 
 }
