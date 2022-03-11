@@ -26,13 +26,12 @@ abstract class ClimberCommandBase extends PKCommandBase {
     private static final PKLogger logger = RioLogger.getLogger(ClimberCommandBase.class.getName());
 
     // Handle to our subsystem
-    protected IClimberSubsystem climber;
+    protected final IClimberSubsystem climber;
 
     public ClimberCommandBase() {
         logger.info("constructing {}", getName());
 
         climber = ClimberFactory.getInstance();
-
         addRequirements(climber);
 
         logger.info("constructed");

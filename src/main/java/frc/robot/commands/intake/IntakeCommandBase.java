@@ -26,13 +26,12 @@ abstract class IntakeCommandBase extends PKCommandBase {
     private static final PKLogger logger = RioLogger.getLogger(IntakeCommandBase.class.getName());
 
     // Handle to our subsystem
-    protected IIntakeSubsystem intake;
+    protected final IIntakeSubsystem intake;
 
     public IntakeCommandBase() {
         logger.info("constructing {}", getName());
 
         intake = IntakeFactory.getInstance();
-
         addRequirements(intake);
 
         logger.info("constructed");

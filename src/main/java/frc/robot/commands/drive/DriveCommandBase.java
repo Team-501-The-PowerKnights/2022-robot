@@ -26,13 +26,12 @@ abstract class DriveCommandBase extends PKCommandBase {
     private static final PKLogger logger = RioLogger.getLogger(DriveCommandBase.class.getName());
 
     // Handle to our subsystem
-    protected IDriveSubsystem drive;
+    protected final IDriveSubsystem drive;
 
     public DriveCommandBase() {
         logger.info("constructing {}", getName());
 
         drive = DriveFactory.getInstance();
-
         addRequirements(drive);
 
         logger.info("constructed");

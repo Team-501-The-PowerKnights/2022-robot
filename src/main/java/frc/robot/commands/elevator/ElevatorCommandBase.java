@@ -26,7 +26,7 @@ abstract class ElevatorCommandBase extends PKCommandBase {
     private static final PKLogger logger = RioLogger.getLogger(ElevatorCommandBase.class.getName());
 
     // Handle to our subsystem
-    protected IElevatorSubsystem elevator;
+    protected final IElevatorSubsystem elevator;
 
     public ElevatorCommandBase() {
         logger.info("constructing {}", getName());
