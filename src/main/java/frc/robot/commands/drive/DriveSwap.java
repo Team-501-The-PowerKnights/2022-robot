@@ -21,12 +21,8 @@ public class DriveSwap extends DriveCommandBase {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(DriveSwap.class.getName());
 
-    // FIXME - Is dependency right?
     // FIXME - Should pause a couple of cycles of execute to give time to coast out
 
-    /**
-     * Creates a new DriveJoystickControl.
-     */
     public DriveSwap() {
         logger.info("constructing {}", getName());
 
@@ -34,10 +30,15 @@ public class DriveSwap extends DriveCommandBase {
     }
 
     @Override
-    public void initialize() {
-        super.initialize();
+    public void execute() {
+        super.execute();
 
         drive.swap();
+    }
+
+    @Override
+    public boolean isFinished() {
+        return true;
     }
 
 }
