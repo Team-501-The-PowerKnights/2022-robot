@@ -38,8 +38,13 @@ public class ElevatorLiftToLimitForHMI extends ElevatorCommandBase {
     public void execute() {
         super.execute();
 
-        elevator.liftToLimit();
         counts++;
+    }
+
+    @Override
+    protected void firstExecution() {
+        logger.trace("elevator.lift() called in firstExecution()");
+        elevator.lift();
     }
 
     @Override

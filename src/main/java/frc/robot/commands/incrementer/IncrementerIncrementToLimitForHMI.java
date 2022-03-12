@@ -36,8 +36,13 @@ public class IncrementerIncrementToLimitForHMI extends IncrementerCommandBase {
     public void execute() {
         super.execute();
 
-        incrementer.incrementToLimit();
         counts++;
+    }
+
+    @Override
+    protected void firstExecution() {
+        logger.trace("incrementer.increment() called in firstExecution()");
+        incrementer.increment();
     }
 
     @Override

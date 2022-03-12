@@ -48,10 +48,14 @@ public class IntakeIngestTimed extends IntakeCommandBase {
     public void execute() {
         super.execute();
 
+        --executeCount;
+    }
+
+    @Override
+    protected void firstExecution() {
+        logger.trace("intake.extend() & intake.pullin called in firstExecution()");
         intake.extend();
         intake.pullIn();
-
-        --executeCount;
     }
 
     @Override

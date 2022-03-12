@@ -27,7 +27,11 @@ public class ClimberRetract extends ClimberCommandBase {
     @Override
     public void execute() {
         super.execute();
+    }
 
+    @Override
+    protected void firstExecution() {
+        logger.trace("climber.retract() called in firstExecution()");
         climber.retract();
     }
 

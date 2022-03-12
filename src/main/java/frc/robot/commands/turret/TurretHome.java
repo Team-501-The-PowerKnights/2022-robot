@@ -29,13 +29,12 @@ public class TurretHome extends TurretCommandBase {
     @Override
     public void execute() {
         super.execute();
-
-        turret.home();
     }
 
     @Override
-    public boolean isFinished() {
-        return false;
+    protected void firstExecution() {
+        logger.trace("turret.home() called in firstExecution()");
+        turret.home();
     }
 
 }
