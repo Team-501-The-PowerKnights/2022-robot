@@ -9,6 +9,8 @@
 package frc.robot.commands.drive;
 
 
+import frc.robot.utils.TimerFromPeriod;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -21,36 +23,31 @@ public class DriveForwardTimed extends DriveCommandBase {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(DriveForwardTimed.class.getName());
 
-    // 
-    private final double timeInSeconds;
-    //
-    private long executeCount;
+    // Duration to execute (in seconds)
+    private final double duration;
+    // Timer to count it down during execute()
+    private TimerFromPeriod timer;
 
     public DriveForwardTimed(double seconds) {
         logger.info("constructing {} for {}", getName(), seconds);
 
-        timeInSeconds = seconds;
+        duration = seconds;
 
         logger.info("constructed");
-    }
-
-    // FIXME: make this a base class or something
-    private long secondsToClicks (double seconds) {
-        return (long)(seconds * 50.0);  // @ 50 Hz
     }
 
     @Override
     public void initialize() {
         super.initialize();
 
-        executeCount = secondsToClicks(timeInSeconds);
+        timer = new TimerFromPeriod(duration);
     }
 
     @Override
     public void execute() {
         super.execute();
 
-        --executeCount;
+        timer.nextTic();
     }
 
     @Override
@@ -65,7 +62,7 @@ public class DriveForwardTimed extends DriveCommandBase {
 
     @Override
     public boolean isFinished() {
-        return (executeCount > 0 ? false : true);
+        return timer.isExpired();
     }
 
     @Override
