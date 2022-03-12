@@ -11,15 +11,17 @@ package frc.robot.subsystems.elevator;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.sensors.elevator.ElevatorSensorFactory;
-import frc.robot.sensors.elevator.IElevatorSensor;
+// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+// import frc.robot.sensors.elevator.ElevatorSensorFactory;
+// import frc.robot.sensors.elevator.IElevatorSensor;
 import frc.robot.sensors.incrementer.IIncrementerSensor;
 import frc.robot.sensors.incrementer.IncrementerSensorFactory;
-import frc.robot.telemetry.TelemetryNames;
+// import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class ElevatorSubsystem extends BaseElevatorSubsystem {
 

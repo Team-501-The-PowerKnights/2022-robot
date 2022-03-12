@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-import frc.robot.commands.AutoDoNothing;
+import frc.robot.commands.modes.AutoDoNothing;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.PKSequentialCommandGroup;
 import frc.robot.commands.drive.DriveBackwardDistance;
@@ -31,7 +31,6 @@ import frc.robot.commands.drive.DriveBackwardTimed;
 import frc.robot.commands.drive.DriveForwardDistance;
 import frc.robot.commands.drive.DriveForwardTimed;
 import frc.robot.commands.elevator.ElevatorLift;
-import frc.robot.commands.intake.IntakeIngest;
 import frc.robot.commands.intake.IntakeIngestTimed;
 import frc.robot.commands.poses.FirePoseVision;
 import frc.robot.commands.turret.TurretVisionAlign;
@@ -98,6 +97,16 @@ public class Robot extends TimedRobot {
     // Chooser for overriding field connection in pit
     private static SendableChooser<Boolean> fmsOverrideChooser;
 
+    // Capture the period at start (shouldn't ever change)
+    private static double loopPeriod;
+
+    /**
+     * Constucts an instance of the robot to play the match.
+     */
+    public Robot() {
+        loopPeriod = getPeriod();
+    }
+
     /**
      * This function is run when the robot is first started up and should be used
      * for any initialization code.
@@ -108,6 +117,8 @@ public class Robot extends TimedRobot {
 
         // Wait until we get the configuration data from driver station
         waitForDriverStationData();
+
+        loopPeriod = getPeriod();
 
         // Make sure Preferences are initialized
         intializePreferences();
@@ -361,14 +372,10 @@ public class Robot extends TimedRobot {
             s.setDefaultAutoCommand();
         }
 
-        // CommandScheduler.getInstance().schedule(true, new DriveForwardTimed());
-        // CommandScheduler.getInstance().schedule(true, new AutoFull());
         autoCommand = autoChooser.getSelected();
         logger.info("auto command is {}", autoCommand.getName());
         if (autoCommand != null) {
             CommandScheduler.getInstance().schedule(true, autoCommand);
-            // CommandScheduler.getInstance().schedule(true, new
-            // PKSequentialCommandGroup(new TurretHome(), autoCommand));
         }
 
         logger.info("initialized autonomous");
@@ -527,12 +534,10 @@ public class Robot extends TimedRobot {
         else {
             return fmsOverrideChooser.getSelected();
         }
+    }
 
-        // // For Field Running
-        // return DriverStation.isFMSAttached();
-
-        // // For Pit Testing (be careful)
-        // // return true; // FOR pit testing
+    static public double getLoopPeriod() {
+        return loopPeriod;
     }
 
 }

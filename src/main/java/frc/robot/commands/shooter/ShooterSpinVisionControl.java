@@ -13,8 +13,6 @@ import frc.robot.sensors.vision.IVisionSensor;
 import frc.robot.sensors.vision.VisionFactory;
 import frc.robot.subsystems.drive.DriveFactory;
 import frc.robot.subsystems.drive.IDriveSubsystem;
-import frc.robot.subsystems.shooter.IShooterSubsystem;
-import frc.robot.subsystems.shooter.ShooterFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;

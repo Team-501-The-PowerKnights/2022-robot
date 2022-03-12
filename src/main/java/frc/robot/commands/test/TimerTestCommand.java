@@ -6,39 +6,35 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.climber;
+package frc.robot.commands.test;
 
 
+import frc.robot.commands.PKCommandBase;
 import frc.robot.utils.TimerFromPeriod;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class ClimberClimbTimed extends ClimberCommandBase {
-
+/**
+ * Class to test the <code>TimerFromPeriod</code> class.
+ * 
+ * @see frc.robot.utils.TimerFromPeriod
+ */
+public class TimerTestCommand extends PKCommandBase {
+        
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ClimberClimbTimed.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(TimerTestCommand.class.getName());
 
-    // Duration to execute (in seconds)
-    private double duration;
-    // Timer to count it down during execute()
     private TimerFromPeriod timer;
 
-    protected ClimberClimbTimed() {
-        // Prevent direct instantiation 
-    }
+    private long startTime;
+    private long stopTime;
 
-    /**
-     * 
-     * @param duration - (seconds)
-     */
-    public ClimberClimbTimed(double duration) {
-        logger.info("constructing {} for {}", getName(), duration);
+    private final double duration = 1.0; // seconds
 
-        this.duration = duration;
-
-        logger.info("constructed");
+    public TimerTestCommand() {
+        logger.info("constructing {}", getName());
     }
 
     @Override
@@ -57,8 +53,8 @@ public class ClimberClimbTimed extends ClimberCommandBase {
 
     @Override
     protected void firstExecution() {
-        logger.trace("climber.climb() called in firstExecution()");
-        climber.climb();
+        startTime = System.currentTimeMillis();
+        logger.trace("*** timestamp for firstExecution() = {}", startTime);
     }
 
     @Override
@@ -70,7 +66,10 @@ public class ClimberClimbTimed extends ClimberCommandBase {
     public void end(boolean interrupted) {
         super.end(interrupted);
 
-        climber.stop();
+        stopTime = System.currentTimeMillis();
+        logger.trace("*** timestamp for end() = {}", stopTime);
+        logger.trace("*** result: request = {}, actual = {}",
+                     duration, (stopTime - startTime)/1000.0);
     }
 
 }
