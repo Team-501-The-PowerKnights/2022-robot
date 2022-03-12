@@ -21,15 +21,22 @@ public class IntakeIngestTimed extends IntakeCommandBase {
     private static final PKLogger logger = RioLogger.getLogger(IntakeIngestTimed.class.getName());
 
     // Duration to execute (in seconds)
-    private final double duration;
+    private double duration;
     // Timer to count it down during execute()
     private TimerFromPeriod timer;
 
+    protected IntakeIngestTimed() {
+        // Prevent direct instantiation 
+    }
 
-    public IntakeIngestTimed(double seconds) {
-        logger.info("constructing {} for {}", getName(), seconds);
+    /**
+     * 
+     * @param duration - (seconds)
+     */
+    public IntakeIngestTimed(double duration) {
+        logger.info("constructing {} for {}", getName(), duration);
 
-        duration = seconds;
+        this.duration = duration;
 
         logger.info("constructed");
     }

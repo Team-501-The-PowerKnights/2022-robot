@@ -21,14 +21,22 @@ public class ClimberClimbTimed extends ClimberCommandBase {
     private static final PKLogger logger = RioLogger.getLogger(ClimberClimbTimed.class.getName());
 
     // Duration to execute (in seconds)
-    private final double duration;
+    private double duration;
     // Timer to count it down during execute()
     private TimerFromPeriod timer;
 
-    public ClimberClimbTimed(double seconds) {
-        logger.info("constructing {} for {}", getName(), seconds);
+    protected ClimberClimbTimed() {
+        // Prevent direct instantiation 
+    }
 
-        duration = seconds;
+    /**
+     * 
+     * @param duration - (seconds)
+     */
+    public ClimberClimbTimed(double duration) {
+        logger.info("constructing {} for {}", getName(), duration);
+
+        this.duration = duration;
 
         logger.info("constructed");
     }

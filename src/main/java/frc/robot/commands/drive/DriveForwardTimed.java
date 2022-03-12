@@ -24,16 +24,53 @@ public class DriveForwardTimed extends DriveCommandBase {
     private static final PKLogger logger = RioLogger.getLogger(DriveForwardTimed.class.getName());
 
     // Duration to execute (in seconds)
-    private final double duration;
+    private double duration;
+    // Speed to drive
+    private double speed = 0.30;  // default
+    private final double turn = 0.0;  // no turn component
+
     // Timer to count it down during execute()
     private TimerFromPeriod timer;
 
-    public DriveForwardTimed(double seconds) {
-        logger.info("constructing {} for {}", getName(), seconds);
+    protected DriveForwardTimed() {
+        // Prevent direct instantiation 
+    }
 
-        duration = seconds;
+    /**
+     * Creates an instance of a class to dive forward at the default
+     * speed.
+     * 
+     * @param duration - duration to drive (seconds)
+     */
+    public DriveForwardTimed(double duration) {
+        logger.info("constructing {} for {} {}", getName(), duration, speed);
+
+        setValues(duration, speed);
 
         logger.info("constructed");
+    }
+
+    /**
+     * Creates an instance of the class to drive forward at the specified
+     * speed.
+     * 
+     * @param duration - duration to drive (seconds)
+     * @param speed - speed to drive
+     */
+    public DriveForwardTimed(double duration, double speed) {
+        logger.info("constructing {} for {} {}", getName(), duration, speed);
+
+        setValues(speed, duration);
+
+        logger.info("constructed");
+    }
+
+    private void setValues(double duration, double speed) {
+        this.duration = duration;
+        if ( speed < 0.0 ) {
+            speed = Math.abs(speed);
+        }
+        this.speed = speed;
     }
 
     @Override
@@ -53,9 +90,6 @@ public class DriveForwardTimed extends DriveCommandBase {
     @Override
     protected void firstExecution() {
         logger.trace("drive.drive() called in firstExecution()");
-
-        double speed = 0.3;
-        double turn = 0.0;
 
         drive.drive(speed, turn);
     }
