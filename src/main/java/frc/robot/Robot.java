@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-import frc.robot.commands.AutoDoNothing;
+import frc.robot.commands.modes.AutoDoNothing;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.PKSequentialCommandGroup;
 import frc.robot.commands.drive.DriveBackwardDistance;

@@ -6,24 +6,26 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.modes;
 
+
+import frc.robot.commands.DoNothing;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
 /**
- * Provides an implementation of the DoNothing command for Teleop mode.
+ * Provides an implementation of the DoNothing command for Auto mode.
  * <p>
  * Mostly so the logging and telemetry displays are more exact.
  */
-public class TeleopDoNothing extends DoNothing {
+public class AutoDoNothing extends DoNothing {
     
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(TeleopDoNothing.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(AutoDoNothing.class.getName());
 
-    public TeleopDoNothing() {
+    public AutoDoNothing() {
         logger.info("constructing {}", getName());
     }
 
