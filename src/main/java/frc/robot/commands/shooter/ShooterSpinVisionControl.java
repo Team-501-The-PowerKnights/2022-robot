@@ -9,7 +9,6 @@
 package frc.robot.commands.shooter;
 
 
-import frc.robot.commands.PKCommandBase;
 import frc.robot.sensors.vision.IVisionSensor;
 import frc.robot.sensors.vision.VisionFactory;
 import frc.robot.subsystems.drive.DriveFactory;
@@ -24,31 +23,25 @@ import riolog.RioLogger;
 /**
  * 
  */
-public class ShooterSpinVisionControl extends PKCommandBase {
+public class ShooterSpinVisionControl extends ShooterCommandBase {
     
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ShooterSpinVisionControl.class.getName());
 
     /*
-     * We aren't using the subsystems to reserve because all we are doing
-     * is getting values from the subsystems.
+     * We aren't reserving the subsystems because all we are doing
+     * is getting values from them (and the sensors).
      */
-    // TODO: Why isn't this a subsystem reserved from base command?
     // TODO: Make a sensor on shooter for RPMs
-    private IShooterSubsystem shooter;
-
     // TODO: Make a sensor for speedometer / odometer on Drive
     private IDriveSubsystem drive;
     private IVisionSensor vision;
 
-    private double targetRpm;
-
     public ShooterSpinVisionControl() {
         logger.info("constructing {}", getName());
 
-        vision = VisionFactory.getInstance();
-        shooter = ShooterFactory.getInstance();
         drive = DriveFactory.getInstance();
+        vision = VisionFactory.getInstance();
 
         logger.info("constructed");
     }
@@ -57,14 +50,13 @@ public class ShooterSpinVisionControl extends PKCommandBase {
     public void execute() {
         super.execute();
 
-        double ty = vision.getY();
-
         double linearVelocity = drive.getEncoderVelocity();
-
         double coefficient = linearVelocity < 0 ? 0.7 : 0.015;
 
+        double ty = vision.getY();
+
         // targetRpm = (13.5 * (ty * ty)) - (111.3 * ty) + 3352.4;
-        targetRpm = (1297 + (-15.2 * ty) + (1.25 * (ty * ty))) - (coefficient * linearVelocity);
+        double targetRpm = (1297 + (-15.2 * ty) + (1.25 * (ty * ty))) - (coefficient * linearVelocity);
         // targetRpm = SmartDashboard.getNumber("targetRpm", 0.0);
 
         shooter.setTargetRpm(targetRpm);
