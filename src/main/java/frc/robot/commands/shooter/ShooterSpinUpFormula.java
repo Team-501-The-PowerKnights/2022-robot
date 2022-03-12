@@ -70,9 +70,4 @@ public class ShooterSpinUpFormula extends PKCommandBase {
         shooter.setTargetRpm(targetRpm);
     }
 
-    @Override
-    public boolean isFinished() {
-        return false;
-    }
-
 }

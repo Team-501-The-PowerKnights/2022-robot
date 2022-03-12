@@ -30,6 +30,7 @@ public class ElevatorManualControl extends ElevatorOICommandBase {
     public void execute() {
         super.execute();
 
+        // FIXME: Continuous calling needs one shot
         double liftSpeed = oi.getIntakeSpeed();
         if (liftSpeed > 0) {
             wasEnabled = true;

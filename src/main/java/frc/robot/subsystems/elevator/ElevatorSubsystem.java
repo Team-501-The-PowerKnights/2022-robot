@@ -80,7 +80,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     public void lift() {
         super.lift();
 
-        setSpeed(-1);
+        setSpeed(-1.0);
     }
 
     @Override
@@ -100,6 +100,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     public void liftToLimit() {
         super.liftToLimit();
 
+        // FIXME: Needs oneshot for speed controller set
         if (!isFull()) {
             lift();
         } else {
