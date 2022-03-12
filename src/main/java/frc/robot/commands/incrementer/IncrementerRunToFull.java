@@ -14,12 +14,12 @@ import riolog.RioLogger;
 /**
  * Add your docs here.
  */
-public class IncrementerIncrementToLimitForHMI extends IncrementerCommandBase {
+public class IncrementerRunToFull extends IncrementerCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IncrementerIncrementToLimitForHMI.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IncrementerRunToFull.class.getName());
 
-    public IncrementerIncrementToLimitForHMI() {
+    public IncrementerRunToFull() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");

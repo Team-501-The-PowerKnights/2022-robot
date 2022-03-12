@@ -24,10 +24,10 @@ import riolog.RioLogger;
 /**
  * 
  */
-public class ShooterSpinUpFormula extends PKCommandBase {
+public class ShooterSpinVisionControl extends PKCommandBase {
     
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ShooterSpinUpFormula.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ShooterSpinVisionControl.class.getName());
 
     /*
      * We aren't using the subsystems to reserve because all we are doing
@@ -43,7 +43,7 @@ public class ShooterSpinUpFormula extends PKCommandBase {
 
     private double targetRpm;
 
-    public ShooterSpinUpFormula() {
+    public ShooterSpinVisionControl() {
         logger.info("constructing {}", getName());
 
         vision = VisionFactory.getInstance();

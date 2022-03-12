@@ -13,15 +13,15 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class TurretManualControlJog extends TurretOICommandBase {
+public class TurretManualControl extends TurretOICommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(TurretManualControlJog.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(TurretManualControl.class.getName());
 
     /**
      * Creates a new TurretManualControlJog.
      */
-    public TurretManualControlJog() {
+    public TurretManualControl() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");

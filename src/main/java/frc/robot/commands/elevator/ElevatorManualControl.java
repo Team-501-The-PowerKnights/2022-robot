@@ -39,7 +39,7 @@ public class ElevatorManualControl extends ElevatorOICommandBase {
         } else {
             if (wasEnabled) {
                 wasEnabled = false;
-                (new ElevatorLiftToLimitForHMI()).schedule();
+                (new ElevatorLiftToFull()).schedule();
             } else {
                 elevator.stop();
             }

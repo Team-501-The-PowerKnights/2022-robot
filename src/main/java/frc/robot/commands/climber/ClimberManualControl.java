@@ -12,12 +12,12 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class ClimberSimpleManual extends ClimberOICommandBase {
+public class ClimberManualControl extends ClimberOICommandBase {
         
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ClimberSimpleManual.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ClimberManualControl.class.getName());
 
-    public ClimberSimpleManual() {
+    public ClimberManualControl() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");

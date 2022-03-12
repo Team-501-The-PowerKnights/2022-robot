@@ -16,12 +16,12 @@ import riolog.RioLogger;
 /**
  * Add your docs here.
  */
-public class ElevatorLiftToLimitForHMI extends ElevatorCommandBase {
+public class ElevatorLiftToFull extends ElevatorCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ElevatorLiftToLimitForHMI.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ElevatorLiftToFull.class.getName());
 
-    public ElevatorLiftToLimitForHMI() {
+    public ElevatorLiftToFull() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
