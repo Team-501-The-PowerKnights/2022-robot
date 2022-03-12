@@ -27,7 +27,6 @@ public class DriveJoystickControl extends DriveOICommandBase {
         logger.info("constructed");
     }
 
-    // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
         super.execute();

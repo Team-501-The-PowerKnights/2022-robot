@@ -50,12 +50,17 @@ public class DriveForwardTimed extends DriveCommandBase {
     public void execute() {
         super.execute();
 
+        --executeCount;
+    }
+
+    @Override
+    protected void firstExecution() {
+        logger.trace("drive.drive() called in firstExecution()");
+
         double speed = 0.3;
         double turn = 0.0;
 
         drive.drive(speed, turn);
-
-        --executeCount;
     }
 
     @Override
