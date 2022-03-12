@@ -35,7 +35,6 @@ public class InvalidButton extends PKCommandBase {
 
     @Override
     public boolean isFinished() {
-        // We just run once
         return true;
     }
 

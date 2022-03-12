@@ -48,9 +48,13 @@ public class ClimberClimbTimed extends ClimberCommandBase {
     public void execute() {
         super.execute();
 
-        climber.climb();
-
         --executeCount;
+    }
+
+    @Override
+    protected void firstExecution() {
+        logger.trace("climber.climb() called in firstExecution()");
+        climber.climb();
     }
 
     @Override

@@ -52,6 +52,11 @@ public class DriveForwardDistance extends DriveCommandBase {
     @Override
     public void execute() {
         super.execute();
+    }
+
+    @Override
+    protected void firstExecution() {
+        logger.trace("drive.drive() called in firstExecution()");
 
         double speed = 0.20;
         double turn = 0.0;

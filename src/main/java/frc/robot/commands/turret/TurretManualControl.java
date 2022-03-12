@@ -6,50 +6,36 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.incrementer;
+package frc.robot.commands.turret;
+
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-/**
- * Add your docs here.
- */
-public class IncrementerIncrementToLimitForHMI extends IncrementerCommandBase {
+
+public class TurretManualControl extends TurretOICommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IncrementerIncrementToLimitForHMI.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(TurretManualControl.class.getName());
 
-    public IncrementerIncrementToLimitForHMI() {
+    /**
+     * Creates a new TurretManualControlJog.
+     */
+    public TurretManualControl() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
     }
 
-    private static double counts = 0;
-
-    @Override
-    public void initialize() {
-        counts = 0;
-    }
+    // FIXME: This is a hack; use commands right
+    boolean started = true;
 
     @Override
     public void execute() {
         super.execute();
 
-        incrementer.incrementToLimit();
-        counts++;
-    }
-
-    @Override
-    public boolean isFinished() {
-        return incrementer.isFull() || counts >= 50;
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        super.end(interrupted);
-
-        incrementer.stop();
+        double speed = oi.getTurretJog();
+        turret.setSpeed(20, speed);
     }
 
 }

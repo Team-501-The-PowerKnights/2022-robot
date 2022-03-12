@@ -27,7 +27,11 @@ public class ClimberClimb extends ClimberCommandBase {
     @Override
     public void execute() {
         super.execute();
+    }
 
+    @Override
+    protected void firstExecution() {
+        logger.trace("climber.climb() called in firstExecution()");
         climber.climb();
     }
 

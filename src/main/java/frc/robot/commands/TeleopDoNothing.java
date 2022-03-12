@@ -6,40 +6,25 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.elevator;
+package frc.robot.commands;
 
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class ElevatorLift extends ElevatorCommandBase {
-
+/**
+ * Provides an implementation of the DoNothing command for Teleop mode.
+ * <p>
+ * Mostly so the logging and telemetry displays are more exact.
+ */
+public class TeleopDoNothing extends DoNothing {
+    
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ElevatorLift.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(TeleopDoNothing.class.getName());
 
-    public ElevatorLift() {
+    public TeleopDoNothing() {
         logger.info("constructing {}", getName());
-
-        logger.info("constructed");
-    }
-
-    @Override
-    public void execute() {
-        super.execute();
-    }
-
-    @Override
-    protected void firstExecution() {
-        logger.trace("elevator.lift() called in firstExecution()");
-        elevator.lift();
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        super.end(interrupted);
-
-        elevator.stop();
     }
 
 }

@@ -13,12 +13,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-import frc.robot.commands.FirePoseNoVision;
-import frc.robot.commands.FirePoseVision;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.PKSequentialCommandGroup;
 import frc.robot.commands.climber.ClimberRetract;
 import frc.robot.commands.climber.ClimberRunToTarget;
+import frc.robot.commands.poses.FirePoseNoVision;
+import frc.robot.commands.poses.FirePoseVision;
 import frc.robot.commands.turret.TurretVisionAlign;
 import frc.robot.telemetry.TelemetryNames;
 

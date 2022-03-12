@@ -18,20 +18,17 @@ public class IncrementerManualControl extends IncrementerOICommandBase {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(IncrementerManualControl.class.getName());
 
-    /**
-     * Creates a new DriveJoystickControl.
-     */
     public IncrementerManualControl() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
     }
 
-    // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
         super.execute();
 
+        // FIXME: No implementation / commented out
         double incrementSpeed = oi.getIntakeSpeed();
         if (incrementSpeed > 0) {
             // incrementer.incrementToLimit();
