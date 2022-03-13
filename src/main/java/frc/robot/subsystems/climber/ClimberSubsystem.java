@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.climber;
 
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
@@ -17,8 +18,10 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.telemetry.TelemetryNames;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class ClimberSubsystem extends BaseClimberSubsystem {
 
@@ -34,36 +37,19 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     ClimberSubsystem() {
         logger.info("constructing");
 
-        motor = new CANSparkMax(55, MotorType.kBrushless);
-        if (motor.restoreFactoryDefaults() == REVLibError.kOk) {
-            logger.info("Factory defaults restored successfully");
-        } else {
-            logger.warn("An error occurred setting factory defaults");
-        }
-        if (motor.setIdleMode(IdleMode.kBrake) == REVLibError.kOk) {
-            logger.info("Set to brake successfully");
-        } else {
-            logger.warn("An error occurred setting to brake");
-        }
-        if (motor.setOpenLoopRampRate(0.5) == REVLibError.kOk) { // 1.0
-            logger.info("Ramp rate set successfully");
-        } else {
-            logger.warn("An error occurred setting ramp rate");
-        }
+        lastError = REVLibError.kOk;
 
-        if (motor.setSmartCurrentLimit(35) == REVLibError.kOk) {
-            logger.info("Current limit set successfully");
-        } else {
-            logger.warn("An error occurred setting current limit");
-        }
+        motor = new CANSparkMax(55, MotorType.kBrushless);
+        checkError(motor.restoreFactoryDefaults(), "setting factory defaults {}");
+
+        checkError(motor.setIdleMode(IdleMode.kBrake), "setting to brake {}");
+        checkError(motor.setOpenLoopRampRate(0.5), "setting ramp rate {}");
+        checkError(motor.setSmartCurrentLimit(35), "setting current limit {}");
 
         encoder = motor.getEncoder();
-        if (encoder.setPosition(0.0) == REVLibError.kOk) {
-            logger.info("Encoder zeroed successfully");
-        } else {
-            logger.warn("An error occurred zeroing the encoder");
-        }
 
+        checkError(encoder.setPosition(0.0), "zeroing the encoder {}");
+ 
         // limitUp = new AnalogInput(0);
         // limitDown = new AnalogInput(1);
 
@@ -72,7 +58,18 @@ class ClimberSubsystem extends BaseClimberSubsystem {
         SmartDashboard.putBoolean(TelemetryNames.Climber.atTarget, false);
 
         logger.info("constructed");
+    }
 
+    // last error (not the same as kOk)
+    // TODO: Use to set a degraded error status/state on subsystem
+    @SuppressWarnings("unused")
+    private REVLibError lastError;
+
+    private void checkError(REVLibError error, String message) {
+        if (error != REVLibError.kOk) {
+            lastError = error;
+            logger.error(message, error);
+        }
     }
 
     @Override
