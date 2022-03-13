@@ -6,33 +6,39 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.incrementer;
+package frc.robot.sensors;
 
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import frc.robot.sensors.BaseSensor;
-import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-abstract class BaseIncrementerSensor extends BaseSensor implements IIncrementerSensor {
-
+/**
+ * A base class for sensors that provides default methods for the
+ * {@link frc.robot.IModeFollower IRobotModes} interface for notifications of
+ * mode transitions.
+ */
+public abstract class BaseSensor implements ISensor {
+       
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(BaseIncrementerSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(BaseSensor.class.getName());
 
-    BaseIncrementerSensor() {
-        super(TelemetryNames.Incrementer.name);
+    /** Our sensors's name **/
+    protected final String myName;
+
+    public BaseSensor(String name) {
         logger.info("constructing");
+
+        myName = name;
 
         logger.info("constructed");
     }
 
     @Override
-    public void updateTelemetry() {
-        SmartDashboard.putBoolean(TelemetryNames.Incrementer.full, get());
+    public void autonomousInit() {
+        logger.info("initializing auto for {}", myName);
+
+        logger.info("initialized auto for {}", myName);
     }
 
 }

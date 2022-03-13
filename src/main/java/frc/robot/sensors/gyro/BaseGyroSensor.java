@@ -10,22 +10,22 @@ package frc.robot.sensors.gyro;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import frc.robot.sensors.BaseSensor;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-abstract class BaseGyroSensor implements IGyroSensor {
+
+abstract class BaseGyroSensor extends BaseSensor implements IGyroSensor {
 
     /* Our classes logger */
     private static final PKLogger logger = RioLogger.getLogger(BaseGyroSensor.class.getName());
 
-    /** Our sensor's name **/
-    protected static final String myName = TelemetryNames.Gyro.name;
-
     protected final boolean gyroReversed;
 
     BaseGyroSensor() {
+        super(TelemetryNames.Gyro.name);
         logger.info("constructing");
 
         // FIXME - Get from Properties file

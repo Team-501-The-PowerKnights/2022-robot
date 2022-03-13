@@ -28,7 +28,7 @@ import riolog.RioLogger;
 
 /**
  * A base class for subsystems that handles registration in the constructor, deals
- * with the default commands, and provides empty methods for the
+ * with the default commands, and provides default methods for the
  * {@link frc.robot.IModeFollower IRobotModes} interface for notifications of
  * mode transitions.
  */
@@ -58,6 +58,8 @@ public abstract class BaseSubsystem implements ISubsystem {
     @Override
     public void disabledInit() {
         logger.info("initializing disabled for {}", myName);
+
+        validateCalibration();
 
         logger.info("initialized disabled for {}", myName);
     }
