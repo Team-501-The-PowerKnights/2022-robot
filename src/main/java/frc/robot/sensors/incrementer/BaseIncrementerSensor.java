@@ -12,6 +12,7 @@ package frc.robot.sensors.incrementer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.sensors.BaseSensor;
+import frc.robot.sensors.SensorNames;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -24,7 +25,7 @@ abstract class BaseIncrementerSensor extends BaseSensor implements IIncrementerS
     private static final PKLogger logger = RioLogger.getLogger(BaseIncrementerSensor.class.getName());
 
     BaseIncrementerSensor() {
-        super(TelemetryNames.Incrementer.name);
+        super(SensorNames.incrementerName);
         logger.info("constructing");
 
         logger.info("constructed");

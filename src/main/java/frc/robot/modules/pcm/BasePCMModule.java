@@ -12,6 +12,7 @@ package frc.robot.modules.pcm;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.modules.BaseModule;
+import frc.robot.modules.ModuleNames;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -24,7 +25,7 @@ abstract class BasePCMModule extends BaseModule implements IPCMModule {
     private static final PKLogger logger = RioLogger.getLogger(BasePCMModule.class.getName());
 
     BasePCMModule() {
-        super(TelemetryNames.PCM.name);
+        super(ModuleNames.pcmName);
         logger.info("constructing");
 
         logger.info("constructed");
