@@ -8,11 +8,11 @@
 
 package frc.robot.subsystems.drive;
 
-
 import java.util.List;
 
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -39,7 +39,6 @@ import frc.robot.sensors.gyro.IGyroSensor;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class ProtoDriveSubsystem extends BaseDriveSubsystem {
 
@@ -99,8 +98,16 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
         rightFrontMotor = new CANSparkMax(20, MotorType.kBrushless);
         rightRearMotor = new CANSparkMax(21, MotorType.kBrushless);
 
-        leftFrontMotor.setOpenLoopRampRate(ramp);
-        rightFrontMotor.setOpenLoopRampRate(ramp);
+        if (leftFrontMotor.setOpenLoopRampRate(ramp) == REVLibError.kOk) {
+            logger.info("Left front ramp rate set successfully");
+        } else {
+            logger.warn("An error occurred setting left front ramp rate");
+        }
+        if (rightFrontMotor.setOpenLoopRampRate(ramp) == REVLibError.kOk) {
+            logger.info("Right front ramp rate set successfully");
+        } else {
+            logger.warn("An error occurred setting right front ramp rate");
+        }
 
         left = new MotorControllerGroup(leftFrontMotor, leftRearMotor);
         right = new MotorControllerGroup(rightFrontMotor, rightRearMotor);
@@ -152,8 +159,16 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
         // TODO: Update the PID values based on preferences
 
         logger.info("setting OpenLoopRate={}", ramp);
-        leftFrontMotor.setOpenLoopRampRate(ramp);
-        rightFrontMotor.setOpenLoopRampRate(ramp);
+        if (leftFrontMotor.setOpenLoopRampRate(ramp) == REVLibError.kOk) {
+            logger.info("Left front ramp rate set successfully");
+        } else {
+            logger.warn("An error occurred setting left front ramp rate");
+        }
+        if (rightFrontMotor.setOpenLoopRampRate(ramp) == REVLibError.kOk) {
+            logger.info("Right front ramp rate set successfully");
+        } else {
+            logger.warn("An error occurred setting right front ramp rate");
+        }
     }
 
     @Override

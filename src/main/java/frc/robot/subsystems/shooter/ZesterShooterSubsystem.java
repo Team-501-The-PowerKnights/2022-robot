@@ -8,21 +8,19 @@
 
 package frc.robot.subsystems.shooter;
 
-
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import frc.robot.Robot;
 import frc.robot.commands.CommandingNames;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class ZesterShooterSubsystem extends BaseShooterSubsystem {
 
@@ -57,24 +55,41 @@ class ZesterShooterSubsystem extends BaseShooterSubsystem {
         logger.info("constructing");
 
         leftMotor = new CANSparkMax(21, MotorType.kBrushless);
-        leftMotor.restoreFactoryDefaults();
+        if (leftMotor.restoreFactoryDefaults() == REVLibError.kOk) {
+            logger.info("Left factory defaults restored successfully");
+        } else {
+            logger.warn("An error occurred setting left factory defaults");
+        }
         rightMotor = new CANSparkMax(22, MotorType.kBrushless);
-        rightMotor.restoreFactoryDefaults();
+        if (rightMotor.restoreFactoryDefaults() == REVLibError.kOk) {
+            logger.info("Right factory defaults restored successfully");
+        } else {
+            logger.warn("An error occurred setting right factory defaults");
+        }
+
         // + spin out, - spin in
+        leftMotor.setInverted(true);
 
         // Slaved and inverted
-        rightMotor.follow(leftMotor, true);
+        if (rightMotor.follow(leftMotor, true) == REVLibError.kOk) {
+            logger.info("Right successfully following left");
+        } else {
+            logger.warn("An error occurred setting right to follow left");
+        }
 
         encoder = leftMotor.getEncoder();
 
         pid = leftMotor.getPIDController();
-        pid.setOutputRange(0.05, 1, slotID);
-
-        updatePreferences();
+        if (pid.setOutputRange(0.05, 1, slotID) == REVLibError.kOk) {
+            logger.info("PID output range set successfully");
+        } else {
+            logger.warn("An error occurred setting PID output range");
+        }
 
         targetRpm = 2000; // TODO - Make the values
         isActive = false;
 
+        // TODO: Is this really used anywhere? for anything?
         SmartDashboard.putNumber(CommandingNames.Shooter.tolerance, 0.012);
 
         logger.info("constructed");
@@ -100,9 +115,9 @@ class ZesterShooterSubsystem extends BaseShooterSubsystem {
     public void updatePreferences() {
         super.updatePreferences();
 
-        // Nothing extra here
+        // Nothing extra here.
     }
-    
+
     @Override
     public void disable() {
         logger.info("last value of RPM tolerance: {}", tolerance);
@@ -120,7 +135,11 @@ class ZesterShooterSubsystem extends BaseShooterSubsystem {
         this.targetRpm = rpm; // Save off value for enabling
 
         if (isActive) {
-            pid.setReference(targetRpm, CANSparkMax.ControlType.kVelocity, slotID);
+            if (pid.setReference(targetRpm, CANSparkMax.ControlType.kVelocity, slotID) == REVLibError.kOk) {
+                logger.info("PID setpoint set successfully to: {}", targetRpm);
+            } else {
+                logger.warn("An error occurred setting PID setpoint");
+            }
         }
     }
 
@@ -128,7 +147,11 @@ class ZesterShooterSubsystem extends BaseShooterSubsystem {
     public void shoot() {
         isActive = true;
         /* generated speed */
-        pid.setReference(targetRpm, CANSparkMax.ControlType.kVelocity, slotID);
+        if (pid.setReference(targetRpm, CANSparkMax.ControlType.kVelocity, slotID) == REVLibError.kOk) {
+            logger.info("PID setpoint set successfully to: {}", targetRpm);
+        } else {
+            logger.warn("An error occurred setting PID setpoint");
+        }
     }
 
     // FIXME - Was supposed to be for manual; no idleShooter scaling
@@ -178,7 +201,7 @@ class ZesterShooterSubsystem extends BaseShooterSubsystem {
     public String getActivePosition() {
         return activePosition;
     }
-   
+
     private void setSpeed(double speed) {
         setTlmSetSpeed(speed);
 

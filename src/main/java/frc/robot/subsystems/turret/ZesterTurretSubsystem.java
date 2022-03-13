@@ -8,8 +8,8 @@
 
 package frc.robot.subsystems.turret;
 
-
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -26,7 +26,6 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class ZesterTurretSubsystem extends BaseTurretSubsystem {
 
@@ -55,20 +54,58 @@ class ZesterTurretSubsystem extends BaseTurretSubsystem {
         logger.info("constructing");
 
         motor = new CANSparkMax(20, MotorType.kBrushless);
-        motor.restoreFactoryDefaults();
+        if (motor.restoreFactoryDefaults() == REVLibError.kOk) {
+            logger.info("Factory defaults restored successfully");
+        } else {
+            logger.warn("An error occurred setting factory defaults");
+        }
         // +CW +, CCW -
         motor.setInverted(true);
         encoder = motor.getEncoder();
 
         pid = motor.getPIDController();
-        pid.setIZone(0.25, 1);
-        pid.setIMaxAccum(1, 1);
-        pid.setP(pid_P, 1);
-        pid.setI(pid_I, 1);
-        pid.setD(pid_D, 1);
-        pid.setFF(pid_F, 1);
-        pid.setOutputRange(-1.0, 1.0, 1);
-        motor.setSmartCurrentLimit(10);
+
+        if (pid.setIZone(0.25, 1) == REVLibError.kOk) {
+            logger.info("PID IZone set successfully");
+        } else {
+            logger.warn("An error occurred setting PID IZone");
+        }
+        if (pid.setIMaxAccum(1, 1) == REVLibError.kOk) {
+            logger.info("PID IMaxAccum set successfully");
+        } else {
+            logger.warn("An error occurred setting PID IMaxAccum");
+        }
+        if (pid.setP(pid_P, 1) == REVLibError.kOk) {
+            logger.info("PID P set successfully");
+        } else {
+            logger.warn("An error occurred setting PID P");
+        }
+        if (pid.setI(pid_I, 1) == REVLibError.kOk) {
+            logger.info("PID I set successfully");
+        } else {
+            logger.warn("An error occurred setting PID I");
+        }
+        if (pid.setD(pid_D, 1) == REVLibError.kOk) {
+            logger.info("PID D set successfully");
+        } else {
+            logger.warn("An error occurred setting PID D");
+        }
+        if (pid.setFF(pid_F, 1) == REVLibError.kOk) {
+            logger.info("PID FF set successfully");
+        } else {
+            logger.warn("An error occurred setting PID FF");
+        }
+        if (pid.setOutputRange(-1.0, 1.0, 1) == REVLibError.kOk) {
+            logger.info("PID Output Range set successfully");
+        } else {
+            logger.warn("An error occurred setting PID Output Range");
+        }
+
+        if (motor.setSmartCurrentLimit(10) == REVLibError.kOk) {
+            logger.info("Current limit set successfully");
+        } else {
+            logger.warn("An error occurred setting current limit");
+        }
 
         location = TurretLocationFactory.getInstance();
 
@@ -77,14 +114,18 @@ class ZesterTurretSubsystem extends BaseTurretSubsystem {
 
         SmartDashboard.putBoolean(TelemetryNames.Turret.isHomed, false);
 
-        encoder.setPosition(convertTurretAngleToCounts(-90));
+        if (encoder.setPosition(convertTurretAngleToCounts(-90)) == REVLibError.kOk) {
+            logger.info("Encoder set to -90 successfully");
+        } else {
+            logger.warn("An error occurred setting the encoder to -90");
+        }
 
         logger.info("constructed");
     }
 
     @Override
     public void updateTelemetry() {
-        setTlmSpeed(motor.get());  // get current actual speed
+        setTlmSpeed(motor.get()); // get current actual speed
         super.updateTelemetry();
 
         SmartDashboard.putNumber(TelemetryNames.Turret.angle, getAngle());
@@ -101,10 +142,26 @@ class ZesterTurretSubsystem extends BaseTurretSubsystem {
         super.updatePreferences();
 
         if (pid != null) {
-            pid.setP(pid_P, 1);
-            pid.setI(pid_I, 1);
-            pid.setD(pid_D, 1);
-            pid.setFF(pid_F, 1);
+            if (pid.setP(pid_P, 1) == REVLibError.kOk) {
+                logger.info("PID P set successfully");
+            } else {
+                logger.warn("An error occurred setting PID P");
+            }
+            if (pid.setI(pid_I, 1) == REVLibError.kOk) {
+                logger.info("PID I set successfully");
+            } else {
+                logger.warn("An error occurred setting PID I");
+            }
+            if (pid.setD(pid_D, 1) == REVLibError.kOk) {
+                logger.info("PID D set successfully");
+            } else {
+                logger.warn("An error occurred setting PID D");
+            }
+            if (pid.setFF(pid_F, 1) == REVLibError.kOk) {
+                logger.info("PID FF set successfully");
+            } else {
+                logger.warn("An error occurred setting PID FF");
+            }
         }
     }
 
@@ -114,7 +171,11 @@ class ZesterTurretSubsystem extends BaseTurretSubsystem {
 
     @Override
     public void stop() {
-        pid.setReference(0, CANSparkMax.ControlType.kVoltage);
+        if (pid.setReference(0, CANSparkMax.ControlType.kVoltage) == REVLibError.kOk) {
+            logger.info("PID setpoint set successfully to 0 volts");
+        } else {
+            logger.warn("An error occurred setting PID setpoint");
+        }
         setSpeed(0.0);
     }
 
@@ -128,7 +189,11 @@ class ZesterTurretSubsystem extends BaseTurretSubsystem {
 
         double targetCounts = convertTurretAngleToCounts(angle);
 
-        pid.setReference(targetCounts, CANSparkMax.ControlType.kPosition, 1);
+        if (pid.setReference(targetCounts, CANSparkMax.ControlType.kPosition, 1) == REVLibError.kOk) {
+            logger.info("PID setpoint set successfully to: {}", targetCounts);
+        } else {
+            logger.warn("An error occurred setting PID setpoint");
+        }
     }
 
     @Override
@@ -147,7 +212,11 @@ class ZesterTurretSubsystem extends BaseTurretSubsystem {
 
         SmartDashboard.putNumber(TelemetryNames.Turret.visionPIDOutput, steering_adjust);
 
-        pid.setReference(steering_adjust, CANSparkMax.ControlType.kVoltage, 1);
+        if (pid.setReference(steering_adjust, CANSparkMax.ControlType.kVoltage, 1) == REVLibError.kOk) {
+            logger.info("PID setpoint set successfully to: {}", steering_adjust);
+        } else {
+            logger.warn("An error occurred setting PID setpoint");
+        }
     }
 
     @Override
@@ -223,6 +292,7 @@ class ZesterTurretSubsystem extends BaseTurretSubsystem {
 
         SmartDashboard.putBoolean(TelemetryNames.Turret.isHomed, true);
         logger.debug("... done");
+
     }
 
     private double convertTurretCountsToAngle(double counts) {

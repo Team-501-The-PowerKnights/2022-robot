@@ -9,6 +9,7 @@
 package frc.robot.subsystems.climber;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -34,8 +35,16 @@ class ZesterClimberSubsystem extends BaseClimberSubsystem {
         logger.info("constructing");
 
         motor = new CANSparkMax(55, MotorType.kBrushless);
-        motor.restoreFactoryDefaults();
-        motor.setIdleMode(IdleMode.kBrake);
+        if (motor.restoreFactoryDefaults() == REVLibError.kOk) {
+            logger.info("Factory defaults restored successfully");
+        } else {
+            logger.warn("An error occurred setting factory defaults");
+        }
+        if (motor.setIdleMode(IdleMode.kBrake) == REVLibError.kOk) {
+            logger.info("Set to brake successfully");
+        } else {
+            logger.warn("An error occurred setting to brake");
+        }
 
         limitUp = new AnalogInput(0);
         limitDown = new AnalogInput(1);
@@ -98,7 +107,7 @@ class ZesterClimberSubsystem extends BaseClimberSubsystem {
     @Override
     public void zeroPosition() {
         // TODO Auto-generated method stub
-        
+
     }
 
 }

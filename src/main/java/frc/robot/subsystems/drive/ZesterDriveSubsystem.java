@@ -8,11 +8,11 @@
 
 package frc.robot.subsystems.drive;
 
-
 import java.util.List;
 
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -40,7 +40,6 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class ZesterDriveSubsystem extends BaseDriveSubsystem {
 
@@ -95,29 +94,68 @@ class ZesterDriveSubsystem extends BaseDriveSubsystem {
         logger.info("constructing");
 
         leftFrontMotor = new CANSparkMax(11, MotorType.kBrushless);
-        leftFrontMotor.restoreFactoryDefaults();
+        if (leftFrontMotor.restoreFactoryDefaults() == REVLibError.kOk) {
+            logger.info("Left front factory defaults restored successfully");
+        } else {
+            logger.warn("An error occurred setting left front factory defaults");
+        }
         leftRearMotor = new CANSparkMax(12, MotorType.kBrushless);
-        leftRearMotor.restoreFactoryDefaults();
+        if (leftRearMotor.restoreFactoryDefaults() == REVLibError.kOk) {
+            logger.info("Left rear factory defaults restored successfully");
+        } else {
+            logger.warn("An error occurred setting left rear factory defaults");
+        }
         rightFrontMotor = new CANSparkMax(13, MotorType.kBrushless);
-        rightFrontMotor.restoreFactoryDefaults();
+        if (rightFrontMotor.restoreFactoryDefaults() == REVLibError.kOk) {
+            logger.info("Right front factory defaults restored successfully");
+        } else {
+            logger.warn("An error occurred setting right front factory defaults");
+        }
         rightRearMotor = new CANSparkMax(14, MotorType.kBrushless);
-        rightRearMotor.restoreFactoryDefaults();
+        if (rightRearMotor.restoreFactoryDefaults() == REVLibError.kOk) {
+            logger.info("Right rear factory defaults restored successfully");
+        } else {
+            logger.warn("An error occurred setting right rear factory defaults");
+        }
+
+        // FIXME: Use MotorControllerGroup (see Proto ...)
 
         rightFrontMotor.setInverted(true);
 
-        // FIXME: Use MotorControllerGroup (see Zester ...)
+        if (leftRearMotor.follow(leftFrontMotor) == REVLibError.kOk) {
+            logger.info("Left rear successfully following left front");
+        } else {
+            logger.warn("An error occurred setting left rear to follow left front");
+        }
+        if (rightRearMotor.follow(rightFrontMotor) == REVLibError.kOk) {
+            logger.info("Right rear successfully following right front");
+        } else {
+            logger.warn("An error occurred setting right rear to follow right front");
+        }
 
-        leftRearMotor.follow(leftFrontMotor);
-        rightRearMotor.follow(rightFrontMotor);
-
-        logger.info("ramp={}", ramp);
-        leftFrontMotor.setOpenLoopRampRate(ramp);
-        rightFrontMotor.setOpenLoopRampRate(ramp);
+        if (leftFrontMotor.setOpenLoopRampRate(ramp) == REVLibError.kOk) {
+            logger.info("Left front ramp rate set successfully");
+        } else {
+            logger.warn("An error occurred setting left front ramp rate");
+        }
+        if (rightFrontMotor.setOpenLoopRampRate(ramp) == REVLibError.kOk) {
+            logger.info("Right front ramp rate set successfully");
+        } else {
+            logger.warn("An error occurred setting right front ramp rate");
+        }
 
         leftEncoder = leftFrontMotor.getEncoder();
-        leftEncoder.setPosition(0.0);
+        if (leftEncoder.setPosition(0.0) == REVLibError.kOk) {
+            logger.info("Left encoder zeroed successfully");
+        } else {
+            logger.warn("An error occurred zeroing the left encoder");
+        }
         rightEncoder = rightFrontMotor.getEncoder();
-        rightEncoder.setPosition(0.0);
+        if (rightEncoder.setPosition(0.0) == REVLibError.kOk) {
+            logger.info("Right encoder zeroed successfully");
+        } else {
+            logger.warn("An error occurred zeroing the right encoder");
+        }
 
         nav = GyroFactory.getInstance();
 
@@ -163,8 +201,16 @@ class ZesterDriveSubsystem extends BaseDriveSubsystem {
         // TODO: Update the PID values based on preferences
 
         logger.info("setting OpenLoopRate={}", ramp);
-        leftFrontMotor.setOpenLoopRampRate(ramp);
-        rightFrontMotor.setOpenLoopRampRate(ramp);
+        if (leftFrontMotor.setOpenLoopRampRate(ramp) == REVLibError.kOk) {
+            logger.info("Left front ramp rate set successfully");
+        } else {
+            logger.warn("An error occurred setting left front ramp rate");
+        }
+        if (rightFrontMotor.setOpenLoopRampRate(ramp) == REVLibError.kOk) {
+            logger.info("Right front ramp rate set successfully");
+        } else {
+            logger.warn("An error occurred setting right front ramp rate");
+        }
     }
 
     @Override

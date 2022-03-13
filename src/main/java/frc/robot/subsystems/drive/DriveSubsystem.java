@@ -12,6 +12,7 @@ import java.util.List;
 
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -92,32 +93,77 @@ class DriveSubsystem extends BaseDriveSubsystem {
     DriveSubsystem() {
         logger.info("constructing");
 
+        // Instantiation and factory default-ing motors
         leftFrontMotor = new CANSparkMax(11, MotorType.kBrushless);
-        leftFrontMotor.restoreFactoryDefaults();
+        if (leftFrontMotor.restoreFactoryDefaults() == REVLibError.kOk) {
+            logger.info("Left front factory defaults restored successfully");
+        } else {
+            logger.warn("An error occurred setting left front factory defaults");
+        }
         leftRearMotor = new CANSparkMax(12, MotorType.kBrushless);
-        leftRearMotor.restoreFactoryDefaults();
+        if (leftRearMotor.restoreFactoryDefaults() == REVLibError.kOk) {
+            logger.info("Left rear factory defaults restored successfully");
+        } else {
+            logger.warn("An error occurred setting left rear factory defaults");
+        }
         rightFrontMotor = new CANSparkMax(13, MotorType.kBrushless);
-        rightFrontMotor.restoreFactoryDefaults();
+        if (rightFrontMotor.restoreFactoryDefaults() == REVLibError.kOk) {
+            logger.info("Right front factory defaults restored successfully");
+        } else {
+            logger.warn("An error occurred setting right front factory defaults");
+        }
         rightRearMotor = new CANSparkMax(14, MotorType.kBrushless);
-        rightRearMotor.restoreFactoryDefaults();
+        if (rightRearMotor.restoreFactoryDefaults() == REVLibError.kOk) {
+            logger.info("Right rear factory defaults restored successfully");
+        } else {
+            logger.warn("An error occurred setting right rear factory defaults");
+        }
 
         // FIXME: Use MotorControllerGroup (see Proto ...)
 
         rightFrontMotor.setInverted(true);
 
-        leftRearMotor.follow(leftFrontMotor);
-        rightRearMotor.follow(rightFrontMotor);
+        // Following
+        if (leftRearMotor.follow(leftFrontMotor) == REVLibError.kOk) {
+            logger.info("Left rear successfully following left front");
+        } else {
+            logger.warn("An error occurred setting left rear to follow left front");
+        }
+        if (rightRearMotor.follow(rightFrontMotor) == REVLibError.kOk) {
+            logger.info("Right rear successfully following right front");
+        } else {
+            logger.warn("An error occurred setting right rear to follow right front");
+        }
 
-        leftFrontMotor.setOpenLoopRampRate(ramp);
-        rightFrontMotor.setOpenLoopRampRate(ramp);
+        // Ramp rates
+        if (leftFrontMotor.setOpenLoopRampRate(ramp) == REVLibError.kOk) {
+            logger.info("Left front ramp rate set successfully");
+        } else {
+            logger.warn("An error occurred setting left front ramp rate");
+        }
+        if (rightFrontMotor.setOpenLoopRampRate(ramp) == REVLibError.kOk) {
+            logger.info("Right front ramp rate set successfully");
+        } else {
+            logger.warn("An error occurred setting right front ramp rate");
+        }
 
+        // Instantiation of encoders and zeroing
         leftEncoder = leftFrontMotor.getEncoder();
-        leftEncoder.setPosition(0.0);
+        if (leftEncoder.setPosition(0.0) == REVLibError.kOk) {
+            logger.info("Left encoder zeroed successfully");
+        } else {
+            logger.warn("An error occurred zeroing the left encoder");
+        }
         rightEncoder = rightFrontMotor.getEncoder();
-        rightEncoder.setPosition(0.0);
+        if (rightEncoder.setPosition(0.0) == REVLibError.kOk) {
+            logger.info("Right encoder zeroed successfully");
+        } else {
+            logger.warn("An error occurred zeroing the right encoder");
+        }
 
         nav = GyroFactory.getInstance();
 
+        // Trajectory pieces instantiation
         drive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
         drive.setSafetyEnabled(false);
         driveKinematics = new DifferentialDriveKinematics(trackWidth);
@@ -159,8 +205,16 @@ class DriveSubsystem extends BaseDriveSubsystem {
 
         // TODO: Update the PID values based on preferences
         logger.info("setting OpenLoopRate={}", ramp);
-        leftFrontMotor.setOpenLoopRampRate(ramp);
-        rightFrontMotor.setOpenLoopRampRate(ramp);
+        if (leftFrontMotor.setOpenLoopRampRate(ramp) == REVLibError.kOk) {
+            logger.info("Left front ramp rate set successfully");
+        } else {
+            logger.warn("An error occurred setting left front ramp rate");
+        }
+        if (rightFrontMotor.setOpenLoopRampRate(ramp) == REVLibError.kOk) {
+            logger.info("Right front ramp rate set successfully");
+        } else {
+            logger.warn("An error occurred setting right front ramp rate");
+        }
     }
 
     @Override
@@ -171,15 +225,47 @@ class DriveSubsystem extends BaseDriveSubsystem {
     @Override
     public void setBrake(boolean brakeOn) {
         if (brakeOn) {
-            leftFrontMotor.setIdleMode(IdleMode.kBrake);
-            leftRearMotor.setIdleMode(IdleMode.kBrake);
-            rightFrontMotor.setIdleMode(IdleMode.kBrake);
-            rightRearMotor.setIdleMode(IdleMode.kBrake);
+            if (leftFrontMotor.setIdleMode(IdleMode.kBrake) == REVLibError.kOk) {
+                logger.info("Left front set to brake successfully");
+            } else {
+                logger.warn("An error occurred setting left front to brake");
+            }
+            if (leftRearMotor.setIdleMode(IdleMode.kBrake) == REVLibError.kOk) {
+                logger.info("Left rear set to brake successfully");
+            } else {
+                logger.warn("An error occurred setting left rear to brake");
+            }
+            if (rightFrontMotor.setIdleMode(IdleMode.kBrake) == REVLibError.kOk) {
+                logger.info("Right front set to brake successfully");
+            } else {
+                logger.warn("An error occurred setting right front to brake");
+            }
+            if (rightRearMotor.setIdleMode(IdleMode.kBrake) == REVLibError.kOk) {
+                logger.info("Right rear set to brake successfully");
+            } else {
+                logger.warn("An error occurred setting right rear to brake");
+            }
         } else {
-            leftFrontMotor.setIdleMode(IdleMode.kCoast);
-            leftRearMotor.setIdleMode(IdleMode.kCoast);
-            rightFrontMotor.setIdleMode(IdleMode.kCoast);
-            rightRearMotor.setIdleMode(IdleMode.kCoast);
+            if (leftFrontMotor.setIdleMode(IdleMode.kCoast) == REVLibError.kOk) {
+                logger.info("Left front set to coast successfully");
+            } else {
+                logger.warn("An error occurred setting left front to coast");
+            }
+            if (leftRearMotor.setIdleMode(IdleMode.kCoast) == REVLibError.kOk) {
+                logger.info("Left rear set to coast successfully");
+            } else {
+                logger.warn("An error occurred setting left rear to coast");
+            }
+            if (rightFrontMotor.setIdleMode(IdleMode.kCoast) == REVLibError.kOk) {
+                logger.info("Right front set to coast successfully");
+            } else {
+                logger.warn("An error occurred setting right front to coast");
+            }
+            if (rightRearMotor.setIdleMode(IdleMode.kCoast) == REVLibError.kOk) {
+                logger.info("Right rear set to coast successfully");
+            } else {
+                logger.warn("An error occurred setting right rear to coast");
+            }
         }
     }
 
