@@ -11,6 +11,7 @@ package frc.robot.sensors.elevator;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.sensors.BaseSensor;
+import frc.robot.sensors.SensorNames;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -23,7 +24,7 @@ abstract class BaseElevatorSensor extends BaseSensor implements IElevatorSensor 
     private static final PKLogger logger = RioLogger.getLogger(BaseElevatorSensor.class.getName());
 
     BaseElevatorSensor() {
-        super(TelemetryNames.Elevator.name);
+        super(SensorNames.elevatorName);
         logger.info("constructing");
 
         logger.info("constructed");

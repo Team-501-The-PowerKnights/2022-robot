@@ -12,6 +12,7 @@ package frc.robot.sensors.vision;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.sensors.BaseSensor;
+import frc.robot.sensors.SensorNames;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -27,7 +28,7 @@ abstract class BaseVisionSensor extends BaseSensor implements IVisionSensor {
     protected boolean isActive;
 
     BaseVisionSensor() {
-        super(TelemetryNames.Vision.name);
+        super(SensorNames.visionName);
         logger.info("constructing");
 
         isActive = false;

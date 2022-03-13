@@ -12,6 +12,7 @@ package frc.robot.sensors.turretlocation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.sensors.BaseSensor;
+import frc.robot.sensors.SensorNames;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -24,7 +25,7 @@ abstract class BaseTurretLocationSensor extends BaseSensor implements ITurretLoc
     private static final PKLogger logger = RioLogger.getLogger(BaseTurretLocationSensor.class.getName());
 
     BaseTurretLocationSensor() {
-        super(TelemetryNames.TurretLocation.name);
+        super(SensorNames.turretLocationName);
         logger.info("constructing");
 
         logger.info("constructed");
