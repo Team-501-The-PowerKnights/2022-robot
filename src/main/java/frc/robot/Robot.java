@@ -143,21 +143,18 @@ public class Robot extends TimedRobot {
         SchedulerProvider.constructInstance();
         tlmMgr.addProvider(SchedulerProvider.getInstance());
 
+        // Add all the mode followers (need to be in order of creation)
+        followers = new ArrayList<>();
+
         // Create all the modules
         modules = ModuleFactory.constructModules();
+        followers.addAll(modules);
         // Create all the sensors
         sensors = SensorFactory.constructSensors();
+        followers.addAll(sensors);
         // Create all the subsystems
         subsystems = SubsystemFactory.constructSubsystems();
-
-        // Add all the mode handlers (need to be in order of creation)
-        followers = new ArrayList<>();
-        followers.addAll(modules);
-        followers.addAll(sensors);
         followers.addAll(subsystems);
-        for ( IModeFollower f : followers ) {
-            logger.trace("follower: {}", f);
-        }
 
         // Configure all OI now that subsystems are complete
         oi.configureButtonBindings();
@@ -282,14 +279,12 @@ public class Robot extends TimedRobot {
             f.disabledInit();
         }
 
-        validateCalibrations();
-
         if (autonomousComplete && teleopComplete) {
             logger.info("match complete");
 
-            logVisionData();
+            logFinalVisionData();
 
-            logPreferences();
+            logFinalPreferences();
 
             logMatchData();
 
@@ -308,26 +303,16 @@ public class Robot extends TimedRobot {
     }
 
     /**
-     * Calls each subsystem to validate their calibration and update the appropriate
-     * telemetry points.
-     */
-    private void validateCalibrations() {
-        for (ISubsystem s : subsystems) {
-            s.validateCalibration();
-        }
-    }
-
-    /**
      * Log the data associated with the vision to the tail of the log file.
      **/
-    private void logVisionData() {
+    private void logFinalVisionData() {
         logger.info("vision data:");
     }
 
     /**
      * Log the data associated with the preferences to the tail of the log file.
      **/
-    private void logPreferences() {
+    private void logFinalPreferences() {
         logger.info("preferences:");
         PreferencesManager.getInstance().logPreferences(logger);
     }

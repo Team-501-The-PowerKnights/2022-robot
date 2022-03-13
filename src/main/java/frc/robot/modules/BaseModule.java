@@ -6,26 +6,39 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.modules.pdp;
+package frc.robot.modules;
 
-
-import frc.robot.modules.BaseModule;
-import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-abstract class BasePDPModule extends BaseModule implements IPDPModule {
-
+/**
+ * A base class for modules that provides default methods for the
+ * {@link frc.robot.IModeFollower IRobotModes} interface for notifications of
+ * mode transitions.
+ */
+public abstract class BaseModule implements IModule {
+           
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(BasePDPModule.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(BaseModule.class.getName());
 
-    BasePDPModule() {
-        super(TelemetryNames.PDP.name);
+    /** Our sensors's name **/
+    protected final String myName;
+
+    public BaseModule(String name) {
         logger.info("constructing");
 
+        myName = name;
+
         logger.info("constructed");
+    }
+
+    @Override
+    public void autonomousInit() {
+        logger.info("initializing auto for {}", myName);
+
+        logger.info("initialized auto for {}", myName);
     }
 
 }
