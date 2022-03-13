@@ -38,7 +38,27 @@ public abstract class BaseSensor implements ISensor {
     public void autonomousInit() {
         logger.info("initializing auto for {}", myName);
 
+        updatePreferences();
+
         logger.info("initialized auto for {}", myName);
     }
 
+    @Override
+    public void teleopInit() {
+        logger.info("initializing teleop for {}", myName);
+
+        updatePreferences();
+        
+        logger.info("initialized teleop for {}", myName);
+    }
+    
+    @Override
+    public void testInit() {
+        logger.info("initializing test for {}", myName);
+
+        updatePreferences();
+        
+        logger.info("initialized test for {}", myName);
+    }
+    
 }

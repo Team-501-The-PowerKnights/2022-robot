@@ -369,17 +369,6 @@ public class Robot extends TimedRobot {
             f.autonomousInit();
         }
 
-        // Update the preferences
-        for (IModule m : modules) {
-            m.updatePreferences();
-        }
-        for (ISensor s : sensors) {
-            s.updatePreferences();
-        }
-        for (ISubsystem s : subsystems) {
-            s.updatePreferences();
-        }
-
         autoCommand = autoChooser.getSelected();
         logger.info("auto command is {}", autoCommand.getName());
         if (autoCommand != null) {
@@ -446,18 +435,7 @@ public class Robot extends TimedRobot {
             f.teleopInit();
         }
 
-        // Update the preferences
-        for (IModule m : modules) {
-            m.updatePreferences();
-        }
-        for (ISensor s : sensors) {
-            s.updatePreferences();
-        }
-        for (ISubsystem s : subsystems) {
-            s.updatePreferences();
-        }
-
-        logger.info("initialized teleop");
+         logger.info("initialized teleop");
     }
 
     /**
@@ -507,17 +485,6 @@ public class Robot extends TimedRobot {
 
         for (IModeFollower f : followers) {
             f.testInit();
-        }
-
-        // Update the preferences
-        for (IModule m : modules) {
-            m.updatePreferences();
-        }
-        for (ISensor s : sensors) {
-            s.updatePreferences();
-        }
-        for (ISubsystem s : subsystems) {
-            s.updatePreferences();
         }
 
         logger.info("initialized test");

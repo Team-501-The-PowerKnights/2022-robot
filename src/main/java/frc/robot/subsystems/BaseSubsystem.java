@@ -78,6 +78,8 @@ public abstract class BaseSubsystem implements ISubsystem {
         logger.info("set default auto command to {}", defaultAutoCommand.getName());
         setDefaultCommand(defaultAutoCommand);
 
+        updatePreferences();
+
         logger.info("initialized auto for {}", myName);
     }
 
@@ -94,6 +96,8 @@ public abstract class BaseSubsystem implements ISubsystem {
 
         logger.info("set default teleop command to {}", defaultTeleCommand.getName());
         setDefaultCommand(defaultTeleCommand);
+
+        updatePreferences();
         
         logger.info("initialized teleop for {}", myName);
     }
@@ -108,6 +112,8 @@ public abstract class BaseSubsystem implements ISubsystem {
     @Override
     public void testInit() {
         logger.info("initializing test for {}", myName);
+
+        updatePreferences();
         
         logger.info("initialized test for {}", myName);
     }
