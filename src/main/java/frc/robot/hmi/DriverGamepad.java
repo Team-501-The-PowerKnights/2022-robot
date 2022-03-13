@@ -80,7 +80,7 @@ public class DriverGamepad extends F310Gamepad {
         double hmiSpeed = getRawDriveSpeed();
         double calcSpeed;
         if (turboButton.get()) {
-            calcSpeed = hmiSpeed; // * 0.80 in 2019
+            calcSpeed = hmiSpeed;
         } else if (crawlButton.get()) {
             calcSpeed = hmiSpeed * 0.30;
         } else {
@@ -97,7 +97,7 @@ public class DriverGamepad extends F310Gamepad {
         final double hmiTurn = getRawDriveTurn();
         double calcTurn;
         if (turboButton.get()) {
-            calcTurn = hmiTurn * 0.60; // * 0.50 in 2019
+            calcTurn = hmiTurn * 0.60;
         } else if (crawlButton.get()) {
             calcTurn = hmiTurn * 0.25;
         } else {
