@@ -11,18 +11,20 @@ package frc.robot.modules.pcm;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import frc.robot.modules.BaseModule;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-abstract class BasePCMModule implements IPCMModule {
+abstract class BasePCMModule extends BaseModule implements IPCMModule {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(BasePCMModule.class.getName());
 
     BasePCMModule() {
+        super(TelemetryNames.PCM.name);
         logger.info("constructing");
 
         logger.info("constructed");
@@ -40,7 +42,6 @@ abstract class BasePCMModule implements IPCMModule {
     protected void setTlmPressureGood(boolean pressure) {
         tlmPressure = pressure;
     }
-
 
     @Override
     public void updateTelemetry() {

@@ -49,17 +49,16 @@ public abstract class PKCommandBase extends CommandBase {
     public static PKCommandBase[] getActiveCommands() {
         return activeCommandsList;
     }
-    
-    // Flag for whether the first execution has happened
-    private boolean executedOnce;
 
     protected PKCommandBase() {
         logger.info("constructing for {}", getName());
 
         logger.info("constructed");
     }
+    
+    // Flag for whether the first execution has happened
+    private boolean executedOnce;
 
-    // Called once just before this Command runs the first time
     @Override
     public void initialize() {
         logger.debug("initializing {}", getName());
@@ -67,23 +66,27 @@ public abstract class PKCommandBase extends CommandBase {
         executedOnce = false;
     }
 
-    // Called repeatedly while the Command is scheduled
     @Override
     public void execute() {
-        logExecuteStart(logger);
-    }
-
-    protected void logExecuteStart(PKLogger logger) {
         if (!executedOnce) {
-            executedOnce = true;
-            logger.trace("first execution of {}", getName());
+            logger.debug("first execution of {}", getName());
 
+            executedOnce = true;
+    
             add(this);
+
+            firstExecution();
         }
     }
 
-    // Called once when either the Command finishes normally, or when it
-    // is interrupted/canceled.
+    /**
+     * Provides hook to have something happen on the first time the
+     * <code>execute</code> method is called. Typicall for subsystem
+     * commands that are stateful and don't need to be called each
+     * time.
+     */
+    protected void firstExecution() {};
+
     @Override
     public void end(boolean interrupted) {
         logger.debug("ending {} interrupted={}", getName(), interrupted);

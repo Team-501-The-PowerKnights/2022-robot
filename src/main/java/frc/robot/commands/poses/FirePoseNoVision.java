@@ -6,9 +6,10 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.poses;
 
 
+import frc.robot.commands.PKCommandBase;
 import frc.robot.sensors.vision.IVisionSensor;
 import frc.robot.sensors.vision.VisionFactory;
 import frc.robot.subsystems.elevator.ElevatorFactory;
@@ -22,10 +23,10 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class FirePoseVision extends PKCommandBase {
+public class FirePoseNoVision extends PKCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(FirePoseVision.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(FirePoseNoVision.class.getName());
 
     private final IVisionSensor vision;
 
@@ -33,7 +34,7 @@ public class FirePoseVision extends PKCommandBase {
     private final IIncrementerSubsystem incrementer;
     private final IElevatorSubsystem elevator;
 
-    public FirePoseVision() {
+    public FirePoseNoVision() {
         logger.info("constructing {}", getName());
 
         vision = VisionFactory.getInstance();
@@ -48,34 +49,40 @@ public class FirePoseVision extends PKCommandBase {
     }
 
     @Override
+    public void initialize() {
+        vision.enable();
+    }
+
+    @Override
     public void execute() {
         super.execute();
 
-        double y = vision.getY();
-        double speed = 0.489 + (-0.0116 * y) + (0.0107 * (Math.pow(y, 2))) + ((-4.32E-03) * (Math.pow(y, 3)))
+        double speed = 0.5;
+
+        if (vision.isActive()) {
+            double y = vision.getY();
+            speed = 0.489 + (-0.0116 * y) + (0.0107 * (Math.pow(y, 2))) + ((-4.32E-03) * (Math.pow(y, 3)))
                 + (2.07E-04 * Math.pow(y, 4)) + (2.34E-04 * Math.pow(y, 5)) + (-5.47E-05 * Math.pow(y, 6))
                 + (4.68E-06 * Math.pow(y, 7)) + -1.41E-07 * (Math.pow(y, 8));
+            // speed += 0.015;
+        }
+
         shooter.setSpeed(29, speed);
 
-        boolean visionGood = (vision.isActive() && vision.isLocked()) || !(vision.isActive());
-        if (visionGood) {
-            incrementer.increment();
-            elevator.liftToLimit();
-        } else {
-            incrementer.stop();
-            elevator.stop();
-        }
+        incrementer.increment();
+        // elevator.liftToLimit();
+        elevator.lift();
     }
 
     @Override
     public void end(boolean interrupted) {
         super.end(interrupted);
 
+        vision.disable();
+
+        // shooter goes to default (idle) when command ends
         incrementer.stop();
         elevator.stop();
-
-        // Don't stop shooter (default is idle command)
-        // shooter.stop();
     }
 
 }

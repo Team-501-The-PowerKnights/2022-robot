@@ -10,23 +10,24 @@ package frc.robot.sensors.vision;
 
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import frc.robot.sensors.BaseSensor;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-abstract class BaseVisionSensor implements IVisionSensor {
+abstract class BaseVisionSensor extends BaseSensor implements IVisionSensor {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(BaseVisionSensor.class.getName());
-
-    protected static final String myName = TelemetryNames.Vision.name;
 
     // Flag for whether active
     protected boolean isActive;
 
     BaseVisionSensor() {
+        super(TelemetryNames.Vision.name);
         logger.info("constructing");
 
         isActive = false;

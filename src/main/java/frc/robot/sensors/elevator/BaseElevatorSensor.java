@@ -10,21 +10,20 @@ package frc.robot.sensors.elevator;
 
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.sensors.BaseSensor;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-abstract class BaseElevatorSensor implements IElevatorSensor {
+abstract class BaseElevatorSensor extends BaseSensor implements IElevatorSensor {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(BaseElevatorSensor.class.getName());
 
-    /** Our sensor's name **/
-    protected static final String myName = TelemetryNames.Elevator.name;
-
     BaseElevatorSensor() {
+        super(TelemetryNames.Elevator.name);
         logger.info("constructing");
 
         logger.info("constructed");

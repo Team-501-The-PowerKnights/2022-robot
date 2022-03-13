@@ -1,4 +1,3 @@
-/*-----------------------------------------------------------------------*/
 /* Copyright (c) Team 501 - The PowerKnights. All Rights Reserved.       */
 /* Open Source Software - may be modified and shared by other FRC teams  */
 /* under the terms of the Team501 license. The code must be accompanied  */
@@ -6,35 +5,46 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.turret;
+package frc.robot.commands.climber;
+
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class TurretManualControlJog extends TurretOICommandBase {
 
+public class ClimberManualControl extends ClimberOICommandBase {
+        
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(TurretManualControlJog.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ClimberManualControl.class.getName());
 
-    /**
-     * Creates a new TurretManualControlJog.
-     */
-    public TurretManualControlJog() {
+    public ClimberManualControl() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
     }
-
-    // FIXME: This is a hack; use commands right
-    boolean started = true;
-
-    // Called every time the scheduler runs while the command is scheduled.
+    
     @Override
     public void execute() {
         super.execute();
 
-        double speed = oi.getTurretJog();
-         turret.setSpeed(20, speed);
+        // // FIXME - Get Climber Command re-implemented
+        // if (oi.getClimberExtend()) {
+        //     climber.extend();
+        // }
+        // else if (oi.getClimberClimb()) {
+        //     climber.climb();
+        // }
+        // else {
+        //     climber.stop();
+        // }
+        climber.stop();
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        super.end(interrupted);
+
+        climber.stop();
     }
 
 }

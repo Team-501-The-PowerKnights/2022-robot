@@ -8,13 +8,14 @@
 
 package frc.robot.sensors.vision;
 
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Wrapper for the Limelight Vision Sensor to provide ease when switching from
@@ -40,7 +41,8 @@ class LimelightVision {
     }
 
     protected boolean isLocked() {
-        return (table.getEntry("tv").getDouble(0.0) == 1);
+        return (table.getEntry("tv").getDouble(0.0) == 1)
+                && (Math.abs((table.getEntry("tx").getDouble(0.15))) < 0.15);
     }
 
     protected boolean isEnabled() {
@@ -63,10 +65,6 @@ class LimelightVision {
 
     protected double getError() {
         double x = table.getEntry("tx").getDouble(0.0);
-
-        if (DriverStation.isTeleop()) {
-            x += 1.0;
-        }
 
         if (table.getEntry("tv").getDouble(0.0) == 1) {
             return -x;

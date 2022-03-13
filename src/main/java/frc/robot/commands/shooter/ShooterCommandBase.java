@@ -26,13 +26,12 @@ abstract class ShooterCommandBase extends PKCommandBase {
     private static final PKLogger logger = RioLogger.getLogger(ShooterCommandBase.class.getName());
 
     // Handle to our subsystem
-    protected IShooterSubsystem shooter;
+    protected final IShooterSubsystem shooter;
 
     public ShooterCommandBase() {
         logger.info("constructing {}", getName());
 
         shooter = ShooterFactory.getInstance();
-
         addRequirements(shooter);
 
         logger.info("constructed");

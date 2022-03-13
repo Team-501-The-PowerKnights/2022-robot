@@ -8,8 +8,10 @@
 
 package frc.robot.commands.intake;
 
+
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 public class IntakeManualControl extends IntakeOICommandBase {
 
@@ -25,7 +27,6 @@ public class IntakeManualControl extends IntakeOICommandBase {
         logger.info("constructed");
     }
 
-    // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
         super.execute();

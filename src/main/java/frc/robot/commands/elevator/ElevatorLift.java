@@ -27,7 +27,11 @@ public class ElevatorLift extends ElevatorCommandBase {
     @Override
     public void execute() {
         super.execute();
+    }
 
+    @Override
+    protected void firstExecution() {
+        logger.trace("elevator.lift() called in firstExecution()");
         elevator.lift();
     }
 

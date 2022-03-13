@@ -15,6 +15,7 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
+
 /**
  * Add your docs here.
  */
@@ -31,7 +32,7 @@ public class DriveForwardDistance extends DriveCommandBase {
     private double targetClicks;
 
     public DriveForwardDistance(double distanceInFeet) {
-        logger.info("constructing {}", getName());
+        logger.info("constructing {} for {}", getName(), distanceInFeet);
 
         this.distanceInFeet = distanceInFeet;
 
@@ -53,6 +54,11 @@ public class DriveForwardDistance extends DriveCommandBase {
     @Override
     public void execute() {
         super.execute();
+    }
+
+    @Override
+    protected void firstExecution() {
+        logger.trace("drive.drive() called in firstExecution()");
 
         double speed = 0.20;
         double turn = 0.0;
@@ -67,10 +73,10 @@ public class DriveForwardDistance extends DriveCommandBase {
 
     @Override
     public void end(boolean interrupted) {
+        super.end(interrupted);
+
         // Stop the drive
         drive.stop();
-
-        super.end(interrupted);
     }
 
 }

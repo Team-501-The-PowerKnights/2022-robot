@@ -27,8 +27,21 @@ public class IntakeIngest extends IntakeCommandBase {
     @Override
     public void execute() {
         super.execute();
+    }
 
+    @Override
+    protected void firstExecution() {
+        logger.trace("intake.extend() & intake.pullin called in firstExecution()");
+        intake.extend();
         intake.pullIn();
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        super.end(interrupted);
+
+        intake.stop();
+        intake.retract();
     }
 
 }

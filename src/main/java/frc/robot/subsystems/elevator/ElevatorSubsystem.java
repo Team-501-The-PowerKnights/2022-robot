@@ -11,15 +11,17 @@ package frc.robot.subsystems.elevator;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.sensors.elevator.ElevatorSensorFactory;
-import frc.robot.sensors.elevator.IElevatorSensor;
+// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+// import frc.robot.sensors.elevator.ElevatorSensorFactory;
+// import frc.robot.sensors.elevator.IElevatorSensor;
 import frc.robot.sensors.incrementer.IIncrementerSensor;
 import frc.robot.sensors.incrementer.IncrementerSensorFactory;
-import frc.robot.telemetry.TelemetryNames;
+// import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class ElevatorSubsystem extends BaseElevatorSubsystem {
 
@@ -80,7 +82,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     public void lift() {
         super.lift();
 
-        setSpeed(-1);
+        setSpeed(-1.0);
     }
 
     @Override
@@ -100,6 +102,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     public void liftToLimit() {
         super.liftToLimit();
 
+        // FIXME: Needs oneshot for speed controller set
         if (!isFull()) {
             lift();
         } else {

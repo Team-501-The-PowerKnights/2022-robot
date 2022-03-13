@@ -6,46 +6,40 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.incrementer;
+package frc.robot.commands.climber;
+
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-/**
- * Add your docs here.
- */
-public class IncrementerIncrementToLimitForHMI extends IncrementerCommandBase {
 
+public class ClimberRetract extends ClimberCommandBase {
+    
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IncrementerIncrementToLimitForHMI.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ClimberRetract.class.getName());
 
-    public IncrementerIncrementToLimitForHMI() {
+    public ClimberRetract() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
     }
 
-    private static double counts = 0;
-
-    @Override
-    public void initialize() {
-        counts = 0;
-    }
-
     @Override
     public void execute() {
-        incrementer.incrementToLimit();
-        counts++;
+        super.execute();
     }
 
     @Override
-    public boolean isFinished() {
-        return incrementer.isFull() || counts >= 50;
+    protected void firstExecution() {
+        logger.trace("climber.retract() called in firstExecution()");
+        climber.retract();
     }
 
     @Override
     public void end(boolean interrupted) {
-        incrementer.stop();
+        super.end(interrupted);
+
+        climber.stop();
     }
 
 }

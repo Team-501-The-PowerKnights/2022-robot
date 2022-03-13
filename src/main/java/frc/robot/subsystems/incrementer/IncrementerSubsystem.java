@@ -70,7 +70,7 @@ class IncrementerSubsystem extends BaseIncrementerSubsystem {
 
     @Override
     public void increment() {
-        setSpeed(0.8);
+        setSpeed(1.0);
     }
 
     @Override
@@ -82,6 +82,7 @@ class IncrementerSubsystem extends BaseIncrementerSubsystem {
     public void incrementToLimit() {
         super.incrementToLimit();
 
+        // FIXME: Needs oneshot for speed controller set
         if (!isFull()) {
             increment();
         } else {

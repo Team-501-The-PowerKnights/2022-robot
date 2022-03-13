@@ -48,6 +48,11 @@ public class DriveBackwardDistance extends DriveCommandBase {
     @Override
     public void execute() {
         super.execute();
+    }
+
+    @Override
+    protected void firstExecution() {
+        logger.trace("drive.drive() called in firstExecution()");
 
         double speed = -0.20;
         double turn = 0.0;
@@ -62,10 +67,9 @@ public class DriveBackwardDistance extends DriveCommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        // Stop the drive
-        drive.stop();
-
         super.end(interrupted);
+
+        drive.stop();
     }
 
 }

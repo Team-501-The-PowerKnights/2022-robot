@@ -9,6 +9,8 @@
 package frc.robot.commands.drive;
 
 
+import frc.robot.utils.TimerFromPeriod;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -21,46 +23,87 @@ public class DriveBackwardTimed extends DriveCommandBase {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(DriveBackwardTimed.class.getName());
 
-    //
-    private long executeCount;
+    // Duration to execute (in seconds)
+    private double duration;
+    // Speed to drive
+    private double speed = -0.30;  // default
+    private final double turn = 0.0;  // no turn component
 
-    public DriveBackwardTimed() {
-        logger.info("constructing {}", getName());
+    // Timer to count it down during execute()
+    private TimerFromPeriod timer;
+
+    protected DriveBackwardTimed() {
+        // Prevent direct instantiation
+    }
+
+    /**
+     * Creates an instance of a class to dive backward at the default
+     * speed.
+     * 
+     * @param duration - duration to drive (seconds)
+     */
+    public DriveBackwardTimed(double duration) {
+        logger.info("constructing {} for {} {}", getName(), duration, speed);
+
+        setValues(duration, speed);
 
         logger.info("constructed");
+    }
+
+    /**
+     * Creates an instance of the class to drive backward at the specified
+     * speed.
+     * 
+     * @param duration - duration to drive (seconds)
+     * @param speed - speed to drive
+     */
+    public DriveBackwardTimed(double duration, double speed) {
+        logger.info("constructing {} for {} {}", getName(), duration, speed);
+
+        setValues(speed, duration);
+
+        logger.info("constructed");
+    }
+
+    private void setValues(double duration, double speed) {
+        this.duration = duration;
+        if ( speed > 0.0 ) {
+            speed = -speed;
+        }
+        this.speed = speed;
     }
 
     @Override
     public void initialize() {
         super.initialize();
 
-        // 4 seconds = 200 * 20 msec (@ 50 Hz)
-        executeCount = 200;
+        timer = new TimerFromPeriod(duration);
     }
 
     @Override
     public void execute() {
         super.execute();
 
-        double speed = -0.4;
-        double turn = 0.0;
+        timer.nextTic();
+    }
+    
+    @Override
+    protected void firstExecution() {
+        logger.trace("drive.drive() called in firstExecution()");
 
         drive.drive(speed, turn);
-
-        --executeCount;
     }
 
     @Override
     public boolean isFinished() {
-        return (executeCount > 0 ? false : true);
+        return timer.isExpired();
     }
 
     @Override
     public void end(boolean interrupted) {
-        // Stop the drive
-        drive.stop();
-
         super.end(interrupted);
+
+        drive.stop();
     }
 
 }

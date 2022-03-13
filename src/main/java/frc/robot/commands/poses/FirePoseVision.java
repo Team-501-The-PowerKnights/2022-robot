@@ -6,10 +6,12 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.poses;
 
-import org.slf4j.Logger;
 
+import frc.robot.commands.PKCommandBase;
+import frc.robot.sensors.vision.IVisionSensor;
+import frc.robot.sensors.vision.VisionFactory;
 import frc.robot.subsystems.elevator.ElevatorFactory;
 import frc.robot.subsystems.elevator.IElevatorSubsystem;
 import frc.robot.subsystems.incrementer.IIncrementerSubsystem;
@@ -17,19 +19,25 @@ import frc.robot.subsystems.incrementer.IncrementerFactory;
 import frc.robot.subsystems.shooter.IShooterSubsystem;
 import frc.robot.subsystems.shooter.ShooterFactory;
 
+import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class FirePoseNoVision extends PKCommandBase {
+
+public class FirePoseVision extends PKCommandBase {
 
     /** Our classes' logger **/
-    private static final Logger logger = RioLogger.getLogger(FirePoseNoVision.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(FirePoseVision.class.getName());
+
+    private final IVisionSensor vision;
 
     private final IShooterSubsystem shooter;
     private final IIncrementerSubsystem incrementer;
     private final IElevatorSubsystem elevator;
 
-    public FirePoseNoVision() {
+    public FirePoseVision() {
         logger.info("constructing {}", getName());
+
+        vision = VisionFactory.getInstance();
 
         shooter = ShooterFactory.getInstance();
         incrementer = IncrementerFactory.getInstance();
@@ -44,16 +52,29 @@ public class FirePoseNoVision extends PKCommandBase {
     public void execute() {
         super.execute();
 
-        shooter.setSpeed(29, 0.50);
+        double y = vision.getY();
+        double speed = 0.489 + (-0.0116 * y) + (0.0107 * (Math.pow(y, 2))) + ((-4.32E-03) * (Math.pow(y, 3)))
+                + (2.07E-04 * Math.pow(y, 4)) + (2.34E-04 * Math.pow(y, 5)) + (-5.47E-05 * Math.pow(y, 6))
+                + (4.68E-06 * Math.pow(y, 7)) + -1.41E-07 * (Math.pow(y, 8));
+        // speed += 0.015;
+        shooter.setSpeed(29, speed);
 
-        incrementer.increment();
-        elevator.liftToLimit();
+        boolean visionGood = (vision.isActive() && vision.isLocked()) || !(vision.isActive());
+        if (visionGood) {
+            incrementer.increment();
+            // elevator.liftToLimit();
+            elevator.lift();
+        } else {
+            incrementer.stop();
+            elevator.stop();
+        }
     }
 
     @Override
     public void end(boolean interrupted) {
         super.end(interrupted);
 
+        // shooter goes to default (idle) when command ends
         incrementer.stop();
         elevator.stop();
     }

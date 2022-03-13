@@ -9,7 +9,6 @@
 package frc.robot;
 
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.hmi.DriverGamepad;
@@ -87,15 +86,6 @@ public class OI implements ITelemetryProvider {
 
    }
 
-    // FIXME - Change for pit testing like field
-    public boolean isFieldConnected() {
-        // For Field Running
-        return DriverStation.isFMSAttached();
-
-        // For Pit Testing (be careful)
-        // return true; // FOR pit testing
-    }
-
     /*****************
      * Drive
      *****************/
@@ -125,11 +115,24 @@ public class OI implements ITelemetryProvider {
     }
 
     /*****************
-     * Elevator
+     * Turret
      *****************/
 
     public double getTurretJog() {
         return operatorPad.getTurretJog();
     }
+
+    /*****************
+     * Climber
+     *****************/
+
+     public boolean getClimberExtend() {
+         return false;
+     }
+
+     public boolean getClimberClimb() {
+         return false;
+     }
+    
 
 }

@@ -6,46 +6,40 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.elevator;
+package frc.robot.commands.climber;
+
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-/**
- * Add your docs here.
- */
-public class ElevatorLiftToLimitForHMI extends ElevatorCommandBase {
 
+public class ClimberClimb extends ClimberCommandBase {
+    
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ElevatorLiftToLimitForHMI.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ClimberClimb.class.getName());
 
-    public ElevatorLiftToLimitForHMI() {
+    public ClimberClimb() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
     }
 
-    private static double counts = 0;
-
-    @Override
-    public void initialize() {
-        counts = 0;
-    }
-
     @Override
     public void execute() {
-        elevator.liftToLimit();
-        counts++;
+        super.execute();
     }
 
     @Override
-    public boolean isFinished() {
-        return elevator.isFull() || counts >= 250;
+    protected void firstExecution() {
+        logger.trace("climber.climb() called in firstExecution()");
+        climber.climb();
     }
 
     @Override
     public void end(boolean interrupted) {
-        elevator.stop();
+        super.end(interrupted);
+
+        climber.stop();
     }
 
 }

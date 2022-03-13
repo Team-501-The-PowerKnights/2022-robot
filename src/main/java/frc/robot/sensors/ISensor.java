@@ -9,30 +9,28 @@
 package frc.robot.sensors;
 
 
+import frc.robot.IModeFollower;
 import frc.robot.telemetry.ITelemetryProvider;
 
 
 /**
  * Add your docs here.
  */
-public interface ISensor extends ITelemetryProvider {
+public interface ISensor extends IModeFollower, ITelemetryProvider {
 
     /**
      * Enable the sensor.
      **/
-    default public void enable() {
-    };
+    default public void enable() {};
 
     /**
      * Disable the sensor.
      **/
-    default public void disable() {
-    };
+    default public void disable() {};
 
     /**
      * Called to update any preferences associated with the sensor.
      **/
-    default public void updatePreferences() {
-    };
+    default public void updatePreferences() {};
 
 }

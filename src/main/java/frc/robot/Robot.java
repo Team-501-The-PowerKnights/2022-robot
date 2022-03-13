@@ -12,6 +12,8 @@
 
 package frc.robot;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -22,7 +24,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-import frc.robot.commands.DoNothing;
+import frc.robot.commands.modes.AutoDoNothing;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.PKSequentialCommandGroup;
 import frc.robot.commands.drive.DriveBackwardDistance;
@@ -30,24 +32,24 @@ import frc.robot.commands.drive.DriveBackwardTimed;
 import frc.robot.commands.drive.DriveForwardDistance;
 import frc.robot.commands.drive.DriveForwardTimed;
 import frc.robot.commands.elevator.ElevatorLift;
-import frc.robot.commands.intake.IntakeIngest;
-import frc.robot.commands.turret.TurretHome;
+import frc.robot.commands.intake.IntakeIngestTimed;
+import frc.robot.commands.poses.FirePoseVision;
+import frc.robot.commands.turret.TurretVisionAlign;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModuleFactory;
-import frc.robot.preferences.PreferencesInitializer;
+import frc.robot.preferences.PreferencesManager;
 import frc.robot.properties.PropertiesManager;
 import frc.robot.sensors.ISensor;
 import frc.robot.sensors.SensorFactory;
 import frc.robot.telemetry.SchedulerProvider;
 import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
-import frc.robot.telemetry.TelemetryNames.Preferences;
-import frc.robot.utils.PKStatus;
 import frc.robot.subsystems.ISubsystem;
 import frc.robot.subsystems.SubsystemFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -72,19 +74,42 @@ public class Robot extends TimedRobot {
     //
     private List<ISubsystem> subsystems;
 
-    // Flag for having completed autonomous part of match
-    private boolean autonomousComplete;
+    //
+    private List<IModeFollower> followers;
+
+    // Flag for started/running autonomous part of match
+    @SuppressWarnings("unused")
+    private boolean autonomousRunning;
     // Flag for having run first autonomous loop
     private boolean autonomousFirstRun;
-    // Flag for having completed operator control part of match
-    private boolean teleopComplete;
-    // Flag for having run first operator control loop
-    private boolean teleopFirstRun;
+    // Flag for having completed autonomous part of match
+    private boolean autonomousComplete;
 
-    // Chooser from Dashboard
+    // Flag for having started/running teleop part of match
+    @SuppressWarnings("unused")
+    private boolean teleopRunning;
+    // Flag for having run first teleop loop
+    private boolean teleopFirstRun;
+    // Flag for having completed teleop part of match
+    private boolean teleopComplete;
+
+    // Chooser for autonomous command from Dashboard
     private SendableChooser<Command> autoChooser;
     // Command that was selected
     private Command autoCommand;
+
+    // Chooser for overriding field connection in pit
+    private static SendableChooser<Boolean> fmsOverrideChooser;
+
+    // Capture the period at start (shouldn't ever change)
+    private static double loopPeriod;
+
+    /**
+     * Constucts an instance of the robot to play the match.
+     */
+    public Robot() {
+        loopPeriod = getPeriod();
+    }
 
     /**
      * This function is run when the robot is first started up and should be used
@@ -96,6 +121,8 @@ public class Robot extends TimedRobot {
 
         // Wait until we get the configuration data from driver station
         waitForDriverStationData();
+
+        loopPeriod = getPeriod();
 
         // Make sure Preferences are initialized
         intializePreferences();
@@ -116,12 +143,18 @@ public class Robot extends TimedRobot {
         SchedulerProvider.constructInstance();
         tlmMgr.addProvider(SchedulerProvider.getInstance());
 
-        // Initialize all the modules
+        // Add all the mode followers (need to be in order of creation)
+        followers = new ArrayList<>();
+
+        // Create all the modules
         modules = ModuleFactory.constructModules();
-        // Initialize all the sensors
+        followers.addAll(modules);
+        // Create all the sensors
         sensors = SensorFactory.constructSensors();
-        // Initialize all the subsystems
+        followers.addAll(sensors);
+        // Create all the subsystems
         subsystems = SubsystemFactory.constructSubsystems();
+        followers.addAll(subsystems);
 
         // Configure all OI now that subsystems are complete
         oi.configureButtonBindings();
@@ -130,10 +163,15 @@ public class Robot extends TimedRobot {
         createAutoChooser();
 
         // Initialize state variables
-        autonomousComplete = false;
+        autonomousRunning = false;
         autonomousFirstRun = false;
-        teleopComplete = false;
+        autonomousComplete = false;
+        teleopRunning = false;
         teleopFirstRun = false;
+        teleopComplete = false;
+
+        // Create the chooser for FMS connected override
+        createFmsOverrideChooser();
 
         logger.info("initialized");
     }
@@ -158,51 +196,48 @@ public class Robot extends TimedRobot {
     }
 
     private void intializePreferences() {
-        // Needs to be here or conflict with class from WPILib? wth?
-        SmartDashboard.putNumber(Preferences.status, PKStatus.inProgress.tlmValue);
-
-        PreferencesInitializer.initialize();
+        // Reads and initializes all subsystems preferences
+        PreferencesManager.constructInstance();
 
         logger.info("Preferences as initialized:");
-        PreferencesInitializer.logPreferences(logger);
-
-        SmartDashboard.putNumber(Preferences.status, PKStatus.success.tlmValue);
+        PreferencesManager.getInstance().logPreferences(logger);
     }
 
     private void initializeProperties() {
         // Reads and stores all the properties
         PropertiesManager.constructInstance();
 
+        logger.info("Properties as initialized:");
         PropertiesManager.getInstance().logProperties(logger);
     }
 
     private void createAutoChooser() {
         autoChooser = new SendableChooser<>();
 
-        autoChooser.setDefaultOption("Do Nothing", new DoNothing());
+        autoChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
 
         // FIXME: This only works because default shooter command is idle
 
         // FIXME: Make parameterized like distance
-        autoChooser.addOption("Drive Forward (4 sec)", new DriveForwardTimed());
-        autoChooser.addOption("Drive Forward (3 feet)", new DriveForwardDistance(3));
+        autoChooser.addOption("Drive Forward (4 sec)", new DriveForwardTimed(4.0));
+        autoChooser.addOption("Drive Forward (3 feet)", new DriveForwardDistance(3.0));
         autoChooser.addOption("Shoot and Drive Forward (3 feet)",
                 new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardDistance(3)));
         autoChooser.addOption("Shoot and Drive Forward (4 sec)",
-                new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardTimed()));
+                new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardTimed(4.0)));
 
-        autoChooser.addOption("Drive Backward (4 sec)", new DriveBackwardTimed());
+        autoChooser.addOption("Drive Backward (4 sec)", new DriveBackwardTimed(4.0));
         autoChooser.addOption("Drive Backward (3 feet)", new DriveBackwardDistance(3));
         autoChooser.addOption("Shoot and Drive Backward (3 feet)",
                 new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardDistance(3)));
         autoChooser.addOption("Shoot and Drive Backward (4 sec)",
-                new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardTimed()));
+                new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardTimed(4.0)));
 
-        autoChooser.addOption("Full Auto (Driving Forward)",
-                new PKParallelCommandGroup(new ElevatorLift(), new IntakeIngest(), new DriveForwardTimed()));
         autoChooser.addOption("Full Auto (Driving Forward Delay)",
-                new PKParallelCommandGroup(new ElevatorLift(), new IntakeIngest(),
-                        new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed())));
+            new PKParallelCommandGroup(new TurretVisionAlign(),
+                                       new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(4.0),
+                                                                                               new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(3.0)),
+                                                                    new FirePoseVision()))));
 
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
@@ -240,14 +275,16 @@ public class Robot extends TimedRobot {
     public void disabledInit() {
         logger.info("disabling");
 
-        validateCalibrations();
+        for (IModeFollower f : followers) {
+            f.disabledInit();
+        }
 
         if (autonomousComplete && teleopComplete) {
             logger.info("match complete");
 
-            logVisionData();
+            logFinalVisionData();
 
-            logPreferences();
+            logFinalPreferences();
 
             logMatchData();
 
@@ -266,28 +303,18 @@ public class Robot extends TimedRobot {
     }
 
     /**
-     * Calls each subsystem to validate their calibration and update the appropriate
-     * telemetry points.
-     */
-    private void validateCalibrations() {
-        for (ISubsystem s : subsystems) {
-            s.validateCalibration();
-        }
-    }
-
-    /**
      * Log the data associated with the vision to the tail of the log file.
      **/
-    private void logVisionData() {
+    private void logFinalVisionData() {
         logger.info("vision data:");
     }
 
     /**
      * Log the data associated with the preferences to the tail of the log file.
      **/
-    private void logPreferences() {
+    private void logFinalPreferences() {
         logger.info("preferences:");
-        PreferencesInitializer.logPreferences(logger);
+        PreferencesManager.getInstance().logPreferences(logger);
     }
 
     /**
@@ -318,35 +345,34 @@ public class Robot extends TimedRobot {
     }
 
     /**
+     * This function is called once each time the robot exits Disabled mode.
+     */
+    @Override
+    public void disabledExit() {
+        for (IModeFollower f : followers) {
+            f.disabledExit();
+        }
+    }
+
+    /**
      * This autonomous runs the autonomous command selected by your
      * frc.robot.RobotContainer class.
      */
     @Override
     public void autonomousInit() {
         logger.info("initializing autonomous");
-        autonomousComplete = true;
+        autonomousRunning = true;
         autonomousFirstRun = false;
+        autonomousComplete = false;
 
-        // Update the preferences
-        for (IModule m : modules) {
-            m.updatePreferences();
-        }
-        for (ISensor s : sensors) {
-            s.updatePreferences();
-        }
-        for (ISubsystem s : subsystems) {
-            s.updatePreferences();
-            s.loadDefaultAutoCommand();
+        for (IModeFollower f : followers) {
+            f.autonomousInit();
         }
 
-        // CommandScheduler.getInstance().schedule(true, new DriveForwardTimed());
-        // CommandScheduler.getInstance().schedule(true, new AutoFull());
         autoCommand = autoChooser.getSelected();
         logger.info("auto command is {}", autoCommand.getName());
         if (autoCommand != null) {
             CommandScheduler.getInstance().schedule(true, autoCommand);
-            // CommandScheduler.getInstance().schedule(true, new
-            // PKSequentialCommandGroup(new TurretHome(), autoCommand));
         }
 
         logger.info("initialized autonomous");
@@ -371,13 +397,31 @@ public class Robot extends TimedRobot {
     }
 
     /**
+     * This function is called once each time the robot exits Autonomous mode.
+     */
+    @Override
+    public void autonomousExit() {
+        logger.info("exiting autonomous");
+
+        autonomousRunning = false;
+        autonomousComplete = true;
+
+        for (IModeFollower f : followers) {
+            f.autonomousExit();
+        }
+
+        logger.info("exited autonomous");
+    }
+
+    /**
      * This function is called once each time the robot enters Teleop mode.
      */
     @Override
     public void teleopInit() {
         logger.info("initializing teleop");
-        teleopComplete = true;
+        teleopRunning = true;
         teleopFirstRun = false;
+        teleopComplete = false; 
 
         // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to
@@ -387,19 +431,11 @@ public class Robot extends TimedRobot {
             autoCommand.cancel();
         }
 
-        // Update the preferences
-        for (IModule m : modules) {
-            m.updatePreferences();
-        }
-        for (ISensor s : sensors) {
-            s.updatePreferences();
-        }
-        for (ISubsystem s : subsystems) {
-            s.updatePreferences();
-            s.loadDefaultTeleCommand();
+        for (IModeFollower f : followers) {
+            f.teleopInit();
         }
 
-        logger.info("initialized teleop");
+         logger.info("initialized teleop");
     }
 
     /**
@@ -421,6 +457,23 @@ public class Robot extends TimedRobot {
     }
 
     /**
+     * This function is called once each time the robot exits Teleop mode.
+     */
+    @Override
+    public void teleopExit() {
+        logger.info("exiting teleop");
+
+        teleopRunning = false;
+        teleopComplete = true;
+
+        for (IModeFollower f : followers) {
+            f.teleopExit();
+        }
+
+        logger.info("exited teleop");
+    }
+
+    /**
      * This function is called once each time the robot enters Test mode.
      */
     @Override
@@ -430,25 +483,55 @@ public class Robot extends TimedRobot {
         // Cancels all running commands at the start of test mode.
         CommandScheduler.getInstance().cancelAll();
 
-        // Update the preferences
-        for (IModule m : modules) {
-            m.updatePreferences();
-        }
-        for (ISensor s : sensors) {
-            s.updatePreferences();
-        }
-        for (ISubsystem s : subsystems) {
-            s.updatePreferences();
+        for (IModeFollower f : followers) {
+            f.testInit();
         }
 
         logger.info("initialized test");
     }
 
     /**
-     * This function is called periodically during test mode.
+     * This function is called periodically during Test mode.
      */
     @Override
     public void testPeriodic() {
+    }
+
+    
+    /**
+     * This function is called once each time the robot exits Test mode.
+     */
+    @Override
+    public void testExit() {
+        logger.info("exiting test");
+
+        for (IModeFollower f : followers) {
+            f.testExit();
+        }
+
+        logger.info("exited test");
+    }
+
+    private static void createFmsOverrideChooser() {
+        fmsOverrideChooser = new SendableChooser<>();
+
+        fmsOverrideChooser.setDefaultOption("Use Real FMS Connect", Boolean.FALSE);
+        fmsOverrideChooser.addOption("Override FMS Connect", Boolean.TRUE);
+
+        SmartDashboard.putData("FMS Override", fmsOverrideChooser);
+    }
+    
+    static public boolean isFieldConnected() {
+        if ( DriverStation.isFMSAttached()) {
+            return true;
+        }
+        else {
+            return fmsOverrideChooser.getSelected();
+        }
+    }
+
+    static public double getLoopPeriod() {
+        return loopPeriod;
     }
 
 }

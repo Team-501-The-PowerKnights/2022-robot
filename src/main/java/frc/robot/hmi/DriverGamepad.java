@@ -54,6 +54,9 @@ public class DriverGamepad extends F310Gamepad {
         // crawlButton - implemented in getting values speed & turn
         driveSwapButton.whenPressed(new DriveSwap());
 
+        // Hook to configure for testing of new stuff
+        configureTestBindings();
+
         logger.info("configured");
     }
 
@@ -125,5 +128,16 @@ public class DriverGamepad extends F310Gamepad {
             return -getRightTrigger();
         }
     }
+
+    /*********************
+     * Test Stuff
+     *********************/
+
+    // TESTCODE: Button binding for commands here
+    private void configureTestBindings() {
+        // Timer Test
+        // Button testButton = new JoystickButton(stick, 3);
+        // testButton.whenPressed(new frc.robot.commands.test.TimerTestCommand());
+     }
 
 }
