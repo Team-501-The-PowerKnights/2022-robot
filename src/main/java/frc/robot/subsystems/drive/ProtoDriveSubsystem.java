@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.drive;
 
+
 import java.util.List;
 
 import com.revrobotics.RelativeEncoder;
@@ -39,6 +40,7 @@ import frc.robot.sensors.gyro.IGyroSensor;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class ProtoDriveSubsystem extends BaseDriveSubsystem {
 
@@ -93,21 +95,24 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
     ProtoDriveSubsystem() {
         logger.info("constructing");
 
-        leftFrontMotor = new CANSparkMax(23, MotorType.kBrushless);
-        leftRearMotor = new CANSparkMax(22, MotorType.kBrushless);
-        rightFrontMotor = new CANSparkMax(20, MotorType.kBrushless);
-        rightRearMotor = new CANSparkMax(21, MotorType.kBrushless);
+        lastError = REVLibError.kOk;
 
-        if (leftFrontMotor.setOpenLoopRampRate(ramp) == REVLibError.kOk) {
-            logger.info("Left front ramp rate set successfully");
-        } else {
-            logger.warn("An error occurred setting left front ramp rate");
-        }
-        if (rightFrontMotor.setOpenLoopRampRate(ramp) == REVLibError.kOk) {
-            logger.info("Right front ramp rate set successfully");
-        } else {
-            logger.warn("An error occurred setting right front ramp rate");
-        }
+        // Instantiation and factory default-ing motors
+        leftFrontMotor = new CANSparkMax(23, MotorType.kBrushless);
+        checkError(leftFrontMotor.restoreFactoryDefaults(), "LF setting factory defaults {}");
+
+        leftRearMotor = new CANSparkMax(22, MotorType.kBrushless);
+        checkError(leftRearMotor.restoreFactoryDefaults(), "LR setting factory defaults {}");
+
+        rightFrontMotor = new CANSparkMax(20, MotorType.kBrushless);
+        checkError(rightFrontMotor.restoreFactoryDefaults(), "RF setting factory defaults {}");
+
+        rightRearMotor = new CANSparkMax(21, MotorType.kBrushless);
+        checkError(rightRearMotor.restoreFactoryDefaults(), "RR setting factory defaults {}");
+
+        // Ramp rates
+        checkError(leftFrontMotor.setOpenLoopRampRate(ramp), "L setting ramp rate {}");
+        checkError(rightFrontMotor.setOpenLoopRampRate(ramp), "R setting ramp rate {}");
 
         left = new MotorControllerGroup(leftFrontMotor, leftRearMotor);
         right = new MotorControllerGroup(rightFrontMotor, rightRearMotor);
@@ -131,6 +136,18 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
                 .addConstraint(autoVoltageConstraint);
 
         logger.info("constructed");
+    }
+
+    // last error (not the same as kOk)
+    // TODO: Use to set a degraded error status/state on subsystem
+    @SuppressWarnings("unused")
+    private REVLibError lastError;
+
+    private void checkError(REVLibError error, String message) {
+        if (error != REVLibError.kOk) {
+            lastError = error;
+            logger.error(message, error);
+        }
     }
 
     @Override
@@ -159,16 +176,8 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
         // TODO: Update the PID values based on preferences
 
         logger.info("setting OpenLoopRate={}", ramp);
-        if (leftFrontMotor.setOpenLoopRampRate(ramp) == REVLibError.kOk) {
-            logger.info("Left front ramp rate set successfully");
-        } else {
-            logger.warn("An error occurred setting left front ramp rate");
-        }
-        if (rightFrontMotor.setOpenLoopRampRate(ramp) == REVLibError.kOk) {
-            logger.info("Right front ramp rate set successfully");
-        } else {
-            logger.warn("An error occurred setting right front ramp rate");
-        }
+        checkError(leftFrontMotor.setOpenLoopRampRate(ramp), "L setting ramp rate {}");
+        checkError(rightFrontMotor.setOpenLoopRampRate(ramp), "R setting ramp rate {}");
     }
 
     @Override
@@ -183,17 +192,12 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void setBrake(boolean brakeOn) {
-        if (brakeOn) {
-            leftFrontMotor.setIdleMode(IdleMode.kBrake);
-            leftRearMotor.setIdleMode(IdleMode.kBrake);
-            rightFrontMotor.setIdleMode(IdleMode.kBrake);
-            rightRearMotor.setIdleMode(IdleMode.kBrake);
-        } else {
-            leftFrontMotor.setIdleMode(IdleMode.kCoast);
-            leftRearMotor.setIdleMode(IdleMode.kCoast);
-            rightFrontMotor.setIdleMode(IdleMode.kCoast);
-            rightRearMotor.setIdleMode(IdleMode.kCoast);
-        }
+        IdleMode mode = (brakeOn) ? IdleMode.kBrake : IdleMode.kCoast;
+ 
+        checkError(leftFrontMotor.setIdleMode(mode), "LF setting idle mode {}");
+        checkError(leftRearMotor.setIdleMode(mode), "LR setting idle mode {}");
+        checkError(rightFrontMotor.setIdleMode(mode), "RF setting idle mode {}");
+        checkError(rightRearMotor.setIdleMode(mode), "RR setting idle mode {}");
     }
 
     /*
