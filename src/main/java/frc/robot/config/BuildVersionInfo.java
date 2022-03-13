@@ -19,6 +19,6 @@ package frc.robot.config;
  **/
 class BuildVersionInfo {
     public static final String programmer = "Stu Lewin";
-    public static final String commitSHA = "1aa7d83";
-    public static final String timeStamp = "20220312-133828";
+    public static final String commitSHA = "040cdb8";
+    public static final String timeStamp = "20220313-103300";
 }
