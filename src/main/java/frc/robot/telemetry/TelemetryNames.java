@@ -8,9 +8,11 @@
 
 package frc.robot.telemetry;
 
+
 import frc.robot.modules.ModuleNames;
 import frc.robot.sensors.SensorNames;
 import frc.robot.subsystems.SubsystemNames;
+
 
 /**
  * Provides a standard way of defining names for the <i>Telemetry</i> used in
@@ -23,7 +25,7 @@ public final class TelemetryNames {
     }
 
     public final class Misc {
-        public static final String name = "Misc";
+        private static final String name = "Misc";
 
         public static final String programmer = name + ".programmer";
         public static final String codeVersion = name + ".codeVersion";
@@ -41,24 +43,26 @@ public final class TelemetryNames {
      ***************/
 
     public final class Telemetry {
+        // FIXME: Need to not be public (but needs higher grouping)
         public static final String name = "Telemetry";
 
         public static final String status = name + ".status";
     }
 
     public final class Preferences {
-        public static final String name = "Preferences";
+        private static final String name = "Preferences";
 
         public static final String status = name + ".status";
     }
 
     public final class Properties {
-        public static final String name = "Properties";
+        private static final String name = "Properties";
 
         public static final String status = name + ".status";
     }
 
     public static class Scheduler {
+        // FIXME: Need to not be public (but needs higher grouping)
         public static final String name = "Scheduler";
 
         public static final String status = name + ".status";
@@ -71,6 +75,7 @@ public final class TelemetryNames {
      ***************/
 
     public final class OI {
+        // FIXME: Need to not be public (but needs higher grouping)
         public static final String name = "OI";
 
         public static final String status = name + ".status";
@@ -105,7 +110,7 @@ public final class TelemetryNames {
      ***************/
 
     public final class PDP {
-        public static final String name = ModuleNames.pdpName;
+        private static final String name = ModuleNames.pdpName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
@@ -117,7 +122,7 @@ public final class TelemetryNames {
     }
 
     public final class PCM {
-        public static final String name = ModuleNames.pcmName;
+        private static final String name = ModuleNames.pcmName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
@@ -133,7 +138,7 @@ public final class TelemetryNames {
      ***************/
 
     public final class Gyro {
-        public static final String name = SensorNames.gyroName;
+        private static final String name = SensorNames.gyroName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
@@ -146,7 +151,7 @@ public final class TelemetryNames {
     }
 
     public final class TurretLocation {
-        public static final String name = SensorNames.turretLocationName;
+        private static final String name = SensorNames.turretLocationName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
@@ -155,21 +160,21 @@ public final class TelemetryNames {
     }
 
     public final class ElevatorSensor {
-        public static final String name = SensorNames.elevatorName;
+        private static final String name = SensorNames.elevatorName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
     }
 
     public final class IncrementerSensor {
-        public static final String name = SensorNames.incrementerName;
+        private static final String name = SensorNames.incrementerName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
     }
 
     public final class Vision {
-        public static final String name = SensorNames.visionName;
+        private static final String name = SensorNames.visionName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
@@ -184,7 +189,7 @@ public final class TelemetryNames {
      ***************/
 
     public final class Drive {
-        public static final String name = SubsystemNames.driveName;
+        private static final String name = SubsystemNames.driveName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
@@ -200,7 +205,7 @@ public final class TelemetryNames {
     }
 
     public final class Intake {
-        public static final String name = SubsystemNames.intakeName;
+        private static final String name = SubsystemNames.intakeName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
@@ -217,7 +222,7 @@ public final class TelemetryNames {
     }
 
     public final class Elevator {
-        public static final String name = SubsystemNames.elevatorName;
+        private static final String name = SubsystemNames.elevatorName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
@@ -233,7 +238,7 @@ public final class TelemetryNames {
     }
 
     public final class Incrementer {
-        public static final String name = SubsystemNames.incrementerName;
+        private static final String name = SubsystemNames.incrementerName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
@@ -249,7 +254,7 @@ public final class TelemetryNames {
     }
 
     public final class Shooter {
-        public static final String name = SubsystemNames.shooterName;
+        private static final String name = SubsystemNames.shooterName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
@@ -266,7 +271,7 @@ public final class TelemetryNames {
     }
 
     public final class Turret {
-        public static final String name = SubsystemNames.turretName;
+        private static final String name = SubsystemNames.turretName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
@@ -283,7 +288,7 @@ public final class TelemetryNames {
     }
 
     public final class Climber {
-        public static final String name = SubsystemNames.climberName;
+        private static final String name = SubsystemNames.climberName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";

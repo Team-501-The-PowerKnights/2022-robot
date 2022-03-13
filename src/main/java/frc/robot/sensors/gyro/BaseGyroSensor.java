@@ -11,6 +11,7 @@ package frc.robot.sensors.gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.sensors.BaseSensor;
+import frc.robot.sensors.SensorNames;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -25,7 +26,7 @@ abstract class BaseGyroSensor extends BaseSensor implements IGyroSensor {
     protected final boolean gyroReversed;
 
     BaseGyroSensor() {
-        super(TelemetryNames.Gyro.name);
+        super(SensorNames.gyroName);
         logger.info("constructing");
 
         // FIXME - Get from Properties file
