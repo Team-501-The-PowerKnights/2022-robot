@@ -9,23 +9,24 @@
 package frc.robot.modules;
 
 
+import frc.robot.IModeFollower;
 import frc.robot.telemetry.ITelemetryProvider;
 
 
 /**
  * Add your docs here.
  */
-public interface IModule extends ITelemetryProvider {
+public interface IModule extends IModeFollower, ITelemetryProvider {
 
     /**
      * Called to update any preferences associated with the module. This will be
      * used at a minimum to update any PID values.
      **/
-    public void updatePreferences();
+    default public void updatePreferences() {};
 
     /**
      * Disable the module.
      **/
-    public void disable();
+    default public void disable() {};
 
 }

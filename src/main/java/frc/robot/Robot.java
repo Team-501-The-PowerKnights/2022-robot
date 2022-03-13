@@ -13,6 +13,7 @@
 package frc.robot;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -72,6 +73,9 @@ public class Robot extends TimedRobot {
     private List<ISensor> sensors;
     //
     private List<ISubsystem> subsystems;
+
+    //
+    private List<IModeFollower> followers;
 
     // Flag for started/running autonomous part of match
     @SuppressWarnings("unused")
@@ -139,12 +143,21 @@ public class Robot extends TimedRobot {
         SchedulerProvider.constructInstance();
         tlmMgr.addProvider(SchedulerProvider.getInstance());
 
-        // Initialize all the modules
+        // Create all the modules
         modules = ModuleFactory.constructModules();
-        // Initialize all the sensors
+        // Create all the sensors
         sensors = SensorFactory.constructSensors();
-        // Initialize all the subsystems
+        // Create all the subsystems
         subsystems = SubsystemFactory.constructSubsystems();
+
+        // Add all the mode handlers (need to be in order of creation)
+        followers = new ArrayList<>();
+        followers.addAll(modules);
+        followers.addAll(sensors);
+        followers.addAll(subsystems);
+        for ( IModeFollower f : followers ) {
+            logger.trace("follower: {}", f);
+        }
 
         // Configure all OI now that subsystems are complete
         oi.configureButtonBindings();
@@ -265,6 +278,10 @@ public class Robot extends TimedRobot {
     public void disabledInit() {
         logger.info("disabling");
 
+        for (IModeFollower f : followers) {
+            f.disabledInit();
+        }
+
         validateCalibrations();
 
         if (autonomousComplete && teleopComplete) {
@@ -347,6 +364,9 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void disabledExit() {
+        for (IModeFollower f : followers) {
+            f.disabledExit();
+        }
     }
 
     /**
@@ -360,6 +380,10 @@ public class Robot extends TimedRobot {
         autonomousFirstRun = false;
         autonomousComplete = false;
 
+        for (IModeFollower f : followers) {
+            f.autonomousInit();
+        }
+
         // Update the preferences
         for (IModule m : modules) {
             m.updatePreferences();
@@ -369,7 +393,6 @@ public class Robot extends TimedRobot {
         }
         for (ISubsystem s : subsystems) {
             s.updatePreferences();
-            s.setDefaultAutoCommand();
         }
 
         autoCommand = autoChooser.getSelected();
@@ -409,6 +432,10 @@ public class Robot extends TimedRobot {
         autonomousRunning = false;
         autonomousComplete = true;
 
+        for (IModeFollower f : followers) {
+            f.autonomousExit();
+        }
+
         logger.info("exited autonomous");
     }
 
@@ -430,6 +457,10 @@ public class Robot extends TimedRobot {
             autoCommand.cancel();
         }
 
+        for (IModeFollower f : followers) {
+            f.teleopInit();
+        }
+
         // Update the preferences
         for (IModule m : modules) {
             m.updatePreferences();
@@ -439,7 +470,6 @@ public class Robot extends TimedRobot {
         }
         for (ISubsystem s : subsystems) {
             s.updatePreferences();
-            s.setDefaultTeleCommand();
         }
 
         logger.info("initialized teleop");
@@ -473,6 +503,10 @@ public class Robot extends TimedRobot {
         teleopRunning = false;
         teleopComplete = true;
 
+        for (IModeFollower f : followers) {
+            f.teleopExit();
+        }
+
         logger.info("exited teleop");
     }
 
@@ -485,6 +519,10 @@ public class Robot extends TimedRobot {
 
         // Cancels all running commands at the start of test mode.
         CommandScheduler.getInstance().cancelAll();
+
+        for (IModeFollower f : followers) {
+            f.testInit();
+        }
 
         // Update the preferences
         for (IModule m : modules) {
@@ -514,6 +552,10 @@ public class Robot extends TimedRobot {
     @Override
     public void testExit() {
         logger.info("exiting test");
+
+        for (IModeFollower f : followers) {
+            f.testExit();
+        }
 
         logger.info("exited test");
     }
