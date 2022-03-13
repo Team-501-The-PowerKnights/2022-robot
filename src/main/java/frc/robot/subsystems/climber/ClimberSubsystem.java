@@ -8,8 +8,8 @@
 
 package frc.robot.subsystems.climber;
 
-
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -19,7 +19,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class ClimberSubsystem extends BaseClimberSubsystem {
 
@@ -36,13 +35,34 @@ class ClimberSubsystem extends BaseClimberSubsystem {
         logger.info("constructing");
 
         motor = new CANSparkMax(55, MotorType.kBrushless);
-        motor.restoreFactoryDefaults();
-        motor.setIdleMode(IdleMode.kBrake);
-        motor.setOpenLoopRampRate(0.5); // 1.0
-        motor.setSmartCurrentLimit(35);
+        if (motor.restoreFactoryDefaults() == REVLibError.kOk) {
+            logger.info("Factory defaults restored successfully");
+        } else {
+            logger.warn("An error occurred setting factory defaults");
+        }
+        if (motor.setIdleMode(IdleMode.kBrake) == REVLibError.kOk) {
+            logger.info("Set to brake successfully");
+        } else {
+            logger.warn("An error occurred setting to brake");
+        }
+        if (motor.setOpenLoopRampRate(0.5) == REVLibError.kOk) { // 1.0
+            logger.info("Ramp rate set successfully");
+        } else {
+            logger.warn("An error occurred setting ramp rate");
+        }
+
+        if (motor.setSmartCurrentLimit(35) == REVLibError.kOk) {
+            logger.info("Current limit set successfully");
+        } else {
+            logger.warn("An error occurred setting current limit");
+        }
 
         encoder = motor.getEncoder();
-        encoder.setPosition(0.0);
+        if (encoder.setPosition(0.0) == REVLibError.kOk) {
+            logger.info("Encoder zeroed successfully");
+        } else {
+            logger.warn("An error occurred zeroing the encoder");
+        }
 
         // limitUp = new AnalogInput(0);
         // limitDown = new AnalogInput(1);

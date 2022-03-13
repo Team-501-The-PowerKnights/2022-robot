@@ -8,8 +8,8 @@
 
 package frc.robot.subsystems.shooter;
 
-
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
@@ -22,7 +22,6 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class ShooterSubsystem extends BaseShooterSubsystem {
 
@@ -57,25 +56,58 @@ class ShooterSubsystem extends BaseShooterSubsystem {
         logger.info("constructing");
 
         leftMotor = new CANSparkMax(21, MotorType.kBrushless);
-        leftMotor.restoreFactoryDefaults();
+        if (leftMotor.restoreFactoryDefaults() == REVLibError.kOk) {
+            logger.info("Left factory defaults restored successfully");
+        } else {
+            logger.warn("An error occurred setting left factory defaults");
+        }
         rightMotor = new CANSparkMax(22, MotorType.kBrushless);
-        rightMotor.restoreFactoryDefaults();
-        leftMotor.enableVoltageCompensation(11.0);
-        rightMotor.enableVoltageCompensation(11.0);
-        
+        if (rightMotor.restoreFactoryDefaults() == REVLibError.kOk) {
+            logger.info("Right factory defaults restored successfully");
+        } else {
+            logger.warn("An error occurred setting right factory defaults");
+        }
+        // Voltage compensation
+        if (leftMotor.enableVoltageCompensation(11.0) == REVLibError.kOk) {
+            logger.info("Left voltage limit set successfully");
+        } else {
+            logger.warn("An error occurred setting left voltage limit");
+        }
+        if (rightMotor.enableVoltageCompensation(11.0) == REVLibError.kOk) {
+            logger.info("Right voltage limit set successfully");
+        } else {
+            logger.warn("An error occurred setting right voltage limit");
+        }
+
         // + spin out, - spin in
         leftMotor.setInverted(true);
 
         // Slaved and inverted
-        rightMotor.follow(leftMotor, true);
+        if (rightMotor.follow(leftMotor, true) == REVLibError.kOk) {
+            logger.info("Right successfully following left");
+        } else {
+            logger.warn("An error occurred setting right to follow left");
+        }
 
-        leftMotor.setSoftLimit(SoftLimitDirection.kReverse, 0.0f);
-        rightMotor.setSoftLimit(SoftLimitDirection.kReverse, 0.0f);
+        if (leftMotor.setSoftLimit(SoftLimitDirection.kReverse, 0.0f) == REVLibError.kOk) {
+            logger.info("Left directional limit set successfully");
+        } else {
+            logger.warn("An error occurred setting left directional limit");
+        }
+        if (rightMotor.setSoftLimit(SoftLimitDirection.kReverse, 0.0f) == REVLibError.kOk) {
+            logger.info("Right directional limit set successfully");
+        } else {
+            logger.warn("An error occurred setting right directional limit");
+        }
 
         encoder = leftMotor.getEncoder();
 
         pid = leftMotor.getPIDController();
-        pid.setOutputRange(0.05, 1, slotID);
+        if (pid.setOutputRange(0.05, 1, slotID) == REVLibError.kOk) {
+            logger.info("PID output range set successfully");
+        } else {
+            logger.warn("An error occurred setting PID output range");
+        }
 
         targetRpm = 2000; // TODO - Make the values
         isActive = false;
@@ -126,7 +158,11 @@ class ShooterSubsystem extends BaseShooterSubsystem {
         this.targetRpm = rpm; // Save off value for enabling
 
         if (isActive) {
-            pid.setReference(targetRpm, CANSparkMax.ControlType.kVelocity, slotID);
+            if (pid.setReference(targetRpm, CANSparkMax.ControlType.kVelocity, slotID) == REVLibError.kOk) {
+                logger.info("PID setpoint set successfully to: {}", targetRpm);
+            } else {
+                logger.warn("An error occurred setting PID setpoint");
+            }
         }
     }
 
@@ -134,7 +170,11 @@ class ShooterSubsystem extends BaseShooterSubsystem {
     public void shoot() {
         isActive = true;
         /* generated speed */
-        pid.setReference(targetRpm, CANSparkMax.ControlType.kVelocity, slotID);
+        if (pid.setReference(targetRpm, CANSparkMax.ControlType.kVelocity, slotID) == REVLibError.kOk) {
+            logger.info("PID setpoint set successfully to: {}", targetRpm);
+        } else {
+            logger.warn("An error occurred setting PID setpoint");
+        }
     }
 
     // FIXME - Was supposed to be for manual; no idleShooter scaling
