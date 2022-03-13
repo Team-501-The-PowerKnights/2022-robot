@@ -9,14 +9,23 @@
 package frc.robot.modules.pdp;
 
 
+import frc.robot.modules.BaseModule;
+import frc.robot.telemetry.TelemetryNames;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-abstract class BasePDPModule implements IPDPModule {
+abstract class BasePDPModule extends BaseModule implements IPDPModule {
 
     /** Our classes' logger **/
-    @SuppressWarnings("unused")
     private static final PKLogger logger = RioLogger.getLogger(BasePDPModule.class.getName());
+
+    BasePDPModule() {
+        super(TelemetryNames.PDP.name);
+        logger.info("constructing");
+
+        logger.info("constructed");
+    }
 
 }

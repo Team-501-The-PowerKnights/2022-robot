@@ -13,6 +13,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.commands.DoNothing;
 import frc.robot.commands.PKCommandBase;
@@ -25,6 +26,12 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
+/**
+ * A base class for subsystems that handles registration in the constructor, deals
+ * with the default commands, and provides default methods for the
+ * {@link frc.robot.IModeFollower IRobotModes} interface for notifications of
+ * mode transitions.
+ */
 public abstract class BaseSubsystem implements ISubsystem {
     
     /** Our classes' logger **/
@@ -42,19 +49,80 @@ public abstract class BaseSubsystem implements ISubsystem {
 
         myName = name;
 
+        // Register subsystem with 
+        CommandScheduler.getInstance().registerSubsystem(this);
+
         logger.info("constructed");
     }
 
     @Override
-    public void setDefaultAutoCommand() {
-        logger.info("{} set default auto command to {}", myName, defaultAutoCommand.getName());
-        setDefaultCommand(defaultAutoCommand);
+    public void disabledInit() {
+        logger.info("initializing disabled for {}", myName);
+
+        validateCalibration();
+
+        logger.info("initialized disabled for {}", myName);
     }
 
     @Override
-    public void setDefaultTeleCommand() {
-        logger.info("{} set default teleop command to {}", myName, defaultTeleCommand.getName());
+    public void disabledExit() {
+        logger.info("exiting disabled for {}", myName);
+        
+        logger.info("exited disabled for {}", myName);
+    }
+
+    @Override
+    public void autonomousInit() {
+        logger.info("initializing auto for {}", myName);
+
+        logger.info("set default auto command to {}", defaultAutoCommand.getName());
+        setDefaultCommand(defaultAutoCommand);
+
+        updatePreferences();
+
+        logger.info("initialized auto for {}", myName);
+    }
+
+    @Override
+    public void autonomousExit() {
+        logger.info("exiting auto for {}", myName);
+        
+        logger.info("exited auto for {}", myName);
+    }
+
+    @Override
+    public void teleopInit() {
+        logger.info("initializing teleop for {}", myName);
+
+        logger.info("set default teleop command to {}", defaultTeleCommand.getName());
         setDefaultCommand(defaultTeleCommand);
+
+        updatePreferences();
+        
+        logger.info("initialized teleop for {}", myName);
+    }
+
+    @Override
+    public void teleopExit() {
+        logger.info("exiting teleop for {}", myName);
+        
+        logger.info("exited teleop for {}", myName);
+    }
+
+    @Override
+    public void testInit() {
+        logger.info("initializing test for {}", myName);
+
+        updatePreferences();
+        
+        logger.info("initialized test for {}", myName);
+    }
+
+    @Override
+    public void testExit() {
+        logger.info("exiting test for {}", myName);
+        
+        logger.info("exited test for {}", myName);
     }
     
     /**

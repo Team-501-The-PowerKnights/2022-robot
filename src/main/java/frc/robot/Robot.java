@@ -13,6 +13,7 @@
 package frc.robot;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -72,6 +73,9 @@ public class Robot extends TimedRobot {
     private List<ISensor> sensors;
     //
     private List<ISubsystem> subsystems;
+
+    //
+    private List<IModeFollower> followers;
 
     // Flag for started/running autonomous part of match
     @SuppressWarnings("unused")
@@ -139,12 +143,18 @@ public class Robot extends TimedRobot {
         SchedulerProvider.constructInstance();
         tlmMgr.addProvider(SchedulerProvider.getInstance());
 
-        // Initialize all the modules
+        // Add all the mode followers (need to be in order of creation)
+        followers = new ArrayList<>();
+
+        // Create all the modules
         modules = ModuleFactory.constructModules();
-        // Initialize all the sensors
+        followers.addAll(modules);
+        // Create all the sensors
         sensors = SensorFactory.constructSensors();
-        // Initialize all the subsystems
+        followers.addAll(sensors);
+        // Create all the subsystems
         subsystems = SubsystemFactory.constructSubsystems();
+        followers.addAll(subsystems);
 
         // Configure all OI now that subsystems are complete
         oi.configureButtonBindings();
@@ -265,14 +275,16 @@ public class Robot extends TimedRobot {
     public void disabledInit() {
         logger.info("disabling");
 
-        validateCalibrations();
+        for (IModeFollower f : followers) {
+            f.disabledInit();
+        }
 
         if (autonomousComplete && teleopComplete) {
             logger.info("match complete");
 
-            logVisionData();
+            logFinalVisionData();
 
-            logPreferences();
+            logFinalPreferences();
 
             logMatchData();
 
@@ -291,26 +303,16 @@ public class Robot extends TimedRobot {
     }
 
     /**
-     * Calls each subsystem to validate their calibration and update the appropriate
-     * telemetry points.
-     */
-    private void validateCalibrations() {
-        for (ISubsystem s : subsystems) {
-            s.validateCalibration();
-        }
-    }
-
-    /**
      * Log the data associated with the vision to the tail of the log file.
      **/
-    private void logVisionData() {
+    private void logFinalVisionData() {
         logger.info("vision data:");
     }
 
     /**
      * Log the data associated with the preferences to the tail of the log file.
      **/
-    private void logPreferences() {
+    private void logFinalPreferences() {
         logger.info("preferences:");
         PreferencesManager.getInstance().logPreferences(logger);
     }
@@ -347,6 +349,9 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void disabledExit() {
+        for (IModeFollower f : followers) {
+            f.disabledExit();
+        }
     }
 
     /**
@@ -360,16 +365,8 @@ public class Robot extends TimedRobot {
         autonomousFirstRun = false;
         autonomousComplete = false;
 
-        // Update the preferences
-        for (IModule m : modules) {
-            m.updatePreferences();
-        }
-        for (ISensor s : sensors) {
-            s.updatePreferences();
-        }
-        for (ISubsystem s : subsystems) {
-            s.updatePreferences();
-            s.setDefaultAutoCommand();
+        for (IModeFollower f : followers) {
+            f.autonomousInit();
         }
 
         autoCommand = autoChooser.getSelected();
@@ -409,6 +406,10 @@ public class Robot extends TimedRobot {
         autonomousRunning = false;
         autonomousComplete = true;
 
+        for (IModeFollower f : followers) {
+            f.autonomousExit();
+        }
+
         logger.info("exited autonomous");
     }
 
@@ -430,19 +431,11 @@ public class Robot extends TimedRobot {
             autoCommand.cancel();
         }
 
-        // Update the preferences
-        for (IModule m : modules) {
-            m.updatePreferences();
-        }
-        for (ISensor s : sensors) {
-            s.updatePreferences();
-        }
-        for (ISubsystem s : subsystems) {
-            s.updatePreferences();
-            s.setDefaultTeleCommand();
+        for (IModeFollower f : followers) {
+            f.teleopInit();
         }
 
-        logger.info("initialized teleop");
+         logger.info("initialized teleop");
     }
 
     /**
@@ -473,6 +466,10 @@ public class Robot extends TimedRobot {
         teleopRunning = false;
         teleopComplete = true;
 
+        for (IModeFollower f : followers) {
+            f.teleopExit();
+        }
+
         logger.info("exited teleop");
     }
 
@@ -486,15 +483,8 @@ public class Robot extends TimedRobot {
         // Cancels all running commands at the start of test mode.
         CommandScheduler.getInstance().cancelAll();
 
-        // Update the preferences
-        for (IModule m : modules) {
-            m.updatePreferences();
-        }
-        for (ISensor s : sensors) {
-            s.updatePreferences();
-        }
-        for (ISubsystem s : subsystems) {
-            s.updatePreferences();
+        for (IModeFollower f : followers) {
+            f.testInit();
         }
 
         logger.info("initialized test");
@@ -514,6 +504,10 @@ public class Robot extends TimedRobot {
     @Override
     public void testExit() {
         logger.info("exiting test");
+
+        for (IModeFollower f : followers) {
+            f.testExit();
+        }
 
         logger.info("exited test");
     }

@@ -10,21 +10,21 @@ package frc.robot.sensors.incrementer;
 
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import frc.robot.sensors.BaseSensor;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-abstract class BaseIncrementerSensor implements IIncrementerSensor {
+abstract class BaseIncrementerSensor extends BaseSensor implements IIncrementerSensor {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(BaseIncrementerSensor.class.getName());
 
-    /** Our sensor's name **/
-    protected static final String myName = TelemetryNames.Incrementer.name;
-
     BaseIncrementerSensor() {
+        super(TelemetryNames.Incrementer.name);
         logger.info("constructing");
 
         logger.info("constructed");
