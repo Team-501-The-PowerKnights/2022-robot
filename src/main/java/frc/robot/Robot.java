@@ -12,10 +12,12 @@
 
 package frc.robot;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -46,10 +48,9 @@ import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.subsystems.ISubsystem;
 import frc.robot.subsystems.SubsystemFactory;
-
+import frc.robot.subsystems.drive.DriveFactory;
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -234,10 +235,10 @@ public class Robot extends TimedRobot {
                 new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardTimed(4.0)));
 
         autoChooser.addOption("Full Auto (Driving Forward Delay)",
-            new PKParallelCommandGroup(new TurretVisionAlign(),
-                                       new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(4.0),
-                                                                                               new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(3.0)),
-                                                                    new FirePoseVision()))));
+                new PKParallelCommandGroup(new TurretVisionAlign(),
+                        new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(4.0),
+                                new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(3.0)),
+                                new FirePoseVision()))));
 
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
@@ -369,11 +370,17 @@ public class Robot extends TimedRobot {
             f.autonomousInit();
         }
 
-        autoCommand = autoChooser.getSelected();
-        logger.info("auto command is {}", autoCommand.getName());
-        if (autoCommand != null) {
-            CommandScheduler.getInstance().schedule(true, autoCommand);
-        }
+        // autoCommand = autoChooser.getSelected();
+        // logger.info("auto command is {}", autoCommand.getName());
+        // if (autoCommand != null) {
+        // CommandScheduler.getInstance().schedule(true, autoCommand);
+        // }
+        DriveFactory.getInstance().followPath(// Start at the origin facing the +X direction
+                new Pose2d(0, 0, new Rotation2d(0)),
+                // Pass through these two interior waypoints, making an 's' curve path
+                List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
+                // End 3 meters straight ahead of where we started, facing forward
+                new Pose2d(3, 0, new Rotation2d(0)));
 
         logger.info("initialized autonomous");
     }
@@ -421,7 +428,7 @@ public class Robot extends TimedRobot {
         logger.info("initializing teleop");
         teleopRunning = true;
         teleopFirstRun = false;
-        teleopComplete = false; 
+        teleopComplete = false;
 
         // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to
@@ -435,7 +442,7 @@ public class Robot extends TimedRobot {
             f.teleopInit();
         }
 
-         logger.info("initialized teleop");
+        logger.info("initialized teleop");
     }
 
     /**
@@ -497,7 +504,6 @@ public class Robot extends TimedRobot {
     public void testPeriodic() {
     }
 
-    
     /**
      * This function is called once each time the robot exits Test mode.
      */
@@ -520,12 +526,11 @@ public class Robot extends TimedRobot {
 
         SmartDashboard.putData("FMS Override", fmsOverrideChooser);
     }
-    
+
     static public boolean isFieldConnected() {
-        if ( DriverStation.isFMSAttached()) {
+        if (DriverStation.isFMSAttached()) {
             return true;
-        }
-        else {
+        } else {
             return fmsOverrideChooser.getSelected();
         }
     }

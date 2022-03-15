@@ -48,11 +48,11 @@ class DriveSubsystem extends BaseDriveSubsystem {
     /**
      * Drive Constants
      */
-    private static final double s = 0.147; // Volts
-    private static final double v = 2.82; // VoltSeconds Per Meter
-    private static final double a = 0.393; // VoltSecondsSquared Per Meter
-    private static final double p = 2.57; // Drive Velocity
-    private static final double trackWidth = 0.629; // Meters
+    private static final double s = 0.11646; // Volts
+    private static final double v = 2.177; // VoltSeconds Per Meter
+    private static final double a = 0.46731; // VoltSecondsSquared Per Meter
+    private static final double p = 3.0061; // Drive Velocity
+    private static final double trackWidth = 0.56735; // Meters
     private static final double ramseteB = 2;
     private static final double ramseteZeta = 0.7;
     private static final double maxSpeed = 3.04; // Meters Per Second
