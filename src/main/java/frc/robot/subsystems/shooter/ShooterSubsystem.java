@@ -10,6 +10,7 @@ package frc.robot.subsystems.shooter;
 
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
@@ -56,26 +57,31 @@ class ShooterSubsystem extends BaseShooterSubsystem {
     ShooterSubsystem() {
         logger.info("constructing");
 
+        // Instantiation and factory default-ing motors
         leftMotor = new CANSparkMax(21, MotorType.kBrushless);
-        leftMotor.restoreFactoryDefaults();
+        checkError(leftMotor.restoreFactoryDefaults(), "L setting factory defaults {}");
+
         rightMotor = new CANSparkMax(22, MotorType.kBrushless);
-        rightMotor.restoreFactoryDefaults();
-        leftMotor.enableVoltageCompensation(11.0);
-        rightMotor.enableVoltageCompensation(11.0);
-        
+        checkError(rightMotor.restoreFactoryDefaults(), "R setting factory defaults {}");
+
+        // Voltage compensation
+        checkError(leftMotor.enableVoltageCompensation(11.0), "L enabling voltage compensation {}");
+        checkError(rightMotor.enableVoltageCompensation(11.0), "R enabling voltage compensation {}");
+
         // + spin out, - spin in
         leftMotor.setInverted(true);
 
         // Slaved and inverted
-        rightMotor.follow(leftMotor, true);
-
-        leftMotor.setSoftLimit(SoftLimitDirection.kReverse, 0.0f);
-        rightMotor.setSoftLimit(SoftLimitDirection.kReverse, 0.0f);
+        checkError(rightMotor.follow(leftMotor, true), "R slaving & inverting {}");
+ 
+        // Soft limits
+        checkError(leftMotor.setSoftLimit(SoftLimitDirection.kReverse, 0.0f), "L setting soft limits {}");
+        checkError(rightMotor.setSoftLimit(SoftLimitDirection.kReverse, 0.0f), "R setting soft limits {}");
 
         encoder = leftMotor.getEncoder();
 
         pid = leftMotor.getPIDController();
-        pid.setOutputRange(0.05, 1, slotID);
+        checkError(pid.setOutputRange(0.05, 1, slotID), "setting pid output range {}");
 
         targetRpm = 2000; // TODO - Make the values
         isActive = false;
@@ -84,6 +90,18 @@ class ShooterSubsystem extends BaseShooterSubsystem {
         SmartDashboard.putNumber(CommandingNames.Shooter.tolerance, 0.012);
 
         logger.info("constructed");
+    }
+
+    // last error (not the same as kOk)
+    // TODO: Use to set a degraded error status/state on subsystem
+    @SuppressWarnings("unused")
+    private REVLibError lastError;
+
+    private void checkError(REVLibError error, String message) {
+        if (error != REVLibError.kOk) {
+            lastError = error;
+            logger.error(message, error);
+        }
     }
 
     @Override
@@ -125,16 +143,19 @@ class ShooterSubsystem extends BaseShooterSubsystem {
     public void setTargetRpm(double rpm) {
         this.targetRpm = rpm; // Save off value for enabling
 
-        if (isActive) {
-            pid.setReference(targetRpm, CANSparkMax.ControlType.kVelocity, slotID);
+        if (!isActive) {
+            return;
         }
+
+        checkError(pid.setReference(targetRpm, CANSparkMax.ControlType.kVelocity, slotID), "setting pid reference {}");
     }
 
     @Override
     public void shoot() {
         isActive = true;
-        /* generated speed */
-        pid.setReference(targetRpm, CANSparkMax.ControlType.kVelocity, slotID);
+
+        //generated speed
+        checkError(pid.setReference(targetRpm, CANSparkMax.ControlType.kVelocity, slotID), "setting pid reference {}");
     }
 
     // FIXME - Was supposed to be for manual; no idleShooter scaling

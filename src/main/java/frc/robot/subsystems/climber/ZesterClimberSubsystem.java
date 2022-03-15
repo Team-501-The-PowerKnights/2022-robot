@@ -8,7 +8,9 @@
 
 package frc.robot.subsystems.climber;
 
+
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -19,6 +21,7 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class ZesterClimberSubsystem extends BaseClimberSubsystem {
 
@@ -33,14 +36,29 @@ class ZesterClimberSubsystem extends BaseClimberSubsystem {
     ZesterClimberSubsystem() {
         logger.info("constructing");
 
+        lastError = REVLibError.kOk;
+
         motor = new CANSparkMax(55, MotorType.kBrushless);
-        motor.restoreFactoryDefaults();
-        motor.setIdleMode(IdleMode.kBrake);
+        checkError(motor.restoreFactoryDefaults(), "setting factory defaults {}");
+
+        checkError(motor.setIdleMode(IdleMode.kBrake), "setting to brake {}");
 
         limitUp = new AnalogInput(0);
         limitDown = new AnalogInput(1);
 
         logger.info("constructed");
+    }
+
+    // last error (not the same as kOk)
+    // TODO: Use to set a degraded error status/state on subsystem
+    @SuppressWarnings("unused")
+    private REVLibError lastError;
+
+    private void checkError(REVLibError error, String message) {
+        if (error != REVLibError.kOk) {
+            lastError = error;
+            logger.error(message, error);
+        }
     }
 
     @Override
@@ -98,7 +116,7 @@ class ZesterClimberSubsystem extends BaseClimberSubsystem {
     @Override
     public void zeroPosition() {
         // TODO Auto-generated method stub
-        
+
     }
 
 }
