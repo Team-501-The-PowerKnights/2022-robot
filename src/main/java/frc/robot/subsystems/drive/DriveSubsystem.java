@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.drive;
 
-
 import java.util.List;
 
 import com.revrobotics.RelativeEncoder;
@@ -42,7 +41,6 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-
 class DriveSubsystem extends BaseDriveSubsystem {
 
     /** Our classes' logger **/
@@ -51,14 +49,14 @@ class DriveSubsystem extends BaseDriveSubsystem {
     /**
      * Drive Constants
      */
-    private static final double s = 0.11646; // Volts
-    private static final double v = 2.177; // VoltSeconds Per Meter
-    private static final double a = 0.46731; // VoltSecondsSquared Per Meter
-    private static final double p = 3.0061; // Drive Velocity
-    private static final double trackWidth = 0.56735; // Meters
+    private static final double s = 0.12715; // Volts
+    private static final double v = 2.1836; // VoltSeconds Per Meter
+    private static final double a = 0.44028; // VoltSecondsSquared Per Meter
+    private static final double p = 2.3834; // Drive Velocity
+    private static final double trackWidth = 0.56411; // Meters
     private static final double ramseteB = 2;
     private static final double ramseteZeta = 0.7;
-    private static final double maxSpeed = 3.04; // Meters Per Second
+    private static final double maxSpeed = 1; // Meters Per Second
     private static final double maxAcceleration = 0.5; // Meters Per Second Squared
     private static final boolean leftReversed = false;
     private static final boolean rightReversed = false;
@@ -113,11 +111,12 @@ class DriveSubsystem extends BaseDriveSubsystem {
         // FIXME: Use MotorControllerGroup (see Proto ...)
 
         rightFrontMotor.setInverted(true);
+        // leftFrontMotor.setInverted(true);
 
         // Following
         checkError(leftRearMotor.follow(leftFrontMotor), "L setting following mode {}");
         checkError(rightRearMotor.follow(rightFrontMotor), "R setting following mode {}");
- 
+
         // Ramp rates
         checkError(leftFrontMotor.setOpenLoopRampRate(ramp), "L setting ramp rate {}");
         checkError(rightFrontMotor.setOpenLoopRampRate(ramp), "R setting ramp rate {}");
@@ -198,7 +197,7 @@ class DriveSubsystem extends BaseDriveSubsystem {
     @Override
     public void setBrake(boolean brakeOn) {
         IdleMode mode = (brakeOn) ? IdleMode.kBrake : IdleMode.kCoast;
- 
+
         checkError(leftFrontMotor.setIdleMode(mode), "LF setting idle mode {}");
         checkError(leftRearMotor.setIdleMode(mode), "LR setting idle mode {}");
         checkError(rightFrontMotor.setIdleMode(mode), "RF setting idle mode {}");

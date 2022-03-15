@@ -8,10 +8,8 @@
 
 package frc.robot.sensors.gyro;
 
-
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Provides implementation of <code>IGyroSensor</code> for the
