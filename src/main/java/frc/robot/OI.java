@@ -83,8 +83,7 @@ public class OI implements ITelemetryProvider {
     public void updateTelemetry() {
         driverPad.updateTelemetry();
         operatorPad.updateTelemetry();
-
-   }
+    }
 
     /*****************
      * Drive

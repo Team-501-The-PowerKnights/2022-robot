@@ -335,14 +335,7 @@ public class Robot extends TimedRobot {
      * This function is called periodically during Disabled mode.
      */
     @Override
-    public void disabledPeriodic() {
-        // Runs the Scheduler. This is responsible for polling buttons, adding
-        // newly-scheduled commands, running already-scheduled commands, removing
-        // finished or interrupted commands, and running subsystem periodic()
-        // methods. This must be called from the robot's periodic block in order
-        // for anything in the Command-based framework to work.
-        CommandScheduler.getInstance().run();
-    }
+    public void disabledPeriodic() {}
 
     /**
      * This function is called once each time the robot exits Disabled mode.
@@ -387,13 +380,6 @@ public class Robot extends TimedRobot {
             autonomousFirstRun = true;
             logger.info("first run of autonomous periodic");
         }
-
-        // Runs the Scheduler. This is responsible for polling buttons, adding
-        // newly-scheduled commands, running already-scheduled commands, removing
-        // finished or interrupted commands, and running subsystem periodic()
-        // methods. This must be called from the robot's periodic block in order
-        // for anything in the Command-based framework to work.
-        CommandScheduler.getInstance().run();
     }
 
     /**
@@ -447,13 +433,6 @@ public class Robot extends TimedRobot {
             teleopFirstRun = true;
             logger.info("first run of teleop periodic");
         }
-
-        // Runs the Scheduler. This is responsible for polling buttons, adding
-        // newly-scheduled commands, running already-scheduled commands, removing
-        // finished or interrupted commands, and running subsystem periodic()
-        // methods. This must be called from the robot's periodic block in order
-        // for anything in the Command-based framework to work.
-        CommandScheduler.getInstance().run();
     }
 
     /**

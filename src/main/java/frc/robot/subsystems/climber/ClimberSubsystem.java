@@ -10,6 +10,7 @@ package frc.robot.subsystems.climber;
 
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -17,6 +18,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.telemetry.TelemetryNames;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -35,15 +37,19 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     ClimberSubsystem() {
         logger.info("constructing");
 
+        lastError = REVLibError.kOk;
+
         motor = new CANSparkMax(55, MotorType.kBrushless);
-        motor.restoreFactoryDefaults();
-        motor.setIdleMode(IdleMode.kBrake);
-        motor.setOpenLoopRampRate(0.5); // 1.0
-        motor.setSmartCurrentLimit(35);
+        checkError(motor.restoreFactoryDefaults(), "setting factory defaults {}");
+
+        checkError(motor.setIdleMode(IdleMode.kBrake), "setting to brake {}");
+        checkError(motor.setOpenLoopRampRate(0.5), "setting ramp rate {}");
+        checkError(motor.setSmartCurrentLimit(35), "setting current limit {}");
 
         encoder = motor.getEncoder();
-        encoder.setPosition(0.0);
 
+        checkError(encoder.setPosition(0.0), "zeroing the encoder {}");
+ 
         // limitUp = new AnalogInput(0);
         // limitDown = new AnalogInput(1);
 
@@ -52,7 +58,18 @@ class ClimberSubsystem extends BaseClimberSubsystem {
         SmartDashboard.putBoolean(TelemetryNames.Climber.atTarget, false);
 
         logger.info("constructed");
+    }
 
+    // last error (not the same as kOk)
+    // TODO: Use to set a degraded error status/state on subsystem
+    @SuppressWarnings("unused")
+    private REVLibError lastError;
+
+    private void checkError(REVLibError error, String message) {
+        if (error != REVLibError.kOk) {
+            lastError = error;
+            logger.error(message, error);
+        }
     }
 
     @Override

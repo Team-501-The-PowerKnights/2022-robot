@@ -57,7 +57,7 @@ abstract class F310Gamepad extends BaseGamepad {
     }
 
     protected final int greenButton = 1;
-    protected final int aButton = greenButton;
+    protected final int abutton = greenButton;
     protected boolean getGreenButton() {
         return stick.getRawButton(greenButton);
     }
@@ -66,6 +66,18 @@ abstract class F310Gamepad extends BaseGamepad {
     protected final int bButton = redButton;
     protected boolean getRedButton() {
         return stick.getRawButton(redButton);
+    }
+
+    protected final int blueButton = 3;
+    protected final int xButton = blueButton;
+    protected boolean getBlueButton() {
+        return stick.getRawButton(blueButton);
+    }
+
+    protected final int yellowButton = 4;
+    protected final int yButton = yellowButton;
+    protected boolean getYellowButton() {
+        return stick.getRawButton(yellowButton);
     }
 
     protected final int leftBumper = 5;

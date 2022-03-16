@@ -8,7 +8,9 @@
 
 package frc.robot.subsystems.turret;
 
+
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -24,6 +26,7 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class TurretSubsystem extends BaseTurretSubsystem {
 
@@ -51,31 +54,50 @@ class TurretSubsystem extends BaseTurretSubsystem {
     TurretSubsystem() {
         logger.info("constructing");
 
+        //
         motor = new CANSparkMax(20, MotorType.kBrushless);
-        motor.restoreFactoryDefaults();
+        checkError(motor.restoreFactoryDefaults(), "setting factory defaults {}");
+
         // +CW +, CCW -
         motor.setInverted(true);
+
+        checkError(motor.setSmartCurrentLimit(10), "setting current limit {}");
+
+        //
         encoder = motor.getEncoder();
 
+        checkError(encoder.setPosition(convertTurretAngleToCounts(-90)), "setting the encoder position {}");
+ 
+        //
         pid = motor.getPIDController();
-        pid.setIZone(0.25, 1);
-        pid.setIMaxAccum(1, 1);
-        pid.setP(pid_P, 1);
-        pid.setI(pid_I, 1);
-        pid.setD(pid_D, 1);
-        pid.setFF(pid_F, 1);
-        pid.setOutputRange(-1.0, 1.0, 1);
-        motor.setSmartCurrentLimit(10);
 
+        checkError(pid.setIZone(0.25, 1), "PID setting IZone {}");
+        checkError(pid.setIMaxAccum(1, 1), "PID setting IMaxAccum {}");
+        checkError(pid.setP(pid_P, 1), "PID setting P {}");
+        checkError(pid.setI(pid_I, 1), "PID setting I {}");
+        checkError(pid.setD(pid_D, 1), "PID setting D {}");
+        checkError(pid.setFF(pid_F, 1), "PID setting F {}");
+        checkError(pid.setOutputRange(-1.0, 1.0, 1), "PID setting output range {}");
+ 
         location = TurretLocationFactory.getInstance();
 
         vision = VisionFactory.getInstance();
 
         SmartDashboard.putBoolean(TelemetryNames.Turret.isHomed, false);
 
-        encoder.setPosition(convertTurretAngleToCounts(-90));
-
         logger.info("constructed");
+    }
+
+    // last error (not the same as kOk)
+    // TODO: Use to set a degraded error status/state on subsystem
+    @SuppressWarnings("unused")
+    private REVLibError lastError;
+
+    private void checkError(REVLibError error, String message) {
+        if (error != REVLibError.kOk) {
+            lastError = error;
+            logger.error(message, error);
+        }
     }
 
     @Override
@@ -97,10 +119,13 @@ class TurretSubsystem extends BaseTurretSubsystem {
         super.updatePreferences();
 
         if (pid != null) {
-            pid.setP(pid_P, 1);
-            pid.setI(pid_I, 1);
-            pid.setD(pid_D, 1);
-            pid.setFF(pid_F, 1);
+            checkError(pid.setIZone(0.25, 1), "PID setting IZone {}");
+            checkError(pid.setIMaxAccum(1, 1), "PID setting IMaxAccum {}");
+            checkError(pid.setP(pid_P, 1), "PID setting P {}");
+            checkError(pid.setI(pid_I, 1), "PID setting I {}");
+            checkError(pid.setD(pid_D, 1), "PID setting D {}");
+            checkError(pid.setFF(pid_F, 1), "PID setting F {}");
+            checkError(pid.setOutputRange(-1.0, 1.0, 1), "PID setting output range {}");
         }
     }
 
@@ -110,7 +135,8 @@ class TurretSubsystem extends BaseTurretSubsystem {
 
     @Override
     public void stop() {
-        pid.setReference(0, CANSparkMax.ControlType.kVoltage);
+        checkError(pid.setReference(0, CANSparkMax.ControlType.kVoltage), "PID setting reference {}");
+
         setSpeed(0.0);
     }
 
@@ -124,7 +150,7 @@ class TurretSubsystem extends BaseTurretSubsystem {
 
         double targetCounts = convertTurretAngleToCounts(angle);
 
-        pid.setReference(targetCounts, CANSparkMax.ControlType.kPosition, 1);
+        checkError(pid.setReference(targetCounts, CANSparkMax.ControlType.kPosition, 1), "PID setting reference {}");
     }
 
     @Override
@@ -166,7 +192,7 @@ class TurretSubsystem extends BaseTurretSubsystem {
 
         SmartDashboard.putNumber(TelemetryNames.Turret.visionPIDOutput, steering_adjust);
 
-        pid.setReference(steering_adjust, CANSparkMax.ControlType.kVoltage, 1);
+        checkError(pid.setReference(steering_adjust, CANSparkMax.ControlType.kVoltage, 1), "PID setting reference {}");
     }
 
     @Override

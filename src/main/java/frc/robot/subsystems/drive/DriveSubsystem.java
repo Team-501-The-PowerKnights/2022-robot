@@ -8,10 +8,12 @@
 
 package frc.robot.subsystems.drive;
 
+
 import java.util.List;
 
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -39,6 +41,7 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class DriveSubsystem extends BaseDriveSubsystem {
 
@@ -92,32 +95,43 @@ class DriveSubsystem extends BaseDriveSubsystem {
     DriveSubsystem() {
         logger.info("constructing");
 
+        lastError = REVLibError.kOk;
+
+        // Instantiation and factory default-ing motors
         leftFrontMotor = new CANSparkMax(11, MotorType.kBrushless);
-        leftFrontMotor.restoreFactoryDefaults();
+        checkError(leftFrontMotor.restoreFactoryDefaults(), "LF setting factory defaults {}");
+
         leftRearMotor = new CANSparkMax(12, MotorType.kBrushless);
-        leftRearMotor.restoreFactoryDefaults();
+        checkError(leftRearMotor.restoreFactoryDefaults(), "LR setting factory defaults {}");
+
         rightFrontMotor = new CANSparkMax(13, MotorType.kBrushless);
-        rightFrontMotor.restoreFactoryDefaults();
+        checkError(rightFrontMotor.restoreFactoryDefaults(), "RF setting factory defaults {}");
+
         rightRearMotor = new CANSparkMax(14, MotorType.kBrushless);
-        rightRearMotor.restoreFactoryDefaults();
+        checkError(rightRearMotor.restoreFactoryDefaults(), "RR setting factory defaults {}");
 
         // FIXME: Use MotorControllerGroup (see Proto ...)
 
         rightFrontMotor.setInverted(true);
 
-        leftRearMotor.follow(leftFrontMotor);
-        rightRearMotor.follow(rightFrontMotor);
+        // Following
+        checkError(leftRearMotor.follow(leftFrontMotor), "L setting following mode {}");
+        checkError(rightRearMotor.follow(rightFrontMotor), "R setting following mode {}");
+ 
+        // Ramp rates
+        checkError(leftFrontMotor.setOpenLoopRampRate(ramp), "L setting ramp rate {}");
+        checkError(rightFrontMotor.setOpenLoopRampRate(ramp), "R setting ramp rate {}");
 
-        leftFrontMotor.setOpenLoopRampRate(ramp);
-        rightFrontMotor.setOpenLoopRampRate(ramp);
-
+        // Instantiation of encoders and zeroing
         leftEncoder = leftFrontMotor.getEncoder();
-        leftEncoder.setPosition(0.0);
         rightEncoder = rightFrontMotor.getEncoder();
-        rightEncoder.setPosition(0.0);
+
+        checkError(leftEncoder.setPosition(0.0), "L zeroing the encoder {}");
+        checkError(rightEncoder.setPosition(0.0), "R zeroing the encoder {}");
 
         nav = GyroFactory.getInstance();
 
+        // Trajectory pieces instantiation
         drive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
         drive.setSafetyEnabled(false);
         driveKinematics = new DifferentialDriveKinematics(trackWidth);
@@ -132,6 +146,18 @@ class DriveSubsystem extends BaseDriveSubsystem {
         helper = new DriveHelper();
 
         logger.info("constructed");
+    }
+
+    // last error (not the same as kOk)
+    // TODO: Use to set a degraded error status/state on subsystem
+    @SuppressWarnings("unused")
+    private REVLibError lastError;
+
+    private void checkError(REVLibError error, String message) {
+        if (error != REVLibError.kOk) {
+            lastError = error;
+            logger.error(message, error);
+        }
     }
 
     @Override
@@ -158,9 +184,10 @@ class DriveSubsystem extends BaseDriveSubsystem {
         super.updatePreferences();
 
         // TODO: Update the PID values based on preferences
+
         logger.info("setting OpenLoopRate={}", ramp);
-        leftFrontMotor.setOpenLoopRampRate(ramp);
-        rightFrontMotor.setOpenLoopRampRate(ramp);
+        checkError(leftFrontMotor.setOpenLoopRampRate(ramp), "L setting ramp rate {}");
+        checkError(rightFrontMotor.setOpenLoopRampRate(ramp), "R setting ramp rate {}");
     }
 
     @Override
@@ -170,17 +197,12 @@ class DriveSubsystem extends BaseDriveSubsystem {
 
     @Override
     public void setBrake(boolean brakeOn) {
-        if (brakeOn) {
-            leftFrontMotor.setIdleMode(IdleMode.kBrake);
-            leftRearMotor.setIdleMode(IdleMode.kBrake);
-            rightFrontMotor.setIdleMode(IdleMode.kBrake);
-            rightRearMotor.setIdleMode(IdleMode.kBrake);
-        } else {
-            leftFrontMotor.setIdleMode(IdleMode.kCoast);
-            leftRearMotor.setIdleMode(IdleMode.kCoast);
-            rightFrontMotor.setIdleMode(IdleMode.kCoast);
-            rightRearMotor.setIdleMode(IdleMode.kCoast);
-        }
+        IdleMode mode = (brakeOn) ? IdleMode.kBrake : IdleMode.kCoast;
+ 
+        checkError(leftFrontMotor.setIdleMode(mode), "LF setting idle mode {}");
+        checkError(leftRearMotor.setIdleMode(mode), "LR setting idle mode {}");
+        checkError(rightFrontMotor.setIdleMode(mode), "RF setting idle mode {}");
+        checkError(rightRearMotor.setIdleMode(mode), "RR setting idle mode {}");
     }
 
     @Override

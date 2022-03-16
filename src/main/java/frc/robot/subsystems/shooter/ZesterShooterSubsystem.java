@@ -10,6 +10,7 @@ package frc.robot.subsystems.shooter;
 
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -56,28 +57,43 @@ class ZesterShooterSubsystem extends BaseShooterSubsystem {
     ZesterShooterSubsystem() {
         logger.info("constructing");
 
+        // Instantiation and factory default-ing motors
         leftMotor = new CANSparkMax(21, MotorType.kBrushless);
-        leftMotor.restoreFactoryDefaults();
+        checkError(leftMotor.restoreFactoryDefaults(), "L setting factory defaults {}");
+
         rightMotor = new CANSparkMax(22, MotorType.kBrushless);
-        rightMotor.restoreFactoryDefaults();
+        checkError(rightMotor.restoreFactoryDefaults(), "R setting factory defaults {}");
+
         // + spin out, - spin in
+        leftMotor.setInverted(true);
 
         // Slaved and inverted
-        rightMotor.follow(leftMotor, true);
+        checkError(rightMotor.follow(leftMotor, true), "R slaving & inverting {}");
 
         encoder = leftMotor.getEncoder();
 
         pid = leftMotor.getPIDController();
-        pid.setOutputRange(0.05, 1, slotID);
-
-        updatePreferences();
+        checkError(pid.setOutputRange(0.05, 1, slotID), "setting pid output range {}");
 
         targetRpm = 2000; // TODO - Make the values
         isActive = false;
 
+        // TODO: Is this really used anywhere? for anything?
         SmartDashboard.putNumber(CommandingNames.Shooter.tolerance, 0.012);
 
         logger.info("constructed");
+    }
+
+    // last error (not the same as kOk)
+    // TODO: Use to set a degraded error status/state on subsystem
+    @SuppressWarnings("unused")
+    private REVLibError lastError;
+
+    private void checkError(REVLibError error, String message) {
+        if (error != REVLibError.kOk) {
+            lastError = error;
+            logger.error(message, error);
+        }
     }
 
     @Override
@@ -100,9 +116,9 @@ class ZesterShooterSubsystem extends BaseShooterSubsystem {
     public void updatePreferences() {
         super.updatePreferences();
 
-        // Nothing extra here
+        // Nothing extra here.
     }
-    
+
     @Override
     public void disable() {
         logger.info("last value of RPM tolerance: {}", tolerance);
@@ -118,17 +134,20 @@ class ZesterShooterSubsystem extends BaseShooterSubsystem {
     @Override
     public void setTargetRpm(double rpm) {
         this.targetRpm = rpm; // Save off value for enabling
-
-        if (isActive) {
-            pid.setReference(targetRpm, CANSparkMax.ControlType.kVelocity, slotID);
+        
+        if (!isActive) {
+            return;
         }
+
+        checkError(pid.setReference(targetRpm, CANSparkMax.ControlType.kVelocity, slotID), "setting pid reference {}");
     }
 
     @Override
     public void shoot() {
         isActive = true;
-        /* generated speed */
-        pid.setReference(targetRpm, CANSparkMax.ControlType.kVelocity, slotID);
+
+        //generated speed
+        checkError(pid.setReference(targetRpm, CANSparkMax.ControlType.kVelocity, slotID), "setting pid reference {}");
     }
 
     // FIXME - Was supposed to be for manual; no idleShooter scaling
@@ -178,7 +197,7 @@ class ZesterShooterSubsystem extends BaseShooterSubsystem {
     public String getActivePosition() {
         return activePosition;
     }
-   
+
     private void setSpeed(double speed) {
         setTlmSetSpeed(speed);
 
