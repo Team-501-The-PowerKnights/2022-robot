@@ -135,7 +135,7 @@ public class DriverGamepad extends F310Gamepad {
 
     // TESTCODE: Button binding for commands here
     private void configureTestBindings() {
-        // Timer Test
+        // *** Timer Test
         // Button testButton = new JoystickButton(stick, 3);
         // testButton.whenPressed(new frc.robot.commands.test.TimerTestCommand());
      }
