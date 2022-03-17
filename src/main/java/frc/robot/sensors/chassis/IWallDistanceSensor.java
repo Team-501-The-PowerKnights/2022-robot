@@ -6,7 +6,7 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.walldistance;
+package frc.robot.sensors.chassis;
 
 
 import frc.robot.sensors.ISensor;

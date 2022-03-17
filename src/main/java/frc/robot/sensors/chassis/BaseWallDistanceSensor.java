@@ -6,37 +6,35 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.turretlocation;
+package frc.robot.sensors.chassis;
 
 
-import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import frc.robot.sensors.BaseSensor;
+import frc.robot.sensors.SensorNames;
+import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-/**
- * Provides implementation of <code>ITurretLocationSensor</code> for the
- * <i>Real-Bot</i>.
- */
-class TurretLocationSensor extends BaseTurretLocationSensor {
-
+abstract class BaseWallDistanceSensor extends BaseSensor implements IWallDistanceSensor {
+    
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(TurretLocationSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(BaseWallDistanceSensor.class.getName());
 
-    private DigitalInput location;
-
-    TurretLocationSensor() {
+    BaseWallDistanceSensor() {
+        super(SensorNames.turretLocationName);
         logger.info("constructing");
-
-        location = new DigitalInput(8);
 
         logger.info("constructed");
     }
 
     @Override
-    public boolean get() {
-        return !(location.get());
+    public void updateTelemetry() {
+        SmartDashboard.putNumber(TelemetryNames.WallDistance.distance, get());
+        SmartDashboard.putBoolean(TelemetryNames.WallDistance.valid, isValid());
     }
 
 }

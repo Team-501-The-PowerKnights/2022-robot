@@ -6,33 +6,37 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.turretlocation;
+package frc.robot.sensors.turret;
 
+
+import edu.wpi.first.wpilibj.DigitalInput;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
 /**
- * Provides implementation of <code>ITurretHomeSensor</code> which has no sensor
- * or other useful functionality; but which won't blow up if instantiated and
- * 'used'.
+ * Provides implementation of <code>ITurretLocationSensor</code> for the
+ * <i>Zester-Bot</i>.
  */
-class StubTurretLocationSensor extends BaseTurretLocationSensor {
+class ZesterTurretLocationSensor extends BaseTurretLocationSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(StubTurretLocationSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ZesterTurretLocationSensor.class.getName());
 
-    StubTurretLocationSensor() {
+    private DigitalInput location;
+
+    ZesterTurretLocationSensor() {
         logger.info("constructing");
+
+        location = new DigitalInput(8);
 
         logger.info("constructed");
     }
 
     @Override
     public boolean get() {
-        // Stub doesn't implement this - returns false
-        return false;
+        return location.get();
     }
 
 }

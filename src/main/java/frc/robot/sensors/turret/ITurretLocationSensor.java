@@ -6,9 +6,11 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.turretlocation;
+package frc.robot.sensors.turret;
+
 
 import frc.robot.sensors.ISensor;
+
 
 /**
  * Add your docs here.

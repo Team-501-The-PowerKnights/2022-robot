@@ -6,35 +6,33 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.walldistance;
+package frc.robot.sensors.turret;
 
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import frc.robot.sensors.BaseSensor;
-import frc.robot.sensors.SensorNames;
-import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-abstract class BaseWallDistanceSensor extends BaseSensor implements IWallDistanceSensor {
-    
-    /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(BaseWallDistanceSensor.class.getName());
+/**
+ * Provides implementation of <code>ITurretHomeSensor</code> which has no sensor
+ * or other useful functionality; but which won't blow up if instantiated and
+ * 'used'.
+ */
+class StubTurretLocationSensor extends BaseTurretLocationSensor {
 
-    BaseWallDistanceSensor() {
-        super(SensorNames.turretLocationName);
+    /** Our classes' logger **/
+    private static final PKLogger logger = RioLogger.getLogger(StubTurretLocationSensor.class.getName());
+
+    StubTurretLocationSensor() {
         logger.info("constructing");
 
         logger.info("constructed");
     }
 
     @Override
-    public void updateTelemetry() {
-        SmartDashboard.putNumber(TelemetryNames.WallDistance.distance, get());
-        SmartDashboard.putBoolean(TelemetryNames.WallDistance.valid, isValid());
+    public boolean get() {
+        // Stub doesn't implement this - returns false
+        return false;
     }
 
 }

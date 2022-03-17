@@ -6,7 +6,7 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.turretlocation;
+package frc.robot.sensors.turret;
 
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -17,16 +17,16 @@ import riolog.RioLogger;
 
 /**
  * Provides implementation of <code>ITurretLocationSensor</code> for the
- * <i>Zester-Bot</i>.
+ * <i>Real-Bot</i>.
  */
-class ZesterTurretLocationSensor extends BaseTurretLocationSensor {
+class TurretLocationSensor extends BaseTurretLocationSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ZesterTurretLocationSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(TurretLocationSensor.class.getName());
 
     private DigitalInput location;
 
-    ZesterTurretLocationSensor() {
+    TurretLocationSensor() {
         logger.info("constructing");
 
         location = new DigitalInput(8);
@@ -36,7 +36,7 @@ class ZesterTurretLocationSensor extends BaseTurretLocationSensor {
 
     @Override
     public boolean get() {
-        return location.get();
+        return !(location.get());
     }
 
 }

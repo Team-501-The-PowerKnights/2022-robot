@@ -6,7 +6,7 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.turretlocation;
+package frc.robot.sensors.turret;
 
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
