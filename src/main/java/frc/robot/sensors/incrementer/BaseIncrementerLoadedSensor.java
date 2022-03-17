@@ -9,34 +9,31 @@
 package frc.robot.sensors.incrementer;
 
 
-import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import frc.robot.sensors.BaseSensor;
+import frc.robot.sensors.SensorNames;
+import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-/**
- * Provides implementation of <code>IIncrementerSensor</code> for the
- * <i>Real-Bot</i>.
- */
-class IncrementerSensor extends BaseIncrementerSensor {
+abstract class BaseIncrementerLoadedSensor extends BaseSensor implements IIncrementerLoadedSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IncrementerSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(BaseIncrementerLoadedSensor.class.getName());
 
-    private final DigitalInput location;
-
-    IncrementerSensor() {
+    BaseIncrementerLoadedSensor() {
+        super(SensorNames.incrementerName);
         logger.info("constructing");
-
-        location = new DigitalInput(0);
 
         logger.info("constructed");
     }
 
     @Override
-    public boolean get() {
-        return (location.get());
+    public void updateTelemetry() {
+        SmartDashboard.putBoolean(TelemetryNames.Incrementer.full, get());
     }
 
 }

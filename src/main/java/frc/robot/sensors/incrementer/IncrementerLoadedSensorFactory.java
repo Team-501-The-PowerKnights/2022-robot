@@ -24,13 +24,13 @@ import riolog.RioLogger;
 /**
  * 
  */
-public class IncrementerSensorFactory {
+public class IncrementerLoadedSensorFactory {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IncrementerSensorFactory.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IncrementerLoadedSensorFactory.class.getName());
 
     /** Singleton instance of class for all to use **/
-    private static IIncrementerSensor ourInstance;
+    private static IIncrementerLoadedSensor ourInstance;
     /** Name of our subsystem **/
     private static final String myName = SensorNames.incrementerName;
 
@@ -53,7 +53,7 @@ public class IncrementerSensorFactory {
     }
 
     private static void loadImplementationClass(String myClassName) {
-        String myPkgName = IncrementerSensorFactory.class.getPackage().getName();
+        String myPkgName = IncrementerLoadedSensorFactory.class.getPackage().getName();
         if (myClassName.isEmpty()) {
             logger.info("no class specified; go with subsystem default");
             myClassName = new StringBuilder().append(PropertiesManager.getInstance().getImpl()).append(myName)
@@ -68,11 +68,11 @@ public class IncrementerSensorFactory {
             Class myClass = Class.forName(classToLoad);
             @SuppressWarnings("deprecation")
             Object myObject = myClass.newInstance();
-            ourInstance = (IIncrementerSensor) myObject;
+            ourInstance = (IIncrementerLoadedSensor) myObject;
             SmartDashboard.putNumber(TelemetryNames.IncrementerSensor.status, PKStatus.success.tlmValue);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for {}", myName);
-            ourInstance = new StubIncrementerSensor();
+            ourInstance = new StubIncrementerLoadedSensor();
             SmartDashboard.putNumber(TelemetryNames.IncrementerSensor.status, PKStatus.degraded.tlmValue);
         }
         SmartDashboard.putString(TelemetryNames.IncrementerSensor.implClass, ourInstance.getClass().getSimpleName());
@@ -85,7 +85,7 @@ public class IncrementerSensorFactory {
      *
      * @return singleton instance of sensor
      **/
-    public synchronized static IIncrementerSensor getInstance() {
+    public synchronized static IIncrementerLoadedSensor getInstance() {
         if (ourInstance == null) {
             throw new IllegalStateException(myName + " Not Constructed Yet");
         }

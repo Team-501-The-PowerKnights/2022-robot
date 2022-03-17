@@ -9,23 +9,34 @@
 package frc.robot.sensors.incrementer;
 
 
+import edu.wpi.first.wpilibj.DigitalInput;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
 /**
- * Provides implementation of <code>IIncrementerSensor</code> for the
- * <i>Zester-Bot</i>.
+ * Provides implementation of {@link IIncrementerLoadedSensor} for the
+ * <i>Real-Bot</i>.
  */
-class ZesterIncrementerSensor extends StubIncrementerSensor {
+class IncrementerLoadedSensor extends BaseIncrementerLoadedSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ZesterIncrementerSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IncrementerLoadedSensor.class.getName());
 
-    ZesterIncrementerSensor() {
+    private final DigitalInput location;
+
+    IncrementerLoadedSensor() {
         logger.info("constructing");
 
+        location = new DigitalInput(0);
+
         logger.info("constructed");
+    }
+
+    @Override
+    public boolean get() {
+        return (location.get());
     }
 
 }

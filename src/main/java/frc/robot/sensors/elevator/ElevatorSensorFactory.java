@@ -30,7 +30,7 @@ public class ElevatorSensorFactory {
     private static final PKLogger logger = RioLogger.getLogger(ElevatorSensorFactory.class.getName());
 
     /** Singleton instance of class for all to use **/
-    private static IElevatorSensor ourInstance;
+    private static IElevatorLoadedSensor ourInstance;
     /** Name of our subsystem **/
     private static final String myName = SensorNames.elevatorName;
 
@@ -68,11 +68,11 @@ public class ElevatorSensorFactory {
             Class myClass = Class.forName(classToLoad);
             @SuppressWarnings("deprecation")
             Object myObject = myClass.newInstance();
-            ourInstance = (IElevatorSensor) myObject;
+            ourInstance = (IElevatorLoadedSensor) myObject;
             SmartDashboard.putNumber(TelemetryNames.ElevatorSensor.status, PKStatus.success.tlmValue);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for {}", myName);
-            ourInstance = new StubElevatorSensor();
+            ourInstance = new StubElevatorLoadedSensor();
             SmartDashboard.putNumber(TelemetryNames.ElevatorSensor.status, PKStatus.degraded.tlmValue);
         }
         SmartDashboard.putString(TelemetryNames.ElevatorSensor.implClass, ourInstance.getClass().getSimpleName());
@@ -85,7 +85,7 @@ public class ElevatorSensorFactory {
      *
      * @return singleton instance of sensor
      **/
-    public synchronized static IElevatorSensor getInstance() {
+    public synchronized static IElevatorLoadedSensor getInstance() {
         if (ourInstance == null) {
             throw new IllegalStateException(myName + " Not Constructed Yet");
         }

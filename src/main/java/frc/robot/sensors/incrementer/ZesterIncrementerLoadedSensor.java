@@ -9,31 +9,23 @@
 package frc.robot.sensors.incrementer;
 
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import frc.robot.sensors.BaseSensor;
-import frc.robot.sensors.SensorNames;
-import frc.robot.telemetry.TelemetryNames;
-
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-abstract class BaseIncrementerSensor extends BaseSensor implements IIncrementerSensor {
+/**
+ * Provides implementation of {@link IIncrementerLoadedSensor} for the
+ * <i>Zester-Bot</i>.
+ */
+class ZesterIncrementerLoadedSensor extends StubIncrementerLoadedSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(BaseIncrementerSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ZesterIncrementerLoadedSensor.class.getName());
 
-    BaseIncrementerSensor() {
-        super(SensorNames.incrementerName);
+    ZesterIncrementerLoadedSensor() {
         logger.info("constructing");
 
         logger.info("constructed");
-    }
-
-    @Override
-    public void updateTelemetry() {
-        SmartDashboard.putBoolean(TelemetryNames.Incrementer.full, get());
     }
 
 }

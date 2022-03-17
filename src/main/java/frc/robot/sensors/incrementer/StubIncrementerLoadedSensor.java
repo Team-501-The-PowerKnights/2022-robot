@@ -6,33 +6,33 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.elevator;
+package frc.robot.sensors.incrementer;
 
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.sensors.BaseSensor;
-import frc.robot.sensors.SensorNames;
-import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-abstract class BaseElevatorSensor extends BaseSensor implements IElevatorSensor {
+/**
+ * Provides implementation of {@link IIncrementerLoadedSensor} which has no sensor
+ * or other useful functionality; but which won't blow up if instantiated and
+ * 'used'.
+ */
+class StubIncrementerLoadedSensor extends BaseIncrementerLoadedSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(BaseElevatorSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(StubIncrementerLoadedSensor.class.getName());
 
-    BaseElevatorSensor() {
-        super(SensorNames.elevatorName);
+    StubIncrementerLoadedSensor() {
         logger.info("constructing");
 
         logger.info("constructed");
     }
 
     @Override
-    public void updateTelemetry() {
-        SmartDashboard.putBoolean(TelemetryNames.Elevator.full, get());
+    public boolean get() {
+        // Stub doesn't implement this - returns false
+        return false;
     }
 
 }

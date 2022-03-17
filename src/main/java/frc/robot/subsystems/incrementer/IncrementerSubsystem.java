@@ -12,8 +12,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.sensors.incrementer.IIncrementerSensor;
-import frc.robot.sensors.incrementer.IncrementerSensorFactory;
+import frc.robot.sensors.incrementer.IIncrementerLoadedSensor;
+import frc.robot.sensors.incrementer.IncrementerLoadedSensorFactory;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -26,7 +26,7 @@ class IncrementerSubsystem extends BaseIncrementerSubsystem {
 
     private final TalonSRX motor;
 
-    private final IIncrementerSensor sensor;
+    private final IIncrementerLoadedSensor sensor;
 
     IncrementerSubsystem() {
         logger.info("constructing");
@@ -34,7 +34,7 @@ class IncrementerSubsystem extends BaseIncrementerSubsystem {
         motor = new TalonSRX(51);
         motor.configFactoryDefault();
 
-        sensor = IncrementerSensorFactory.getInstance();
+        sensor = IncrementerLoadedSensorFactory.getInstance();
 
         logger.info("constructed");
     }

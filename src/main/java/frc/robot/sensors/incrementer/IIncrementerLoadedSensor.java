@@ -15,7 +15,7 @@ import frc.robot.sensors.ISensor;
 /**
  * Add your docs here.
  **/
-public interface IIncrementerSensor extends ISensor {
+public interface IIncrementerLoadedSensor extends ISensor {
 
     public boolean get();
 

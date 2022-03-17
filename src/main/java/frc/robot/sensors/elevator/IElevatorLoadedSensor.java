@@ -8,23 +8,13 @@
 
 package frc.robot.sensors.elevator;
 
-
-import riolog.PKLogger;
-import riolog.RioLogger;
-
+import frc.robot.sensors.ISensor;
 
 /**
- * Provides implementation of <code>IElevatorSensor</code> for the
- * <i>Zester-Bot</i>.
- */
-class ZesterElevatorSensor extends StubElevatorSensor {
+ * Add your docs here.
+ **/
+public interface IElevatorLoadedSensor extends ISensor {
 
-    /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ZesterElevatorSensor.class.getName());
+    public boolean get();
 
-    ZesterElevatorSensor() {
-        logger.info("constructing");
-
-        logger.info("constructed");
-    }
 }

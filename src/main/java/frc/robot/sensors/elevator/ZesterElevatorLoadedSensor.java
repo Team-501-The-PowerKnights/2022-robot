@@ -9,34 +9,22 @@
 package frc.robot.sensors.elevator;
 
 
-import edu.wpi.first.wpilibj.DigitalInput;
-
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
 /**
- * Provides implementation of <code>IElevatorSensor</code> for the
- * <i>Real-Bot</i>.
+ * Provides implementation of {@link IElevatorLoadedSensor} for the
+ * <i>Zester-Bot</i>.
  */
-class ElevatorSensor extends BaseElevatorSensor {
+class ZesterElevatorLoadedSensor extends StubElevatorLoadedSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ElevatorSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ZesterElevatorLoadedSensor.class.getName());
 
-    private final DigitalInput location;
-
-    ElevatorSensor() {
+    ZesterElevatorLoadedSensor() {
         logger.info("constructing");
-
-        location = new DigitalInput(1);
 
         logger.info("constructed");
     }
-
-    @Override
-    public boolean get() {
-        return (location.get());
-    }
-
 }

@@ -15,8 +15,8 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 // import frc.robot.sensors.elevator.ElevatorSensorFactory;
 // import frc.robot.sensors.elevator.IElevatorSensor;
-import frc.robot.sensors.incrementer.IIncrementerSensor;
-import frc.robot.sensors.incrementer.IncrementerSensorFactory;
+import frc.robot.sensors.incrementer.IIncrementerLoadedSensor;
+import frc.robot.sensors.incrementer.IncrementerLoadedSensorFactory;
 // import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -31,7 +31,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     private final VictorSPX motor;
 
     // private final IElevatorSensor elevatorSensor;
-    private final IIncrementerSensor incremSensor;
+    private final IIncrementerLoadedSensor incremSensor;
 
     ElevatorSubsystem() {
         logger.info("constructing");
@@ -41,7 +41,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
         motor.setInverted(true);
 
         // elevatorSensor = ElevatorSensorFactory.getInstance();
-        incremSensor = IncrementerSensorFactory.getInstance();
+        incremSensor = IncrementerLoadedSensorFactory.getInstance();
 
         logger.info("constructed");
     }

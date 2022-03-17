@@ -6,33 +6,37 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.incrementer;
+package frc.robot.sensors.elevator;
 
+
+import edu.wpi.first.wpilibj.DigitalInput;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
 /**
- * Provides implementation of <code>IIncrementerSensor</code> which has no sensor
- * or other useful functionality; but which won't blow up if instantiated and
- * 'used'.
+ * Provides implementation of {@link IElevatorLoadedSensor} for the
+ * <i>Real-Bot</i>.
  */
-class StubIncrementerSensor extends BaseIncrementerSensor {
+class ElevatorLoadedSensor extends BaseElevatorLoadedSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(StubIncrementerSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ElevatorLoadedSensor.class.getName());
 
-    StubIncrementerSensor() {
+    private final DigitalInput location;
+
+    ElevatorLoadedSensor() {
         logger.info("constructing");
+
+        location = new DigitalInput(1);
 
         logger.info("constructed");
     }
 
     @Override
     public boolean get() {
-        // Stub doesn't implement this - returns false
-        return false;
+        return (location.get());
     }
 
 }
