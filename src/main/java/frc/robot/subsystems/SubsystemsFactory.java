@@ -32,10 +32,10 @@ import riolog.RioLogger;
 /**
  * 
  **/
-public class SubsystemFactory {
+public class SubsystemsFactory {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(SubsystemFactory.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(SubsystemsFactory.class.getName());
 
     public static List<ISubsystem> constructSubsystems() {
         logger.info("constructing");

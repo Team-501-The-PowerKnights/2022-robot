@@ -31,10 +31,10 @@ import riolog.RioLogger;
 /**
  * Add your docs here.
  */
-public class SensorFactory {
+public class SensorsFactory {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(SensorFactory.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(SensorsFactory.class.getName());
 
     public static List<ISensor> constructSensors() {
         logger.info("constructing");
