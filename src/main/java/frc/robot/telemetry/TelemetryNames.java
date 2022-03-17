@@ -150,15 +150,15 @@ public final class TelemetryNames {
         public static final String heading = name + ".heading";
     }
 
-    public final class IncrementerSensor {
-        private static final String name = SensorNames.incrementerName;
+    public final class IncrementorLoadedSensor {
+        private static final String name = SensorNames.incrementorLoadedName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
     }
 
-    public final class ElevatorSensor {
-        private static final String name = SensorNames.elevatorName;
+    public final class ElevatorLoadedSensor {
+        private static final String name = SensorNames.elevatorLoadedName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
@@ -248,7 +248,7 @@ public final class TelemetryNames {
     }
 
     public final class Incrementer {
-        private static final String name = SubsystemNames.incrementerName;
+        private static final String name = SubsystemNames.incrementorName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";

@@ -6,7 +6,7 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.incrementer;
+package frc.robot.sensors.incrementor;
 
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,13 +19,13 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-abstract class BaseIncrementerLoadedSensor extends BaseSensor implements IIncrementerLoadedSensor {
+abstract class BaseIncrementorLoadedSensor extends BaseSensor implements IIncrementorLoadedSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(BaseIncrementerLoadedSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(BaseIncrementorLoadedSensor.class.getName());
 
-    BaseIncrementerLoadedSensor() {
-        super(SensorNames.incrementerName);
+    BaseIncrementorLoadedSensor() {
+        super(SensorNames.incrementorLoadedName);
         logger.info("constructing");
 
         logger.info("constructed");

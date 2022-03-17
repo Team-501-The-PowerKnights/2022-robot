@@ -6,24 +6,22 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.subsystems.incrementer;
+package frc.robot.subsystems.incrementor;
 
-import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public final class IncrementerProperties {
+
+class ZesterIncrementorSubsystem extends StubIncrementorSubsystem {
 
     /** Our classes' logger **/
-    @SuppressWarnings("unused")
-    private static final PKLogger logger = RioLogger.getLogger(IncrementerProperties.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ZesterIncrementorSubsystem.class.getName());
 
-    private IncrementerProperties() {
+    ZesterIncrementorSubsystem() {
+        logger.info("constructing");
+
+        logger.info("constructed");
     }
-
-    static private final String name = SubsystemNames.incrementerName;
-    static final String className = name + ".className";
-    static final String defaultCommandName = name + ".defaultCommandName";
 
 }

@@ -6,17 +6,23 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.subsystems.incrementer;
+package frc.robot.sensors.incrementor;
+
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-class ProtoIncrementerSubsystem extends StubIncrementerSubsystem {
+
+/**
+ * Provides implementation of {@link IIncrementorLoadedSensor} for the
+ * <i>Zester-Bot</i>.
+ */
+class ZesterIncrementorLoadedSensor extends StubIncrementorLoadedSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ProtoIncrementerSubsystem.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ZesterIncrementorLoadedSensor.class.getName());
 
-    ProtoIncrementerSubsystem() {
+    ZesterIncrementorLoadedSensor() {
         logger.info("constructing");
 
         logger.info("constructed");

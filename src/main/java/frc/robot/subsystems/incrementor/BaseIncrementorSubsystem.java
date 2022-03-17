@@ -6,12 +6,12 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.subsystems.incrementer;
+package frc.robot.subsystems.incrementor;
 
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.commands.incrementer.IncrementerDoNothing;
+import frc.robot.commands.incrementor.IncrementorDoNothing;
 import frc.robot.subsystems.BaseSubsystem;
 import frc.robot.subsystems.SubsystemNames;
 import frc.robot.telemetry.TelemetryNames;
@@ -23,13 +23,13 @@ import riolog.RioLogger;
 /**
  * Add your docs here.
  */
-abstract class BaseIncrementerSubsystem extends BaseSubsystem implements IIncrementerSubsystem {
+abstract class BaseIncrementorSubsystem extends BaseSubsystem implements IIncrementorSubsystem {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(BaseIncrementerSubsystem.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(BaseIncrementorSubsystem.class.getName());
 
-    BaseIncrementerSubsystem() {
-        super(SubsystemNames.incrementerName);
+    BaseIncrementorSubsystem() {
+        super(SubsystemNames.incrementorName);
         logger.info("constructing");
 
         logger.info("constructed");
@@ -37,7 +37,7 @@ abstract class BaseIncrementerSubsystem extends BaseSubsystem implements IIncrem
 
     @Override
     public void loadDefaultCommands() {
-        loadDefaultCommands(IncrementerDoNothing.class);
+        loadDefaultCommands(IncrementorDoNothing.class);
         SmartDashboard.putString(TelemetryNames.Incrementer.autoCommand, defaultAutoCommand.getClass().getSimpleName());
         SmartDashboard.putString(TelemetryNames.Incrementer.teleCommand, defaultTeleCommand.getClass().getSimpleName());
     }

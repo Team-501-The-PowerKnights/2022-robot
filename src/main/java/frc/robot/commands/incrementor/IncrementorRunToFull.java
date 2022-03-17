@@ -6,20 +6,22 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.incrementer;
+package frc.robot.commands.incrementor;
+
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
+
 /**
  * Add your docs here.
  */
-public class IncrementerRunToFull extends IncrementerCommandBase {
+public class IncrementorRunToFull extends IncrementorCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IncrementerRunToFull.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IncrementorRunToFull.class.getName());
 
-    public IncrementerRunToFull() {
+    public IncrementorRunToFull() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");

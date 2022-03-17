@@ -46,17 +46,17 @@ Gyro.className = StubGyroSensor
 
 
 #####################
-# Incrementer Loaded
+# Incrementor Loaded
 #####################
-IncrementerSensor.className = StubIncrementerLoadedSensor
-#IncrementerSensor.className = IncrementerLoadedSensor
+IncrementorLoaded.className = StubIncrementorLoadedSensor
+#IncrementorLoaded.className = IncrementorLoadedSensor
 
 
 #####################
 # Elevator Loaded
 #####################
-ElevatorSensor.className = StubElevatorLoadedSensor
-#ElevatorSensor.className = ElevatorLoadedSensor
+ElevatorLoaded.className = StubElevatorLoadedSensor
+#ElevatorLoaded.className = ElevatorLoadedSensor
 
 
 #####################
@@ -115,12 +115,12 @@ Elevator.teleCommandName = ElevatorDoNothing
 
 
 #####################
-# Incrementer
+# Incrementor
 #####################
-Incrementer.className = StubIncrementerSubsystem
-#Incrementer.className =
-Incrementer.autoCommandName = IncrementerDoNothing
-Incrementer.teleCommandName = IncrementerDoNothing
+Incrementor.className = StubIncrementorSubsystem
+#Incrementor.className =
+Incrementor.autoCommandName = IncrementorDoNothing
+Incrementor.teleCommandName = IncrementorDoNothing
 
 
 #####################

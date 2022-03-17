@@ -6,7 +6,7 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.incrementer;
+package frc.robot.sensors.incrementor;
 
 
 import riolog.PKLogger;
@@ -14,16 +14,16 @@ import riolog.RioLogger;
 
 
 /**
- * Provides implementation of {@link IIncrementerLoadedSensor} which has no sensor
+ * Provides implementation of {@link IIncrementorLoadedSensor} which has no sensor
  * or other useful functionality; but which won't blow up if instantiated and
  * 'used'.
  */
-class StubIncrementerLoadedSensor extends BaseIncrementerLoadedSensor {
+class StubIncrementorLoadedSensor extends BaseIncrementorLoadedSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(StubIncrementerLoadedSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(StubIncrementorLoadedSensor.class.getName());
 
-    StubIncrementerLoadedSensor() {
+    StubIncrementorLoadedSensor() {
         logger.info("constructing");
 
         logger.info("constructed");

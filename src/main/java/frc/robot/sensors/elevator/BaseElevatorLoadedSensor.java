@@ -24,7 +24,7 @@ abstract class BaseElevatorLoadedSensor extends BaseSensor implements IElevatorL
     private static final PKLogger logger = RioLogger.getLogger(BaseElevatorLoadedSensor.class.getName());
 
     BaseElevatorLoadedSensor() {
-        super(SensorNames.elevatorName);
+        super(SensorNames.elevatorLoadedName);
         logger.info("constructing");
 
         logger.info("constructed");

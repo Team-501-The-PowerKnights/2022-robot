@@ -6,32 +6,35 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.incrementer;
+package frc.robot.commands.incrementor;
 
-
-import frc.robot.OI;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-/**
- * Add your docs here.
- */
-public class IncrementerOICommandBase extends IncrementerCommandBase {
+public class IncrementorManualControl extends IncrementorOICommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IncrementerOICommandBase.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IncrementorManualControl.class.getName());
 
-    // Handle to the OI
-    protected OI oi;
-
-    public IncrementerOICommandBase() {
+    public IncrementorManualControl() {
         logger.info("constructing {}", getName());
 
-        oi = OI.getInstance();
-
         logger.info("constructed");
+    }
+
+    @Override
+    public void execute() {
+        super.execute();
+
+        // FIXME: No implementation / commented out
+        double incrementSpeed = oi.getIntakeSpeed();
+        if (incrementSpeed > 0) {
+            // incrementer.incrementToLimit();
+        } else {
+            // incrementer.stop();
+        }
     }
 
 }

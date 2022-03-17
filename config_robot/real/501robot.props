@@ -46,17 +46,17 @@ Gyro.className = GyroSensor
 
 
 #####################
+# Incrementor Loaded
+#####################
+IncrementorLoaded.className = StubIncrementorLoadedSensor
+#IncrementorLoaded.className = IncrementorLoadedSensor
+
+
+#####################
 # Elevator Loaded
 #####################
-ElevatorSensor.className = StubElevatorLoadedSensor
-#ElevatorSensor.className = ElevatorLoadedSensor
-
-
-#####################
-# Incrementer Loaded
-#####################
-IncrementerSensor.className = StubIncrementerLoadedSensor
-#IncrementerSensor.className = IncrementerLoadedSensor
+ElevatorLoaded.className = StubElevatorLoadedSensor
+#ElevatorLoaded.className = ElevatorLoadedSensor
 
 
 #####################

@@ -32,7 +32,7 @@ public class ElevatorSensorFactory {
     /** Singleton instance of class for all to use **/
     private static IElevatorLoadedSensor ourInstance;
     /** Name of our subsystem **/
-    private static final String myName = SensorNames.elevatorName;
+    private static final String myName = SensorNames.elevatorLoadedName;
 
     /**
      * Constructs instance of the subsystem. Assumed to be called before any usage
@@ -40,7 +40,7 @@ public class ElevatorSensorFactory {
      * sequencing of the robot and all it's sensors.
      **/
     public static synchronized void constructInstance() {
-        SmartDashboard.putNumber(TelemetryNames.ElevatorSensor.status, PKStatus.inProgress.tlmValue);
+        SmartDashboard.putNumber(TelemetryNames.ElevatorLoadedSensor.status, PKStatus.inProgress.tlmValue);
 
         if (ourInstance != null) {
             throw new IllegalStateException(myName + " Already Constructed");
@@ -69,13 +69,13 @@ public class ElevatorSensorFactory {
             @SuppressWarnings("deprecation")
             Object myObject = myClass.newInstance();
             ourInstance = (IElevatorLoadedSensor) myObject;
-            SmartDashboard.putNumber(TelemetryNames.ElevatorSensor.status, PKStatus.success.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.ElevatorLoadedSensor.status, PKStatus.success.tlmValue);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for {}", myName);
             ourInstance = new StubElevatorLoadedSensor();
-            SmartDashboard.putNumber(TelemetryNames.ElevatorSensor.status, PKStatus.degraded.tlmValue);
+            SmartDashboard.putNumber(TelemetryNames.ElevatorLoadedSensor.status, PKStatus.degraded.tlmValue);
         }
-        SmartDashboard.putString(TelemetryNames.ElevatorSensor.implClass, ourInstance.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.ElevatorLoadedSensor.implClass, ourInstance.getClass().getSimpleName());
     }
 
     /**

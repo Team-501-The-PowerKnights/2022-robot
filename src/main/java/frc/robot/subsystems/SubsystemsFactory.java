@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.climber.ClimberFactory;
 import frc.robot.subsystems.drive.DriveFactory;
 import frc.robot.subsystems.elevator.ElevatorFactory;
-import frc.robot.subsystems.incrementer.IncrementerFactory;
+import frc.robot.subsystems.incrementor.IncrementorFactory;
 import frc.robot.subsystems.intake.IntakeFactory;
 import frc.robot.subsystems.shooter.ShooterFactory;
 import frc.robot.subsystems.turret.TurretFactory;
@@ -74,8 +74,8 @@ public class SubsystemsFactory {
         // ** Incrementer **
         SmartDashboard.putNumber(TelemetryNames.Incrementer.status, PKStatus.unknown.tlmValue);
         {
-            IncrementerFactory.constructInstance();
-            ISubsystem ss = IncrementerFactory.getInstance();
+            IncrementorFactory.constructInstance();
+            ISubsystem ss = IncrementorFactory.getInstance();
             tlmMgr.addProvider(ss);
             subsystems.add(ss);
         }

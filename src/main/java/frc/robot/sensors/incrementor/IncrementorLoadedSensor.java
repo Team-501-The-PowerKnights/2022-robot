@@ -6,35 +6,37 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.incrementer;
+package frc.robot.sensors.incrementor;
 
 
-import frc.robot.commands.PKCommandBase;
-import frc.robot.subsystems.incrementer.IIncrementerSubsystem;
-import frc.robot.subsystems.incrementer.IncrementerFactory;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
 /**
- * Add your docs here.
+ * Provides implementation of {@link IIncrementorLoadedSensor} for the
+ * <i>Real-Bot</i>.
  */
-abstract class IncrementerCommandBase extends PKCommandBase {
+class IncrementorLoadedSensor extends BaseIncrementorLoadedSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IncrementerCommandBase.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IncrementorLoadedSensor.class.getName());
 
-    // Handle to our subsystem
-    protected final IIncrementerSubsystem incrementer;
+    private final DigitalInput location;
 
-    public IncrementerCommandBase() {
-        logger.info("constructing {}", getName());
+    IncrementorLoadedSensor() {
+        logger.info("constructing");
 
-        incrementer = IncrementerFactory.getInstance();
-        addRequirements(incrementer);
+        location = new DigitalInput(0);
 
         logger.info("constructed");
+    }
+
+    @Override
+    public boolean get() {
+        return (location.get());
     }
 
 }

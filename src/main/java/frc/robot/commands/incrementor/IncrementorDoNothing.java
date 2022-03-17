@@ -6,17 +6,22 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.incrementer;
+package frc.robot.commands.incrementor;
 
 
-import frc.robot.sensors.ISensor;
+import riolog.PKLogger;
+import riolog.RioLogger;
 
 
-/**
- * Add your docs here.
- **/
-public interface IIncrementerLoadedSensor extends ISensor {
+public class IncrementorDoNothing extends IncrementorCommandBase {
 
-    public boolean get();
+    /** Our classes' logger **/
+    private static final PKLogger logger = RioLogger.getLogger(IncrementorDoNothing.class.getName());
+
+    public IncrementorDoNothing() {
+        logger.info("constructing {}", getName());
+
+        logger.info("constructed");
+    }
 
 }

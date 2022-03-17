@@ -6,7 +6,7 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.subsystems.incrementer;
+package frc.robot.subsystems.incrementor;
 
 
 import frc.robot.subsystems.SubsystemNames;
@@ -27,16 +27,16 @@ import riolog.RioLogger;
  *
  * @see edu.wpi.first.networktables.NetworkTable
  */
-public final class IncrementerPreferences {
+public final class IncrementorPreferences {
 
     /** Our classes' logger **/
     @SuppressWarnings("unused")
-    private static final PKLogger logger = RioLogger.getLogger(IncrementerPreferences.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IncrementorPreferences.class.getName());
 
     @SuppressWarnings("unused")
-    static private final String name = SubsystemNames.incrementerName;
+    static private final String name = SubsystemNames.incrementorName;
 
-    private IncrementerPreferences() {
+    private IncrementorPreferences() {
     }
 
     public static void initialize() {

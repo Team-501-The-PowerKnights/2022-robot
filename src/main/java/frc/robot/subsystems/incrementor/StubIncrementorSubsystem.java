@@ -6,35 +6,20 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.subsystems.incrementer;
+package frc.robot.subsystems.incrementor;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.sensors.incrementer.IIncrementerLoadedSensor;
-import frc.robot.sensors.incrementer.IncrementerLoadedSensorFactory;
-import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-class IncrementerSubsystem extends BaseIncrementerSubsystem {
+
+class StubIncrementorSubsystem extends BaseIncrementorSubsystem {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IncrementerSubsystem.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(StubIncrementorSubsystem.class.getName());
 
-    private final TalonSRX motor;
-
-    private final IIncrementerLoadedSensor sensor;
-
-    IncrementerSubsystem() {
+    StubIncrementorSubsystem() {
         logger.info("constructing");
-
-        motor = new TalonSRX(51);
-        motor.configFactoryDefault();
-
-        sensor = IncrementerLoadedSensorFactory.getInstance();
 
         logger.info("constructed");
     }
@@ -42,8 +27,7 @@ class IncrementerSubsystem extends BaseIncrementerSubsystem {
     @Override
     public void updateTelemetry() {
         super.updateTelemetry();
-
-        SmartDashboard.putBoolean(TelemetryNames.Incrementer.atLimit, sensor.get());
+        // Stub doesn't implement this
     }
 
     @Override
@@ -70,30 +54,25 @@ class IncrementerSubsystem extends BaseIncrementerSubsystem {
 
     @Override
     public void increment() {
-        setSpeed(1.0);
+        // TODO Auto-generated method stub
     }
 
     @Override
     public boolean isFull() {
-        return sensor.get();
+        // Stub doesn't implement this
+        return false;
     }
 
     @Override
     public void incrementToLimit() {
         super.incrementToLimit();
-
-        // FIXME: Needs oneshot for speed controller set
-        if (!isFull()) {
-            increment();
-        } else {
-            stop();
-        }
+        // Stub doesn't implement this
     }
 
     private void setSpeed(double speed) {
         setTlmSpeed(speed);
 
-        motor.set(ControlMode.PercentOutput, speed);
+        // Stub doesn't implement this
     }
 
 }

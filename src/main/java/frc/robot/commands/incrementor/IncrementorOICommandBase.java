@@ -6,24 +6,32 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.subsystems.incrementer;
+package frc.robot.commands.incrementor;
 
-import frc.robot.subsystems.ISubsystem;
+
+import frc.robot.OI;
+
+import riolog.PKLogger;
+import riolog.RioLogger;
+
 
 /**
  * Add your docs here.
- **/
-public interface IIncrementerSubsystem extends ISubsystem {
+ */
+public class IncrementorOICommandBase extends IncrementorCommandBase {
 
-    /**
-     * Stop the incrementer from any motion it may have been running under.
-     */
-    public void stop();
+    /** Our classes' logger **/
+    private static final PKLogger logger = RioLogger.getLogger(IncrementorOICommandBase.class.getName());
 
-    public void increment();
+    // Handle to the OI
+    protected OI oi;
 
-    public boolean isFull();
+    public IncrementorOICommandBase() {
+        logger.info("constructing {}", getName());
 
-    public void incrementToLimit();
+        oi = OI.getInstance();
+
+        logger.info("constructed");
+    }
 
 }

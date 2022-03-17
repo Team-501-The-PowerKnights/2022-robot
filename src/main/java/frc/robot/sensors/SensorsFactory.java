@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.sensors.elevator.ElevatorSensorFactory;
 import frc.robot.sensors.gyro.GyroFactory;
-import frc.robot.sensors.incrementer.IncrementerLoadedSensorFactory;
+import frc.robot.sensors.incrementor.IncrementorLoadedSensorFactory;
 import frc.robot.sensors.turret.TurretLocationFactory;
 import frc.robot.sensors.vision.VisionFactory;
 import frc.robot.sensors.chassis.*;
@@ -51,15 +51,15 @@ public class SensorsFactory {
             sensors.add(s);
         }
 
-        SmartDashboard.putNumber(TelemetryNames.IncrementerSensor.status, PKStatus.unknown.tlmValue);
+        SmartDashboard.putNumber(TelemetryNames.IncrementorLoadedSensor.status, PKStatus.unknown.tlmValue);
         {
-            IncrementerLoadedSensorFactory.constructInstance();
-            ISensor s = IncrementerLoadedSensorFactory.getInstance();
+            IncrementorLoadedSensorFactory.constructInstance();
+            ISensor s = IncrementorLoadedSensorFactory.getInstance();
             tlmMgr.addProvider(s);
             sensors.add(s);
         }
 
-        SmartDashboard.putNumber(TelemetryNames.ElevatorSensor.status, PKStatus.unknown.tlmValue);
+        SmartDashboard.putNumber(TelemetryNames.ElevatorLoadedSensor.status, PKStatus.unknown.tlmValue);
         {
             ElevatorSensorFactory.constructInstance();
             ISensor s = ElevatorSensorFactory.getInstance();
