@@ -46,13 +46,6 @@ Gyro.className = GyroSensor
 
 
 #####################
-# Vision
-#####################
-#Vision.className = StubVisionSensor
-Vision.className = VisionSensor
-
-
-#####################
 # Elevator Loaded
 #####################
 ElevatorSensor.className = StubElevatorSensor
@@ -71,6 +64,20 @@ IncrementerSensor.className = StubIncrementerSensor
 #####################
 TurretLocation.className = StubTurretLocationSensor
 #TurretLocation.className = TurretLocationSensor
+
+
+#####################
+# Wall Distance
+#####################
+WallDistance.className = StubWallDistanceSensor
+#WallDistance.className = WallDistanceSensor
+
+
+#####################
+# Vision
+#####################
+#Vision.className = StubVisionSensor
+Vision.className = VisionSensor
 
 
 

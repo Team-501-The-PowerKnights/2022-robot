@@ -13,11 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.sensors.elevator.ElevatorSensorFactory;
 import frc.robot.sensors.gyro.GyroFactory;
 import frc.robot.sensors.incrementer.IncrementerSensorFactory;
 import frc.robot.sensors.turretlocation.TurretLocationFactory;
 import frc.robot.sensors.vision.VisionFactory;
+import frc.robot.sensors.walldistance.WallDistanceSensorFactory;
 import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
@@ -49,22 +51,6 @@ public class SensorFactory {
             sensors.add(s);
         }
 
-        SmartDashboard.putNumber(TelemetryNames.Vision.status, PKStatus.unknown.tlmValue);
-        {
-            VisionFactory.constructInstance();
-            ISensor s = VisionFactory.getInstance();
-            tlmMgr.addProvider(s);
-            sensors.add(s);
-        }
-
-        SmartDashboard.putNumber(TelemetryNames.TurretLocation.status, PKStatus.unknown.tlmValue);
-        {
-            TurretLocationFactory.constructInstance();
-            ISensor s = TurretLocationFactory.getInstance();
-            tlmMgr.addProvider(s);
-            sensors.add(s);
-        }
-
         SmartDashboard.putNumber(TelemetryNames.IncrementerSensor.status, PKStatus.unknown.tlmValue);
         {
             IncrementerSensorFactory.constructInstance();
@@ -77,6 +63,30 @@ public class SensorFactory {
         {
             ElevatorSensorFactory.constructInstance();
             ISensor s = ElevatorSensorFactory.getInstance();
+            tlmMgr.addProvider(s);
+            sensors.add(s);
+        }
+
+        SmartDashboard.putNumber(TelemetryNames.TurretLocation.status, PKStatus.unknown.tlmValue);
+        {
+            TurretLocationFactory.constructInstance();
+            ISensor s = TurretLocationFactory.getInstance();
+            tlmMgr.addProvider(s);
+            sensors.add(s);
+        }
+
+        SmartDashboard.putNumber(TelemetryNames.WallDistance.status, PKStatus.unknown.tlmValue);
+        {
+            WallDistanceSensorFactory.constructInstance();
+            ISensor s = WallDistanceSensorFactory.getInstance();
+            tlmMgr.addProvider(s);
+            sensors.add(s);
+        }
+        
+        SmartDashboard.putNumber(TelemetryNames.Vision.status, PKStatus.unknown.tlmValue);
+        {
+            VisionFactory.constructInstance();
+            ISensor s = VisionFactory.getInstance();
             tlmMgr.addProvider(s);
             sensors.add(s);
         }

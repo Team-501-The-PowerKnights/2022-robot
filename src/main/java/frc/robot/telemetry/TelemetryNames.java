@@ -150,13 +150,11 @@ public final class TelemetryNames {
         public static final String heading = name + ".heading";
     }
 
-    public final class TurretLocation {
-        private static final String name = SensorNames.turretLocationName;
+    public final class IncrementerSensor {
+        private static final String name = SensorNames.incrementerName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
-
-        public static final String isFound = name + ".isFound";
     }
 
     public final class ElevatorSensor {
@@ -166,11 +164,23 @@ public final class TelemetryNames {
         public static final String implClass = name + ".implClass";
     }
 
-    public final class IncrementerSensor {
-        private static final String name = SensorNames.incrementerName;
+    public final class TurretLocation {
+        private static final String name = SensorNames.turretLocationName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+
+        public static final String isFound = name + ".isFound";
+    }
+    
+    public final class WallDistance {
+        private static final String name = SensorNames.wallDistanceName;
+
+        public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+
+        public static final String distance = name +".distance";
+        public static final String valid = name +".valid";
     }
 
     public final class Vision {
