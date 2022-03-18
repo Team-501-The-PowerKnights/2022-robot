@@ -8,9 +8,6 @@
 
 package frc.robot.subsystems.drive;
 
-
-import java.util.List;
-
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
@@ -22,15 +19,12 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
@@ -40,7 +34,6 @@ import frc.robot.sensors.gyro.IGyroSensor;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class ProtoDriveSubsystem extends BaseDriveSubsystem {
 
@@ -193,7 +186,7 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
     @Override
     public void setBrake(boolean brakeOn) {
         IdleMode mode = (brakeOn) ? IdleMode.kBrake : IdleMode.kCoast;
- 
+
         checkError(leftFrontMotor.setIdleMode(mode), "LF setting idle mode {}");
         checkError(leftRearMotor.setIdleMode(mode), "LR setting idle mode {}");
         checkError(rightFrontMotor.setIdleMode(mode), "RF setting idle mode {}");
@@ -210,17 +203,12 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
     }
 
     @Override
-    public void followPath(final Pose2d start, final List<Translation2d> interiorWaypoints, final Pose2d end) {
-
-        // Create trajectory to follow
-        final Trajectory trajectory = TrajectoryGenerator.generateTrajectory(start, interiorWaypoints, end,
-                trajectoryConfig);
+    public RamseteCommand followTrajectory(Trajectory trajectory) {
 
         // return the RamseteCommand to run
-        CommandScheduler.getInstance()
-                .schedule(new RamseteCommand(trajectory, this::getPose, new RamseteController(ramseteB, ramseteZeta),
-                        new SimpleMotorFeedforward(s, v, a), driveKinematics, this::getVelocity,
-                        new PIDController(p, 0, 0), new PIDController(p, 0, 0), this::tankDriveVolts, this));
+        return (new RamseteCommand(trajectory, this::getPose, new RamseteController(ramseteB, ramseteZeta),
+                new SimpleMotorFeedforward(s, v, a), driveKinematics, this::getVelocity,
+                new PIDController(p, 0, 0), new PIDController(p, 0, 0), this::tankDriveVolts, this));
     }
 
     protected double convertInchesToEncoderClicks(double inches) {

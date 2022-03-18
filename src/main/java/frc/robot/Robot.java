@@ -33,6 +33,7 @@ import frc.robot.commands.drive.DriveBackwardDistance;
 import frc.robot.commands.drive.DriveBackwardTimed;
 import frc.robot.commands.drive.DriveForwardDistance;
 import frc.robot.commands.drive.DriveForwardTimed;
+import frc.robot.commands.drive.DriveTrajectory;
 import frc.robot.commands.elevator.ElevatorLift;
 import frc.robot.commands.intake.IntakeIngestTimed;
 import frc.robot.commands.poses.FirePoseVision;
@@ -240,6 +241,8 @@ public class Robot extends TimedRobot {
                                 new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(3.0)),
                                 new FirePoseVision()))));
 
+        autoChooser.addOption("Drive Straight Trajectory", new DriveTrajectory("StraightLine"));
+
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
 
@@ -364,17 +367,11 @@ public class Robot extends TimedRobot {
             f.autonomousInit();
         }
 
-        // autoCommand = autoChooser.getSelected();
-        // logger.info("auto command is {}", autoCommand.getName());
-        // if (autoCommand != null) {
-        // CommandScheduler.getInstance().schedule(true, autoCommand);
-        // }
-        DriveFactory.getInstance().followPath(// Start at the origin facing the +X direction
-                new Pose2d(0, 0, new Rotation2d(0)),
-                // Pass through these two interior waypoints, making an 's' curve path
-                List.of(),
-                // End 3 meters straight ahead of where we started, facing forward
-                new Pose2d(3, 0, new Rotation2d(0)));
+        autoCommand = autoChooser.getSelected();
+        logger.info("auto command is {}", autoCommand.getName());
+        if (autoCommand != null) {
+            CommandScheduler.getInstance().schedule(true, autoCommand);
+        }
 
         logger.info("initialized autonomous");
     }
