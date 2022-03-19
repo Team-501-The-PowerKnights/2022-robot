@@ -10,6 +10,7 @@ package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.ClimberSetSubystemsPose;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -96,7 +97,7 @@ public class ClimberStateMachine {
         climberStarted = true;
         SmartDashboard.putBoolean(TelemetryNames.Misc.climberStarted, climberStarted);
 
-        //CommandScheduler.getInstance().schedule(true, new ClimberEnableSequencing());
+        CommandScheduler.getInstance().schedule(true, new ClimberSetSubystemsPose());
     }
 
     public boolean isClimberStarted() {
