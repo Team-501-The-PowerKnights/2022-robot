@@ -8,15 +8,10 @@
 
 package frc.robot.subsystems.drive;
 
-
-import java.util.List;
-
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Translation2d;
-
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class StubDriveSubsystem extends BaseDriveSubsystem {
 
@@ -72,8 +67,9 @@ class StubDriveSubsystem extends BaseDriveSubsystem {
     }
 
     @Override
-    public void followPath(Pose2d start, List<Translation2d> interiorWaypoints, Pose2d end) {
+    public RamseteCommand followTrajectory(Trajectory trajectory) {
         // Stub doesn't implement this
+        return null;
     }
 
     @Override

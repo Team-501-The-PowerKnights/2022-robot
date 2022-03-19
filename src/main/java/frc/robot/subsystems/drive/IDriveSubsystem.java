@@ -8,14 +8,9 @@
 
 package frc.robot.subsystems.drive;
 
-
-import java.util.List;
-
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Translation2d;
-
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.subsystems.ISubsystem;
-
 
 /**
  * Add your docs here.
@@ -49,11 +44,9 @@ public interface IDriveSubsystem extends ISubsystem {
 
     /**
      * 
-     * @param start
-     * @param interiorWaypoints
-     * @param end
+     * @param trajectory
      */
-    public void followPath(final Pose2d start, final List<Translation2d> interiorWaypoints, final Pose2d end);
+    public RamseteCommand followTrajectory(Trajectory trajectory);
 
     public void setSpeed(int canID, double speed);
 

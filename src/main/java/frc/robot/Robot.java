@@ -12,10 +12,12 @@
 
 package frc.robot;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -31,6 +33,7 @@ import frc.robot.commands.drive.DriveBackwardDistance;
 import frc.robot.commands.drive.DriveBackwardTimed;
 import frc.robot.commands.drive.DriveForwardDistance;
 import frc.robot.commands.drive.DriveForwardTimed;
+import frc.robot.commands.drive.DriveTrajectory;
 import frc.robot.commands.elevator.ElevatorLift;
 import frc.robot.commands.intake.IntakeIngestTimed;
 import frc.robot.commands.poses.FirePoseVision;
@@ -46,10 +49,9 @@ import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.subsystems.ISubsystem;
 import frc.robot.subsystems.SubsystemFactory;
-
+import frc.robot.subsystems.drive.DriveFactory;
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -234,10 +236,12 @@ public class Robot extends TimedRobot {
                 new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardTimed(4.0)));
 
         autoChooser.addOption("Full Auto (Driving Forward Delay)",
-            new PKParallelCommandGroup(new TurretVisionAlign(),
-                                       new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(4.0),
-                                                                                               new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(3.0)),
-                                                                    new FirePoseVision()))));
+                new PKParallelCommandGroup(new TurretVisionAlign(),
+                        new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(4.0),
+                                new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(3.0)),
+                                new FirePoseVision()))));
+
+        autoChooser.addOption("Drive Straight Trajectory", new DriveTrajectory("StraightLine"));
 
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
@@ -335,7 +339,8 @@ public class Robot extends TimedRobot {
      * This function is called periodically during Disabled mode.
      */
     @Override
-    public void disabledPeriodic() {}
+    public void disabledPeriodic() {
+    }
 
     /**
      * This function is called once each time the robot exits Disabled mode.
@@ -407,7 +412,7 @@ public class Robot extends TimedRobot {
         logger.info("initializing teleop");
         teleopRunning = true;
         teleopFirstRun = false;
-        teleopComplete = false; 
+        teleopComplete = false;
 
         // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to
@@ -421,7 +426,7 @@ public class Robot extends TimedRobot {
             f.teleopInit();
         }
 
-         logger.info("initialized teleop");
+        logger.info("initialized teleop");
     }
 
     /**
@@ -476,7 +481,6 @@ public class Robot extends TimedRobot {
     public void testPeriodic() {
     }
 
-    
     /**
      * This function is called once each time the robot exits Test mode.
      */
@@ -499,12 +503,11 @@ public class Robot extends TimedRobot {
 
         SmartDashboard.putData("FMS Override", fmsOverrideChooser);
     }
-    
+
     static public boolean isFieldConnected() {
-        if ( DriverStation.isFMSAttached()) {
+        if (DriverStation.isFMSAttached()) {
             return true;
-        }
-        else {
+        } else {
             return fmsOverrideChooser.getSelected();
         }
     }
