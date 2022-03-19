@@ -68,6 +68,16 @@ public class Robot extends TimedRobot {
 
     private TelemetryManager tlmMgr;
 
+    private Runnable telemetryReporter = new Runnable() {
+
+        @Override
+        public void run() {
+            // Update the telemetry
+            tlmMgr.sendTelemetry();
+        }
+
+    };
+
     //
     private List<IModule> modules;
     //
@@ -144,7 +154,11 @@ public class Robot extends TimedRobot {
         // Wait until we get the configuration data from driver station
         waitForDriverStationData();
 
+        // Get the loop period set for robot
         loopPeriod = getPeriod();
+
+        // Initialize the dashboard to false for status
+        SmartDashboard.putBoolean(TelemetryNames.Misc.initStatus, false);
 
         // Make sure Preferences are initialized
         intializePreferences();
@@ -206,6 +220,9 @@ public class Robot extends TimedRobot {
         endGameStarted = false;
         SmartDashboard.putBoolean(TelemetryNames.Misc.endGameStarted, endGameStarted);
         addPeriodic(endGameDeterminer, 5.0);
+
+        // Set up the telemetry reporter
+        addPeriodic(telemetryReporter, 5 * getLoopPeriod());
 
         logger.info("initialized");
     }
@@ -306,8 +323,7 @@ public class Robot extends TimedRobot {
         // for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
 
-        // Update the telemetry
-        tlmMgr.sendTelemetry();
+ 
 
         // Add an indicator about what auto command is current selected
         SmartDashboard.putBoolean(TelemetryNames.Misc.realAuto,
