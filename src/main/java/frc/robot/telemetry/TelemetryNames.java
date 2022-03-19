@@ -36,6 +36,8 @@ public final class TelemetryNames {
         public static final String fmsConnected = name + ".fmsConnected";
 
         public static final String realAuto = name + ".realAuto";
+
+        public static final String initStatus = name + ".initStatus";
     }
 
     /***************
