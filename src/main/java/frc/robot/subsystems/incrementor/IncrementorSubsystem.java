@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.incrementor;
 
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -19,16 +20,17 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-class IncrementerSubsystem extends BaseIncrementorSubsystem {
+
+class IncrementorSubsystem extends BaseIncrementorSubsystem {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IncrementerSubsystem.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IncrementorSubsystem.class.getName());
 
     private final TalonSRX motor;
 
     private final IIncrementorLoadedSensor sensor;
 
-    IncrementerSubsystem() {
+    IncrementorSubsystem() {
         logger.info("constructing");
 
         motor = new TalonSRX(51);
