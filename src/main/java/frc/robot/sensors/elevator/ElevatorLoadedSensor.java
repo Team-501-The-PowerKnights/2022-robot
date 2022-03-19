@@ -9,22 +9,34 @@
 package frc.robot.sensors.elevator;
 
 
+import edu.wpi.first.wpilibj.DigitalInput;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
 /**
  * Provides implementation of {@link IElevatorLoadedSensor} for the
- * <i>Suitcase-Bot</i>.
+ * <i>Real-Bot</i>.
  */
-class SuitcaseElevatorLoadedSensor extends StubElevatorLoadedSensor {
+class ElevatorLoadedSensor extends BaseElevatorLoadedSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(SuitcaseElevatorLoadedSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ElevatorLoadedSensor.class.getName());
 
-    SuitcaseElevatorLoadedSensor() {
+    private final DigitalInput location;
+
+    ElevatorLoadedSensor() {
         logger.info("constructing");
+
+        location = new DigitalInput(1);
 
         logger.info("constructed");
     }
+
+    @Override
+    public boolean get() {
+        return (location.get());
+    }
+
 }

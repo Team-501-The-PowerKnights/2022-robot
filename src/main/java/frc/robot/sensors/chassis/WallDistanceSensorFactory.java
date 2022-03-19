@@ -6,7 +6,7 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.elevator;
+package frc.robot.sensors.chassis;
 
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,15 +24,15 @@ import riolog.RioLogger;
 /**
  * 
  */
-public class ElevatorSensorFactory {
+public class WallDistanceSensorFactory {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ElevatorSensorFactory.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(WallDistanceSensorFactory.class.getName());
 
     /** Singleton instance of class for all to use **/
-    private static IElevatorLoadedSensor ourInstance;
+    private static IWallDistanceSensor ourInstance;
     /** Name of our subsystem **/
-    private static final String myName = SensorNames.elevatorLoadedName;
+    private static final String myName = SensorNames.wallDistanceName;
 
     /**
      * Constructs instance of the subsystem. Assumed to be called before any usage
@@ -40,7 +40,7 @@ public class ElevatorSensorFactory {
      * sequencing of the robot and all it's sensors.
      **/
     public static synchronized void constructInstance() {
-        SmartDashboard.putNumber(TelemetryNames.ElevatorLoadedSensor.status, PKStatus.inProgress.tlmValue);
+        SmartDashboard.putNumber(TelemetryNames.WallDistance.status, PKStatus.inProgress.tlmValue);
 
         if (ourInstance != null) {
             throw new IllegalStateException(myName + " Already Constructed");
@@ -54,7 +54,7 @@ public class ElevatorSensorFactory {
     }
 
     private static void loadImplementationClass(String myClassName) {
-        String myPkgName = ElevatorSensorFactory.class.getPackage().getName();
+        String myPkgName = WallDistanceSensorFactory.class.getPackage().getName();
         if (myClassName.isEmpty()) {
             logger.info("no class specified; go with subsystem default");
             myClassName = new StringBuilder().append(PropertiesManager.getInstance().getImpl()).append(myName)
@@ -69,14 +69,14 @@ public class ElevatorSensorFactory {
             Class myClass = Class.forName(classToLoad);
             @SuppressWarnings("deprecation")
             Object myObject = myClass.newInstance();
-            ourInstance = (IElevatorLoadedSensor) myObject;
-            SmartDashboard.putNumber(TelemetryNames.ElevatorLoadedSensor.status, PKStatus.success.tlmValue);
+            ourInstance = (IWallDistanceSensor) myObject;
+            SmartDashboard.putNumber(TelemetryNames.WallDistance.status, PKStatus.success.tlmValue);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for {}", myName);
-            ourInstance = new StubElevatorLoadedSensor();
-            SmartDashboard.putNumber(TelemetryNames.ElevatorLoadedSensor.status, PKStatus.degraded.tlmValue);
+            ourInstance = new StubWallDistanceSensor();
+            SmartDashboard.putNumber(TelemetryNames.WallDistance.status, PKStatus.degraded.tlmValue);
         }
-        SmartDashboard.putString(TelemetryNames.ElevatorLoadedSensor.implClass, ourInstance.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.WallDistance.implClass, ourInstance.getClass().getSimpleName());
     }
 
     /**
@@ -86,7 +86,7 @@ public class ElevatorSensorFactory {
      *
      * @return singleton instance of sensor
      **/
-    public synchronized static IElevatorLoadedSensor getInstance() {
+    public synchronized static IWallDistanceSensor getInstance() {
         if (ourInstance == null) {
             throw new IllegalStateException(myName + " Not Constructed Yet");
         }

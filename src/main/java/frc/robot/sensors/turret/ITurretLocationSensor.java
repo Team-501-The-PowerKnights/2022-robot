@@ -6,25 +6,17 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.elevator;
+package frc.robot.sensors.turret;
 
 
-import riolog.PKLogger;
-import riolog.RioLogger;
+import frc.robot.sensors.ISensor;
 
 
 /**
- * Provides implementation of {@link IElevatorLoadedSensor} for the
- * <i>Suitcase-Bot</i>.
- */
-class SuitcaseElevatorLoadedSensor extends StubElevatorLoadedSensor {
+ * Add your docs here.
+ **/
+public interface ITurretLocationSensor extends ISensor {
 
-    /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(SuitcaseElevatorLoadedSensor.class.getName());
+    public boolean get();
 
-    SuitcaseElevatorLoadedSensor() {
-        logger.info("constructing");
-
-        logger.info("constructed");
-    }
 }

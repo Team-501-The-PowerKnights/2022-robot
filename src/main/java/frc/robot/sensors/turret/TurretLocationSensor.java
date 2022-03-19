@@ -6,25 +6,37 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.elevator;
+package frc.robot.sensors.turret;
 
+
+import edu.wpi.first.wpilibj.DigitalInput;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
 /**
- * Provides implementation of {@link IElevatorLoadedSensor} for the
- * <i>Suitcase-Bot</i>.
+ * Provides implementation of <code>ITurretLocationSensor</code> for the
+ * <i>Real-Bot</i>.
  */
-class SuitcaseElevatorLoadedSensor extends StubElevatorLoadedSensor {
+class TurretLocationSensor extends BaseTurretLocationSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(SuitcaseElevatorLoadedSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(TurretLocationSensor.class.getName());
 
-    SuitcaseElevatorLoadedSensor() {
+    private DigitalInput location;
+
+    TurretLocationSensor() {
         logger.info("constructing");
+
+        location = new DigitalInput(8);
 
         logger.info("constructed");
     }
+
+    @Override
+    public boolean get() {
+        return !(location.get());
+    }
+
 }

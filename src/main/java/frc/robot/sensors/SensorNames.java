@@ -18,8 +18,8 @@ public class SensorNames {
 
     public static final String gyroName = "Gyro";
 
-    public static final String incrementerName = "IncrementerSensor";
-    public static final String elevatorName = "ElevatorSensor";
+    public static final String incrementorLoadedName = "IncrementorLoaded";
+    public static final String elevatorLoadedName = "ElevatorLoaded";
     public static final String turretLocationName = "TurretLocation";
     
     public static final String wallDistanceName = "WallDistance";

@@ -6,25 +6,34 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.elevator;
+package frc.robot.sensors.incrementor;
 
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import frc.robot.sensors.BaseSensor;
+import frc.robot.sensors.SensorNames;
+import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-/**
- * Provides implementation of {@link IElevatorLoadedSensor} for the
- * <i>Suitcase-Bot</i>.
- */
-class SuitcaseElevatorLoadedSensor extends StubElevatorLoadedSensor {
+abstract class BaseIncrementorLoadedSensor extends BaseSensor implements IIncrementorLoadedSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(SuitcaseElevatorLoadedSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(BaseIncrementorLoadedSensor.class.getName());
 
-    SuitcaseElevatorLoadedSensor() {
+    BaseIncrementorLoadedSensor() {
+        super(SensorNames.incrementorLoadedName);
         logger.info("constructing");
 
         logger.info("constructed");
     }
+
+    @Override
+    public void updateTelemetry() {
+        SmartDashboard.putBoolean(TelemetryNames.Incrementer.full, get());
+    }
+
 }

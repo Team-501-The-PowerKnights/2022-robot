@@ -14,17 +14,25 @@ import riolog.RioLogger;
 
 
 /**
- * Provides implementation of {@link IElevatorLoadedSensor} for the
- * <i>Suitcase-Bot</i>.
+ * Provides implementation of {@link IElevatorLoadedSensor} which has no sensor
+ * or other useful functionality; but which won't blow up if instantiated and
+ * 'used'.
  */
-class SuitcaseElevatorLoadedSensor extends StubElevatorLoadedSensor {
+class StubElevatorLoadedSensor extends BaseElevatorLoadedSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(SuitcaseElevatorLoadedSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(StubElevatorLoadedSensor.class.getName());
 
-    SuitcaseElevatorLoadedSensor() {
+    StubElevatorLoadedSensor() {
         logger.info("constructing");
 
         logger.info("constructed");
     }
+
+    @Override
+    public boolean get() {
+        // Stub doesn't implement this - returns false
+        return false;
+    }
+
 }

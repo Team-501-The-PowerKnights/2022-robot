@@ -6,25 +6,24 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.elevator;
+package frc.robot.subsystems.incrementor;
 
-
-import riolog.PKLogger;
-import riolog.RioLogger;
-
+import frc.robot.subsystems.ISubsystem;
 
 /**
- * Provides implementation of {@link IElevatorLoadedSensor} for the
- * <i>Suitcase-Bot</i>.
- */
-class SuitcaseElevatorLoadedSensor extends StubElevatorLoadedSensor {
+ * Add your docs here.
+ **/
+public interface IIncrementorSubsystem extends ISubsystem {
 
-    /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(SuitcaseElevatorLoadedSensor.class.getName());
+    /**
+     * Stop the incrementer from any motion it may have been running under.
+     */
+    public void stop();
 
-    SuitcaseElevatorLoadedSensor() {
-        logger.info("constructing");
+    public void increment();
 
-        logger.info("constructed");
-    }
+    public boolean isFull();
+
+    public void incrementToLimit();
+
 }

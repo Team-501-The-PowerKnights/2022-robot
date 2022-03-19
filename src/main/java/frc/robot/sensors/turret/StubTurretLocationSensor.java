@@ -6,7 +6,7 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.elevator;
+package frc.robot.sensors.turret;
 
 
 import riolog.PKLogger;
@@ -14,17 +14,25 @@ import riolog.RioLogger;
 
 
 /**
- * Provides implementation of {@link IElevatorLoadedSensor} for the
- * <i>Suitcase-Bot</i>.
+ * Provides implementation of <code>ITurretHomeSensor</code> which has no sensor
+ * or other useful functionality; but which won't blow up if instantiated and
+ * 'used'.
  */
-class SuitcaseElevatorLoadedSensor extends StubElevatorLoadedSensor {
+class StubTurretLocationSensor extends BaseTurretLocationSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(SuitcaseElevatorLoadedSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(StubTurretLocationSensor.class.getName());
 
-    SuitcaseElevatorLoadedSensor() {
+    StubTurretLocationSensor() {
         logger.info("constructing");
 
         logger.info("constructed");
     }
+
+    @Override
+    public boolean get() {
+        // Stub doesn't implement this - returns false
+        return false;
+    }
+
 }

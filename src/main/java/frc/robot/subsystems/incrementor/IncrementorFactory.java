@@ -6,14 +6,15 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.elevator;
+package frc.robot.subsystems.incrementor;
 
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import frc.robot.commands.incrementor.IncrementorDoNothing;
 import frc.robot.properties.PKProperties;
 import frc.robot.properties.PropertiesManager;
-import frc.robot.sensors.SensorNames;
+import frc.robot.subsystems.SubsystemNames;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.utils.PKStatus;
 
@@ -21,32 +22,32 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-/**
- * 
- */
-public class ElevatorSensorFactory {
+public class IncrementorFactory {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ElevatorSensorFactory.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IncrementorFactory.class.getName());
 
     /** Singleton instance of class for all to use **/
-    private static IElevatorLoadedSensor ourInstance;
+    private static IIncrementorSubsystem ourInstance;
     /** Name of our subsystem **/
-    private static final String myName = SensorNames.elevatorLoadedName;
+    private static final String myName = SubsystemNames.incrementorName;
+
+    /** Properties for subsystem */
+    private static PKProperties props;
 
     /**
      * Constructs instance of the subsystem. Assumed to be called before any usage
-     * of the sensor; and verifies only called once. Allows controlled startup
-     * sequencing of the robot and all it's sensors.
+     * of the subsystem; and verifies only called once. Allows controlled startup
+     * sequencing of the robot and all it's subsystems.
      **/
     public static synchronized void constructInstance() {
-        SmartDashboard.putNumber(TelemetryNames.ElevatorLoadedSensor.status, PKStatus.inProgress.tlmValue);
+        SmartDashboard.putNumber(TelemetryNames.Incrementer.status, PKStatus.inProgress.tlmValue);
 
         if (ourInstance != null) {
             throw new IllegalStateException(myName + " Already Constructed");
         }
 
-        PKProperties props = PropertiesManager.getInstance().getProperties(myName);
+        props = PropertiesManager.getInstance().getProperties(myName);
         logger.info(props.listProperties());
         String className = props.getString("className");
 
@@ -54,39 +55,40 @@ public class ElevatorSensorFactory {
     }
 
     private static void loadImplementationClass(String myClassName) {
-        String myPkgName = ElevatorSensorFactory.class.getPackage().getName();
+        String myPkgName = IncrementorFactory.class.getPackage().getName();
         if (myClassName.isEmpty()) {
             logger.info("no class specified; go with subsystem default");
             myClassName = new StringBuilder().append(PropertiesManager.getInstance().getImpl()).append(myName)
                     .append("Subsystem").toString();
         }
         String classToLoad = new StringBuilder().append(myPkgName).append(".").append(myClassName).toString();
-        logger.debug("class to load {}", classToLoad);
+        logger.debug("class to load: {}", classToLoad);
 
-        logger.info("constructing {} for {} sensor", myClassName, myName);
+        logger.info("constructing {} for {} subsystem", myClassName, myName);
         try {
             @SuppressWarnings("rawtypes")
             Class myClass = Class.forName(classToLoad);
             @SuppressWarnings("deprecation")
             Object myObject = myClass.newInstance();
-            ourInstance = (IElevatorLoadedSensor) myObject;
-            SmartDashboard.putNumber(TelemetryNames.ElevatorLoadedSensor.status, PKStatus.success.tlmValue);
+            ourInstance = (IIncrementorSubsystem) myObject;
+            SmartDashboard.putNumber(TelemetryNames.Incrementer.status, PKStatus.success.tlmValue);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            logger.error("failed to load class; instantiating default stub for {}", myName);
-            ourInstance = new StubElevatorLoadedSensor();
-            SmartDashboard.putNumber(TelemetryNames.ElevatorLoadedSensor.status, PKStatus.degraded.tlmValue);
+            logger.error("failed to load class; instantiating default stub for: {}", myName);
+            ourInstance = new StubIncrementorSubsystem();
+            ourInstance.setDefaultCommand(new IncrementorDoNothing());
+            SmartDashboard.putNumber(TelemetryNames.Incrementer.status, PKStatus.degraded.tlmValue);
         }
-        SmartDashboard.putString(TelemetryNames.ElevatorLoadedSensor.implClass, ourInstance.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.Incrementer.implClass, ourInstance.getClass().getSimpleName());
     }
 
     /**
-     * Returns the singleton instance of the sensor in the form of the
+     * Returns the singleton instance of the subsystem in the form of the
      * <i>Interface</i> that is defined for it. If it hasn't been constructed yet,
      * throws an <code>IllegalStateException</code>.
      *
-     * @return singleton instance of sensor
+     * @return singleton instance of subsystem
      **/
-    public synchronized static IElevatorLoadedSensor getInstance() {
+    public static IIncrementorSubsystem getInstance() {
         if (ourInstance == null) {
             throw new IllegalStateException(myName + " Not Constructed Yet");
         }

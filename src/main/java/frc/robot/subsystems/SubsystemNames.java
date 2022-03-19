@@ -22,7 +22,7 @@ public class SubsystemNames {
 
     public static final String intakeName = "Intake";
     public static final String elevatorName = "Elevator";
-    public static final String incrementerName = "Incrementer";
+    public static final String incrementorName = "Incrementor";
     public static final String shooterName = "Shooter";
     // Not really a subsystem ... next year - modules
     public static final String turretName = "Turret";

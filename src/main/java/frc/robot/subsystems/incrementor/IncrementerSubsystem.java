@@ -6,42 +6,35 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.subsystems.elevator;
+package frc.robot.subsystems.incrementor;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-// import frc.robot.sensors.elevator.ElevatorSensorFactory;
-// import frc.robot.sensors.elevator.IElevatorSensor;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.sensors.incrementor.IIncrementorLoadedSensor;
 import frc.robot.sensors.incrementor.IncrementorLoadedSensorFactory;
-// import frc.robot.telemetry.TelemetryNames;
+import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-
-class ElevatorSubsystem extends BaseElevatorSubsystem {
+class IncrementerSubsystem extends BaseIncrementorSubsystem {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ElevatorSubsystem.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IncrementerSubsystem.class.getName());
 
-    private final VictorSPX motor;
+    private final TalonSRX motor;
 
-    // private final IElevatorSensor elevatorSensor;
-    private final IIncrementorLoadedSensor incremSensor;
+    private final IIncrementorLoadedSensor sensor;
 
-    ElevatorSubsystem() {
+    IncrementerSubsystem() {
         logger.info("constructing");
 
-        motor = new VictorSPX(50);
+        motor = new TalonSRX(51);
         motor.configFactoryDefault();
-        motor.setInverted(true);
 
-        // elevatorSensor = ElevatorSensorFactory.getInstance();
-        incremSensor = IncrementorLoadedSensorFactory.getInstance();
+        sensor = IncrementorLoadedSensorFactory.getInstance();
 
         logger.info("constructed");
     }
@@ -50,8 +43,7 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     public void updateTelemetry() {
         super.updateTelemetry();
 
-        // SmartDashboard.putBoolean(TelemetryNames.Elevator.atLimit,
-        // elevatorSensor.get());
+        SmartDashboard.putBoolean(TelemetryNames.Incrementer.atLimit, sensor.get());
     }
 
     @Override
@@ -61,8 +53,6 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
 
     @Override
     public void updatePreferences() {
-        super.updatePreferences();
-
         // Stub doesn't implement this
     }
 
@@ -79,32 +69,22 @@ class ElevatorSubsystem extends BaseElevatorSubsystem {
     }
 
     @Override
-    public void lift() {
-        super.lift();
-
-        setSpeed(-1.0);
-    }
-
-    @Override
-    public void lower() {
-        super.lower();
-
+    public void increment() {
         setSpeed(1.0);
     }
 
     @Override
     public boolean isFull() {
-        // return (elevatorSensor.get() && incremSensor.get());
-        return incremSensor.get();
+        return sensor.get();
     }
 
     @Override
-    public void liftToLimit() {
-        super.liftToLimit();
+    public void incrementToLimit() {
+        super.incrementToLimit();
 
         // FIXME: Needs oneshot for speed controller set
         if (!isFull()) {
-            lift();
+            increment();
         } else {
             stop();
         }

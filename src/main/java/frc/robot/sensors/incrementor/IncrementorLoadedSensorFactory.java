@@ -6,7 +6,7 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.elevator;
+package frc.robot.sensors.incrementor;
 
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,15 +24,15 @@ import riolog.RioLogger;
 /**
  * 
  */
-public class ElevatorSensorFactory {
+public class IncrementorLoadedSensorFactory {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ElevatorSensorFactory.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IncrementorLoadedSensorFactory.class.getName());
 
     /** Singleton instance of class for all to use **/
-    private static IElevatorLoadedSensor ourInstance;
+    private static IIncrementorLoadedSensor ourInstance;
     /** Name of our subsystem **/
-    private static final String myName = SensorNames.elevatorLoadedName;
+    private static final String myName = SensorNames.incrementorLoadedName;
 
     /**
      * Constructs instance of the subsystem. Assumed to be called before any usage
@@ -40,21 +40,20 @@ public class ElevatorSensorFactory {
      * sequencing of the robot and all it's sensors.
      **/
     public static synchronized void constructInstance() {
-        SmartDashboard.putNumber(TelemetryNames.ElevatorLoadedSensor.status, PKStatus.inProgress.tlmValue);
+        SmartDashboard.putNumber(TelemetryNames.IncrementorLoadedSensor.status, PKStatus.inProgress.tlmValue);
 
         if (ourInstance != null) {
             throw new IllegalStateException(myName + " Already Constructed");
         }
 
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
-        logger.info(props.listProperties());
-        String className = props.getString("className");
+        props.listProperties();
 
-        loadImplementationClass(className);
+        loadImplementationClass(props.getString("className"));
     }
 
     private static void loadImplementationClass(String myClassName) {
-        String myPkgName = ElevatorSensorFactory.class.getPackage().getName();
+        String myPkgName = IncrementorLoadedSensorFactory.class.getPackage().getName();
         if (myClassName.isEmpty()) {
             logger.info("no class specified; go with subsystem default");
             myClassName = new StringBuilder().append(PropertiesManager.getInstance().getImpl()).append(myName)
@@ -69,14 +68,14 @@ public class ElevatorSensorFactory {
             Class myClass = Class.forName(classToLoad);
             @SuppressWarnings("deprecation")
             Object myObject = myClass.newInstance();
-            ourInstance = (IElevatorLoadedSensor) myObject;
-            SmartDashboard.putNumber(TelemetryNames.ElevatorLoadedSensor.status, PKStatus.success.tlmValue);
+            ourInstance = (IIncrementorLoadedSensor) myObject;
+            SmartDashboard.putNumber(TelemetryNames.IncrementorLoadedSensor.status, PKStatus.success.tlmValue);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for {}", myName);
-            ourInstance = new StubElevatorLoadedSensor();
-            SmartDashboard.putNumber(TelemetryNames.ElevatorLoadedSensor.status, PKStatus.degraded.tlmValue);
+            ourInstance = new StubIncrementorLoadedSensor();
+            SmartDashboard.putNumber(TelemetryNames.IncrementorLoadedSensor.status, PKStatus.degraded.tlmValue);
         }
-        SmartDashboard.putString(TelemetryNames.ElevatorLoadedSensor.implClass, ourInstance.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.IncrementorLoadedSensor.implClass, ourInstance.getClass().getSimpleName());
     }
 
     /**
@@ -86,7 +85,7 @@ public class ElevatorSensorFactory {
      *
      * @return singleton instance of sensor
      **/
-    public synchronized static IElevatorLoadedSensor getInstance() {
+    public synchronized static IIncrementorLoadedSensor getInstance() {
         if (ourInstance == null) {
             throw new IllegalStateException(myName + " Not Constructed Yet");
         }

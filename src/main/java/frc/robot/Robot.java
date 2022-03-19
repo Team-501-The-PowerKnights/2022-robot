@@ -36,16 +36,16 @@ import frc.robot.commands.intake.IntakeIngestTimed;
 import frc.robot.commands.poses.FirePoseVision;
 import frc.robot.commands.turret.TurretVisionAlign;
 import frc.robot.modules.IModule;
-import frc.robot.modules.ModuleFactory;
+import frc.robot.modules.ModulesFactory;
 import frc.robot.preferences.PreferencesManager;
 import frc.robot.properties.PropertiesManager;
 import frc.robot.sensors.ISensor;
-import frc.robot.sensors.SensorFactory;
+import frc.robot.sensors.SensorsFactory;
 import frc.robot.telemetry.SchedulerProvider;
 import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.subsystems.ISubsystem;
-import frc.robot.subsystems.SubsystemFactory;
+import frc.robot.subsystems.SubsystemsFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -147,13 +147,13 @@ public class Robot extends TimedRobot {
         followers = new ArrayList<>();
 
         // Create all the modules
-        modules = ModuleFactory.constructModules();
+        modules = ModulesFactory.constructModules();
         followers.addAll(modules);
         // Create all the sensors
-        sensors = SensorFactory.constructSensors();
+        sensors = SensorsFactory.constructSensors();
         followers.addAll(sensors);
         // Create all the subsystems
-        subsystems = SubsystemFactory.constructSubsystems();
+        subsystems = SubsystemsFactory.constructSubsystems();
         followers.addAll(subsystems);
 
         // Configure all OI now that subsystems are complete

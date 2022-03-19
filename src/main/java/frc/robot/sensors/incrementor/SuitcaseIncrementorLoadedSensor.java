@@ -6,7 +6,7 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.sensors.elevator;
+package frc.robot.sensors.incrementor;
 
 
 import riolog.PKLogger;
@@ -14,17 +14,18 @@ import riolog.RioLogger;
 
 
 /**
- * Provides implementation of {@link IElevatorLoadedSensor} for the
+ * Provides implementation of {@link IIncrementorLoadedSensor} for the
  * <i>Suitcase-Bot</i>.
  */
-class SuitcaseElevatorLoadedSensor extends StubElevatorLoadedSensor {
+class SuitcaseIncrementorLoadedSensor extends StubIncrementorLoadedSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(SuitcaseElevatorLoadedSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(SuitcaseIncrementorLoadedSensor.class.getName());
 
-    SuitcaseElevatorLoadedSensor() {
+    SuitcaseIncrementorLoadedSensor() {
         logger.info("constructing");
 
         logger.info("constructed");
     }
+
 }
