@@ -19,7 +19,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Misc.codeVersion",
-              "_title": "Misc.codeVersion"
+              "_title": "codeVersion"
             }
           },
           "33,6": {
@@ -30,7 +30,7 @@
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/Misc.fmsConnected",
-              "_title": "Misc.fmsConnected",
+              "_title": "fmsConnected",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
@@ -43,7 +43,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Misc.robotImpl",
-              "_title": "Misc.robotImpl"
+              "_title": "robotImpl"
             }
           },
           "34,11": {
@@ -54,7 +54,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Misc.robotName",
-              "_title": "Misc.robotName"
+              "_title": "robotName"
             }
           },
           "24,0": {
@@ -76,7 +76,7 @@
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/Misc.realAuto",
-              "_title": "Misc.realAuto",
+              "_title": "realAuto",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
@@ -100,7 +100,7 @@
               "imageHeight": -1
             }
           },
-          "33,4": {
+          "33,3": {
             "size": [
               4,
               2
@@ -160,7 +160,46 @@
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/Misc.initStatus",
-              "_title": "Misc.initStatus",
+              "_title": "initStatus",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "24,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Misc.climberStarted",
+              "_title": "climberStarted",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "24,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Misc.climberEnabled",
+              "_title": "climberEnabled",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "24,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Misc.endGameStarted",
+              "_title": "endGameStarted",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
@@ -2234,6 +2273,45 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Climber.autoCommand",
               "_title": "Climber.autoCommand"
+            }
+          },
+          "8,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Misc.climberEnabled",
+              "_title": "Misc.climberEnabled",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "8,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Misc.climberStarted",
+              "_title": "Misc.climberStarted",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "8,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Misc.endGameStarted",
+              "_title": "Misc.endGameStarted",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
