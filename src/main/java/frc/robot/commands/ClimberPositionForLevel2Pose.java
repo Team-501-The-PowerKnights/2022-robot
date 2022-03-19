@@ -10,15 +10,17 @@ package frc.robot.commands;
 
 
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+
 import frc.robot.commands.climber.ClimberExtendLevel2;
 import frc.robot.commands.drive.DriveBackwardTimed;
-import frc.robot.commands.drive.DriveJoystickControl;
+import frc.robot.commands.drive.DriveStraightJoystickControl;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
 /**
- * Pose to position the robot for hanging on level 2.
+ * Pose to position the robot for climbing on level 2.
  * <p>
  * Drives from an assumed starting point of the wall to a position
  * lined up with bar, and extends the climber at the same time.
@@ -28,18 +30,19 @@ public class ClimberPositionForLevel2Pose extends PKSequentialCommandGroup {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimberPositionForLevel2Pose.class.getName());
 
-    // Duration to hold before starting to drive and extend
-    private final double delay;
-
+    /**
+     * Creates an instance of class to position the robot to
+     * climb on Level 2 bar.
+     * 
+     * @param delay - how long to wait before starting (seconds)
+     */
     public ClimberPositionForLevel2Pose(double delay) {
         logger.info("constucting {} for {}", getName(), delay);
-
-        this.delay = delay;
 
         addCommands(new WaitCommand(delay),
                     new PKParallelCommandGroup(new DriveBackwardTimed(3.0),
                                                new ClimberExtendLevel2()),
-                    new DriveJoystickControl()
+                    new DriveStraightJoystickControl()
                     );
 
         logger.info("constructed");
