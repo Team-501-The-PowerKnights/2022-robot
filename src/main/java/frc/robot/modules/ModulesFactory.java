@@ -27,11 +27,11 @@ import riolog.RioLogger;
 /**
  * Add your docs here.
  */
-public class ModuleFactory {
+public class ModulesFactory {
 
     /** Our classes' logger **/
     @SuppressWarnings("unused")
-    private static final PKLogger logger = RioLogger.getLogger(ModuleFactory.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ModulesFactory.class.getName());
 
     public static List<IModule> constructModules() {
 

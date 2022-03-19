@@ -36,7 +36,7 @@ import frc.robot.commands.intake.IntakeIngestTimed;
 import frc.robot.commands.poses.FirePoseVision;
 import frc.robot.commands.turret.TurretVisionAlign;
 import frc.robot.modules.IModule;
-import frc.robot.modules.ModuleFactory;
+import frc.robot.modules.ModulesFactory;
 import frc.robot.preferences.PreferencesManager;
 import frc.robot.properties.PropertiesManager;
 import frc.robot.sensors.ISensor;
@@ -147,7 +147,7 @@ public class Robot extends TimedRobot {
         followers = new ArrayList<>();
 
         // Create all the modules
-        modules = ModuleFactory.constructModules();
+        modules = ModulesFactory.constructModules();
         followers.addAll(modules);
         // Create all the sensors
         sensors = SensorsFactory.constructSensors();
