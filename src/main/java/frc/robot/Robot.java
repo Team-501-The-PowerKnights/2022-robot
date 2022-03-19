@@ -27,7 +27,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.modes.AutoDoNothing;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.PKSequentialCommandGroup;
-import frc.robot.commands.climber.ClimberEnableSequencing;
+import frc.robot.commands.climber.ClimberStateMachine;
 import frc.robot.commands.drive.DriveBackwardDistance;
 import frc.robot.commands.drive.DriveBackwardTimed;
 import frc.robot.commands.drive.DriveForwardDistance;
@@ -94,10 +94,8 @@ public class Robot extends TimedRobot {
     // Flag for having completed teleop part of match
     private boolean teleopComplete;
 
-    // Flag for whether climber sequencing is enabled
-    private boolean climberEnabled;
-    // Flag for whether climber sequencing is started
-    private boolean climberStarted;
+    // Handle to climber state machine
+    private ClimberStateMachine climberSM;
 
     // Chooser for autonomous command from Dashboard
     private SendableChooser<Command> autoChooser;
@@ -182,8 +180,9 @@ public class Robot extends TimedRobot {
         // Put indication of initialization status on dash
         determineInitStatus();
 
-        // Initialize state and set dashboard
-        initCimberControlState();
+        // Construct the instance of climber state machine
+        ClimberStateMachine.constructInstance();
+        climberSM = ClimberStateMachine.getInstance();
 
         logger.info("initialized");
     }
@@ -457,8 +456,7 @@ public class Robot extends TimedRobot {
             f.teleopInit();
         }
 
-        // Initialize state and set dashboard
-        initCimberControlState();
+        climberSM.initState();
 
         logger.info("initialized teleop");
     }
@@ -473,26 +471,14 @@ public class Robot extends TimedRobot {
             logger.info("first run of teleop periodic");
         }
 
+        // When at end game, enable the climber sequencing to start
+        // FIXME: Use some kind of timer to expire and set state to enable
         double remainingSeconds = DriverStation.getMatchTime();
-        if (!climberEnabled && (remainingSeconds < 40)) {
-            enableClimberSequencing();
+        if (remainingSeconds < 40) {
+            if (!climberSM.isClimberEnabled()) {
+                climberSM.enableClimberSequencing();
+            }
         }
-    }
-
-    private void initCimberControlState() {
-        logger.trace("initialize climber control state");
-        climberEnabled = false;
-        SmartDashboard.putBoolean(TelemetryNames.Misc.climberEnabled, climberEnabled);
-        climberStarted = false;
-        SmartDashboard.putBoolean(TelemetryNames.Misc.climberStarted, climberStarted);
-    }
-
-    private void enableClimberSequencing() {
-        logger.info("enabling climber sequencing");
-        climberEnabled = true;
-        SmartDashboard.putBoolean(TelemetryNames.Misc.climberEnabled, climberEnabled);
-
-        CommandScheduler.getInstance().schedule(true, new ClimberEnableSequencing());
     }
 
     /**
@@ -508,6 +494,8 @@ public class Robot extends TimedRobot {
         for (IModeFollower f : followers) {
             f.teleopExit();
         }
+
+        climberSM.resetState();
 
         logger.info("exited teleop");
     }
