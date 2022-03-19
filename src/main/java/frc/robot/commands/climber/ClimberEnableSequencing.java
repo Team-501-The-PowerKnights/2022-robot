@@ -8,6 +8,10 @@
 package frc.robot.commands.climber;
 
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import frc.robot.telemetry.TelemetryNames;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -30,12 +34,14 @@ public class ClimberEnableSequencing extends ClimberOICommandBase {
 
     @Override
     public boolean isFinished() {
-        return oi.getDriverClimberStart() && oi.getOperatorClimberStart();
+        return (oi.getDriverClimberStart() && oi.getOperatorClimberStart());
     }
 
     @Override
     public void end(boolean interrupted) {
         super.end(interrupted);
+
+        SmartDashboard.putBoolean(TelemetryNames.Misc.climberStarted, true);
     }
 
 }

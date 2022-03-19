@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.modes.AutoDoNothing;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.PKSequentialCommandGroup;
+import frc.robot.commands.climber.ClimberEnableSequencing;
 import frc.robot.commands.drive.DriveBackwardDistance;
 import frc.robot.commands.drive.DriveBackwardTimed;
 import frc.robot.commands.drive.DriveForwardDistance;
@@ -92,6 +93,11 @@ public class Robot extends TimedRobot {
     private boolean teleopFirstRun;
     // Flag for having completed teleop part of match
     private boolean teleopComplete;
+
+    // Flag for whether climber sequencing is enabled
+    private boolean climberEnabled;
+    // Flag for whether climber sequencing is started
+    private boolean climberStarted;
 
     // Chooser for autonomous command from Dashboard
     private SendableChooser<Command> autoChooser;
@@ -175,6 +181,9 @@ public class Robot extends TimedRobot {
 
         // Put indication of initialization status on dash
         determineInitStatus();
+
+        // Initialize state and set dashboard
+        initCimberControlState();
 
         logger.info("initialized");
     }
@@ -448,7 +457,10 @@ public class Robot extends TimedRobot {
             f.teleopInit();
         }
 
-         logger.info("initialized teleop");
+        // Initialize state and set dashboard
+        initCimberControlState();
+
+        logger.info("initialized teleop");
     }
 
     /**
@@ -460,6 +472,27 @@ public class Robot extends TimedRobot {
             teleopFirstRun = true;
             logger.info("first run of teleop periodic");
         }
+
+        double remainingSeconds = DriverStation.getMatchTime();
+        if (!climberEnabled && (remainingSeconds < 40)) {
+            enableClimberSequencing();
+        }
+    }
+
+    private void initCimberControlState() {
+        logger.trace("initialize climber control state");
+        climberEnabled = false;
+        SmartDashboard.putBoolean(TelemetryNames.Misc.climberEnabled, climberEnabled);
+        climberStarted = false;
+        SmartDashboard.putBoolean(TelemetryNames.Misc.climberStarted, climberStarted);
+    }
+
+    private void enableClimberSequencing() {
+        logger.info("enabling climber sequencing");
+        climberEnabled = true;
+        SmartDashboard.putBoolean(TelemetryNames.Misc.climberEnabled, climberEnabled);
+
+        CommandScheduler.getInstance().schedule(true, new ClimberEnableSequencing());
     }
 
     /**
