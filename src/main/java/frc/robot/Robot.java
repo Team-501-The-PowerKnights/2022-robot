@@ -16,8 +16,6 @@ package frc.robot;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -29,6 +27,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.modes.AutoDoNothing;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.PKSequentialCommandGroup;
+import frc.robot.commands.climber.ClimberStateMachine;
 import frc.robot.commands.drive.DriveBackwardDistance;
 import frc.robot.commands.drive.DriveBackwardTimed;
 import frc.robot.commands.drive.DriveForwardDistance;
@@ -94,6 +93,29 @@ public class Robot extends TimedRobot {
     private boolean teleopFirstRun;
     // Flag for having completed teleop part of match
     private boolean teleopComplete;
+
+    // Flag for in end game of match
+    private static boolean endGameStarted;
+    //
+    private Runnable endGameDeterminer = new Runnable() {
+
+        @Override
+        public void run() {
+           logger.trace("running endGameDeterminer");
+           if (teleopRunning && !endGameStarted) {
+                double remainingSeconds = DriverStation.getMatchTime();
+                if (remainingSeconds < 40) {
+                    logger.trace("setting endGameStarted");
+                    endGameStarted = true;
+                    SmartDashboard.putBoolean(TelemetryNames.Misc.endGameStarted, endGameStarted);
+                }
+           }
+        }
+
+    };
+
+    // Handle to climber state machine
+    private ClimberStateMachine climberSM;
 
     // Chooser for autonomous command from Dashboard
     private SendableChooser<Command> autoChooser;
@@ -177,6 +199,15 @@ public class Robot extends TimedRobot {
 
         // Put indication of initialization status on dash
         determineInitStatus();
+
+        // Construct the instance of climber state machine
+        ClimberStateMachine.constructInstance();
+        climberSM = ClimberStateMachine.getInstance();
+
+        // Set up end game determiner
+        endGameStarted = false;
+        SmartDashboard.putBoolean(TelemetryNames.Misc.endGameStarted, endGameStarted);
+        addPeriodic(endGameDeterminer, 5.0);
 
         logger.info("initialized");
     }
@@ -318,6 +349,10 @@ public class Robot extends TimedRobot {
             }
         }
 
+        // (Re-)initialize end game state
+        endGameStarted = false;
+        SmartDashboard.putBoolean(TelemetryNames.Misc.endGameStarted, endGameStarted);
+
         logger.info("disabled");
     }
 
@@ -450,7 +485,10 @@ public class Robot extends TimedRobot {
             f.teleopInit();
         }
 
-         logger.info("initialized teleop");
+        // Initialize the climber state manager (only valid in teleop)
+        climberSM.initState();
+
+        logger.info("initialized teleop");
     }
 
     /**
@@ -461,6 +499,10 @@ public class Robot extends TimedRobot {
         if (!teleopFirstRun) {
             teleopFirstRun = true;
             logger.info("first run of teleop periodic");
+        }
+
+        if (endGameStarted && !climberSM.isClimberEnabled()) {
+            climberSM.enableClimberSequencing();
         }
     }
 
@@ -477,6 +519,8 @@ public class Robot extends TimedRobot {
         for (IModeFollower f : followers) {
             f.teleopExit();
         }
+
+        climberSM.resetState();
 
         logger.info("exited teleop");
     }
@@ -540,6 +584,10 @@ public class Robot extends TimedRobot {
 
     static public double getLoopPeriod() {
         return loopPeriod;
+    }
+
+    static public boolean isEndGameStarted() {
+        return endGameStarted;
     }
 
 }

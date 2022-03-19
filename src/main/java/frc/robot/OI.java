@@ -125,13 +125,20 @@ public class OI implements ITelemetryProvider {
      * Climber
      *****************/
 
-     public boolean getClimberExtend() {
-         return false;
-     }
+    public boolean getDriverClimberStart() {
+        return driverPad.getClimberStart();
+    }
 
-     public boolean getClimberClimb() {
-         return false;
-     }
+    public boolean getOperatorClimberStart() {
+        return operatorPad.getClimberStart();
+    }
     
+    public boolean getClimberExtend() {
+        return false;
+    }
 
+    public boolean getClimberClimb() {
+        return false;
+    }
+    
 }
