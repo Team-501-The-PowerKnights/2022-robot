@@ -47,9 +47,10 @@ public class WallDistanceSensorFactory {
         }
 
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
-        props.listProperties();
+        logger.info(props.listProperties());
+        String className = props.getString("className");
 
-        loadImplementationClass(props.getString("className"));
+        loadImplementationClass(className);
     }
 
     private static void loadImplementationClass(String myClassName) {
