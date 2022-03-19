@@ -128,6 +128,10 @@ public class OperatorGamepad extends F310Gamepad {
      * Climber
      *********************/
 
+    public boolean getClimberStart() {
+        return getStartButton();
+    }
+
     public boolean getClimberExtend() {
         // return isPov0();
         return getStartButton();
