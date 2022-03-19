@@ -16,6 +16,8 @@ package frc.robot;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -173,6 +175,9 @@ public class Robot extends TimedRobot {
         // Create the chooser for FMS connected override
         createFmsOverrideChooser();
 
+        // Put indication of initialization status on dash
+        determineInitStatus();
+
         logger.info("initialized");
     }
 
@@ -242,6 +247,18 @@ public class Robot extends TimedRobot {
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
 
+    private void determineInitStatus() {
+        // TODO: Make tri-color status when implemented
+        long warnCount = logger.getWarnCount();
+        long errorCount = logger.getErrorCount();
+        logger.info("init status: errorCount={}, warnCount={}", errorCount, warnCount);
+        // red for bad, green for good (so reverse sense)
+        boolean status = !((errorCount != 0) || (warnCount != 0));
+        SmartDashboard.putBoolean(TelemetryNames.Misc.initStatus, status);
+
+        // TODO: Parse network tables for all status and do a roll-up
+    }
+
     /**
      * This function is called every robot packet, no matter the mode. Use this for
      * items like diagnostics that you want ran during disabled, autonomous,
@@ -288,6 +305,8 @@ public class Robot extends TimedRobot {
 
             logMatchData();
 
+            logErrorCounts();
+
             for (IModule m : modules) {
                 m.disable();
             }
@@ -329,6 +348,16 @@ public class Robot extends TimedRobot {
         logger.info("ReplayNumber:  {}", DriverStation.getReplayNumber());
         logger.info("Alliance:      {}", DriverStation.getAlliance());
         logger.info("Location:      {}", DriverStation.getLocation());
+    }
+
+    /**
+     * Log the count of errors and warnings from the logger to the tail of the
+     * log file.
+     */
+    private void logErrorCounts() {
+        long warnCount = logger.getWarnCount();
+        long errorCount = logger.getErrorCount();
+        logger.info("error counts: errorCount={}, warnCount={}", errorCount, warnCount);
     }
 
     /**
