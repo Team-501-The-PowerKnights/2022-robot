@@ -94,6 +94,26 @@ public class Robot extends TimedRobot {
     // Flag for having completed teleop part of match
     private boolean teleopComplete;
 
+    // Flag for in end game of match
+    private static boolean endGameStarted;
+    //
+    private Runnable endGameDeterminer = new Runnable() {
+
+        @Override
+        public void run() {
+           logger.trace("running endGameDeterminer");
+           if (teleopRunning && !endGameStarted) {
+                double remainingSeconds = DriverStation.getMatchTime();
+                if (remainingSeconds < 40) {
+                    logger.trace("setting endGameStarted");
+                    endGameStarted = true;
+                    SmartDashboard.putBoolean(TelemetryNames.Misc.endGameStarted, endGameStarted);
+                }
+           }
+        }
+
+    };
+
     // Handle to climber state machine
     private ClimberStateMachine climberSM;
 
@@ -183,6 +203,11 @@ public class Robot extends TimedRobot {
         // Construct the instance of climber state machine
         ClimberStateMachine.constructInstance();
         climberSM = ClimberStateMachine.getInstance();
+
+        // Set up end game determiner
+        endGameStarted = false;
+        SmartDashboard.putBoolean(TelemetryNames.Misc.endGameStarted, endGameStarted);
+        addPeriodic(endGameDeterminer, 5.0);
 
         logger.info("initialized");
     }
@@ -324,6 +349,10 @@ public class Robot extends TimedRobot {
             }
         }
 
+        // (Re-)initialize end game state
+        endGameStarted = false;
+        SmartDashboard.putBoolean(TelemetryNames.Misc.endGameStarted, endGameStarted);
+
         logger.info("disabled");
     }
 
@@ -456,6 +485,7 @@ public class Robot extends TimedRobot {
             f.teleopInit();
         }
 
+        // Initialize the climber state manager (only valid in teleop)
         climberSM.initState();
 
         logger.info("initialized teleop");
@@ -471,13 +501,8 @@ public class Robot extends TimedRobot {
             logger.info("first run of teleop periodic");
         }
 
-        // When at end game, enable the climber sequencing to start
-        // FIXME: Use some kind of timer to expire and set state to enable
-        double remainingSeconds = DriverStation.getMatchTime();
-        if (remainingSeconds < 40) {
-            if (!climberSM.isClimberEnabled()) {
-                climberSM.enableClimberSequencing();
-            }
+        if (endGameStarted && !climberSM.isClimberEnabled()) {
+            climberSM.enableClimberSequencing();
         }
     }
 
@@ -559,6 +584,10 @@ public class Robot extends TimedRobot {
 
     static public double getLoopPeriod() {
         return loopPeriod;
+    }
+
+    static public boolean isEndGameStarted() {
+        return endGameStarted;
     }
 
 }

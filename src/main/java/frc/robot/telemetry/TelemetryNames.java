@@ -39,6 +39,8 @@ public final class TelemetryNames {
 
         public static final String initStatus = name + ".initStatus";
 
+        public static final String endGameStarted = name + ".endGameStarted";
+
         public static final String climberEnabled = name + ".climberEnabled";
         public static final String climberStarted = name + ".climberStarted";
     }
