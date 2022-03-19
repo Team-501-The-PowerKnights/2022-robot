@@ -101,11 +101,9 @@ public class Robot extends TimedRobot {
 
         @Override
         public void run() {
-           logger.trace("running endGameDeterminer");
            if (teleopRunning && !endGameStarted) {
                 double remainingSeconds = DriverStation.getMatchTime();
                 if (remainingSeconds < 40) {
-                    logger.trace("setting endGameStarted");
                     endGameStarted = true;
                     SmartDashboard.putBoolean(TelemetryNames.Misc.endGameStarted, endGameStarted);
                 }
