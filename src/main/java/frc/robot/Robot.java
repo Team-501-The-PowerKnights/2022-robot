@@ -323,11 +323,8 @@ public class Robot extends TimedRobot {
         // for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
 
- 
-
-        // Add an indicator about what auto command is current selected
-        SmartDashboard.putBoolean(TelemetryNames.Misc.realAuto,
-                !autoChooser.getSelected().getName().equalsIgnoreCase("DoNothing"));
+        // Update the telemetry
+        tlmMgr.sendTelemetry();
     }
 
     /**
@@ -413,7 +410,12 @@ public class Robot extends TimedRobot {
      * This function is called periodically during Disabled mode.
      */
     @Override
-    public void disabledPeriodic() {}
+    public void disabledPeriodic() {
+        // Add an indicator about what auto command is current selected
+        String doNothingName = AutoDoNothing.class.getSimpleName();
+        SmartDashboard.putBoolean(TelemetryNames.Misc.realAuto,
+                !autoChooser.getSelected().getName().equalsIgnoreCase(doNothingName));
+    }
 
     /**
      * This function is called once each time the robot exits Disabled mode.

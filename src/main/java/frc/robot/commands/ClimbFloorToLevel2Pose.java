@@ -6,34 +6,28 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.intake;
+package frc.robot.commands;
 
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class IntakeDoNothing extends IntakeCommandBase {
-
+/**
+ * Pose to climb from floor to Level 2.
+ * <p>
+ * Assumes that the climber hook is set and the robot is correctly
+ * positioned under the bar.
+ */
+public class ClimbFloorToLevel2Pose {
+       
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IntakeDoNothing.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ClimbFloorToLevel2Pose.class.getName());
 
-    public IntakeDoNothing() {
-        logger.info("constructing {}", getName());
+    public ClimbFloorToLevel2Pose() {
+        logger.info("constructing");
 
         logger.info("constructed");
-    }
-
-    @Override
-    public void execute() {
-      super.execute();
-    }
-  
-    @Override
-    protected void firstExecution() {
-      logger.trace("intake.stop() called in firstExecution()");
-
-      intake.stop();
     }
 
 }

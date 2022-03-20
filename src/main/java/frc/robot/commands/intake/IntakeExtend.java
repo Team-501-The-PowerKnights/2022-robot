@@ -13,12 +13,18 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class IntakeDoNothing extends IntakeCommandBase {
-
+/**
+ * Command to extend the Intake subystem.
+ * <p>
+ * The command runs as a one shot, as the pneumatics don't require
+ * anything other than setting the state.
+ */
+public class IntakeExtend extends IntakeCommandBase {
+    
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IntakeDoNothing.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IntakeExtend.class.getName());
 
-    public IntakeDoNothing() {
+    public IntakeExtend() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
@@ -26,14 +32,14 @@ public class IntakeDoNothing extends IntakeCommandBase {
 
     @Override
     public void execute() {
-      super.execute();
-    }
-  
-    @Override
-    protected void firstExecution() {
-      logger.trace("intake.stop() called in firstExecution()");
+        super.execute();
 
-      intake.stop();
+        intake.extend();
+    }
+
+    @Override
+    public boolean isFinished() {
+        return true;
     }
 
 }

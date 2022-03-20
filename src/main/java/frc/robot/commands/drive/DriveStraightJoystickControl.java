@@ -6,19 +6,27 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.intake;
+package frc.robot.commands.drive;
 
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class IntakeDoNothing extends IntakeCommandBase {
+/**
+ * A <code>Command</code> for driving under joystick control, but limited
+ * to only forward and backward (via <code>speed</code> with the 
+ * <code>turn</code> held at <code>0</code>.
+ */
+public class DriveStraightJoystickControl extends DriveOICommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IntakeDoNothing.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(DriveStraightJoystickControl.class.getName());
 
-    public IntakeDoNothing() {
+    /**
+     * Creates a new DriveStraightJoystickControl.
+     */
+    public DriveStraightJoystickControl() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
@@ -26,14 +34,11 @@ public class IntakeDoNothing extends IntakeCommandBase {
 
     @Override
     public void execute() {
-      super.execute();
-    }
-  
-    @Override
-    protected void firstExecution() {
-      logger.trace("intake.stop() called in firstExecution()");
+        super.execute();
 
-      intake.stop();
+        double speed = oi.getDriveSpeed();
+
+        drive.drive(speed, 0.0);
     }
 
 }

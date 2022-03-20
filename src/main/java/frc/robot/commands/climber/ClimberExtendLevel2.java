@@ -6,57 +6,58 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.incrementor;
+package frc.robot.commands.climber;
 
 
+import frc.robot.utils.TimerFromPeriod;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-/**
- * Add your docs here.
- */
-public class IncrementorRunToFull extends IncrementorCommandBase {
-
+public class ClimberExtendLevel2 extends ClimberCommandBase {
+       
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(IncrementorRunToFull.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ClimberRetract.class.getName());
 
-    public IncrementorRunToFull() {
+    // Timer to count it down during execute()
+    private TimerFromPeriod timer;
+    
+    public ClimberExtendLevel2() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
     }
 
-    private static double counts = 0;
-
     @Override
     public void initialize() {
-        counts = 0;
-    }
+        super.initialize();
 
+        timer = new TimerFromPeriod(2.0);  // make different than drive
+    }
+    
     @Override
     public void execute() {
         super.execute();
 
-        counts++;
+        timer.nextTic();
     }
 
     @Override
     protected void firstExecution() {
-        logger.trace("incrementer.increment() called in firstExecution()");
-        incrementor.increment();
+        logger.trace("climber.extend() called in firstExecution()");
+        //climber.???????();
     }
 
     @Override
     public boolean isFinished() {
-        return incrementor.isFull() || counts >= 50;
+        return timer.isExpired();
     }
 
     @Override
     public void end(boolean interrupted) {
         super.end(interrupted);
 
-        incrementor.stop();
+        climber.stop();
     }
 
 }

@@ -24,4 +24,16 @@ public class IncrementorDoNothing extends IncrementorCommandBase {
         logger.info("constructed");
     }
 
+    @Override
+    public void execute() {
+      super.execute();
+    }
+  
+    @Override
+    protected void firstExecution() {
+      logger.trace("incrementor.stop() called in firstExecution()");
+
+      incrementor.stop();
+    }
+
 }
