@@ -44,19 +44,19 @@ public class IncrementorRunToFull extends IncrementorCommandBase {
     @Override
     protected void firstExecution() {
         logger.trace("incrementer.increment() called in firstExecution()");
-        incrementer.increment();
+        incrementor.increment();
     }
 
     @Override
     public boolean isFinished() {
-        return incrementer.isFull() || counts >= 50;
+        return incrementor.isFull() || counts >= 50;
     }
 
     @Override
     public void end(boolean interrupted) {
         super.end(interrupted);
 
-        incrementer.stop();
+        incrementor.stop();
     }
 
 }

@@ -24,4 +24,16 @@ public class IntakeDoNothing extends IntakeCommandBase {
         logger.info("constructed");
     }
 
+    @Override
+    public void execute() {
+      super.execute();
+    }
+  
+    @Override
+    protected void firstExecution() {
+      logger.trace("intake.stop() called in firstExecution()");
+
+      intake.stop();
+    }
+
 }
