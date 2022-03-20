@@ -41,6 +41,9 @@ public final class TelemetryNames {
 
         public static final String climberEnabled = name + ".climberEnabled";
         public static final String climberStarted = name + ".climberStarted";
+        public static final String climberPaused = name + ".climberPaused";
+        public static final String level2Climbed = name + ".level2Climbed";
+        public static final String level3Climbed = name + ".level3Climbed";
     }
 
     /***************

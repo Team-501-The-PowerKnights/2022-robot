@@ -8,19 +8,18 @@
 
 package frc.robot.commands.climber;
 
-import frc.robot.utils.TimerFromPeriod;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ClimberExtendLevel2 extends ClimberCommandBase {
+public class ClimberExtendLevel4 extends ClimberCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ClimberExtendLevel2.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ClimberExtendLevel4.class.getName());
 
-    // Timer to count it down during execute()
-    private TimerFromPeriod timer;
+    private double targetElbowCounts;
+    private double targetShoulderCounts;
 
-    public ClimberExtendLevel2() {
+    public ClimberExtendLevel4() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
@@ -30,26 +29,29 @@ public class ClimberExtendLevel2 extends ClimberCommandBase {
     public void initialize() {
         super.initialize();
 
-        timer = new TimerFromPeriod(2.0); // make different than drive // TODO - we should really base this on encoder
-                                          // counts
-    }
-
-    @Override
-    public void execute() {
-        super.execute();
-
-        timer.nextTic();
+        targetElbowCounts = 0; // TODO - make this the actual value
+        targetShoulderCounts = 0; // TODO - make this the actual value
     }
 
     @Override
     protected void firstExecution() {
-        logger.trace("climber.extend() called in firstExecution()");
-        // climber.???????();
+        logger.trace(" called in firstExecution()");
+        if (climber.getElbowPosition() < targetElbowCounts) {
+            climber.runElbow(0.2); // TODO - make this the actual value
+        } else {
+            climber.runElbow(0);
+        }
+        if (climber.getShoulderPosition() < targetShoulderCounts) {
+            climber.runShoulder(0.2); // TODO - make this the actual value
+        } else {
+            climber.runShoulder(0);
+        }
     }
 
     @Override
     public boolean isFinished() {
-        return timer.isExpired();
+        return (climber.getShoulderPosition() >= targetShoulderCounts
+                && climber.getElbowPosition() >= targetElbowCounts);
     }
 
     @Override
