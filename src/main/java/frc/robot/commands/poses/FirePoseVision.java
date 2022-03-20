@@ -8,6 +8,8 @@
 
 package frc.robot.commands.poses;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.commands.PKCommandBase;
 import frc.robot.sensors.vision.IVisionSensor;
 import frc.robot.sensors.vision.VisionFactory;
@@ -17,7 +19,7 @@ import frc.robot.subsystems.incrementer.IIncrementerSubsystem;
 import frc.robot.subsystems.incrementer.IncrementerFactory;
 import frc.robot.subsystems.shooter.IShooterSubsystem;
 import frc.robot.subsystems.shooter.ShooterFactory;
-
+import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -51,13 +53,17 @@ public class FirePoseVision extends PKCommandBase {
         super.execute();
 
         double y = vision.getY();
-        double speed = 0.489 + (-0.0116 * y) + (0.0107 * (Math.pow(y, 2))) + ((-4.32E-03) * (Math.pow(y, 3)))
-                + (2.07E-04 * Math.pow(y, 4)) + (2.34E-04 * Math.pow(y, 5)) + (-5.47E-05 * Math.pow(y, 6))
-                + (4.68E-06 * Math.pow(y, 7)) + -1.41E-07 * (Math.pow(y, 8));
+        double speed = 0.483 + (-6.55E-03 * y) + (1.27E-03 * (Math.pow(y, 2))) +
+                ((-8.18E-05) * (Math.pow(y, 3)));
+        // 0.483 + -6.55E-03x + 1.27E-03x^2 + -8.18E-05x^3
+        // double speed = SmartDashboard.getNumber(TelemetryNames.Shooter.setSpeed,
+        // 0.5); // Tuning only
         // speed += 0.015;
-        if (speed > 0.3) {
-            shooter.setSpeed(29, speed);
+        if (speed > 0.46 && speed < 0.64) {
+            Robot.shooterSetSpeed = speed;
         }
+
+        shooter.setSpeed(29, Robot.shooterSetSpeed);
 
         boolean visionGood = (vision.isActive() && vision.isLocked()) || !(vision.isActive());
         if (visionGood) {

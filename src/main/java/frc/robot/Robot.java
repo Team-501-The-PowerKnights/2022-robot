@@ -106,6 +106,8 @@ public class Robot extends TimedRobot {
     // Capture the period at start (shouldn't ever change)
     private static double loopPeriod;
 
+    public static double shooterSetSpeed;
+
     /**
      * Constucts an instance of the robot to play the match.
      */
@@ -120,6 +122,8 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
         logger.info("initializing");
+
+        shooterSetSpeed = 0.4665;
 
         // Wait until we get the configuration data from driver station
         waitForDriverStationData();
