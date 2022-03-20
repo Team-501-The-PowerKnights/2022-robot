@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.shooter;
 
-
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -19,7 +18,6 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Add your docs here.
@@ -47,6 +45,8 @@ abstract class BaseShooterSubsystem extends BaseSubsystem implements IShooterSub
     BaseShooterSubsystem() {
         super(SubsystemNames.shooterName);
         logger.info("constructing");
+
+        SmartDashboard.putNumber(TelemetryNames.Shooter.setSpeed, 0.5);
 
         logger.info("constructed");
     }
@@ -94,7 +94,6 @@ abstract class BaseShooterSubsystem extends BaseSubsystem implements IShooterSub
     @Override
     public void updateTelemetry() {
         SmartDashboard.putNumber(TelemetryNames.Shooter.speed, tlmSpeed);
-        SmartDashboard.putNumber(TelemetryNames.Shooter.setSpeed, tlmSetSpeed);
     }
 
     @Override

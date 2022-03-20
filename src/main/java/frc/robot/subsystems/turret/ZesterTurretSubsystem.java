@@ -19,8 +19,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.sensors.turretlocation.ITurretLocationSensor;
-import frc.robot.sensors.turretlocation.TurretLocationFactory;
+import frc.robot.sensors.turret.ITurretLocationSensor;
+import frc.robot.sensors.turret.TurretLocationFactory;
 import frc.robot.sensors.vision.IVisionSensor;
 import frc.robot.sensors.vision.VisionFactory;
 import frc.robot.telemetry.TelemetryNames;
