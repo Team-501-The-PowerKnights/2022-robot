@@ -11,7 +11,7 @@
         "vgap": 8.0,
         "titleType": 0,
         "tiles": {
-          "21,11": {
+          "20,11": {
             "size": [
               11,
               2
@@ -19,10 +19,10 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Misc.codeVersion",
-              "_title": "Misc.codeVersion"
+              "_title": "codeVersion"
             }
           },
-          "34,6": {
+          "33,6": {
             "size": [
               4,
               2
@@ -30,12 +30,12 @@
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/Misc.fmsConnected",
-              "_title": "Misc.fmsConnected",
+              "_title": "fmsConnected",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "32,11": {
+          "31,11": {
             "size": [
               3,
               2
@@ -43,10 +43,10 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Misc.robotImpl",
-              "_title": "Misc.robotImpl"
+              "_title": "robotImpl"
             }
           },
-          "35,11": {
+          "34,11": {
             "size": [
               3,
               2
@@ -54,13 +54,13 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Misc.robotName",
-              "_title": "Misc.robotName"
+              "_title": "robotName"
             }
           },
-          "25,0": {
+          "24,0": {
             "size": [
               9,
-              2
+              3
             ],
             "content": {
               "_type": "ComboBox Chooser",
@@ -68,7 +68,7 @@
               "_title": "Auto Mode"
             }
           },
-          "34,0": {
+          "33,0": {
             "size": [
               4,
               2
@@ -76,14 +76,14 @@
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/Misc.realAuto",
-              "_title": "Misc.realAuto",
+              "_title": "realAuto",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
           },
           "0,0": {
             "size": [
-              17,
+              16,
               13
             ],
             "content": {
@@ -100,7 +100,7 @@
               "imageHeight": -1
             }
           },
-          "34,3": {
+          "33,3": {
             "size": [
               4,
               2
@@ -113,7 +113,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "17,0": {
+          "16,0": {
             "size": [
               4,
               4
@@ -127,7 +127,7 @@
               "Visuals/Show value": true
             }
           },
-          "21,0": {
+          "20,0": {
             "size": [
               4,
               4
@@ -141,7 +141,7 @@
               "Visuals/Show value": true
             }
           },
-          "32,8": {
+          "31,8": {
             "size": [
               6,
               2
@@ -152,28 +152,56 @@
               "_title": "FMS Override"
             }
           },
-          "17,6": {
+          "16,11": {
             "size": [
               4,
               2
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Climber.climbing",
-              "_title": "Climber.climbing",
+              "_source0": "network_table:///SmartDashboard/Misc.initStatus",
+              "_title": "initStatus",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "17,8": {
+          "24,8": {
             "size": [
               4,
               2
             ],
             "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Climber.position",
-              "_title": "Climber.position"
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Misc.climberStarted",
+              "_title": "climberStarted",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "24,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Misc.climberEnabled",
+              "_title": "climberEnabled",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "24,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Misc.endGameStarted",
+              "_title": "endGameStarted",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
@@ -487,28 +515,6 @@
               "_title": "PCM.implClass"
             }
           },
-          "21,5": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Incrementer.status",
-              "_title": "Incrementer.status"
-            }
-          },
-          "21,7": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Incrementer.implClass",
-              "_title": "Incrementer.implClass"
-            }
-          },
           "29,7": {
             "size": [
               4,
@@ -652,6 +658,28 @@
               "_title": "Turret.teleCommand"
             }
           },
+          "21,5": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Incrementor.status",
+              "_title": "SmartDashboard/Incrementor.status"
+            }
+          },
+          "21,7": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Incrementor.implClass",
+              "_title": "Incrementor.implClass"
+            }
+          },
           "21,9": {
             "size": [
               4,
@@ -659,8 +687,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Incrementer.autoCommand",
-              "_title": "Incrementer.autoCommand"
+              "_source0": "network_table:///SmartDashboard/Incrementor.autoCommand",
+              "_title": "Incrementor.autoCommand"
             }
           },
           "21,11": {
@@ -670,19 +698,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Incrementer.teleCommand",
-              "_title": "Incrementer.teleCommand"
-            }
-          },
-          "3,7": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ElevatorSensor.implClass",
-              "_title": "ElevatorSensor.implClass"
+              "_source0": "network_table:///SmartDashboard/Incrementor.teleCommand",
+              "_title": "Incrementor.teleCommand"
             }
           },
           "0,7": {
@@ -692,8 +709,19 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ElevatorSensor.status",
-              "_title": "ElevatorSensor.status"
+              "_source0": "network_table:///SmartDashboard/ElevatorLoaded.status",
+              "_title": "ElevatorLoaded.status"
+            }
+          },
+          "3,7": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ElevatorLoaded.implClass",
+              "_title": "ElevatorLoaded.implClass"
             }
           },
           "3,9": {
@@ -703,8 +731,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/IncrementerSensor.implClass",
-              "_title": "IncrementerSensor.implClass"
+              "_source0": "network_table:///SmartDashboard/IncrementorLoaded.implClass",
+              "_title": "IncrementorLoaded.implClass"
             }
           },
           "0,9": {
@@ -714,8 +742,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/IncrementerSensor.status",
-              "_title": "IncrementerSensor.status"
+              "_source0": "network_table:///SmartDashboard/IncrementorLoaded.status",
+              "_title": "IncrementorLoaded.status"
             }
           }
         }
@@ -918,19 +946,6 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "20,5": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Incrementer.full",
-              "_title": "Incrementer.full",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
           "14,0": {
             "size": [
               5,
@@ -938,8 +953,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ElevatorSensor.implClass",
-              "_title": "ElevatorSensor.implClass"
+              "_source0": "network_table:///SmartDashboard/ElevatorLoaded.implClass",
+              "_title": "ElevatorLoaded.implClass"
             }
           },
           "14,2": {
@@ -949,8 +964,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ElevatorSensor.status",
-              "_title": "ElevatorSensor.status"
+              "_source0": "network_table:///SmartDashboard/ElevatorLoaded.status",
+              "_title": "ElevatorLoaded.status"
             }
           },
           "20,0": {
@@ -960,8 +975,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/IncrementerSensor.implClass",
-              "_title": "IncrementerSensor.implClass"
+              "_source0": "network_table:///SmartDashboard/IncrementorLoaded.implClass",
+              "_title": "IncrementorLoaded.implClass"
             }
           },
           "20,2": {
@@ -971,8 +986,21 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/IncrementerSensor.status",
-              "_title": "IncrementerSensor.status"
+              "_source0": "network_table:///SmartDashboard/IncrementorLoaded.status",
+              "_title": "IncrementorLoaded.status"
+            }
+          },
+          "20,5": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Incrementor.full",
+              "_title": "Incrementor.full",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
@@ -1577,19 +1605,6 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "21,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/IntakepushingOut",
-              "_title": "IntakepushingOut",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
           "2,0": {
             "size": [
               5,
@@ -1634,6 +1649,19 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Intake.autoCommand",
               "_title": "Intake.autoCommand"
+            }
+          },
+          "21,0": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Intake.pushingOut",
+              "_title": "Intake.pushingOut",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
@@ -1755,56 +1783,6 @@
               "_title": "Elevator.teleCommand"
             }
           },
-          "20,7": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Incrementer.speed",
-              "_title": "Incrementer.speed"
-            }
-          },
-          "24,7": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Incrementer.stopped",
-              "_title": "Incrementer.stopped",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "28,6": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Incrementer.lifting",
-              "_title": "Incrementer.lifting",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "28,8": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Incrementer.lowering",
-              "_title": "Incrementer.lowering",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
           "33,1": {
             "size": [
               4,
@@ -1818,17 +1796,15 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "33,7": {
+          "2,8": {
             "size": [
               4,
               2
             ],
             "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Incrementer.full",
-              "_title": "Incrementer.full",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Incrementor.status",
+              "_title": "Incrementor.status"
             }
           },
           "7,8": {
@@ -1838,8 +1814,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Incrementer.teleCommand",
-              "_title": "Incrementer.teleCommand"
+              "_source0": "network_table:///SmartDashboard/Incrementor.teleCommand",
+              "_title": "Incrementor.teleCommand"
             }
           },
           "7,6": {
@@ -1849,8 +1825,8 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Incrementer.autoCommand",
-              "_title": "Incrementer.autoCommand"
+              "_source0": "network_table:///SmartDashboard/Incrementor.autoCommand",
+              "_title": "Incrementor.autoCommand"
             }
           },
           "2,6": {
@@ -1860,19 +1836,71 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Incrementer.implClass",
-              "_title": "Incrementer.implClass"
+              "_source0": "network_table:///SmartDashboard/Incrementor.implClass",
+              "_title": "Incrementor.implClass"
             }
           },
-          "2,8": {
+          "20,7": {
             "size": [
               4,
               2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Incrementer.status",
-              "_title": "Incrementer.status"
+              "_source0": "network_table:///SmartDashboard/Incrementor.speed",
+              "_title": "Incrementor.speed"
+            }
+          },
+          "24,7": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Incrementor.stopped",
+              "_title": "Incrementor.stopped",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "28,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Incrementor.lifting",
+              "_title": "Incrementor.lifting",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "28,8": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Incrementor.lowering",
+              "_title": "Incrementor.lowering",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "33,7": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Incrementor.full",
+              "_title": "Incrementor.full",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
@@ -2203,17 +2231,6 @@
         "vgap": 8.0,
         "titleType": 0,
         "tiles": {
-          "2,4": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Climber.autoCommand",
-              "_title": "Climber.autoCommand"
-            }
-          },
           "2,0": {
             "size": [
               5,
@@ -2223,17 +2240,6 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Climber.implClass",
               "_title": "Climber.implClass"
-            }
-          },
-          "2,6": {
-            "size": [
-              5,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Climber.teleCommand",
-              "_title": "Climber.teleCommand"
             }
           },
           "2,2": {
@@ -2247,52 +2253,65 @@
               "_title": "Climber.status"
             }
           },
-          "15,0": {
+          "2,6": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climber.teleCommand",
+              "_title": "Climber.teleCommand"
+            }
+          },
+          "2,4": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climber.autoCommand",
+              "_title": "Climber.autoCommand"
+            }
+          },
+          "8,2": {
             "size": [
               4,
               2
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Climber.climbing",
-              "_title": "Climber.climbing",
+              "_source0": "network_table:///SmartDashboard/Misc.climberEnabled",
+              "_title": "Misc.climberEnabled",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "11,0": {
-            "size": [
-              4,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Climber.speed",
-              "_title": "Climber.speed"
-            }
-          },
-          "20,0": {
+          "8,4": {
             "size": [
               4,
               2
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Climber.retracting",
-              "_title": "Climber.retracting",
+              "_source0": "network_table:///SmartDashboard/Misc.climberStarted",
+              "_title": "Misc.climberStarted",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "15,2": {
+          "8,0": {
             "size": [
               4,
               2
             ],
             "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Climber.position",
-              "_title": "Climber.position"
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Misc.endGameStarted",
+              "_title": "Misc.endGameStarted",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
@@ -2318,1747 +2337,6 @@
               "_type": "ComboBox Chooser",
               "_source0": "network_table:///SmartDashboard/FMS Override",
               "_title": "FMS Override"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Shuffleboard",
-      "autoPopulate": true,
-      "autoPopulatePrefix": "SmartDashboard/",
-      "widgetPane": {
-        "gridSize": 32.0,
-        "showGrid": true,
-        "hgap": 8.0,
-        "vgap": 8.0,
-        "titleType": 0,
-        "tiles": {
-          "0,2": {
-            "size": [
-              3,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Scheduler.currentCommands",
-              "_title": "Scheduler.currentCommands"
-            }
-          },
-          "1,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.status",
-              "_title": "Drive.status"
-            }
-          },
-          "2,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Scheduler.status",
-              "_title": "Scheduler.status"
-            }
-          },
-          "3,4": {
-            "size": [
-              3,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake.implClass",
-              "_title": "Intake.implClass"
-            }
-          },
-          "3,2": {
-            "size": [
-              3,
-              1
-            ],
-            "content": {
-              "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/Auto Mode",
-              "_title": "Auto Mode"
-            }
-          },
-          "5,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Preferences.status",
-              "_title": "Preferences.status"
-            }
-          },
-          "6,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/OI.status",
-              "_title": "OI.status"
-            }
-          },
-          "7,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Elevator.status",
-              "_title": "Elevator.status"
-            }
-          },
-          "8,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/PDP.status",
-              "_title": "PDP.status"
-            }
-          },
-          "9,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter.status",
-              "_title": "Shooter.status"
-            }
-          },
-          "10,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Misc.realAuto",
-              "_title": "Misc.realAuto",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "11,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/HMI.turbo",
-              "_title": "HMI.turbo",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "12,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/HMI.rawTurn",
-              "_title": "HMI.rawTurn"
-            }
-          },
-          "0,5": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Misc.robotName",
-              "_title": "Misc.robotName"
-            }
-          },
-          "9,4": {
-            "size": [
-              3,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter.implClass",
-              "_title": "Shooter.implClass"
-            }
-          },
-          "6,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.heading",
-              "_title": "Gyro.heading"
-            }
-          },
-          "7,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Telemetry.status",
-              "_title": "Telemetry.status"
-            }
-          },
-          "0,4": {
-            "size": [
-              3,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.implClass",
-              "_title": "Drive.implClass"
-            }
-          },
-          "9,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.angle",
-              "_title": "Gyro.angle"
-            }
-          },
-          "10,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.status",
-              "_title": "Gyro.status"
-            }
-          },
-          "11,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Misc.fmsConnected",
-              "_title": "Misc.fmsConnected",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "12,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/HMI.oiSpeed",
-              "_title": "HMI.oiSpeed"
-            }
-          },
-          "6,4": {
-            "size": [
-              3,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Elevator.implClass",
-              "_title": "Elevator.implClass"
-            }
-          },
-          "4,5": {
-            "size": [
-              6,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Misc.codeVersion",
-              "_title": "Misc.codeVersion"
-            }
-          },
-          "12,4": {
-            "size": [
-              3,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turret.implClass",
-              "_title": "Turret.implClass"
-            }
-          },
-          "8,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/HMI.crawl",
-              "_title": "HMI.crawl",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "9,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/HMI.oiTurn",
-              "_title": "HMI.oiTurn"
-            }
-          },
-          "2,5": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Misc.robotImpl",
-              "_title": "Misc.robotImpl"
-            }
-          },
-          "3,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Climber.status",
-              "_title": "Climber.status"
-            }
-          },
-          "15,4": {
-            "size": [
-              3,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Climber.implClass",
-              "_title": "Climber.implClass"
-            }
-          },
-          "13,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/HMI.intakeSpeed",
-              "_title": "HMI.intakeSpeed"
-            }
-          },
-          "14,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/HMI.firePose",
-              "_title": "HMI.firePose",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "16,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/HMI.visionTargetting",
-              "_title": "HMI.visionTargetting",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "14,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/HMI.homeTurret",
-              "_title": "HMI.homeTurret",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "20,0": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/HMI.revShooter",
-              "_title": "HMI.revShooter",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "0,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.yaw",
-              "_title": "Gyro.yaw"
-            }
-          },
-          "4,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/HMI.rawSpeed",
-              "_title": "HMI.rawSpeed"
-            }
-          },
-          "13,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.pitch",
-              "_title": "Gyro.pitch"
-            }
-          },
-          "1,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.roll",
-              "_title": "Gyro.roll"
-            }
-          },
-          "2,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake.status",
-              "_title": "Intake.status"
-            }
-          },
-          "3,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turret.status",
-              "_title": "Turret.status"
-            }
-          },
-          "4,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Properties.status",
-              "_title": "Properties.status"
-            }
-          },
-          "18,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/PDP.implClass",
-              "_title": "PDP.implClass"
-            }
-          },
-          "19,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro.implClass",
-              "_title": "Gyro.implClass"
-            }
-          },
-          "0,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.leftSpeed",
-              "_title": "Drive.leftSpeed"
-            }
-          },
-          "5,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.rightSpeed",
-              "_title": "Drive.rightSpeed"
-            }
-          },
-          "22,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.encoderClicks",
-              "_title": "Drive.encoderClicks"
-            }
-          },
-          "24,0": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/HMI.elevatorUp",
-              "_title": "HMI.elevatorUp",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "28,0": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/HMI.elevatorDown",
-              "_title": "HMI.elevatorDown",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "32,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/HMI.elevatorSpeed",
-              "_title": "HMI.elevatorSpeed"
-            }
-          },
-          "34,0": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Elevator.stopped",
-              "_title": "Elevator.stopped",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "18,2": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Elevator.lifting",
-              "_title": "Elevator.lifting",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "22,4": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Elevator.lowering",
-              "_title": "Elevator.lowering",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "38,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake.speed",
-              "_title": "Intake.speed"
-            }
-          },
-          "26,4": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Intake.stopped",
-              "_title": "Intake.stopped",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "30,4": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Intake.pullingIn",
-              "_title": "Intake.pullingIn",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "34,4": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/IntakepushingOut",
-              "_title": "IntakepushingOut",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "40,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Elevator.speed",
-              "_title": "Elevator.speed"
-            }
-          },
-          "42,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Vision.status",
-              "_title": "Vision.status"
-            }
-          },
-          "16,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Vision.implClass",
-              "_title": "Vision.implClass"
-            }
-          },
-          "38,1": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Vision.enabled",
-              "_title": "Vision.enabled",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "10,5": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Vision.active",
-              "_title": "Vision.active",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "14,5": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Vision.locked",
-              "_title": "Vision.locked",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "44,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/TurretLocation.status",
-              "_title": "TurretLocation.status"
-            }
-          },
-          "46,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/TurretLocation.implClass",
-              "_title": "TurretLocation.implClass"
-            }
-          },
-          "42,1": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/TurretLocation.isFound",
-              "_title": "TurretLocation.isFound",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "48,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_PipelineName",
-              "_title": "limelight_PipelineName"
-            }
-          },
-          "50,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_Interface",
-              "_title": "limelight_Interface"
-            }
-          },
-          "18,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_Stream",
-              "_title": "limelight_Stream"
-            }
-          },
-          "22,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ClimberdefCommand",
-              "_title": "ClimberdefCommand"
-            }
-          },
-          "32,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/DrivedefCommand",
-              "_title": "DrivedefCommand"
-            }
-          },
-          "46,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/IntakedefCommand",
-              "_title": "IntakedefCommand"
-            }
-          },
-          "48,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ElevatordefCommand",
-              "_title": "ElevatordefCommand"
-            }
-          },
-          "50,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ShooterdefCommand",
-              "_title": "ShooterdefCommand"
-            }
-          },
-          "6,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/TurretdefCommand",
-              "_title": "TurretdefCommand"
-            }
-          },
-          "10,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.defCommand",
-              "_title": "Drive.defCommand"
-            }
-          },
-          "14,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake.defCommand",
-              "_title": "Intake.defCommand"
-            }
-          },
-          "16,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Elevator.defCommand",
-              "_title": "Elevator.defCommand"
-            }
-          },
-          "22,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter.defCommand",
-              "_title": "Shooter.defCommand"
-            }
-          },
-          "32,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turret.defCommand",
-              "_title": "Turret.defCommand"
-            }
-          },
-          "46,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Climber.defCommand",
-              "_title": "Climber.defCommand"
-            }
-          },
-          "52,0": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Elevator.atLimit",
-              "_title": "Elevator.atLimit",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "48,2": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/limelightValid",
-              "_title": "limelightValid",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "0,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter.targetRpm",
-              "_title": "Shooter.targetRpm"
-            }
-          },
-          "2,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/PDP.totalCurrent",
-              "_title": "PDP.totalCurrent"
-            }
-          },
-          "4,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter.cmd-tolerance",
-              "_title": "Shooter.cmd-tolerance"
-            }
-          },
-          "52,4": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Shooter.atTarget",
-              "_title": "Shooter.atTarget",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "6,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/PDP.totalEnergy",
-              "_title": "PDP.totalEnergy"
-            }
-          },
-          "38,5": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/ahrsValid",
-              "_title": "ahrsValid",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "8,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turret.angle",
-              "_title": "Turret.angle"
-            }
-          },
-          "42,5": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Turret.isHomed",
-              "_title": "Turret.isHomed",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "0,6": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Shooter.isActive",
-              "_title": "Shooter.isActive",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "10,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turret.rawPosition",
-              "_title": "Turret.rawPosition"
-            }
-          },
-          "12,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/PDP.busVoltage",
-              "_title": "PDP.busVoltage"
-            }
-          },
-          "14,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter.rpm",
-              "_title": "Shooter.rpm"
-            }
-          },
-          "4,6": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Elevator.full",
-              "_title": "Elevator.full",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "56,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/HMI.turretJog",
-              "_title": "HMI.turretJog"
-            }
-          },
-          "58,0": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/Auto choices",
-              "_title": "Auto choices"
-            }
-          },
-          "60,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.distanceClicks",
-              "_title": "Drive.distanceClicks"
-            }
-          },
-          "56,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turret.visionPIDOutput",
-              "_title": "Turret.visionPIDOutput"
-            }
-          },
-          "62,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.targetClicks",
-              "_title": "Drive.targetClicks"
-            }
-          },
-          "64,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turret.setSpeed",
-              "_title": "Turret.setSpeed"
-            }
-          },
-          "60,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turret.speed",
-              "_title": "Turret.speed"
-            }
-          },
-          "66,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Climber.speed",
-              "_title": "Climber.speed"
-            }
-          },
-          "68,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter.speed",
-              "_title": "Shooter.speed"
-            }
-          },
-          "62,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter.setSpeed",
-              "_title": "Shooter.setSpeed"
-            }
-          },
-          "70,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/PCM.implClass",
-              "_title": "PCM.implClass"
-            }
-          },
-          "64,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/PCM.status",
-              "_title": "PCM.status"
-            }
-          },
-          "66,1": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/PCM.compressorEnabled",
-              "_title": "PCM.compressorEnabled",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "70,1": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/PCM.enabled",
-              "_title": "PCM.enabled",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "56,2": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/PCM.intakeExtended",
-              "_title": "PCM.intakeExtended",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "60,2": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/PCM.pressureGood",
-              "_title": "PCM.pressureGood",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "64,5": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Intake.pushingOut",
-              "_title": "Intake.pushingOut",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "68,5": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Intakeretracted",
-              "_title": "Intakeretracted",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "72,5": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Intake.extended",
-              "_title": "Intake.extended",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "72,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Incrementer.status",
-              "_title": "Incrementer.status"
-            }
-          },
-          "74,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Incrementer.implClass",
-              "_title": "Incrementer.implClass"
-            }
-          },
-          "74,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Incrementer.defCommand",
-              "_title": "Incrementer.defCommand"
-            }
-          },
-          "64,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Incrementer.speed",
-              "_title": "Incrementer.speed"
-            }
-          },
-          "18,6": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Incrementer.stopped",
-              "_title": "Incrementer.stopped",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "46,6": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Incrementer.lifting",
-              "_title": "Incrementer.lifting",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "56,6": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Incrementer.lowering",
-              "_title": "Incrementer.lowering",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "60,6": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Incrementer.full",
-              "_title": "Incrementer.full",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "76,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake.teleCommand",
-              "_title": "Intake.teleCommand"
-            }
-          },
-          "78,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.teleCommand",
-              "_title": "Drive.teleCommand"
-            }
-          },
-          "76,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drive.autoCommand",
-              "_title": "Drive.autoCommand"
-            }
-          },
-          "78,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Intake.autoCommand",
-              "_title": "Intake.autoCommand"
-            }
-          },
-          "74,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Elevator.teleCommand",
-              "_title": "Elevator.teleCommand"
-            }
-          },
-          "76,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Elevator.autoCommand",
-              "_title": "Elevator.autoCommand"
-            }
-          },
-          "78,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turret.teleCommand",
-              "_title": "Turret.teleCommand"
-            }
-          },
-          "16,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Turret.autoCommand",
-              "_title": "Turret.autoCommand"
-            }
-          },
-          "22,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter.teleCommand",
-              "_title": "Shooter.teleCommand"
-            }
-          },
-          "32,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter.autoCommand",
-              "_title": "Shooter.autoCommand"
-            }
-          },
-          "46,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Climber.teleCommand",
-              "_title": "Climber.teleCommand"
-            }
-          },
-          "64,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Climber.autoCommand",
-              "_title": "Climber.autoCommand"
-            }
-          },
-          "80,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Incrementer.autoCommand",
-              "_title": "Incrementer.autoCommand"
-            }
-          },
-          "82,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Incrementer.teleCommand",
-              "_title": "Incrementer.teleCommand"
-            }
-          },
-          "80,1": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Incrementer.atLimit",
-              "_title": "Incrementer.atLimit",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "74,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/IncrementerSensor.status",
-              "_title": "IncrementerSensor.status"
-            }
-          },
-          "76,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ElevatorSensor.status",
-              "_title": "ElevatorSensor.status"
-            }
-          },
-          "78,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/IncrementerSensor.implClass",
-              "_title": "IncrementerSensor.implClass"
-            }
-          },
-          "46,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/ElevatorSensor.implClass",
-              "_title": "ElevatorSensor.implClass"
-            }
-          },
-          "84,0": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/FMS Override",
-              "_title": "FMS Override"
-            }
-          },
-          "86,0": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Climber.extending",
-              "_title": "Climber.extending",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "76,4": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Climber.climbing",
-              "_title": "Climber.climbing",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "84,4": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Climber.topLimit",
-              "_title": "Climber.topLimit",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "80,5": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Climber.bottomLimit",
-              "_title": "Climber.bottomLimit",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "88,4": {
-            "size": [
-              4,
-              4
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Climber.retracting",
-              "_title": "Climber.retracting",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "90,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Climber.position",
-              "_title": "Climber.position"
             }
           }
         }
@@ -4336,26 +2614,15 @@
               "Layout/Label position": "BOTTOM",
               "_children": []
             }
-          },
-          "0,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Basic Subsystem",
-              "_source0": "network_table:///LiveWindow/IncrementerSubsystem",
-              "_title": "IncrementerSubsystem"
-            }
           }
         }
       }
     }
   ],
   "windowGeometry": {
-    "x": -6.400000095367432,
+    "x": -6.0,
     "y": 4.0,
-    "width": 1548.800048828125,
+    "width": 1549.0,
     "height": 668.0
   }
 }

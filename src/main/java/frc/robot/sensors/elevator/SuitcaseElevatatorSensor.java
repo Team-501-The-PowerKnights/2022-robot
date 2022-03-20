@@ -14,15 +14,15 @@ import riolog.RioLogger;
 
 
 /**
- * Provides implementation of <code>IElevatorSensor</code> for the
+ * Provides implementation of {@link IElevatorLoadedSensor} for the
  * <i>Suitcase-Bot</i>.
  */
-class SuitcaseElevatorSensor extends StubElevatorSensor {
+class SuitcaseElevatorLoadedSensor extends StubElevatorLoadedSensor {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(SuitcaseElevatorSensor.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(SuitcaseElevatorLoadedSensor.class.getName());
 
-    SuitcaseElevatorSensor() {
+    SuitcaseElevatorLoadedSensor() {
         logger.info("constructing");
 
         logger.info("constructed");

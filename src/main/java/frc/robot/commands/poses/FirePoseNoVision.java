@@ -14,8 +14,8 @@ import frc.robot.sensors.vision.IVisionSensor;
 import frc.robot.sensors.vision.VisionFactory;
 import frc.robot.subsystems.elevator.ElevatorFactory;
 import frc.robot.subsystems.elevator.IElevatorSubsystem;
-import frc.robot.subsystems.incrementer.IIncrementerSubsystem;
-import frc.robot.subsystems.incrementer.IncrementerFactory;
+import frc.robot.subsystems.incrementor.IIncrementorSubsystem;
+import frc.robot.subsystems.incrementor.IncrementorFactory;
 import frc.robot.subsystems.shooter.IShooterSubsystem;
 import frc.robot.subsystems.shooter.ShooterFactory;
 
@@ -30,7 +30,7 @@ public class FirePoseNoVision extends PKCommandBase {
     private final IVisionSensor vision;
 
     private final IShooterSubsystem shooter;
-    private final IIncrementerSubsystem incrementer;
+    private final IIncrementorSubsystem incrementer;
     private final IElevatorSubsystem elevator;
 
     public FirePoseNoVision() {
@@ -39,7 +39,7 @@ public class FirePoseNoVision extends PKCommandBase {
         vision = VisionFactory.getInstance();
 
         shooter = ShooterFactory.getInstance();
-        incrementer = IncrementerFactory.getInstance();
+        incrementer = IncrementorFactory.getInstance();
         elevator = ElevatorFactory.getInstance();
 
         addRequirements(shooter, incrementer, elevator);

@@ -29,6 +29,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.modes.AutoDoNothing;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.PKSequentialCommandGroup;
+import frc.robot.commands.climber.ClimberStateMachine;
 import frc.robot.commands.drive.DriveBackwardDistance;
 import frc.robot.commands.drive.DriveBackwardTimed;
 import frc.robot.commands.drive.DriveForwardDistance;
@@ -39,17 +40,17 @@ import frc.robot.commands.intake.IntakeIngestTimed;
 import frc.robot.commands.poses.FirePoseVision;
 import frc.robot.commands.turret.TurretVisionAlign;
 import frc.robot.modules.IModule;
-import frc.robot.modules.ModuleFactory;
+import frc.robot.modules.ModulesFactory;
 import frc.robot.preferences.PreferencesManager;
 import frc.robot.properties.PropertiesManager;
 import frc.robot.sensors.ISensor;
-import frc.robot.sensors.SensorFactory;
+import frc.robot.sensors.SensorsFactory;
 import frc.robot.telemetry.SchedulerProvider;
 import frc.robot.telemetry.TelemetryManager;
 import frc.robot.telemetry.TelemetryNames;
 import frc.robot.subsystems.ISubsystem;
-import frc.robot.subsystems.SubsystemFactory;
-import frc.robot.subsystems.drive.DriveFactory;
+import frc.robot.subsystems.SubsystemsFactory;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -67,7 +68,18 @@ public class Robot extends TimedRobot {
 
     private OI oi;
 
+    // Handle to telemetry manager
     private TelemetryManager tlmMgr;
+    // Periodic runnable to do the reporting off main loop
+    private Runnable telemetryReporter = new Runnable() {
+
+        @Override
+        public void run() {
+            // Update the telemetry
+            tlmMgr.sendTelemetry();
+        }
+
+    };
 
     //
     private List<IModule> modules;
@@ -94,6 +106,27 @@ public class Robot extends TimedRobot {
     private boolean teleopFirstRun;
     // Flag for having completed teleop part of match
     private boolean teleopComplete;
+
+    // Flag for in end game of match
+    private static boolean endGameStarted;
+    // Periodic runnable to do the determining off main loop
+    private Runnable endGameDeterminer = new Runnable() {
+
+        @Override
+        public void run() {
+            if (teleopRunning && !endGameStarted) {
+                double remainingSeconds = DriverStation.getMatchTime();
+                if (remainingSeconds < 40) {
+                    endGameStarted = true;
+                    SmartDashboard.putBoolean(TelemetryNames.Misc.endGameStarted, endGameStarted);
+                }
+            }
+        }
+
+    };
+
+    // Handle to climber state machine
+    private ClimberStateMachine climberSM;
 
     // Chooser for autonomous command from Dashboard
     private SendableChooser<Command> autoChooser;
@@ -128,7 +161,11 @@ public class Robot extends TimedRobot {
         // Wait until we get the configuration data from driver station
         waitForDriverStationData();
 
+        // Get the loop period set for robot
         loopPeriod = getPeriod();
+
+        // Initialize the dashboard to false for status
+        SmartDashboard.putBoolean(TelemetryNames.Misc.initStatus, false);
 
         // Make sure Preferences are initialized
         intializePreferences();
@@ -153,13 +190,13 @@ public class Robot extends TimedRobot {
         followers = new ArrayList<>();
 
         // Create all the modules
-        modules = ModuleFactory.constructModules();
+        modules = ModulesFactory.constructModules();
         followers.addAll(modules);
         // Create all the sensors
-        sensors = SensorFactory.constructSensors();
+        sensors = SensorsFactory.constructSensors();
         followers.addAll(sensors);
         // Create all the subsystems
-        subsystems = SubsystemFactory.constructSubsystems();
+        subsystems = SubsystemsFactory.constructSubsystems();
         followers.addAll(subsystems);
 
         // Configure all OI now that subsystems are complete
@@ -178,6 +215,21 @@ public class Robot extends TimedRobot {
 
         // Create the chooser for FMS connected override
         createFmsOverrideChooser();
+
+        // Put indication of initialization status on dash
+        determineInitStatus();
+
+        // Construct the instance of climber state machine
+        ClimberStateMachine.constructInstance();
+        climberSM = ClimberStateMachine.getInstance();
+
+        // Set up end game determiner
+        endGameStarted = false;
+        SmartDashboard.putBoolean(TelemetryNames.Misc.endGameStarted, endGameStarted);
+        addPeriodic(endGameDeterminer, 2.0);
+
+        // Set up the telemetry reporter
+        addPeriodic(telemetryReporter, 5 * getLoopPeriod());
 
         logger.info("initialized");
     }
@@ -250,6 +302,18 @@ public class Robot extends TimedRobot {
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
 
+    private void determineInitStatus() {
+        // TODO: Make tri-color status when implemented
+        long warnCount = logger.getWarnCount();
+        long errorCount = logger.getErrorCount();
+        logger.info("init status: errorCount={}, warnCount={}", errorCount, warnCount);
+        // red for bad, green for good (so reverse sense)
+        boolean status = !((errorCount != 0) || (warnCount != 0));
+        SmartDashboard.putBoolean(TelemetryNames.Misc.initStatus, status);
+
+        // TODO: Parse network tables for all status and do a roll-up
+    }
+
     /**
      * This function is called every robot packet, no matter the mode. Use this for
      * items like diagnostics that you want ran during disabled, autonomous,
@@ -267,13 +331,6 @@ public class Robot extends TimedRobot {
         // methods. This must be called from the robot's periodic block in order
         // for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
-
-        // Update the telemetry
-        tlmMgr.sendTelemetry();
-
-        // Add an indicator about what auto command is current selected
-        SmartDashboard.putBoolean(TelemetryNames.Misc.realAuto,
-                !autoChooser.getSelected().getName().equalsIgnoreCase("DoNothing"));
     }
 
     /**
@@ -296,6 +353,8 @@ public class Robot extends TimedRobot {
 
             logMatchData();
 
+            logErrorCounts();
+
             for (IModule m : modules) {
                 m.disable();
             }
@@ -306,6 +365,10 @@ public class Robot extends TimedRobot {
                 s.disable();
             }
         }
+
+        // (Re-)initialize end game state
+        endGameStarted = false;
+        SmartDashboard.putBoolean(TelemetryNames.Misc.endGameStarted, endGameStarted);
 
         logger.info("disabled");
     }
@@ -340,10 +403,24 @@ public class Robot extends TimedRobot {
     }
 
     /**
+     * Log the count of errors and warnings from the logger to the tail of the
+     * log file.
+     */
+    private void logErrorCounts() {
+        long warnCount = logger.getWarnCount();
+        long errorCount = logger.getErrorCount();
+        logger.info("error counts: errorCount={}, warnCount={}", errorCount, warnCount);
+    }
+
+    /**
      * This function is called periodically during Disabled mode.
      */
     @Override
     public void disabledPeriodic() {
+        // Add an indicator about what auto command is current selected
+        String doNothingName = AutoDoNothing.class.getSimpleName();
+        SmartDashboard.putBoolean(TelemetryNames.Misc.realAuto,
+                !autoChooser.getSelected().getName().equalsIgnoreCase(doNothingName));
     }
 
     /**
@@ -430,6 +507,9 @@ public class Robot extends TimedRobot {
             f.teleopInit();
         }
 
+        // Initialize the climber state manager (only valid in teleop)
+        climberSM.initState();
+
         logger.info("initialized teleop");
     }
 
@@ -441,6 +521,10 @@ public class Robot extends TimedRobot {
         if (!teleopFirstRun) {
             teleopFirstRun = true;
             logger.info("first run of teleop periodic");
+        }
+
+        if (endGameStarted && !climberSM.isClimberEnabled()) {
+            climberSM.enableClimberSequencing();
         }
     }
 
@@ -457,6 +541,8 @@ public class Robot extends TimedRobot {
         for (IModeFollower f : followers) {
             f.teleopExit();
         }
+
+        climberSM.resetState();
 
         logger.info("exited teleop");
     }
@@ -518,6 +604,10 @@ public class Robot extends TimedRobot {
 
     static public double getLoopPeriod() {
         return loopPeriod;
+    }
+
+    static public boolean isEndGameStarted() {
+        return endGameStarted;
     }
 
 }

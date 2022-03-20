@@ -130,6 +130,14 @@ public class DriverGamepad extends F310Gamepad {
     }
 
     /*********************
+     * Climber
+     *********************/
+
+    public boolean getClimberStart() {
+        return getStartButton();
+    }
+
+    /*********************
      * Test Stuff
      *********************/
 

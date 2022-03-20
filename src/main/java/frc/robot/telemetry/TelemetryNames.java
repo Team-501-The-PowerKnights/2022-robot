@@ -36,6 +36,13 @@ public final class TelemetryNames {
         public static final String fmsConnected = name + ".fmsConnected";
 
         public static final String realAuto = name + ".realAuto";
+
+        public static final String initStatus = name + ".initStatus";
+
+        public static final String endGameStarted = name + ".endGameStarted";
+
+        public static final String climberEnabled = name + ".climberEnabled";
+        public static final String climberStarted = name + ".climberStarted";
     }
 
     /***************
@@ -150,6 +157,20 @@ public final class TelemetryNames {
         public static final String heading = name + ".heading";
     }
 
+    public final class IncrementorLoadedSensor {
+        private static final String name = SensorNames.incrementorLoadedName;
+
+        public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+    }
+
+    public final class ElevatorLoadedSensor {
+        private static final String name = SensorNames.elevatorLoadedName;
+
+        public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+    }
+
     public final class TurretLocation {
         private static final String name = SensorNames.turretLocationName;
 
@@ -158,19 +179,15 @@ public final class TelemetryNames {
 
         public static final String isFound = name + ".isFound";
     }
-
-    public final class ElevatorSensor {
-        private static final String name = SensorNames.elevatorName;
-
-        public static final String status = name + ".status";
-        public static final String implClass = name + ".implClass";
-    }
-
-    public final class IncrementerSensor {
-        private static final String name = SensorNames.incrementerName;
+    
+    public final class WallDistance {
+        private static final String name = SensorNames.wallDistanceName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
+
+        public static final String distance = name +".distance";
+        public static final String valid = name +".valid";
     }
 
     public final class Vision {
@@ -238,7 +255,7 @@ public final class TelemetryNames {
     }
 
     public final class Incrementer {
-        private static final String name = SubsystemNames.incrementerName;
+        private static final String name = SubsystemNames.incrementorName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";

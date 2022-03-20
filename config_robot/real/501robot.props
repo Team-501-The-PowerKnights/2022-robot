@@ -46,24 +46,17 @@ Gyro.className = GyroSensor
 
 
 #####################
-# Vision
+# Incrementor Loaded
 #####################
-#Vision.className = StubVisionSensor
-Vision.className = VisionSensor
+IncrementorLoaded.className = StubIncrementorLoadedSensor
+#IncrementorLoaded.className = IncrementorLoadedSensor
 
 
 #####################
 # Elevator Loaded
 #####################
-ElevatorSensor.className = StubElevatorSensor
-#ElevatorSensor.className = ElevatorSensor
-
-
-#####################
-# Incrementer Loaded
-#####################
-IncrementerSensor.className = StubIncrementerSensor
-#IncrementerSensor.className = IncrementerSensor
+ElevatorLoaded.className = StubElevatorLoadedSensor
+#ElevatorLoaded.className = ElevatorLoadedSensor
 
 
 #####################
@@ -71,6 +64,20 @@ IncrementerSensor.className = StubIncrementerSensor
 #####################
 TurretLocation.className = StubTurretLocationSensor
 #TurretLocation.className = TurretLocationSensor
+
+
+#####################
+# Wall Distance
+#####################
+WallDistance.className = StubWallDistanceSensor
+#WallDistance.className = WallDistanceSensor
+
+
+#####################
+# Vision
+#####################
+#Vision.className = StubVisionSensor
+Vision.className = VisionSensor
 
 
 
@@ -111,13 +118,13 @@ Elevator.teleCommandName = ElevatorManualControl
 
 
 #####################
-# Incrementer
+# Incrementor
 #####################
-#Incrementer.className = StubIncrementerSubsystem
-Incrementer.className = IncrementerSubsystem
-Incrementer.autoCommandName = IncrementerDoNothing
-#Incrementer.teleCommandName = IncrementerDoNothing
-Incrementer.teleCommandName = IncrementerManualControl
+#Incrementor.className = StubIncrementorSubsystem
+Incrementor.className = IncrementorSubsystem
+Incrementor.autoCommandName = IncrementorDoNothing
+#Incrementor.teleCommandName = IncrementorDoNothing
+Incrementor.teleCommandName = IncrementorManualControl
 
 
 #####################
