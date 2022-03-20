@@ -122,7 +122,7 @@ class DriveSubsystem extends BaseDriveSubsystem {
         rightRearMotor.setInverted(true);
         // leftFrontMotor.setInverted(true);
 
-        setBrake(true);
+        setBrake(false);
 
         // Following
         // checkError(leftRearMotor.follow(leftFrontMotor), "L setting following mode
