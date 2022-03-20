@@ -8,7 +8,6 @@
 
 package frc.robot.commands.poses;
 
-
 import frc.robot.commands.PKCommandBase;
 import frc.robot.sensors.vision.IVisionSensor;
 import frc.robot.sensors.vision.VisionFactory;
@@ -21,7 +20,6 @@ import frc.robot.subsystems.shooter.ShooterFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 public class FirePoseVision extends PKCommandBase {
 
@@ -57,7 +55,9 @@ public class FirePoseVision extends PKCommandBase {
                 + (2.07E-04 * Math.pow(y, 4)) + (2.34E-04 * Math.pow(y, 5)) + (-5.47E-05 * Math.pow(y, 6))
                 + (4.68E-06 * Math.pow(y, 7)) + -1.41E-07 * (Math.pow(y, 8));
         // speed += 0.015;
-        shooter.setSpeed(29, speed);
+        if (speed > 0.3) {
+            shooter.setSpeed(29, speed);
+        }
 
         boolean visionGood = (vision.isActive() && vision.isLocked()) || !(vision.isActive());
         if (visionGood) {
