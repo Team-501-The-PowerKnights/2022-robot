@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.ClimberPositionForLevel2Pose;
 import frc.robot.commands.ClimberSetSubystemsPose;
+import frc.robot.modules.pcm.PCMFactory;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -99,6 +100,9 @@ public class ClimberStateMachine {
         SmartDashboard.putBoolean(TelemetryNames.Misc.climberStarted, climberStarted);
 
         CommandScheduler.getInstance().schedule(true, new ClimberSetSubystemsPose());
+        // Pneumatics aren't a subsystem, so commands don't work
+        PCMFactory.getInstance().disabledInit();
+
         CommandScheduler.getInstance().schedule(true, new ClimberPositionForLevel2Pose(1.0));
     }
 
