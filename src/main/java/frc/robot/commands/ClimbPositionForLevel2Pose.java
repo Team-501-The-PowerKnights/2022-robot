@@ -25,10 +25,10 @@ import riolog.RioLogger;
  * Drives from an assumed starting point of the wall to a position
  * lined up with bar, and extends the climber at the same time.
  */
-public class ClimberPositionForLevel2Pose extends PKSequentialCommandGroup {
+public class ClimbPositionForLevel2Pose extends PKSequentialCommandGroup {
         
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ClimberPositionForLevel2Pose.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ClimbPositionForLevel2Pose.class.getName());
 
     /**
      * Creates an instance of class to position the robot to
@@ -36,7 +36,7 @@ public class ClimberPositionForLevel2Pose extends PKSequentialCommandGroup {
      * 
      * @param delay - how long to wait before starting (seconds)
      */
-    public ClimberPositionForLevel2Pose(double delay) {
+    public ClimbPositionForLevel2Pose(double delay) {
         logger.info("constucting {} for {}", getName(), delay);
 
         addCommands(new WaitCommand(delay),
