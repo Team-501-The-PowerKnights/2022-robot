@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.climber;
 
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
@@ -22,14 +21,16 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-
 class ClimberSubsystem extends BaseClimberSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimberSubsystem.class.getName());
 
-    private final CANSparkMax motor;
-    private final RelativeEncoder encoder;
+    private final CANSparkMax shoulderMotor;
+    private final CANSparkMax elbowMotor;
+
+    private final RelativeEncoder shoulderEncoder;
+    private final RelativeEncoder elbowEncoder;
 
     // private final AnalogInput limitUp;
     // private final AnalogInput limitDown;
@@ -39,17 +40,28 @@ class ClimberSubsystem extends BaseClimberSubsystem {
 
         lastError = REVLibError.kOk;
 
-        motor = new CANSparkMax(55, MotorType.kBrushless);
-        checkError(motor.restoreFactoryDefaults(), "setting factory defaults {}");
+        shoulderMotor = new CANSparkMax(55, MotorType.kBrushless);
+        checkError(shoulderMotor.restoreFactoryDefaults(), "setting factory defaults {}");
 
-        checkError(motor.setIdleMode(IdleMode.kBrake), "setting to brake {}");
-        checkError(motor.setOpenLoopRampRate(0.5), "setting ramp rate {}");
-        checkError(motor.setSmartCurrentLimit(35), "setting current limit {}");
+        checkError(shoulderMotor.setIdleMode(IdleMode.kBrake), "setting to brake {}");
+        checkError(shoulderMotor.setOpenLoopRampRate(0.5), "setting ramp rate {}");
+        checkError(shoulderMotor.setSmartCurrentLimit(35), "setting current limit {}");
 
-        encoder = motor.getEncoder();
+        shoulderEncoder = shoulderMotor.getEncoder();
 
-        checkError(encoder.setPosition(0.0), "zeroing the encoder {}");
- 
+        checkError(shoulderEncoder.setPosition(0.0), "zeroing the shoulderEncoder {}");
+
+        elbowMotor = new CANSparkMax(56, MotorType.kBrushless);
+        checkError(elbowMotor.restoreFactoryDefaults(), "setting factory defaults {}");
+
+        checkError(elbowMotor.setIdleMode(IdleMode.kBrake), "setting to brake {}");
+        checkError(elbowMotor.setOpenLoopRampRate(0.5), "setting ramp rate {}");
+        checkError(elbowMotor.setSmartCurrentLimit(35), "setting current limit {}");
+
+        elbowEncoder = elbowMotor.getEncoder();
+
+        checkError(elbowEncoder.setPosition(0.0), "zeroing the elbowEncoder {}");
+
         // limitUp = new AnalogInput(0);
         // limitDown = new AnalogInput(1);
 
@@ -104,36 +116,63 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     public void stop() {
         super.stop();
 
-        setSpeed(0.0);
+        setSpeed(0.0, 55);
+        setSpeed(0.0, 56);
     }
 
     @Override
-    public void climb() {
-        super.climb();
+    public void runElbow(double speed) {
 
-        setSpeed(1.0);
     }
 
     @Override
-    public void retract() {
-        super.retract();
+    public void runShoulder(double speed) {
+        // TODO Auto-generated method stub
 
-        setSpeed(-0.40);
     }
 
-    private void setSpeed(double speed) {
+    @Override
+    public void elbowGoToSetPoint(double setPoint) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void shoulderGoToSetPoint(double setPoint) {
+        // TODO Auto-generated method stub
+
+    }
+
+    private void setSpeed(double speed, int motorId) {
         setTlmSpeed(speed);
-        motor.set(speed);
+        switch (motorId) {
+            case 55:
+                shoulderMotor.set(speed);
+            case 56:
+                elbowMotor.set(speed);
+            default:
+                break;
+        }
     }
 
     @Override
-    public double getPosition() {
-        return encoder.getPosition();
+    public double getShoulderPosition() {
+        return shoulderEncoder.getPosition();
     }
 
     @Override
-    public void zeroPosition() {
-        encoder.setPosition(0.0);
+    public void zeroShoulderPosition() {
+        shoulderEncoder.setPosition(0.0);
+    }
+
+    @Override
+    public double getElbowPosition() {
+        return elbowEncoder.getPosition();
+    }
+
+    @Override
+    public void zeroElbowPosition() {
+        elbowEncoder.setPosition(0.0);
     }
 
 }

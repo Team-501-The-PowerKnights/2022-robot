@@ -8,11 +8,9 @@
 
 package frc.robot.telemetry;
 
-
 import frc.robot.modules.ModuleNames;
 import frc.robot.sensors.SensorNames;
 import frc.robot.subsystems.SubsystemNames;
-
 
 /**
  * Provides a standard way of defining names for the <i>Telemetry</i> used in
@@ -179,15 +177,15 @@ public final class TelemetryNames {
 
         public static final String isFound = name + ".isFound";
     }
-    
+
     public final class WallDistance {
         private static final String name = SensorNames.wallDistanceName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
 
-        public static final String distance = name +".distance";
-        public static final String valid = name +".valid";
+        public static final String distance = name + ".distance";
+        public static final String valid = name + ".valid";
     }
 
     public final class Vision {
@@ -318,7 +316,8 @@ public final class TelemetryNames {
         public static final String climbing = name + ".climbing";
         public static final String retracting = name + ".retracting";
 
-        public static final String position = name + ".position";
+        public static final String elbowPosition = name + ".elbowPosition";
+        public static final String shoulderPosition = name + ".shoulderPosition";
         public static final String targetPos = name + ".targetPosition";
         public static final String atTarget = name + ".atTarget";
     }

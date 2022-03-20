@@ -52,28 +52,45 @@ class StubClimberSubsystem extends BaseClimberSubsystem {
     }
 
     @Override
-    public void climb() {
-        super.climb();
-
+    public void runElbow(double speed) {
         // Stub doesn't implement this
     }
 
     @Override
-    public void retract() {
-        super.retract();
+    public void runShoulder(double speed) {
         // Stub doesn't implement this
     }
 
     @Override
-    public double getPosition() {
+    public void elbowGoToSetPoint(double setPoint) {
+        // Stub doesn't implement this
+    }
+
+    @Override
+    public void shoulderGoToSetPoint(double setPoint) {
+        // Stub doesn't implement this
+    }
+
+    @Override
+    public double getShoulderPosition() {
         // Stub doesn't implement this
         return 0;
     }
 
     @Override
-    public void zeroPosition() {
-        // TODO Auto-generated method stub
-        
+    public void zeroShoulderPosition() {
+        // Stub doesn't implement this
+    }
+
+    @Override
+    public double getElbowPosition() {
+        // Stub doesn't implement this
+        return 0;
+    }
+
+    @Override
+    public void zeroElbowPosition() {
+        // Stub doesn't implement this
     }
 
 }
