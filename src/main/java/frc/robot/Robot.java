@@ -66,8 +66,9 @@ public class Robot extends TimedRobot {
 
     private OI oi;
 
+    // Handle to telemetry manager
     private TelemetryManager tlmMgr;
-
+    // Periodic runnable to do the reporting off main loop
     private Runnable telemetryReporter = new Runnable() {
 
         @Override
@@ -106,7 +107,7 @@ public class Robot extends TimedRobot {
 
     // Flag for in end game of match
     private static boolean endGameStarted;
-    //
+    // Periodic runnable to do the determining off main loop
     private Runnable endGameDeterminer = new Runnable() {
 
         @Override
@@ -219,7 +220,7 @@ public class Robot extends TimedRobot {
         // Set up end game determiner
         endGameStarted = false;
         SmartDashboard.putBoolean(TelemetryNames.Misc.endGameStarted, endGameStarted);
-        addPeriodic(endGameDeterminer, 5.0);
+        addPeriodic(endGameDeterminer, 2.0);
 
         // Set up the telemetry reporter
         addPeriodic(telemetryReporter, 5 * getLoopPeriod());
@@ -322,9 +323,6 @@ public class Robot extends TimedRobot {
         // methods. This must be called from the robot's periodic block in order
         // for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
-
-        // Update the telemetry
-        tlmMgr.sendTelemetry();
     }
 
     /**
