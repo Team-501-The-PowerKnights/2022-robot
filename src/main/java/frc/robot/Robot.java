@@ -242,6 +242,11 @@ public class Robot extends TimedRobot {
                                 new FirePoseVision()))));
 
         autoChooser.addOption("Drive Straight Trajectory", new DriveTrajectory("StraightLine"));
+        autoChooser.addOption("Linear Test Trajectory", new DriveTrajectory("LinearTest"));
+        autoChooser.addOption("Linear Auto Test Trajectory", new PKParallelCommandGroup(new TurretVisionAlign(),
+                new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(5.0),
+                        new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveTrajectory("LinearTest")),
+                        new FirePoseVision()))));
 
         SmartDashboard.putData("Auto Mode", autoChooser);
     }

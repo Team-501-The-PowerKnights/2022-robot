@@ -46,7 +46,7 @@ public class DriveTrajectory extends PKSequentialCommandGroup {
             Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
             trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
         } catch (IOException ex) {
-            DriverStation.reportError("Unable to open trajectory" + trajectoryJSON, ex.getStackTrace());
+            DriverStation.reportError("Unable to open trajectory " + trajectoryJSON, ex.getStackTrace());
             return;
         }
 
