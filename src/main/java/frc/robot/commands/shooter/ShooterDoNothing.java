@@ -24,4 +24,16 @@ public class ShooterDoNothing extends ShooterCommandBase {
         logger.info("constructed");
     }
 
+    @Override
+    public void execute() {
+      super.execute();
+    }
+  
+    @Override
+    protected void firstExecution() {
+      logger.trace("shooter.stop() called in firstExecution()");
+
+      shooter.stop();
+    }
+
 }

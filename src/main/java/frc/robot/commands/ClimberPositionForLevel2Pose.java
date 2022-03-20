@@ -40,7 +40,7 @@ public class ClimberPositionForLevel2Pose extends PKSequentialCommandGroup {
         logger.info("constucting {} for {}", getName(), delay);
 
         addCommands(new WaitCommand(delay),
-                    new PKParallelCommandGroup(new DriveBackwardTimed(3.0),
+                    new PKParallelCommandGroup(new DriveBackwardTimed(2.0, 0.20),
                                                new ClimberExtendLevel2()),
                     new DriveStraightJoystickControl()
                     );
