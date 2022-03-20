@@ -8,23 +8,21 @@
 
 package frc.robot.commands;
 
-
 import frc.robot.commands.elevator.ElevatorDoNothing;
 import frc.robot.commands.incrementor.IncrementorDoNothing;
 import frc.robot.commands.intake.IntakeDoNothing;
 import frc.robot.commands.intake.IntakeRetract;
 import frc.robot.commands.shooter.ShooterDoNothing;
 import frc.robot.commands.turret.TurretDoNothing;
-
+import frc.robot.commands.turret.TurretHome;
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Pose to get all subsystems to state ready for climbing.
  */
 public class ClimbSetSubystemsPose extends PKParallelCommandGroup {
-    
+
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimbSetSubystemsPose.class.getName());
 
@@ -32,13 +30,12 @@ public class ClimbSetSubystemsPose extends PKParallelCommandGroup {
         logger.info("constructing");
 
         addCommands(new PKSequentialCommandGroup(new IntakeRetract(), new IntakeDoNothing()),
-                    new IncrementorDoNothing(),
-                    new ElevatorDoNothing(),
-                    //new PKSequentialCommandGroup(new TurretHome(), new TurretDoNothing()),
-                    new TurretDoNothing(),
-                    new ShooterDoNothing()
-                    );
- 
+                new IncrementorDoNothing(),
+                new ElevatorDoNothing(),
+                new PKSequentialCommandGroup(new TurretHome(), new TurretDoNothing()),
+                // new TurretDoNothing(),
+                new ShooterDoNothing());
+
         logger.info("constructed");
     }
 
