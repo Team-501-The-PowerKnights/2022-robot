@@ -8,22 +8,17 @@
 
 package frc.robot.subsystems.drive;
 
-
-import java.util.List;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
+import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.sensors.gyro.GyroFactory;
 import frc.robot.sensors.gyro.IGyroSensor;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Translation2d;
-
+import edu.wpi.first.math.trajectory.Trajectory;
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
 
@@ -69,7 +64,7 @@ class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
         super.updateTelemetry();
 
         // Nothing extra here
-   }
+    }
 
     @Override
     public void validateCalibration() {
@@ -112,9 +107,10 @@ class SuitcaseDriveSubsystem extends BaseDriveSubsystem {
     }
 
     @Override
-    public void followPath(Pose2d start, List<Translation2d> interiorWaypoints, Pose2d end) {
+    public RamseteCommand followTrajectory(Trajectory trajectory) {
         // No implementation - Suitcase has no motors, so testing path following makes
         // no sense
+        return null;
     }
 
     @Override

@@ -8,9 +8,6 @@
 
 package frc.robot.subsystems.drive;
 
-
-import java.util.List;
-
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
@@ -20,17 +17,16 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
@@ -42,7 +38,6 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-
 class DriveSubsystem extends BaseDriveSubsystem {
 
     /** Our classes' logger **/
@@ -51,20 +46,28 @@ class DriveSubsystem extends BaseDriveSubsystem {
     /**
      * Drive Constants
      */
-    private static final double s = 0.147; // Volts
-    private static final double v = 2.82; // VoltSeconds Per Meter
-    private static final double a = 0.393; // VoltSecondsSquared Per Meter
-    private static final double p = 2.57; // Drive Velocity
-    private static final double trackWidth = 0.629; // Meters
-    private static final double ramseteB = 2;
-    private static final double ramseteZeta = 0.7;
-    private static final double maxSpeed = 3.04; // Meters Per Second
-    private static final double maxAcceleration = 0.5; // Meters Per Second Squared
+    // private static final double s = 0.12715; // Volts
+    // private static final double v = 2.1836; // VoltSeconds Per Meter
+    // private static final double a = 0.44028; // VoltSecondsSquared Per Meter
+    // private static final double p = 2.3834; // Drive Velocity
+    private static final double s = 6; // Volts // 0.1 // 0.224 // 0.324 // 0.524 // 0.75
+    private static final double v = 5; // VoltSeconds Per Meter // 0.01 // 0.99 // 1.25 // 2.5 // 2.75
+    private static final double a = 0.1; // VoltSecondsSquared Per Meter // 0.2 // 0.5
+    private static final double p = 0.01; // Drive Velocity // 0.03 // 0.00025 // 0.0003 // 0.0005 // 0.00075 // 0.001
+                                          // // 0.005
+                                          // // 0.003
+    private static final double trackWidth = 0.56411; // Meters // 0.6731 * 1.7
+    private static final double ramseteB = 3; // Proportional constant that makes larger values give more aggressive
+                                              // convergence (b > 0)
+    private static final double ramseteZeta = 0.7; // Larger values provide more damping (0 < zeta < 1)
+    private static final double maxSpeed = 5; // Meters Per Second
+    private static final double maxAcceleration = 0.1; // Meters Per Second Squared
     private static final boolean leftReversed = false;
     private static final boolean rightReversed = false;
-    private static final double wheelRadius = 0.0762; // Meters
+    private static final double wheelDiameter = 0.1524; // Meters
     private static final double beltGearing = 1;
     private static final double gearboxGearing = 8.45; // Standard AndyMark KoP chassis Toughbox Mini gearing
+    private static final double gearRatio = beltGearing * gearboxGearing;
 
     // Voltage constraint for trajectory following
     private final DifferentialDriveVoltageConstraint autoVoltageConstraint;
@@ -83,6 +86,9 @@ class DriveSubsystem extends BaseDriveSubsystem {
 
     private final RelativeEncoder leftEncoder;
     private final RelativeEncoder rightEncoder;
+
+    private final MotorControllerGroup left;
+    private final MotorControllerGroup right;
 
     private final IGyroSensor nav;
 
@@ -113,32 +119,52 @@ class DriveSubsystem extends BaseDriveSubsystem {
         // FIXME: Use MotorControllerGroup (see Proto ...)
 
         rightFrontMotor.setInverted(true);
+        rightRearMotor.setInverted(true);
+        // leftFrontMotor.setInverted(true);
+
+        setBrake(false);
 
         // Following
-        checkError(leftRearMotor.follow(leftFrontMotor), "L setting following mode {}");
-        checkError(rightRearMotor.follow(rightFrontMotor), "R setting following mode {}");
- 
+        // checkError(leftRearMotor.follow(leftFrontMotor), "L setting following mode
+        // {}");
+        // checkError(rightRearMotor.follow(rightFrontMotor), "R setting following mode
+        // {}");
+
         // Ramp rates
-        checkError(leftFrontMotor.setOpenLoopRampRate(ramp), "L setting ramp rate {}");
-        checkError(rightFrontMotor.setOpenLoopRampRate(ramp), "R setting ramp rate {}");
+        checkError(leftFrontMotor.setOpenLoopRampRate(ramp), "L Front setting ramp rate {}");
+        checkError(rightFrontMotor.setOpenLoopRampRate(ramp), "R Front setting ramp rate {}");
+        checkError(leftRearMotor.setOpenLoopRampRate(ramp), "L Front setting ramp rate {}");
+        checkError(rightRearMotor.setOpenLoopRampRate(ramp), "R Front setting ramp rate {}");
 
         // Instantiation of encoders and zeroing
         leftEncoder = leftFrontMotor.getEncoder();
+        checkError(leftEncoder.setPositionConversionFactor(Math.PI * wheelDiameter / gearRatio),
+                "L Encoder setting position conversion factor");
+        checkError(leftEncoder.setVelocityConversionFactor(Math.PI * wheelDiameter / gearRatio / 81 / 60),
+                "L Encoder setting velocity conversion factor");
         rightEncoder = rightFrontMotor.getEncoder();
+        checkError(rightEncoder.setPositionConversionFactor(Math.PI * wheelDiameter / gearRatio),
+                "R Encoder setting position conversion factor");
+        checkError(rightEncoder.setVelocityConversionFactor(Math.PI * wheelDiameter / gearRatio / 60),
+                "R Encoder setting velocity conversion factor");
 
         checkError(leftEncoder.setPosition(0.0), "L zeroing the encoder {}");
         checkError(rightEncoder.setPosition(0.0), "R zeroing the encoder {}");
 
+        // Motor Controller Groups
+        left = new MotorControllerGroup(leftFrontMotor, leftRearMotor);
+        right = new MotorControllerGroup(rightFrontMotor, rightRearMotor);
+
         nav = GyroFactory.getInstance();
 
         // Trajectory pieces instantiation
-        drive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
+        drive = new DifferentialDrive(left, right);
         drive.setSafetyEnabled(false);
         driveKinematics = new DifferentialDriveKinematics(trackWidth);
         driveOdometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(nav.getAngle()));
 
         autoVoltageConstraint = new DifferentialDriveVoltageConstraint(new SimpleMotorFeedforward(s, v, a),
-                driveKinematics, 10);
+                driveKinematics, 4);
 
         trajectoryConfig = new TrajectoryConfig(maxSpeed, maxAcceleration).setKinematics(driveKinematics)
                 .addConstraint(autoVoltageConstraint);
@@ -198,7 +224,7 @@ class DriveSubsystem extends BaseDriveSubsystem {
     @Override
     public void setBrake(boolean brakeOn) {
         IdleMode mode = (brakeOn) ? IdleMode.kBrake : IdleMode.kCoast;
- 
+
         checkError(leftFrontMotor.setIdleMode(mode), "LF setting idle mode {}");
         checkError(leftRearMotor.setIdleMode(mode), "LR setting idle mode {}");
         checkError(rightFrontMotor.setIdleMode(mode), "RF setting idle mode {}");
@@ -247,25 +273,14 @@ class DriveSubsystem extends BaseDriveSubsystem {
     }
 
     @Override
-    public void followPath(final Pose2d start, final List<Translation2d> interiorWaypoints, final Pose2d end) {
+    public RamseteCommand followTrajectory(Trajectory trajectory) {
 
-        // Create trajectory to follow
-        final Trajectory trajectory = TrajectoryGenerator.generateTrajectory(start, interiorWaypoints, end,
-                trajectoryConfig);
+        resetOdometry(trajectory.getInitialPose());
 
         // return the RamseteCommand to run
-        CommandScheduler.getInstance()
-                .schedule(new RamseteCommand(trajectory, this::getPose, new RamseteController(ramseteB, ramseteZeta),
-                        new SimpleMotorFeedforward(s, v, a), driveKinematics, this::getVelocity,
-                        new PIDController(p, 0, 0), new PIDController(p, 0, 0), this::tankDriveVolts, this));
-    }
-
-    protected double convertInchesToEncoderClicks(double inches) {
-        return inches * (1 / 12) // Conversion to feet
-                * (1 / 3.281) // Conversion to meters
-                * (1 / (2 * Math.PI * wheelRadius)) // Convert to wheel revolutions (Circumference)
-                * (beltGearing) // Convert to output shaft revolutions (Belt gearing)
-                * (1 / gearboxGearing); // Convert to motor revolutions (TB Mini gearing)
+        return (new RamseteCommand(trajectory, this::getPose, new RamseteController(ramseteB, ramseteZeta),
+                new SimpleMotorFeedforward(s, v, a), driveKinematics, this::getVelocity,
+                new PIDController(p, 0, 0), new PIDController(p, 0, 0), this::tankDriveVolts, this));
     }
 
     /*
@@ -278,8 +293,8 @@ class DriveSubsystem extends BaseDriveSubsystem {
      * @param rightVolts
      */
     private void tankDriveVolts(final double leftVolts, final double rightVolts) {
-        leftFrontMotor.setVoltage(leftVolts * (leftReversed ? -1 : 1));
-        rightFrontMotor.setVoltage(rightVolts * (rightReversed ? -1 : 1));
+        leftFrontMotor.setVoltage(leftVolts * (leftReversed ? -1 : 1)); // 1 // 0.4 // 0.6
+        rightFrontMotor.setVoltage(rightVolts * (rightReversed ? -1 : 1)); // 1 // 0.4 // 0.6
     }
 
     /**
@@ -289,6 +304,21 @@ class DriveSubsystem extends BaseDriveSubsystem {
      */
     private Pose2d getPose() {
         return driveOdometry.getPoseMeters();
+    }
+
+    public void resetOdometry() {
+        double angle = nav.getYaw();
+        Rotation2d rotation = Rotation2d.fromDegrees(angle);
+        resetOdometry(new Pose2d(0, 0, rotation));
+    }
+
+    public void resetOdometry(Pose2d resetPosition) {
+        leftEncoder.setPosition(0);
+        rightEncoder.setPosition(0);
+
+        double angle = nav.getYaw();
+        Rotation2d rotation = Rotation2d.fromDegrees(angle);
+        driveOdometry.resetPosition(resetPosition, rotation);
     }
 
     /**
