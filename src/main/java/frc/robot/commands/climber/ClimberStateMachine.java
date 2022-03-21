@@ -61,12 +61,6 @@ public class ClimberStateMachine {
     private boolean climberEnabled;
     // Flag for whether climber sequencing is started
     private boolean climberStarted;
-    // Flag for whether climber sequencing is paused
-    private boolean climberPaused;
-    // Flag for whether level 2 has been completed
-    private boolean level2Climbed;
-    // Flag for whether level 3 has been completed
-    private boolean level3Climbed;
 
     private ClimberStateMachine() {
         logger.info("constructing");
@@ -82,12 +76,6 @@ public class ClimberStateMachine {
         SmartDashboard.putBoolean(TelemetryNames.Misc.climberEnabled, climberEnabled);
         climberStarted = false;
         SmartDashboard.putBoolean(TelemetryNames.Misc.climberStarted, climberStarted);
-        climberPaused = false;
-        SmartDashboard.putBoolean(TelemetryNames.Misc.climberPaused, climberPaused);
-        level2Climbed = false;
-        SmartDashboard.putBoolean(TelemetryNames.Misc.level2Climbed, level2Climbed);
-        level3Climbed = false;
-        SmartDashboard.putBoolean(TelemetryNames.Misc.level3Climbed, level3Climbed);
     }
 
     public void resetState() {
@@ -102,15 +90,6 @@ public class ClimberStateMachine {
         CommandScheduler.getInstance().schedule(true, new ClimberEnableSequencing());
     }
 
-    public void pause() {
-        climberPaused = true;
-        CommandScheduler.getInstance().schedule(true, new ClimberDoNothing());
-    }
-
-    public void resume() {
-        climberPaused = false;
-    }
-
     public void startClimberSequencing() {
         logger.info("starting climber sequencing");
         climberStarted = true;
@@ -123,16 +102,6 @@ public class ClimberStateMachine {
 
         // Moves the robot to position and extends the climber
         CommandScheduler.getInstance().schedule(true, new ClimbPositionForLevel2Pose(1.0));
-    }
-
-    public void climbNextLevel() {
-        if (level3Climbed) {
-            CommandScheduler.getInstance().schedule(true, new ClimbLevel3ToLevel4Pose());
-        } else if (level2Climbed) {
-            CommandScheduler.getInstance().schedule(true, new ClimbLevel2ToLevel3Pose());
-        } else {
-            CommandScheduler.getInstance().schedule(true, new ClimbFloorToLevel2Pose());
-        }
     }
 
     public boolean isClimberEnabled() {
