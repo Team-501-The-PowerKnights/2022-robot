@@ -13,7 +13,7 @@ import riolog.RioLogger;
 
 /**
  * Provides implementation of <code>IGyroSensor</code> for the
- * <i>Suitcase-Bot</i> which is based on the navX-MXP sensor.
+ * <i>Real-Bot</i> which is based on the navX-MXP sensor.
  */
 class GyroSensor extends SuitcaseGyroSensor {
 

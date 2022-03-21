@@ -8,10 +8,8 @@
 
 package frc.robot.sensors.gyro;
 
-
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Provides implementation of <code>IGyroSensor</code> for the
@@ -45,12 +43,12 @@ class SuitcaseGyroSensor extends BaseGyroSensor {
 
     @Override
     public double getYaw() {
-        return mySensor.ahrs.getYaw();
+        return -mySensor.ahrs.getYaw();
     }
 
     @Override
     public double getAngle() {
-        return mySensor.ahrs.getAngle();
+        return -mySensor.ahrs.getAngle();
     }
 
 }

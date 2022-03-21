@@ -7,12 +7,10 @@
 
 package frc.robot.commands.shooter;
 
-
 import org.slf4j.Logger;
 
 import frc.robot.Robot;
 import riolog.RioLogger;
-
 
 /**
  * Add your docs here.
@@ -51,7 +49,7 @@ public class ShooterIdle extends ShooterCommandBase {
     logger.trace("shooter.setSpeed() called in firstExecution()");
     if (Robot.isFieldConnected()) {
       // FIXME: Add a 'full speed' command
-      shooter.setSpeed(29, speed);
+      shooter.setSpeed(29, Robot.shooterSetSpeed);
     } else {
       shooter.setSpeed(29, 0);
     }

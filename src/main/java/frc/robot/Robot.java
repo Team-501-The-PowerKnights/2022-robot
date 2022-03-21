@@ -12,10 +12,12 @@
 
 package frc.robot;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -32,6 +34,7 @@ import frc.robot.commands.drive.DriveBackwardDistance;
 import frc.robot.commands.drive.DriveBackwardTimed;
 import frc.robot.commands.drive.DriveForwardDistance;
 import frc.robot.commands.drive.DriveForwardTimed;
+import frc.robot.commands.drive.DriveTrajectory;
 import frc.robot.commands.elevator.ElevatorLift;
 import frc.robot.commands.intake.IntakeIngestTimed;
 import frc.robot.commands.poses.FirePoseVision;
@@ -50,7 +53,6 @@ import frc.robot.subsystems.SubsystemsFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -112,13 +114,13 @@ public class Robot extends TimedRobot {
 
         @Override
         public void run() {
-           if (teleopRunning && !endGameStarted) {
+            if (teleopRunning && !endGameStarted) {
                 double remainingSeconds = DriverStation.getMatchTime();
                 if (remainingSeconds < 40) {
                     endGameStarted = true;
                     SmartDashboard.putBoolean(TelemetryNames.Misc.endGameStarted, endGameStarted);
                 }
-           }
+            }
         }
 
     };
@@ -137,6 +139,8 @@ public class Robot extends TimedRobot {
     // Capture the period at start (shouldn't ever change)
     private static double loopPeriod;
 
+    public static double shooterSetSpeed;
+
     /**
      * Constucts an instance of the robot to play the match.
      */
@@ -151,6 +155,8 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
         logger.info("initializing");
+
+        shooterSetSpeed = 0.4665;
 
         // Wait until we get the configuration data from driver station
         waitForDriverStationData();
@@ -286,10 +292,17 @@ public class Robot extends TimedRobot {
                 new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardTimed(4.0)));
 
         autoChooser.addOption("Full Auto (Driving Forward Delay)",
-            new PKParallelCommandGroup(new TurretVisionAlign(),
-                                       new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(4.0),
-                                                                                               new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(3.0)),
-                                                                    new FirePoseVision()))));
+                new PKParallelCommandGroup(new TurretVisionAlign(),
+                        new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(4.0),
+                                new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(3.0)),
+                                new FirePoseVision()))));
+
+        autoChooser.addOption("Drive Straight Trajectory", new DriveTrajectory("StraightLine"));
+        autoChooser.addOption("Linear Test Trajectory", new DriveTrajectory("LinearTest"));
+        autoChooser.addOption("Linear Auto Test Trajectory", new PKParallelCommandGroup(new TurretVisionAlign(),
+                new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(5.0),
+                        new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveTrajectory("LinearTest")),
+                        new FirePoseVision()))));
 
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
@@ -485,7 +498,7 @@ public class Robot extends TimedRobot {
         logger.info("initializing teleop");
         teleopRunning = true;
         teleopFirstRun = false;
-        teleopComplete = false; 
+        teleopComplete = false;
 
         // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to
@@ -563,7 +576,6 @@ public class Robot extends TimedRobot {
     public void testPeriodic() {
     }
 
-    
     /**
      * This function is called once each time the robot exits Test mode.
      */
@@ -586,12 +598,11 @@ public class Robot extends TimedRobot {
 
         SmartDashboard.putData("FMS Override", fmsOverrideChooser);
     }
-    
+
     static public boolean isFieldConnected() {
-        if ( DriverStation.isFMSAttached()) {
+        if (DriverStation.isFMSAttached()) {
             return true;
-        }
-        else {
+        } else {
             return fmsOverrideChooser.getSelected();
         }
     }
