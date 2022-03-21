@@ -8,6 +8,8 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.climber.ClimberStateMachine;
 import frc.robot.sensors.gyro.GyroFactory;
 import frc.robot.sensors.gyro.IGyroSensor;
 import frc.robot.subsystems.climber.ClimberFactory;
@@ -35,19 +37,25 @@ public class ClimbLevel2ToLevel3Pose extends PKSequentialCommandGroup {
         climber = ClimberFactory.getInstance();
         gyro = GyroFactory.getInstance();
 
-        logger.info("constructed");
+        addCommands();
 
-        super.addCommands();
+        logger.info("constructed");
     }
 
-    @Override
-    public void initialize() {
+    public ClimbLevel2ToLevel3Pose(double delay) {
+        logger.info("constructing");
 
+        climber = ClimberFactory.getInstance();
+        gyro = GyroFactory.getInstance();
+
+        addCommands(new WaitCommand(delay));
+
+        logger.info("constructed");
     }
 
     @Override
     public void end(boolean interrupted) {
-
+        // ClimberStateMachine.getInstance().finish(interrupted);
     }
 
 }
