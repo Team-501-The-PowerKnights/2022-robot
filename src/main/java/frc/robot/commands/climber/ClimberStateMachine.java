@@ -10,6 +10,7 @@ package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 import frc.robot.commands.ClimbPositionForLevel2Pose;
 import frc.robot.commands.ClimbSetSubystemsPose;
 import frc.robot.modules.pcm.PCMFactory;
@@ -110,6 +111,41 @@ public class ClimberStateMachine {
 
     public boolean isClimberStarted() {
         return climberStarted;
+    }
+
+    /**
+     * Executes the next queued command step in the sequence for 
+     * climbing. If there are no more commands to execute, it returns
+     * false;
+     * <p>
+     * At the completion of the command step that is scheduled, the
+     * call to {#link endCurrentStep(boolean)} must be called to
+     * close the feedback loop.
+     * <p>
+     * If the previous command was interrupted and failed to complete,
+     * the same command will be restarted. So individual commands are 
+     * responsible for being able to "re-start".
+     * 
+     * @return true if another command will be run; false if all done
+     */
+    public boolean doNextStep() {
+        logger.info("starting next step via command: {}", "notImplementedYet");
+        return true;
+    }
+
+    /**
+     * Signals the end of the currently executing step, with the
+     * argument specifying whether the command was interrupted or
+     * not.
+     * <p>
+     * If the command was interrupted, the state machine is not
+     * advanced, and the next call to {#link doNextStep()} will
+     * schedule the same command.
+     * 
+     * @param interrupted
+     */
+    public void endCurrentStep(boolean interrupted) {
+        logger.info("ending current step: interrupted={}", interrupted);
     }
 
 }
