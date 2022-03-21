@@ -8,20 +8,18 @@
 
 package frc.robot.commands.climber;
 
-
 import frc.robot.utils.TimerFromPeriod;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-
 public class ClimberExtendLevel2 extends ClimberCommandBase {
-       
+
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ClimberRetract.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ClimberExtendLevel2.class.getName());
 
     // Timer to count it down during execute()
     private TimerFromPeriod timer;
-    
+
     public ClimberExtendLevel2() {
         logger.info("constructing {}", getName());
 
@@ -32,9 +30,10 @@ public class ClimberExtendLevel2 extends ClimberCommandBase {
     public void initialize() {
         super.initialize();
 
-        timer = new TimerFromPeriod(2.0);  // make different than drive
+        timer = new TimerFromPeriod(2.0); // make different than drive // TODO - we should really base this on encoder
+                                          // counts
     }
-    
+
     @Override
     public void execute() {
         super.execute();
@@ -45,7 +44,7 @@ public class ClimberExtendLevel2 extends ClimberCommandBase {
     @Override
     protected void firstExecution() {
         logger.trace("climber.extend() called in firstExecution()");
-        //climber.???????();
+        // climber.???????();
     }
 
     @Override
