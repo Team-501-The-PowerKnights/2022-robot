@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.drive;
 
+
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
@@ -36,6 +37,7 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
+
 class ZesterDriveSubsystem extends BaseDriveSubsystem {
 
     /** Our classes' logger **/
@@ -63,6 +65,7 @@ class ZesterDriveSubsystem extends BaseDriveSubsystem {
     private final DifferentialDriveVoltageConstraint autoVoltageConstraint;
 
     // Trajectory configuration for trajectory following
+    @SuppressWarnings("unused")
     private final TrajectoryConfig trajectoryConfig;
 
     /**

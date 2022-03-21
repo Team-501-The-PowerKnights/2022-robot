@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.drive;
 
+
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
@@ -26,7 +27,6 @@ import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
@@ -37,6 +37,7 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class DriveSubsystem extends BaseDriveSubsystem {
 
@@ -73,6 +74,7 @@ class DriveSubsystem extends BaseDriveSubsystem {
     private final DifferentialDriveVoltageConstraint autoVoltageConstraint;
 
     // Trajectory configuration for trajectory following
+    @SuppressWarnings("unused")
     private final TrajectoryConfig trajectoryConfig;
 
     /**

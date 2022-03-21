@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.drive;
 
+
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
@@ -34,6 +35,7 @@ import frc.robot.sensors.gyro.IGyroSensor;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class ProtoDriveSubsystem extends BaseDriveSubsystem {
 
@@ -62,6 +64,7 @@ class ProtoDriveSubsystem extends BaseDriveSubsystem {
     private final DifferentialDriveVoltageConstraint autoVoltageConstraint;
 
     // Trajectory configuration for trajectory following
+    @SuppressWarnings("unused")
     private final TrajectoryConfig trajectoryConfig;
 
     /**
