@@ -37,7 +37,7 @@ public class ClimbLevel3ToLevel4Pose extends PKSequentialCommandGroup {
 
         logger.info("constructed");
 
-        super.addCommands(commands);
+        super.addCommands();
     }
 
     @Override

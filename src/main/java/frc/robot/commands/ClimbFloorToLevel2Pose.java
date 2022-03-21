@@ -37,7 +37,7 @@ public class ClimbFloorToLevel2Pose extends PKSequentialCommandGroup {
 
         logger.info("constructed");
 
-        super.addCommands(commands);
+        super.addCommands();
     }
 
     @Override
