@@ -50,15 +50,18 @@ class DriveSubsystem extends BaseDriveSubsystem {
     // private static final double v = 2.1836; // VoltSeconds Per Meter
     // private static final double a = 0.44028; // VoltSecondsSquared Per Meter
     // private static final double p = 2.3834; // Drive Velocity
-    private static final double s = 6; // Volts // 0.1 // 0.224 // 0.324 // 0.524 // 0.75
-    private static final double v = 5; // VoltSeconds Per Meter // 0.01 // 0.99 // 1.25 // 2.5 // 2.75
-    private static final double a = 0.1; // VoltSecondsSquared Per Meter // 0.2 // 0.5
-    private static final double p = 0.01; // Drive Velocity // 0.03 // 0.00025 // 0.0003 // 0.0005 // 0.00075 // 0.001
-                                          // // 0.005
-                                          // // 0.003
-    private static final double trackWidth = 0.56411; // Meters // 0.6731 * 1.7
-    private static final double ramseteB = 3; // Proportional constant that makes larger values give more aggressive
-                                              // convergence (b > 0)
+    private static final double s = 0.20814; // Volts // 0.1 // 0.224 // 0.324 // 0.524 // 0.75 // 0.20814 // 0.5
+    private static final double v = 1.25; // VoltSeconds Per Meter // 0.01 // 0.99 // 1.25 // 2.5 // 2.75
+    private static final double a = 0.21697; // VoltSecondsSquared Per Meter // 0.2 // 0.5
+    private static final double p = 0.004; // Drive Velocity // 0.03 // 0.00025 // 0.0003 // 0.0005 // 0.00075 //
+                                           // 0.001
+    // // 0.005
+    // // 0.003
+    // 0.01
+    // 0.0048044 // 0.008
+    private static final double trackWidth = 1.2406; // Meters // 0.6731 * 1.7
+    private static final double ramseteB = 1.5; // Proportional constant that makes larger values give more aggressive
+                                                // convergence (b > 0)
     private static final double ramseteZeta = 0.7; // Larger values provide more damping (0 < zeta < 1)
     private static final double maxSpeed = 5; // Meters Per Second
     private static final double maxAcceleration = 0.1; // Meters Per Second Squared
@@ -140,7 +143,7 @@ class DriveSubsystem extends BaseDriveSubsystem {
         leftEncoder = leftFrontMotor.getEncoder();
         checkError(leftEncoder.setPositionConversionFactor(Math.PI * wheelDiameter / gearRatio),
                 "L Encoder setting position conversion factor");
-        checkError(leftEncoder.setVelocityConversionFactor(Math.PI * wheelDiameter / gearRatio / 81 / 60),
+        checkError(leftEncoder.setVelocityConversionFactor(Math.PI * wheelDiameter / gearRatio / 60),
                 "L Encoder setting velocity conversion factor");
         rightEncoder = rightFrontMotor.getEncoder();
         checkError(rightEncoder.setPositionConversionFactor(Math.PI * wheelDiameter / gearRatio),
@@ -164,7 +167,7 @@ class DriveSubsystem extends BaseDriveSubsystem {
         driveOdometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(nav.getAngle()));
 
         autoVoltageConstraint = new DifferentialDriveVoltageConstraint(new SimpleMotorFeedforward(s, v, a),
-                driveKinematics, 4);
+                driveKinematics, 8);
 
         trajectoryConfig = new TrajectoryConfig(maxSpeed, maxAcceleration).setKinematics(driveKinematics)
                 .addConstraint(autoVoltageConstraint);
@@ -294,7 +297,9 @@ class DriveSubsystem extends BaseDriveSubsystem {
      */
     private void tankDriveVolts(final double leftVolts, final double rightVolts) {
         leftFrontMotor.setVoltage(leftVolts * (leftReversed ? -1 : 1)); // 1 // 0.4 // 0.6
+        SmartDashboard.putNumber("Trajectory Left Voltage", leftVolts);
         rightFrontMotor.setVoltage(rightVolts * (rightReversed ? -1 : 1)); // 1 // 0.4 // 0.6
+        SmartDashboard.putNumber("Trajectory Right Voltage", rightVolts);
     }
 
     /**
