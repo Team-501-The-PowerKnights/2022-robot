@@ -42,6 +42,10 @@ abstract class BaseShooterSubsystem extends BaseSubsystem implements IShooterSub
     /** Scale applied to shooter speed when in manual */
     protected double scale = 1;
 
+    // TODO: Make a preference like the PID values?
+    // Default "idle" speed for shooter
+    public final double defaultSetSpeed = 0.4665;
+
     BaseShooterSubsystem() {
         super(SubsystemNames.shooterName);
         logger.info("constructing");
@@ -94,6 +98,7 @@ abstract class BaseShooterSubsystem extends BaseSubsystem implements IShooterSub
     @Override
     public void updateTelemetry() {
         SmartDashboard.putNumber(TelemetryNames.Shooter.speed, tlmSpeed);
+        SmartDashboard.putNumber(TelemetryNames.Shooter.setSpeed, tlmSetSpeed);
     }
 
     @Override

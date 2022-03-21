@@ -12,12 +12,10 @@
 
 package frc.robot;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -53,6 +51,7 @@ import frc.robot.subsystems.SubsystemsFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -100,7 +99,6 @@ public class Robot extends TimedRobot {
     private boolean autonomousComplete;
 
     // Flag for having started/running teleop part of match
-    @SuppressWarnings("unused")
     private boolean teleopRunning;
     // Flag for having run first teleop loop
     private boolean teleopFirstRun;
@@ -139,8 +137,6 @@ public class Robot extends TimedRobot {
     // Capture the period at start (shouldn't ever change)
     private static double loopPeriod;
 
-    public static double shooterSetSpeed;
-
     /**
      * Constucts an instance of the robot to play the match.
      */
@@ -155,8 +151,6 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
         logger.info("initializing");
-
-        shooterSetSpeed = 0.4665;
 
         // Wait until we get the configuration data from driver station
         waitForDriverStationData();

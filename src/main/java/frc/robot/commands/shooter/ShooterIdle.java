@@ -17,42 +17,42 @@ import riolog.RioLogger;
  */
 public class ShooterIdle extends ShooterCommandBase {
 
-  /** Our classes' logger **/
-  private static final Logger logger = RioLogger.getLogger(ShooterIdle.class.getName());
+    /** Our classes' logger **/
+    private static final Logger logger = RioLogger.getLogger(ShooterIdle.class.getName());
 
-  /** Speed to run shooter at */
-  private double speed;
+    /** Speed to run shooter at */
+    private double speed;
 
-  public ShooterIdle() {
-    logger.info("constructing {}", getName());
+    public ShooterIdle() {
+        logger.info("constructing {}", getName());
 
-    this.speed = 0.50;
+        this.speed = shooter.;
 
-    logger.info("constructed");
-  }
-
-  public ShooterIdle(double speed) {
-    logger.info("constructing {} w/ speed = ", getName(), speed);
-
-    this.speed = speed;
-
-    logger.info("constructed");
-  }
-
-  @Override
-  public void execute() {
-    super.execute();
-  }
-
-  @Override
-  protected void firstExecution() {
-    logger.trace("shooter.setSpeed() called in firstExecution()");
-    if (Robot.isFieldConnected()) {
-      // FIXME: Add a 'full speed' command
-      shooter.setSpeed(29, Robot.shooterSetSpeed);
-    } else {
-      shooter.setSpeed(29, 0);
+        logger.info("constructed");
     }
-  }
+
+    public ShooterIdle(double speed) {
+        logger.info("constructing {} w/ speed = ", getName(), speed);
+
+        this.speed = speed;
+
+        logger.info("constructed");
+    }
+
+    @Override
+    public void execute() {
+        super.execute();
+    }
+
+    @Override
+    protected void firstExecution() {
+        logger.trace("shooter.setSpeed() called in firstExecution()");
+        if (Robot.isFieldConnected()) {
+            // FIXME: Add a 'full speed' command
+            shooter.setSpeed(29, Robot.shooterSetSpeed);
+        } else {
+            shooter.setSpeed(29, 0);
+        }
+    }
 
 }

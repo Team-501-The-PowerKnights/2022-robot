@@ -178,11 +178,7 @@ class ShooterSubsystem extends BaseShooterSubsystem {
     }
 
     private double idleShooter(double speed) {
-        // Have to be connected to the field to idle
-        // if (!OI.getInstance().isFieldConnected()) {
-        // return 0.0;
-        // }
-
+        // TODO: Add Dashboard scale for shooter speed
         // Dashboard provides scale for shooter speed
         // double scale = Preferences.getDouble(Shooter.scale, 1.0);
         // speed *= scale;
