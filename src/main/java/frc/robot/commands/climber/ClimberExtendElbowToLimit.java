@@ -8,18 +8,31 @@
 
 package frc.robot.commands.climber;
 
+import frc.robot.commands.PKCommandBase;
+import frc.robot.subsystems.climber.ClimberFactory;
+import frc.robot.subsystems.climber.IClimberSubsystem;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-public class ClimberExtendElbowToLimit extends ClimberCommandBase {
+/**
+ * Extends the elbow to an encoder position. NOTE: does not extend the base
+ * command or require the climber subsystem because it is used only as a
+ * component command of larger command groups.
+ */
+public class ClimberExtendElbowToLimit extends PKCommandBase {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimberExtendElbowToLimit.class.getName());
+
+    // Handle to the climber
+    private final IClimberSubsystem climber;
 
     private double setPoint;
 
     public ClimberExtendElbowToLimit(double setPoint) {
         logger.info("constructing {}", getName());
+
+        climber = ClimberFactory.getInstance();
 
         this.setPoint = setPoint;
 
