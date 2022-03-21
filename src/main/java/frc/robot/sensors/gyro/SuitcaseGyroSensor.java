@@ -48,7 +48,7 @@ class SuitcaseGyroSensor extends BaseGyroSensor {
 
     @Override
     public double getAngle() {
-        return -mySensor.ahrs.getAngle();
+        return mySensor.ahrs.getAngle();
     }
 
 }

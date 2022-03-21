@@ -13,17 +13,42 @@ import riolog.RioLogger;
 
 /**
  * Provides implementation of <code>IGyroSensor</code> for the
- * <i>Suitcase-Bot</i> which is based on the navX-MXP sensor.
+ * <i>Real-Bot</i> which is based on the navX-MXP sensor.
  */
-class GyroSensor extends SuitcaseGyroSensor {
+class GyroSensor extends BaseGyroSensor {
 
     /* Our classes logger */
     private static final PKLogger logger = RioLogger.getLogger(GyroSensor.class.getName());
 
+    // Handle to the hardware sensor
+    private final AHRSGyro mySensor;
+
     GyroSensor() {
         logger.info("constructing");
 
+        mySensor = new AHRSGyro();
+
         logger.info("constructed");
+    }
+
+    @Override
+    public double getRoll() {
+        return mySensor.ahrs.getRoll();
+    }
+
+    @Override
+    public double getPitch() {
+        return mySensor.ahrs.getPitch();
+    }
+
+    @Override
+    public double getYaw() {
+        return -mySensor.ahrs.getYaw();
+    }
+
+    @Override
+    public double getAngle() {
+        return -mySensor.ahrs.getAngle();
     }
 
 }
