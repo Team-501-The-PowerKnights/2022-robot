@@ -7,13 +7,11 @@
 
 package frc.robot.commands.climber;
 
-
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-
 public class ClimberManualControl extends ClimberOICommandBase {
-        
+
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimberManualControl.class.getName());
 
@@ -22,22 +20,12 @@ public class ClimberManualControl extends ClimberOICommandBase {
 
         logger.info("constructed");
     }
-    
+
     @Override
     public void execute() {
         super.execute();
 
-        // // FIXME - Get Climber Command re-implemented
-        // if (oi.getClimberExtend()) {
-        //     climber.extend();
-        // }
-        // else if (oi.getClimberClimb()) {
-        //     climber.climb();
-        // }
-        // else {
-        //     climber.stop();
-        // }
-        climber.stop();
+        climber.run(oi.getClimberSpeed());
     }
 
     @Override

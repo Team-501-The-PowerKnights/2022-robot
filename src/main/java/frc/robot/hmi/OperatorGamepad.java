@@ -8,13 +8,13 @@
 
 package frc.robot.hmi;
 
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.climber.ClimberDoSequencing;
+import frc.robot.commands.climber.ClimberManualControl;
 import frc.robot.commands.poses.FirePoseNoVision;
 import frc.robot.commands.poses.FirePoseVision;
 import frc.robot.commands.turret.TurretVisionAlign;
@@ -22,7 +22,6 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * This class implements the Operator's gamepad.
@@ -55,10 +54,8 @@ public class OperatorGamepad extends F310Gamepad {
     public void configureButtonBindings() {
         logger.info("configure");
 
-        visionTargettingButton.whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(), 
-                                                                   new FirePoseVision()
-                                                                   )
-                                        );
+        visionTargettingButton.whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(),
+                new FirePoseVision()));
         firePoseButton.whenHeld(new FirePoseNoVision());
 
         climbSequenceButton.whileHeld(new ClimberDoSequencing());
@@ -111,6 +108,10 @@ public class OperatorGamepad extends F310Gamepad {
 
     public boolean getClimberStart() {
         return getStartButton();
+    }
+
+    public double getClimberSpeed() {
+        return deadBand(-getRightYAxis(), 0.05);
     }
 
 }

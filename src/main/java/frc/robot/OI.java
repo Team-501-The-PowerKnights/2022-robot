@@ -8,7 +8,6 @@
 
 package frc.robot;
 
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.hmi.DriverGamepad;
@@ -20,7 +19,6 @@ import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Add your docs here.
@@ -59,7 +57,6 @@ public class OI implements ITelemetryProvider {
     // TODO: Make this private with accessor methods
     public final DriverGamepad driverPad;
     public final OperatorGamepad operatorPad;
-    
 
     private OI() {
         logger.info("constructing {}", myName);
@@ -132,7 +129,7 @@ public class OI implements ITelemetryProvider {
     public boolean getOperatorClimberStart() {
         return operatorPad.getClimberStart();
     }
-    
+
     public boolean getClimberExtend() {
         return false;
     }
@@ -140,5 +137,9 @@ public class OI implements ITelemetryProvider {
     public boolean getClimberClimb() {
         return false;
     }
-    
+
+    public double getClimberSpeed() {
+        return operatorPad.getClimberSpeed();
+    }
+
 }
