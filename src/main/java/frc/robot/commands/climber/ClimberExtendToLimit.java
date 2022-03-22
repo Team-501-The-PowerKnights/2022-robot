@@ -19,17 +19,17 @@ import riolog.RioLogger;
  * command or require the climber subsystem because it is used only as a
  * component command of larger command groups.
  */
-public class ClimberExtendShoulderToLimit extends PKCommandBase {
+public class ClimberExtendToLimit extends PKCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(ClimberExtendShoulderToLimit.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ClimberExtendToLimit.class.getName());
 
     private double setPoint;
 
     // Handle to the climber
     private final IClimberSubsystem climber;
 
-    public ClimberExtendShoulderToLimit(double setPoint) {
+    public ClimberExtendToLimit(double setPoint) {
         logger.info("constructing {}", getName());
 
         climber = ClimberFactory.getInstance();
@@ -44,12 +44,12 @@ public class ClimberExtendShoulderToLimit extends PKCommandBase {
         super.firstExecution();
 
         // climber.shoulderGoToSetPoint(setPoint); // PID control
-        climber.runShoulder(0.2);
+        climber.run(0.2);
     }
 
     @Override
     public boolean isFinished() {
-        return climber.getShoulderPosition() >= setPoint;
+        return climber.getAveragePosition() >= setPoint;
     }
 
 }

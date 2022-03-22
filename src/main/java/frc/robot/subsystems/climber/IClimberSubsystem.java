@@ -21,51 +21,37 @@ public interface IClimberSubsystem extends ISubsystem {
     public void stop();
 
     /**
-     * Runs the elbow motor at the passed speed.
+     * Runs the climber motors at the passed speed.
      * 
      * @param speed
      */
-    public void runElbow(double speed);
-
-    /**
-     * Runs the shoulder at the passed speed.
-     * 
-     * @param speed
-     */
-    public void runShoulder(double speed);
+    public void run(double speed);
 
     /**
      * Use PID control on the elbow to make it go to a set point.
      * 
      * @param setPoint
      */
-    public void elbowGoToSetPoint(double setPoint);
+    public void goToSetPoint(double setPoint);
 
     /**
-     * Use PID control on the shoulder to make it go to a set point.
-     * 
-     * @param setPoint
+     * Returns the value of the climber's left encoder (if present)
      */
-    public void shoulderGoToSetPoint(double setPoint);
+    public double getLeftPosition();
 
     /**
-     * Returns the value of the climber's encoder (if present)
+     * Returns the value of the climber's right encoder (if present)
      */
-    public double getShoulderPosition();
+    public double getRightPosition();
 
     /**
-     * Zeros the climber's encoder (if present)
+     * Returns the average value of the climber encoder
      */
-    public void zeroShoulderPosition();
-
-    /**
-     * Returns the value of the climber's encoder (if present)
-     */
-    public double getElbowPosition();
+    public double getAveragePosition();
 
     /**
      * Zeros the climber's encoder (if present)
      */
-    public void zeroElbowPosition();
+    public void zeroPosition();
 
 }
