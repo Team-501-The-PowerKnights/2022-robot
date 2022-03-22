@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.commands.PKParallelCommandGroup;
+import frc.robot.commands.climber.ClimberDoSequencing;
 import frc.robot.commands.poses.FirePoseNoVision;
 import frc.robot.commands.poses.FirePoseVision;
 import frc.robot.commands.turret.TurretVisionAlign;
@@ -36,8 +37,8 @@ public class OperatorGamepad extends F310Gamepad {
 
     private final Button firePoseButton;
     private final Button visionTargettingButton;
-    // private final Button revShooterButton;
-    // private final Button homeTurretButton;
+
+    private final Button climbSequenceButton;
 
     public OperatorGamepad() {
         super(1);
@@ -45,9 +46,8 @@ public class OperatorGamepad extends F310Gamepad {
 
         firePoseButton = new JoystickButton(stick, greenButton);
         visionTargettingButton = new JoystickButton(stick, rightBumper);
-        // revShooterButton = new JoystickButton(stick, redButton);
-        // homeTurretButton = new JoystickButton(stick, startButton);
 
+        climbSequenceButton = new JoystickButton(stick, startButton);
         logger.info("constructed");
     }
 
@@ -60,6 +60,8 @@ public class OperatorGamepad extends F310Gamepad {
                                                                    )
                                         );
         firePoseButton.whenHeld(new FirePoseNoVision());
+
+        climbSequenceButton.whileHeld(new ClimberDoSequencing());
 
         logger.info("configured");
     }

@@ -199,6 +199,11 @@ public class Robot extends TimedRobot {
         subsystems = SubsystemsFactory.constructSubsystems();
         followers.addAll(subsystems);
 
+        // TODO: Put in the Climber subsystem before default commands
+        // Construct the instance of climber state machine
+        ClimberStateMachine.constructInstance();
+        climberSM = ClimberStateMachine.getInstance();
+
         // Configure all OI now that subsystems are complete
         oi.configureButtonBindings();
 
@@ -218,10 +223,6 @@ public class Robot extends TimedRobot {
 
         // Put indication of initialization status on dash
         determineInitStatus();
-
-        // Construct the instance of climber state machine
-        ClimberStateMachine.constructInstance();
-        climberSM = ClimberStateMachine.getInstance();
 
         // Set up end game determiner
         endGameStarted = false;
@@ -297,12 +298,12 @@ public class Robot extends TimedRobot {
                                 new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(3.0)),
                                 new FirePoseVision()))));
 
-        autoChooser.addOption("Drive Straight Trajectory", new DriveTrajectory("StraightLine"));
-        autoChooser.addOption("Linear Test Trajectory", new DriveTrajectory("LinearTest"));
-        autoChooser.addOption("Linear Auto Test Trajectory", new PKParallelCommandGroup(new TurretVisionAlign(),
-                new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(5.0),
-                        new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveTrajectory("LinearTest")),
-                        new FirePoseVision()))));
+        // autoChooser.addOption("Drive Straight Trajectory", new DriveTrajectory("StraightLine"));
+        // autoChooser.addOption("Linear Test Trajectory", new DriveTrajectory("LinearTest"));
+        // autoChooser.addOption("Linear Auto Test Trajectory", new PKParallelCommandGroup(new TurretVisionAlign(),
+        //         new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(5.0),
+        //                 new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveTrajectory("LinearTest")),
+        //                 new FirePoseVision()))));
 
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
