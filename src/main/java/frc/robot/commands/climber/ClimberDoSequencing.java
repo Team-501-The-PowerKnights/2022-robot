@@ -8,7 +8,6 @@
 
 package frc.robot.commands.climber;
 
-
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.commands.PKCommandBase;
@@ -16,9 +15,8 @@ import frc.robot.commands.PKCommandBase;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-
 public class ClimberDoSequencing extends PKCommandBase {
-    
+
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimberDoSequencing.class.getName());
 
@@ -70,8 +68,10 @@ public class ClimberDoSequencing extends PKCommandBase {
         // This is true because the gamepad button was released
         csm.endCurrentStep(true);
 
-        // This command will interrupt any schedule "real" command
-        CommandScheduler.getInstance().schedule(new ClimberDoNothing());
+        // This command will interrupt any schedule "real" command and return the
+        // climber to manual control
+        // CommandScheduler.getInstance().schedule(new ClimberDoNothing());
+        CommandScheduler.getInstance().schedule(new ClimberManualControl());
     }
 
 }
