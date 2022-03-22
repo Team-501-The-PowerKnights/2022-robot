@@ -319,8 +319,8 @@ public final class TelemetryNames {
         public static final String climbing = name + ".climbing";
         public static final String retracting = name + ".retracting";
 
-        public static final String elbowPosition = name + ".elbowPosition";
-        public static final String shoulderPosition = name + ".shoulderPosition";
+        public static final String leftPosition = name + ".leftPosition";
+        public static final String rightPosition = name + ".rightPosition";
         public static final String targetPos = name + ".targetPosition";
         public static final String atTarget = name + ".atTarget";
     }

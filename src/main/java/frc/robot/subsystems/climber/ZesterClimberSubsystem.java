@@ -96,44 +96,36 @@ class ZesterClimberSubsystem extends BaseClimberSubsystem {
     }
 
     @Override
-    public void runElbow(double speed) {
+    public void run(double speed) {
+        // Zester doesn't implement this
+
+    }
+
+    @Override
+    public void goToSetPoint(double setPoint) {
         // Zester doesn't implement this
     }
 
     @Override
-    public void runShoulder(double speed) {
-        setSpeed(speed);
-    }
-
-    @Override
-    public void elbowGoToSetPoint(double setPoint) {
-        // Zester doesn't implement this
-    }
-
-    @Override
-    public void shoulderGoToSetPoint(double setPoint) {
-        // Zester doesn't implement this
-    }
-
-    @Override
-    public double getShoulderPosition() {
+    public double getRightPosition() {
         // Zester doesn't implement this
         return 0;
     }
 
     @Override
-    public void zeroShoulderPosition() {
-        // Zester doesn't implement this
-    }
-
-    @Override
-    public double getElbowPosition() {
+    public double getLeftPosition() {
         // Zester doesn't implement this
         return 0;
     }
 
     @Override
-    public void zeroElbowPosition() {
+    public double getAveragePosition() {
+        // Zester doesn't implement this
+        return 0;
+    }
+
+    @Override
+    public void zeroPosition() {
         // Zester doesn't implement this
     }
 
