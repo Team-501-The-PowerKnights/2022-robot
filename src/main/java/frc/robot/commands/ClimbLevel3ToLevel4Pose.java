@@ -8,13 +8,12 @@
 
 package frc.robot.commands;
 
+
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.sensors.gyro.GyroFactory;
-import frc.robot.sensors.gyro.IGyroSensor;
-import frc.robot.subsystems.climber.ClimberFactory;
-import frc.robot.subsystems.climber.IClimberSubsystem;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Pose to climb from Level 3 to Level 4.
@@ -22,30 +21,24 @@ import riolog.RioLogger;
  * Assumes that the hanging hook is set and the robot is on the
  * Level 3 bar.
  */
-public class ClimbLevel3ToLevel4Pose extends PKSequentialCommandGroup {
+public class ClimbLevel3ToLevel4Pose extends ClimbBasePose {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimbLevel3ToLevel4Pose.class.getName());
 
-    private final IClimberSubsystem climber;
-    private final IGyroSensor gyro;
-
     public ClimbLevel3ToLevel4Pose() {
-        logger.info("constructing");
+        super();
+        logger.info("constructing {} for {}", getName());
 
-        climber = ClimberFactory.getInstance();
-        gyro = GyroFactory.getInstance();
-
+        // TODO: Add the command groups and commands that make this up
         addCommands();
 
         logger.info("constructed");
     }
 
     public ClimbLevel3ToLevel4Pose(double delay) {
-        logger.info("constructing");
-
-        climber = ClimberFactory.getInstance();
-        gyro = GyroFactory.getInstance();
+        super();
+        logger.info("constructing {} stub for {}", getName(), delay);
 
         addCommands(new WaitCommand(delay));
 
@@ -54,7 +47,7 @@ public class ClimbLevel3ToLevel4Pose extends PKSequentialCommandGroup {
 
     @Override
     public void end(boolean interrupted) {
-        // ClimberStateMachine.getInstance().finish(interrupted);
+        csm.endCurrentStep(interrupted);
     }
 
 }

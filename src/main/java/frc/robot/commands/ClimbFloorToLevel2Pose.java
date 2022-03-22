@@ -8,14 +8,13 @@
 
 package frc.robot.commands;
 
+
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.climber.ClimberStateMachine;
-import frc.robot.sensors.gyro.GyroFactory;
-import frc.robot.sensors.gyro.IGyroSensor;
-import frc.robot.subsystems.climber.ClimberFactory;
-import frc.robot.subsystems.climber.IClimberSubsystem;
+
+
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Pose to climb from floor to Level 2.
@@ -23,30 +22,24 @@ import riolog.RioLogger;
  * Assumes that the climber hook is set and the robot is correctly
  * positioned under the bar.
  */
-public class ClimbFloorToLevel2Pose extends PKSequentialCommandGroup {
+public class ClimbFloorToLevel2Pose extends ClimbBasePose {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimbFloorToLevel2Pose.class.getName());
 
-    private final IClimberSubsystem climber;
-    private final IGyroSensor gyro;
-
     public ClimbFloorToLevel2Pose() {
-        logger.info("constructing");
+        super();
+        logger.info("constructing {}", getName());
 
-        climber = ClimberFactory.getInstance();
-        gyro = GyroFactory.getInstance();
-
+        // TODO: Add the command groups and commands that make this up
         addCommands();
 
         logger.info("constructed");
     }
 
     public ClimbFloorToLevel2Pose(double delay) {
-        logger.info("constructing");
-
-        climber = ClimberFactory.getInstance();
-        gyro = GyroFactory.getInstance();
+        super();
+        logger.info("constructing {} stub for {}", getName(), delay);
 
         addCommands(new WaitCommand(delay));
 
@@ -55,6 +48,7 @@ public class ClimbFloorToLevel2Pose extends PKSequentialCommandGroup {
 
     @Override
     public void end(boolean interrupted) {
-        // ClimberStateMachine.getInstance().finish(interrupted);
+        csm.endCurrentStep(interrupted);
     }
+
 }

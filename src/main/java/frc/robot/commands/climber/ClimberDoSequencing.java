@@ -59,6 +59,7 @@ public class ClimberDoSequencing extends PKCommandBase {
 
     @Override
     public boolean isFinished() {
+        // We never finish, unless the climb is complete
         return done;
     }
 

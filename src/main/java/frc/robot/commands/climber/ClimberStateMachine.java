@@ -7,16 +7,24 @@
 
 package frc.robot.commands.climber;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
+import frc.robot.commands.ClimbFloorToLevel2Pose;
+import frc.robot.commands.ClimbLevel2ToLevel3Pose;
+import frc.robot.commands.ClimbLevel3ToLevel4Pose;
 import frc.robot.commands.ClimbPositionForLevel2Pose;
 import frc.robot.commands.ClimbSetSubystemsPose;
+import frc.robot.commands.PKSequentialCommandGroup;
 import frc.robot.modules.pcm.PCMFactory;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * 
@@ -63,7 +71,14 @@ public class ClimberStateMachine {
     private ClimberStateMachine() {
         logger.info("constructing");
 
-        initState();
+        climbSteps = new ArrayList<>();
+
+        /*
+         * Can't init the state in the , as there is a race in
+         * the construction of the poses that make up the sequence
+         * that depends on the state machine being already
+         * constructed.
+         */
 
         logger.info("constructed");
     }
@@ -74,6 +89,15 @@ public class ClimberStateMachine {
         SmartDashboard.putBoolean(TelemetryNames.Misc.climberEnabled, climberEnabled);
         climberStarted = false;
         SmartDashboard.putBoolean(TelemetryNames.Misc.climberStarted, climberStarted);
+
+        // Instantiate "debug stubs" for now with 5 second delays
+        climbSteps.clear();
+        climbSteps.add(new ClimbFloorToLevel2Pose(5.0));
+        climbSteps.add(new ClimbLevel2ToLevel3Pose(5.0));
+        climbSteps.add(new ClimbLevel3ToLevel4Pose(5.0));
+        // Point to first step in the list
+        stepIndex = 0;
+        
     }
 
     public void resetState() {
@@ -110,6 +134,11 @@ public class ClimberStateMachine {
         return climberStarted;
     }
 
+    //
+    private final List<PKSequentialCommandGroup> climbSteps;
+    //
+    private int stepIndex;
+
     /**
      * Executes the next queued command step in the sequence for 
      * climbing. If there are no more commands to execute, it returns
@@ -126,8 +155,16 @@ public class ClimberStateMachine {
      * @return true if another command will be run; false if all done
      */
     public boolean doNextStep() {
-        logger.info("starting next step via command: {}", "notImplementedYet");
-        return true;
+        if (stepIndex < climbSteps.size()) {
+            PKSequentialCommandGroup step = climbSteps.get(stepIndex);
+            logger.info("starting next step via command: {}", step.getName());
+            CommandScheduler.getInstance().schedule(true, step);
+
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     /**
@@ -142,7 +179,12 @@ public class ClimberStateMachine {
      * @param interrupted
      */
     public void endCurrentStep(boolean interrupted) {
-        logger.info("ending current step: interrupted={}", interrupted);
+        PKSequentialCommandGroup step = climbSteps.get(stepIndex);
+        logger.info("ending current step: {} interrupted={}", step.getName(), interrupted);
+        
+        if ( !interrupted) {
+          stepIndex++;
+        }
     }
 
 }
