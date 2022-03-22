@@ -109,7 +109,7 @@ public class ClimberStateMachine {
         climberEnabled = true;
         SmartDashboard.putBoolean(TelemetryNames.Misc.climberEnabled, climberEnabled);
 
-        CommandScheduler.getInstance().schedule(true, new ClimberEnableSequencing());
+        //CommandScheduler.getInstance().schedule(true, new ClimberEnableSequencing());
     }
 
     public void startClimberSequencing() {
@@ -118,12 +118,12 @@ public class ClimberStateMachine {
         SmartDashboard.putBoolean(TelemetryNames.Misc.climberStarted, climberStarted);
 
         // Home, store, disable, etc. all the subsystems not active in climb
-        CommandScheduler.getInstance().schedule(true, new ClimbSetSubystemsPose());
+        //CommandScheduler.getInstance().schedule(true, new ClimbSetSubystemsPose());
         // Pneumatics aren't a subsystem, so commands don't work
-        PCMFactory.getInstance().disabledInit();
+      //  PCMFactory.getInstance().disabledInit();
 
         // Moves the robot to position and extends the climber
-        CommandScheduler.getInstance().schedule(true, new ClimbPositionForLevel2Pose(1.0));
+       // CommandScheduler.getInstance().schedule(true, new ClimbPositionForLevel2Pose(1.0));
     }
 
     public boolean isClimberEnabled() {

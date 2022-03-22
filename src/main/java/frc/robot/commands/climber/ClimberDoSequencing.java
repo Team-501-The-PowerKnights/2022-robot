@@ -25,8 +25,8 @@ public class ClimberDoSequencing extends PKCommandBase {
     // Handle to the state machine we interact with.
     private final ClimberStateMachine csm;
 
-    // Flag for whether we are done combining or not
-    private boolean done;
+    // Flag for whether we are done climbing or not
+    private boolean stepsToRun;
 
     public ClimberDoSequencing() {
         logger.info("constructing {}", getName());
@@ -40,7 +40,7 @@ public class ClimberDoSequencing extends PKCommandBase {
     public void initialize() {
         super.initialize();
 
-        done = false;
+        stepsToRun = false;
     }
 
     @Override
@@ -50,17 +50,17 @@ public class ClimberDoSequencing extends PKCommandBase {
 
     @Override
     protected void firstExecution() {
-        logger.trace("climber.climb() called in firstExecution()");
+        logger.trace("csm.doNextStep() called in firstExecution()");
 
         // May already be done?
-        done = csm.doNextStep();
+        stepsToRun = csm.doNextStep();
         // TODO: Find a way to unschedule this command?
     }
 
     @Override
     public boolean isFinished() {
         // We never finish, unless the climb is complete
-        return done;
+        return !stepsToRun;
     }
 
     @Override
