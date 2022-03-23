@@ -9,13 +9,15 @@
 package frc.robot.commands;
 
 
-import frc.robot.commands.elevator.ElevatorDoNothing;
-import frc.robot.commands.incrementor.IncrementorDoNothing;
-import frc.robot.commands.intake.IntakeDoNothing;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+
+import frc.robot.commands.elevator.ElevatorStop;
+import frc.robot.commands.incrementor.IncrementorStop;
 import frc.robot.commands.intake.IntakeRetract;
-import frc.robot.commands.shooter.ShooterDoNothing;
-import frc.robot.commands.turret.TurretDoNothing;
+import frc.robot.commands.intake.IntakeStop;
+import frc.robot.commands.shooter.ShooterStop;
 import frc.robot.commands.turret.TurretHome;
+import frc.robot.commands.turret.TurretStop;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -24,21 +26,36 @@ import riolog.RioLogger;
 /**
  * Pose to get all subsystems to state ready for climbing.
  */
-public class ClimbSetSubystemsPose extends PKParallelCommandGroup {
+public class ClimbSetSubystemsPose extends ClimbBasePose {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimbSetSubystemsPose.class.getName());
 
     public ClimbSetSubystemsPose() {
-        logger.info("constructing");
+        super();
+        logger.info("constructing {}", getName());
 
-        addCommands(new PKSequentialCommandGroup(new IntakeRetract(), new IntakeDoNothing()),
-                    new IncrementorDoNothing(),
-                    new ElevatorDoNothing(),
-                    new PKSequentialCommandGroup(new TurretHome(), new TurretDoNothing()),
-                    new ShooterDoNothing());
+        addCommands(
+            new PKParallelCommandGroup(
+                new PKSequentialCommandGroup(new IntakeRetract(), new IntakeStop()),
+                new IncrementorStop(),
+                new ElevatorStop(),
+                new PKSequentialCommandGroup(new TurretHome(), new WaitCommand(0.5), new TurretStop()),
+                new ShooterStop()
+                )
+        );
 
         logger.info("constructed");
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        super.end(interrupted);
+
+        csm.endCurrentStep(interrupted);
+        if (!interrupted) {
+            csm.doNextStep();
+        }
     }
 
 }

@@ -8,6 +8,7 @@
 
 package frc.robot.hmi;
 
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -22,6 +23,7 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * This class implements the Operator's gamepad.
@@ -58,6 +60,16 @@ public class OperatorGamepad extends F310Gamepad {
                 new FirePoseVision()));
         firePoseButton.whenHeld(new FirePoseNoVision());
 
+        logger.info("configured");
+    }
+
+    /**
+     * (Re-)Configures the button bindings on the gamepad for the
+     * climbing end game play.
+     */
+    public void configureClimbingButtonBindings() {
+        logger.info("configure");
+
         climbSequenceButton.whileHeld(new ClimberDoSequencing());
 
         logger.info("configured");
@@ -66,12 +78,10 @@ public class OperatorGamepad extends F310Gamepad {
     @Override
     public void updateTelemetry() {
         // SmartDashboard.putBoolean(TelemetryNames.HMI.firePose, firePoseButton.get());
-        // SmartDashboard.putBoolean(TelemetryNames.HMI.visionTargetting,
-        // visionTargettingButton.get());
-        // SmartDashboard.putBoolean(TelemetryNames.HMI.revShooter,
-        // revShooterButton.get());
-        // SmartDashboard.putBoolean(TelemetryNames.HMI.homeTurret,
-        // homeTurretButton.get());
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.visionTargetting, visionTargettingButton.get());
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.revShooter, revShooterButton.get());
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.homeTurret, homeTurretButton.get());
+
         SmartDashboard.putNumber(TelemetryNames.HMI.elevatorSpeed, getElevatorSpeed());
         SmartDashboard.putNumber(TelemetryNames.HMI.turretJog, getTurretJog());
     }

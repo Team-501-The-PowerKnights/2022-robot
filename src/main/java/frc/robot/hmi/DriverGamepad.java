@@ -32,7 +32,7 @@ public class DriverGamepad extends F310Gamepad {
 
     private final Button turboButton;
     private final Button crawlButton;
-    private final Button driveSwapButton;
+    //private final Button driveSwapButton;
     
     public DriverGamepad() 
     {
@@ -41,7 +41,7 @@ public class DriverGamepad extends F310Gamepad {
 
         turboButton = new JoystickButton(stick, leftBumper);
         crawlButton = new JoystickButton(stick, rightBumper);
-        driveSwapButton = new JoystickButton(stick, backButton);
+        //driveSwapButton = new JoystickButton(stick, backButton);
 
         logger.info("constructed");
     }
@@ -52,10 +52,20 @@ public class DriverGamepad extends F310Gamepad {
 
         // turboButton - implemented in getting values speed & turn
         // crawlButton - implemented in getting values speed & turn
-        driveSwapButton.whenPressed(new DriveSwap());
+        //driveSwapButton.whenPressed(new DriveSwap());
 
         // Hook to configure for testing of new stuff
         configureTestBindings();
+
+        logger.info("configured");
+    }
+
+    /**
+     * (Re-)Configures the button bindings on the gamepad for the
+     * climbing end game play.
+     */   
+    public void configureClimbingButtonBindings() {
+        logger.info("configure");
 
         logger.info("configured");
     }

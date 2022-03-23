@@ -6,19 +6,19 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.turret;
+package frc.robot.commands.incrementor;
 
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class TurretDoNothing extends TurretCommandBase {
+public class IncrementorStop extends IncrementorCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(TurretDoNothing.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(IncrementorStop.class.getName());
 
-    public TurretDoNothing() {
+    public IncrementorStop() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
@@ -27,13 +27,13 @@ public class TurretDoNothing extends TurretCommandBase {
     @Override
     public void execute() {
       super.execute();
-    }
-  
-    @Override
-    protected void firstExecution() {
-      logger.trace("turret.stop() called in firstExecution()");
 
-      turret.stop();
+      incrementor.stop();
+    }
+
+    @Override
+    public boolean isFinished() {
+        return true;
     }
 
 }

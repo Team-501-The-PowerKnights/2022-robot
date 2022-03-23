@@ -25,7 +25,7 @@ import riolog.RioLogger;
  * Drives from an assumed starting point of the wall to a position
  * lined up with bar, and extends the climber at the same time.
  */
-public class ClimbPositionForLevel2Pose extends PKSequentialCommandGroup {
+public class ClimbPositionForLevel2Pose extends ClimbBasePose {
         
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimbPositionForLevel2Pose.class.getName());
@@ -37,15 +37,29 @@ public class ClimbPositionForLevel2Pose extends PKSequentialCommandGroup {
      * @param delay - how long to wait before starting (seconds)
      */
     public ClimbPositionForLevel2Pose(double delay) {
+        super();
         logger.info("constucting {} for {}", getName(), delay);
 
         addCommands(new WaitCommand(delay),
-                    new PKParallelCommandGroup(new DriveBackwardTimed(2.0, 0.20),
-                                               new ClimberExtendLevel2()),
-                    new DriveStraightJoystickControl()
-                    );
+                    new PKParallelCommandGroup(
+                        new DriveBackwardTimed(2.0, 0.20),
+                        new ClimberExtendLevel2()
+                        )
+        );
 
         logger.info("constructed");
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        super.end(interrupted);
+        
+        // new DriveStraightJoystickControl()
+
+        csm.endCurrentStep(interrupted);
+        if (!interrupted) {
+            csm.doNextStep();
+        }
     }
 
 }

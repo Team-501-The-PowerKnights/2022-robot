@@ -68,10 +68,11 @@ public class ClimberDoSequencing extends PKCommandBase {
         // This is true because the gamepad button was released
         csm.endCurrentStep(true);
 
-        // This command will interrupt any schedule "real" command and return the
-        // climber to manual control
+        // This command will interrupt any schedule "real" command and
+        // return the climber to manual control
         // CommandScheduler.getInstance().schedule(new ClimberDoNothing());
         CommandScheduler.getInstance().schedule(new ClimberManualControl());
+        ClimberStateMachine.getInstance().endClimberSequencing();
     }
 
 }

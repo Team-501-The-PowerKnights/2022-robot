@@ -54,9 +54,10 @@ public class OI implements ITelemetryProvider {
         return ourInstance;
     }
 
-    // TODO: Make this private with accessor methods
-    public final DriverGamepad driverPad;
-    public final OperatorGamepad operatorPad;
+    // Driver gamepad
+    private final DriverGamepad driverPad;
+    // Operator gamepad
+    private final OperatorGamepad operatorPad;
 
     private OI() {
         logger.info("constructing {}", myName);
@@ -74,6 +75,15 @@ public class OI implements ITelemetryProvider {
         operatorPad.configureButtonBindings();
 
         logger.info("configured");
+    }
+
+    public void configureClimbingButtonBindings() {
+        logger.info("configure");
+
+        driverPad.configureClimbingButtonBindings();
+        operatorPad.configureClimbingButtonBindings();
+
+        logger.info("configure");
     }
 
     @Override
@@ -128,14 +138,6 @@ public class OI implements ITelemetryProvider {
 
     public boolean getOperatorClimberStart() {
         return operatorPad.getClimberStart();
-    }
-
-    public boolean getClimberExtend() {
-        return false;
-    }
-
-    public boolean getClimberClimb() {
-        return false;
     }
 
     public double getClimberSpeed() {
