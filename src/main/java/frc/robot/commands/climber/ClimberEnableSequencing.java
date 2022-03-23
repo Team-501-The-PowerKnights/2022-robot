@@ -7,13 +7,11 @@
 
 package frc.robot.commands.climber;
 
-
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-
 public class ClimberEnableSequencing extends ClimberOICommandBase {
-            
+
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimberEnableSequencing.class.getName());
 
@@ -37,6 +35,9 @@ public class ClimberEnableSequencing extends ClimberOICommandBase {
     public void end(boolean interrupted) {
         super.end(interrupted);
 
+        // Zero encoder position in advance of climber sequencing; they should never be
+        // zeroed after this point
+        climber.zeroPosition();
         ClimberStateMachine.getInstance().startClimberSequencing();
     }
 
