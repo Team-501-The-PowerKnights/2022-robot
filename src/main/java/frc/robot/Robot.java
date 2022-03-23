@@ -514,7 +514,7 @@ public class Robot extends TimedRobot {
         }
 
         // Initialize the climber state manager (only valid in teleop)
-        climberSM.initState();
+        climberSM.initialize();
 
         logger.info("initialized teleop");
     }

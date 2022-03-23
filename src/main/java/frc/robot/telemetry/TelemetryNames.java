@@ -323,7 +323,7 @@ public final class TelemetryNames {
         public static final String running = name + ".running";
         public static final String sequenceName = name + ".sequenceName";
 
-        public static final String climberPaused = name + ".climberPaused";
+        //public static final String climberPaused = name + ".climberPaused";
         public static final String level2Climbed = name + ".level2Climbed";
         public static final String level3Climbed = name + ".level3Climbed";
         public static final String level4Climbed = name + ".level4Climbed";

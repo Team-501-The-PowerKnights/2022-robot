@@ -1290,6 +1290,30 @@
               "_source0": "network_table:///SmartDashboard/HMI.turretJog",
               "_title": "HMI.turretJog"
             }
+          },
+          "6,11": {
+            "size": [
+              10,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climber.sequenceName",
+              "_title": "Climber.sequenceName"
+            }
+          },
+          "2,11": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Climber.running",
+              "_title": "Climber.running",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
           }
         }
       }
@@ -2408,6 +2432,56 @@
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/Misc.endGameStarted",
               "_title": "Misc.endGameStarted",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "10,8": {
+            "size": [
+              10,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climber.sequenceName",
+              "_title": "Climber.sequenceName"
+            }
+          },
+          "16,4": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Climber.level3Climbed",
+              "_title": "Climber.level3Climbed",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "16,6": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Climber.level4Climbed",
+              "_title": "Climber.level4Climbed",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "16,2": {
+            "size": [
+              4,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Climber.level2Climbed",
+              "_title": "SmartDashboard/Climber.level2Climbed",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
