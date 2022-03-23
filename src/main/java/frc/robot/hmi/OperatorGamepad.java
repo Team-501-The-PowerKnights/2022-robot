@@ -60,7 +60,17 @@ public class OperatorGamepad extends F310Gamepad {
                 new FirePoseVision()));
         firePoseButton.whenHeld(new FirePoseNoVision());
 
-        //climbSequenceButton.whileHeld(new ClimberDoSequencing());
+        logger.info("configured");
+    }
+
+    /**
+     * (Re-)Configures the button bindings on the gamepad for the
+     * climbing end game play.
+     */
+    public void configureClimbingButtonBindings() {
+        logger.info("configure");
+
+        climbSequenceButton.whileHeld(new ClimberDoSequencing());
 
         logger.info("configured");
     }
@@ -68,12 +78,10 @@ public class OperatorGamepad extends F310Gamepad {
     @Override
     public void updateTelemetry() {
         // SmartDashboard.putBoolean(TelemetryNames.HMI.firePose, firePoseButton.get());
-        // SmartDashboard.putBoolean(TelemetryNames.HMI.visionTargetting,
-        // visionTargettingButton.get());
-        // SmartDashboard.putBoolean(TelemetryNames.HMI.revShooter,
-        // revShooterButton.get());
-        // SmartDashboard.putBoolean(TelemetryNames.HMI.homeTurret,
-        // homeTurretButton.get());
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.visionTargetting, visionTargettingButton.get());
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.revShooter, revShooterButton.get());
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.homeTurret, homeTurretButton.get());
+
         SmartDashboard.putNumber(TelemetryNames.HMI.elevatorSpeed, getElevatorSpeed());
         SmartDashboard.putNumber(TelemetryNames.HMI.turretJog, getTurretJog());
     }

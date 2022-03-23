@@ -13,12 +13,12 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class TurretDoNothing extends TurretCommandBase {
+public class TurretStop extends TurretCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(TurretDoNothing.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(TurretStop.class.getName());
 
-    public TurretDoNothing() {
+    public TurretStop() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
@@ -27,13 +27,13 @@ public class TurretDoNothing extends TurretCommandBase {
     @Override
     public void execute() {
       super.execute();
-    }
-  
-    @Override
-    protected void firstExecution() {
-      logger.trace("turret.stop() called in firstExecution()");
 
       turret.stop();
     }
-
+    
+    @Override
+    public boolean isFinished() {
+        return true;
+    }
+    
 }

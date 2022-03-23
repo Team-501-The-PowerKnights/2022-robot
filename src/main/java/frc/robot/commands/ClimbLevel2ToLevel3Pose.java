@@ -47,7 +47,12 @@ public class ClimbLevel2ToLevel3Pose extends ClimbBasePose {
 
     @Override
     public void end(boolean interrupted) {
-       csm.endCurrentStep(interrupted);
+        super.end(interrupted);
+
+        csm.endCurrentStep(interrupted);
+        if (!interrupted) {
+            csm.doNextStep();
+        }
     }
 
 }

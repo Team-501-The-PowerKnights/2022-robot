@@ -5,20 +5,19 @@
 /* file in the root directory of the project.                                 */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.turret;
+package frc.robot.commands.shooter;
+
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-/**
- * Add your docs here.
- */
-public class TurretHome extends TurretCommandBase {
+
+public class ShooterStop extends ShooterCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(TurretHome.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ShooterStop.class.getName());
 
-    public TurretHome() {
+    public ShooterStop() {
         logger.info("constructing {}", getName());
 
         logger.info("constructed");
@@ -26,21 +25,14 @@ public class TurretHome extends TurretCommandBase {
 
     @Override
     public void execute() {
-        super.execute();
-    }
+      super.execute();
 
-    @Override
-    protected void firstExecution() {
-        logger.trace("turret.home() called in firstExecution()");
-        
-        // turret.home();
-        turret.setTurretAngle(0); // This works for now; 0 and 180 will be roughly facing straight ahead or back
+      shooter.stop();
     }
-
+    
     @Override
     public boolean isFinished() {
-        // FIXME: Should this be something else? Timed? Check on angle?
         return true;
     }
-
+    
 }

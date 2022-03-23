@@ -14,7 +14,7 @@ import java.util.List;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
+import frc.robot.OI;
 import frc.robot.commands.ClimbFloorToLevel2Pose;
 import frc.robot.commands.ClimbLevel2ToLevel3Pose;
 import frc.robot.commands.ClimbLevel3ToLevel4Pose;
@@ -128,11 +128,12 @@ public class ClimberStateMachine {
         //  PCMFactory.getInstance().disabledInit();
 
         CommandScheduler.getInstance().setDefaultCommand(ClimberFactory.getInstance(), new ClimberManualControl());
+        OI.getInstance().configureClimbingButtonBindings();
     }
 
     public void endClimberSequencing() {
         logger.info("ending climber sequencing");
-        climberStarted = true;
+        climberStarted = false;
         SmartDashboard.putBoolean(TelemetryNames.Misc.climberStarted, climberStarted);
     }
 
@@ -173,6 +174,7 @@ public class ClimberStateMachine {
             return true;
         }
         else {
+            logger.debug("no more steps to do; ignore");
             return false;
         }
     }
@@ -189,11 +191,16 @@ public class ClimberStateMachine {
      * @param interrupted
      */
     public void endCurrentStep(boolean interrupted) {
-        CommandGroupBase step = climbSteps.get(stepIndex);
-        logger.info("ending current step: {} interrupted={}", step.getName(), interrupted);
-        
-        if ( !interrupted) {
-          stepIndex++;
+        if (stepIndex < climbSteps.size()) {
+            CommandGroupBase step = climbSteps.get(stepIndex);
+            logger.info("ending current step: {} interrupted={}", step.getName(), interrupted);
+            
+            if ( !interrupted) {
+            stepIndex++;
+            }
+        }
+        else {
+            logger.debug("all steps already ended; ignore");
         }
     }
 

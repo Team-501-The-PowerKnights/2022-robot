@@ -41,12 +41,25 @@ public class ClimbPositionForLevel2Pose extends ClimbBasePose {
         logger.info("constucting {} for {}", getName(), delay);
 
         addCommands(new WaitCommand(delay),
-                    new PKParallelCommandGroup(new DriveBackwardTimed(2.0, 0.20),
-                                               new ClimberExtendLevel2()),
-                    new DriveStraightJoystickControl()
-                    );
+                    new PKParallelCommandGroup(
+                        new DriveBackwardTimed(2.0, 0.20),
+                        new ClimberExtendLevel2()
+                        )
+        );
 
         logger.info("constructed");
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        super.end(interrupted);
+        
+        // new DriveStraightJoystickControl()
+
+        csm.endCurrentStep(interrupted);
+        if (!interrupted) {
+            csm.doNextStep();
+        }
     }
 
 }
