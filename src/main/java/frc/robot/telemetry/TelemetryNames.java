@@ -38,12 +38,6 @@ public final class TelemetryNames {
         public static final String initStatus = name + ".initStatus";
 
         public static final String endGameStarted = name + ".endGameStarted";
-
-        public static final String climberEnabled = name + ".climberEnabled";
-        public static final String climberStarted = name + ".climberStarted";
-        public static final String climberPaused = name + ".climberPaused";
-        public static final String level2Climbed = name + ".level2Climbed";
-        public static final String level3Climbed = name + ".level3Climbed";
     }
 
     /***************
@@ -323,6 +317,16 @@ public final class TelemetryNames {
         public static final String rightPosition = name + ".rightPosition";
         public static final String targetPos = name + ".targetPosition";
         public static final String atTarget = name + ".atTarget";
+
+        public static final String enabled = name + ".enabled";
+        public static final String started = name + ".started";
+        public static final String running = name + ".running";
+        public static final String sequenceName = name + ".sequenceName";
+
+        public static final String climberPaused = name + ".climberPaused";
+        public static final String level2Climbed = name + ".level2Climbed";
+        public static final String level3Climbed = name + ".level3Climbed";
+        public static final String level4Climbed = name + ".level4Climbed";
     }
 
 }

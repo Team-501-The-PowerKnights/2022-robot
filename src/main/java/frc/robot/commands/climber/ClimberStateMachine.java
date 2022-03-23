@@ -14,16 +14,14 @@ import java.util.List;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 import frc.robot.OI;
 import frc.robot.commands.ClimbFloorToLevel2Pose;
 import frc.robot.commands.ClimbLevel2ToLevel3Pose;
 import frc.robot.commands.ClimbLevel3ToLevel4Pose;
 import frc.robot.commands.ClimbPositionForLevel2Pose;
 import frc.robot.commands.ClimbSetSubystemsPose;
-import frc.robot.commands.PKSequentialCommandGroup;
-import frc.robot.modules.pcm.PCMFactory;
 import frc.robot.subsystems.climber.ClimberFactory;
-import frc.robot.subsystems.climber.IClimberSubsystem;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -69,8 +67,10 @@ public class ClimberStateMachine {
 
     // Flag for whether climber sequencing is enabled
     private boolean climberEnabled;
-    // Flag for whether climber sequencing is started
+    // Flag for whether climber sequencing has started
     private boolean climberStarted;
+    // Flag for whether climber sequencing is running
+    private boolean climberRunning;
 
     private ClimberStateMachine() {
         logger.info("constructing");
@@ -84,18 +84,22 @@ public class ClimberStateMachine {
          * constructed.
          */
 
-        SmartDashboard.putBoolean(TelemetryNames.Misc.climberEnabled, false);
-        SmartDashboard.putBoolean(TelemetryNames.Misc.climberStarted, false);
+        SmartDashboard.putBoolean(TelemetryNames.Climber.enabled, false);
+        SmartDashboard.putBoolean(TelemetryNames.Climber.started, false);
+        SmartDashboard.putBoolean(TelemetryNames.Climber.running, false);
 
         logger.info("constructed");
     }
 
     public void initState() {
         logger.trace("initialize climber control state");
+
         climberEnabled = false;
-        SmartDashboard.putBoolean(TelemetryNames.Misc.climberEnabled, climberEnabled);
+        SmartDashboard.putBoolean(TelemetryNames.Climber.enabled, climberEnabled);
         climberStarted = false;
-        SmartDashboard.putBoolean(TelemetryNames.Misc.climberStarted, climberStarted);
+        SmartDashboard.putBoolean(TelemetryNames.Climber.started, climberStarted);
+        climberRunning = false;
+        SmartDashboard.putBoolean(TelemetryNames.Climber.running, climberRunning);
 
         // Instantiate "debug stubs" for now with 5 second delays
         climbSteps.clear();
@@ -106,6 +110,7 @@ public class ClimberStateMachine {
         climbSteps.add(new ClimbLevel3ToLevel4Pose(5.0));
         // Point to first step in the list
         stepIndex = 0;
+        SmartDashboard.putString(TelemetryNames.Climber.sequenceName, "");
     }
 
     public void resetState() {
@@ -114,16 +119,18 @@ public class ClimberStateMachine {
 
     public void enableClimberSequencing() {
         logger.info("enabling climber sequencing");
+
         climberEnabled = true;
-        SmartDashboard.putBoolean(TelemetryNames.Misc.climberEnabled, climberEnabled);
+        SmartDashboard.putBoolean(TelemetryNames.Climber.enabled, climberEnabled);
 
         CommandScheduler.getInstance().schedule(true, new ClimberEnableSequencing());
     }
 
     public void beginClimberSequencing() {
         logger.info("beginning climber sequencing");
+
         climberStarted = true;
-        SmartDashboard.putBoolean(TelemetryNames.Misc.climberStarted, climberStarted);
+        SmartDashboard.putBoolean(TelemetryNames.Climber.started, climberStarted);
 
         //  PCMFactory.getInstance().disabledInit();
 
@@ -133,16 +140,12 @@ public class ClimberStateMachine {
 
     public void endClimberSequencing() {
         logger.info("ending climber sequencing");
-        climberStarted = false;
-        SmartDashboard.putBoolean(TelemetryNames.Misc.climberStarted, climberStarted);
+        climberRunning = false;
+        SmartDashboard.putBoolean(TelemetryNames.Climber.running, climberRunning);
     }
 
     public boolean isClimberEnabled() {
         return climberEnabled;
-    }
-
-    public boolean isClimberStarted() {
-        return climberStarted;
     }
 
     //
@@ -167,8 +170,12 @@ public class ClimberStateMachine {
      */
     public boolean doNextStep() {
         if (stepIndex < climbSteps.size()) {
+            climberRunning = true;
+            SmartDashboard.putBoolean(TelemetryNames.Climber.running, climberRunning);
+    
             CommandGroupBase step = climbSteps.get(stepIndex);
             logger.info("starting next step via command: {}", step.getName());
+            SmartDashboard.putString(TelemetryNames.Climber.sequenceName, step.getName());
             CommandScheduler.getInstance().schedule(true, step);
 
             return true;
@@ -196,12 +203,15 @@ public class ClimberStateMachine {
             logger.info("ending current step: {} interrupted={}", step.getName(), interrupted);
             
             if ( !interrupted) {
-            stepIndex++;
+                stepIndex++;
             }
         }
         else {
             logger.debug("all steps already ended; ignore");
         }
+        climberRunning = false;
+        SmartDashboard.putBoolean(TelemetryNames.Climber.running, climberRunning);
+        SmartDashboard.putString(TelemetryNames.Climber.sequenceName, "");
     }
 
 }
