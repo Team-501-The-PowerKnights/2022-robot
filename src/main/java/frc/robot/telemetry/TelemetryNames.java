@@ -315,6 +315,7 @@ public final class TelemetryNames {
 
         public static final String leftPosition = name + ".leftPosition";
         public static final String rightPosition = name + ".rightPosition";
+        public static final String position = name + ".position";
         public static final String targetPos = name + ".targetPosition";
         public static final String atTarget = name + ".atTarget";
 

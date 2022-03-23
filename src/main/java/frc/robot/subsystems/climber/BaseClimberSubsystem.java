@@ -59,6 +59,7 @@ abstract class BaseClimberSubsystem extends BaseSubsystem implements IClimberSub
     public void updateTelemetry() {
         SmartDashboard.putNumber(TelemetryNames.Climber.leftPosition, getLeftPosition());
         SmartDashboard.putNumber(TelemetryNames.Climber.rightPosition, getRightPosition());
+        SmartDashboard.putNumber(TelemetryNames.Climber.position, getAveragePosition());
         SmartDashboard.putNumber(TelemetryNames.Climber.speed, tlmSpeed);
         SmartDashboard.putBoolean(TelemetryNames.Climber.climbing, tlmClimbing);
         SmartDashboard.putBoolean(TelemetryNames.Climber.retracting, tlmRetracting);

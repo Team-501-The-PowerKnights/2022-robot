@@ -41,23 +41,24 @@ class ClimberSubsystem extends BaseClimberSubsystem {
         lastError = REVLibError.kOk;
 
         rightMotor = new CANSparkMax(55, MotorType.kBrushless);
-        checkError(rightMotor.restoreFactoryDefaults(), "setting factory defaults {}");
 
+        checkError(rightMotor.restoreFactoryDefaults(), "setting factory defaults {}");
+        rightMotor.setInverted(true);
         checkError(rightMotor.setIdleMode(IdleMode.kBrake), "setting to brake {}");
         checkError(rightMotor.setOpenLoopRampRate(0.5), "setting ramp rate {}");
-        checkError(rightMotor.setSmartCurrentLimit(35), "setting current limit {}");
+        checkError(rightMotor.setSmartCurrentLimit(55), "setting current limit {}");
 
         rightEncoder = rightMotor.getEncoder();
 
         checkError(rightEncoder.setPosition(0.0), "zeroing the rightEncoder {}");
 
         leftMotor = new CANSparkMax(56, MotorType.kBrushless);
-        leftMotor.setInverted(true);
+        leftMotor.setInverted(false);
         checkError(leftMotor.restoreFactoryDefaults(), "setting factory defaults {}");
 
         checkError(leftMotor.setIdleMode(IdleMode.kBrake), "setting to brake {}");
         checkError(leftMotor.setOpenLoopRampRate(0.5), "setting ramp rate {}");
-        checkError(leftMotor.setSmartCurrentLimit(35), "setting current limit {}");
+        checkError(leftMotor.setSmartCurrentLimit(55), "setting current limit {}");
 
         leftEncoder = leftMotor.getEncoder();
 
