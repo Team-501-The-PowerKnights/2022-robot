@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 import frc.robot.commands.ClimbFloorToLevel2Pose;
 import frc.robot.commands.ClimbLevel2ToLevel3Pose;
 import frc.robot.commands.ClimbLevel3ToLevel4Pose;
@@ -20,6 +22,8 @@ import frc.robot.commands.ClimbPositionForLevel2Pose;
 import frc.robot.commands.ClimbSetSubystemsPose;
 import frc.robot.commands.PKSequentialCommandGroup;
 import frc.robot.modules.pcm.PCMFactory;
+import frc.robot.subsystems.climber.ClimberFactory;
+import frc.robot.subsystems.climber.IClimberSubsystem;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -74,11 +78,14 @@ public class ClimberStateMachine {
         climbSteps = new ArrayList<>();
 
         /*
-         * Can't init the state in the , as there is a race in
-         * the construction of the poses that make up the sequence
-         * that depends on the state machine being already
+         * Can't init the state in the constructor, as there is a
+         * race in the construction of the poses that make up the
+         * sequence that depends on the state machine being already
          * constructed.
          */
+
+        SmartDashboard.putBoolean(TelemetryNames.Misc.climberEnabled, false);
+        SmartDashboard.putBoolean(TelemetryNames.Misc.climberStarted, false);
 
         logger.info("constructed");
     }
@@ -92,12 +99,13 @@ public class ClimberStateMachine {
 
         // Instantiate "debug stubs" for now with 5 second delays
         climbSteps.clear();
+        climbSteps.add(new ClimbSetSubystemsPose());
+        climbSteps.add(new ClimbPositionForLevel2Pose(1.0));
         climbSteps.add(new ClimbFloorToLevel2Pose(5.0));
         climbSteps.add(new ClimbLevel2ToLevel3Pose(5.0));
         climbSteps.add(new ClimbLevel3ToLevel4Pose(5.0));
         // Point to first step in the list
         stepIndex = 0;
-        
     }
 
     public void resetState() {
@@ -109,21 +117,23 @@ public class ClimberStateMachine {
         climberEnabled = true;
         SmartDashboard.putBoolean(TelemetryNames.Misc.climberEnabled, climberEnabled);
 
-        //CommandScheduler.getInstance().schedule(true, new ClimberEnableSequencing());
+        CommandScheduler.getInstance().schedule(true, new ClimberEnableSequencing());
     }
 
-    public void startClimberSequencing() {
-        logger.info("starting climber sequencing");
+    public void beginClimberSequencing() {
+        logger.info("beginning climber sequencing");
         climberStarted = true;
         SmartDashboard.putBoolean(TelemetryNames.Misc.climberStarted, climberStarted);
 
-        // Home, store, disable, etc. all the subsystems not active in climb
-        //CommandScheduler.getInstance().schedule(true, new ClimbSetSubystemsPose());
-        // Pneumatics aren't a subsystem, so commands don't work
-      //  PCMFactory.getInstance().disabledInit();
+        //  PCMFactory.getInstance().disabledInit();
 
-        // Moves the robot to position and extends the climber
-       // CommandScheduler.getInstance().schedule(true, new ClimbPositionForLevel2Pose(1.0));
+        CommandScheduler.getInstance().setDefaultCommand(ClimberFactory.getInstance(), new ClimberManualControl());
+    }
+
+    public void endClimberSequencing() {
+        logger.info("ending climber sequencing");
+        climberStarted = true;
+        SmartDashboard.putBoolean(TelemetryNames.Misc.climberStarted, climberStarted);
     }
 
     public boolean isClimberEnabled() {
@@ -135,7 +145,7 @@ public class ClimberStateMachine {
     }
 
     //
-    private final List<PKSequentialCommandGroup> climbSteps;
+    private final List<CommandGroupBase> climbSteps;
     //
     private int stepIndex;
 
@@ -156,7 +166,7 @@ public class ClimberStateMachine {
      */
     public boolean doNextStep() {
         if (stepIndex < climbSteps.size()) {
-            PKSequentialCommandGroup step = climbSteps.get(stepIndex);
+            CommandGroupBase step = climbSteps.get(stepIndex);
             logger.info("starting next step via command: {}", step.getName());
             CommandScheduler.getInstance().schedule(true, step);
 
@@ -179,7 +189,7 @@ public class ClimberStateMachine {
      * @param interrupted
      */
     public void endCurrentStep(boolean interrupted) {
-        PKSequentialCommandGroup step = climbSteps.get(stepIndex);
+        CommandGroupBase step = climbSteps.get(stepIndex);
         logger.info("ending current step: {} interrupted={}", step.getName(), interrupted);
         
         if ( !interrupted) {

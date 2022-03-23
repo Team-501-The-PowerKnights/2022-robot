@@ -24,13 +24,14 @@ import riolog.RioLogger;
 /**
  * Pose to get all subsystems to state ready for climbing.
  */
-public class ClimbSetSubystemsPose extends PKParallelCommandGroup {
+public class ClimbSetSubystemsPose extends ClimbBasePose {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimbSetSubystemsPose.class.getName());
 
     public ClimbSetSubystemsPose() {
-        logger.info("constructing");
+        super();
+        logger.info("constructing {}", getName());
 
         addCommands(new PKSequentialCommandGroup(new IntakeRetract(), new IntakeDoNothing()),
                     new IncrementorDoNothing(),

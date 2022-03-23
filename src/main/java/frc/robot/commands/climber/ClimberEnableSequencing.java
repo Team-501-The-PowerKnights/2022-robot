@@ -37,7 +37,7 @@ public class ClimberEnableSequencing extends ClimberOICommandBase {
     public void end(boolean interrupted) {
         super.end(interrupted);
 
-        ClimberStateMachine.getInstance().startClimberSequencing();
+        ClimberStateMachine.getInstance().beginClimberSequencing();
     }
 
 }

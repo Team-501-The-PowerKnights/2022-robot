@@ -8,6 +8,7 @@
 
 package frc.robot.hmi;
 
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -22,6 +23,7 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * This class implements the Operator's gamepad.
@@ -58,7 +60,7 @@ public class OperatorGamepad extends F310Gamepad {
                 new FirePoseVision()));
         firePoseButton.whenHeld(new FirePoseNoVision());
 
-        climbSequenceButton.whileHeld(new ClimberDoSequencing());
+        //climbSequenceButton.whileHeld(new ClimberDoSequencing());
 
         logger.info("configured");
     }
