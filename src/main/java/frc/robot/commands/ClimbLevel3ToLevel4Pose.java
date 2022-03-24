@@ -9,7 +9,10 @@
 package frc.robot.commands;
 
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+
+import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -51,6 +54,8 @@ public class ClimbLevel3ToLevel4Pose extends ClimbBasePose {
 
         csm.endCurrentStep(interrupted);
         if (!interrupted) {
+            SmartDashboard.putBoolean(TelemetryNames.Climber.level4Climbed, true);
+
             csm.doNextStep();
         }
     }

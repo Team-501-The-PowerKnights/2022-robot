@@ -78,20 +78,18 @@ public class ClimberStateMachine {
         climbSteps = new ArrayList<>();
 
         /*
-         * Can't init the state in the constructor, as there is a
-         * race in the construction of the poses that make up the
-         * sequence that depends on the state machine being already
-         * constructed.
+         * Can't init the sequence list of posese in the constructor,
+         * as there is a race in the construction of the poses that
+         * make up the sequence that depends on the state machine
+         * being already constructed.
          */
 
-        SmartDashboard.putBoolean(TelemetryNames.Climber.enabled, false);
-        SmartDashboard.putBoolean(TelemetryNames.Climber.started, false);
-        SmartDashboard.putBoolean(TelemetryNames.Climber.running, false);
+        initState();
 
         logger.info("constructed");
     }
 
-    public void initState() {
+    private void initState() {
         logger.trace("initialize climber control state");
 
         climberEnabled = false;
@@ -101,6 +99,18 @@ public class ClimberStateMachine {
         climberRunning = false;
         SmartDashboard.putBoolean(TelemetryNames.Climber.running, climberRunning);
 
+        // Point to first step in the list
+        stepIndex = 0;
+        SmartDashboard.putString(TelemetryNames.Climber.sequenceName, "");
+        
+        SmartDashboard.putBoolean(TelemetryNames.Climber.level2Climbed, false);
+        SmartDashboard.putBoolean(TelemetryNames.Climber.level3Climbed, false);
+        SmartDashboard.putBoolean(TelemetryNames.Climber.level4Climbed, false);
+    }
+
+    public void initialize() {
+        logger.trace("initialize climber control");
+
         // Instantiate "debug stubs" for now with 5 second delays
         climbSteps.clear();
         climbSteps.add(new ClimbSetSubystemsPose());
@@ -108,13 +118,12 @@ public class ClimberStateMachine {
         climbSteps.add(new ClimbFloorToLevel2Pose(5.0));
         climbSteps.add(new ClimbLevel2ToLevel3Pose(5.0));
         climbSteps.add(new ClimbLevel3ToLevel4Pose(5.0));
-        // Point to first step in the list
-        stepIndex = 0;
-        SmartDashboard.putString(TelemetryNames.Climber.sequenceName, "");
+
+        initState();
     }
 
     public void resetState() {
-        initState(); // same for now
+        initialize(); // same for now
     }
 
     public void enableClimberSequencing() {
