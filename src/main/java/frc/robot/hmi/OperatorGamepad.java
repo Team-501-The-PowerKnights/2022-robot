@@ -12,7 +12,7 @@ package frc.robot.hmi;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.DoNothingButton;
+
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.climber.ClimberDoSequencing;
 import frc.robot.commands.poses.FirePoseNoVision;
@@ -41,13 +41,14 @@ public class OperatorGamepad extends F310Gamepad {
     private final Button climbSequenceButton;
 
     public OperatorGamepad() {
-        super(1);
-        logger.info("constructing {}");
+        super("OperatorGamepad", 1);
+        logger.info("constructing");
 
         firePoseButton = new JoystickButton(stick, greenButton);
         visionTargettingButton = new JoystickButton(stick, rightBumper);
 
         climbSequenceButton = new JoystickButton(stick, startButton);
+
         logger.info("constructed");
     }
 
@@ -83,6 +84,24 @@ public class OperatorGamepad extends F310Gamepad {
 
         SmartDashboard.putNumber(TelemetryNames.HMI.elevatorSpeed, getElevatorSpeed());
         SmartDashboard.putNumber(TelemetryNames.HMI.turretJog, getTurretJog());
+    }
+
+    @Override
+    public void autonomousInit() {
+        logger.info("initializing auto for {}", this.getClass().getSimpleName());
+
+        // no button or other trigger for autonomous
+
+        logger.info("initialized auto for {}", myName);
+    }
+
+    @Override
+    public void teleopInit() {
+        logger.info("initializing teleop for {}", myName);
+
+        configureButtonBindings();
+        
+        logger.info("initialized teleop for {}", myName);
     }
 
     /*********************

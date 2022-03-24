@@ -12,21 +12,28 @@ package frc.robot.hmi;
 
 import edu.wpi.first.wpilibj.GenericHID;
 
+import frc.robot.IModeFollower;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-abstract class BaseGamepad  implements IGamepad {
+abstract class BaseGamepad  implements IModeFollower, IGamepad {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(BaseGamepad.class.getName());
 
+    /** Our gamepad's name **/
+    protected final String myName;
+
     /** Our joystick */
     protected final GenericHID stick;
 
-    protected BaseGamepad(int port)
+    protected BaseGamepad(String name, int port)
     {
-        logger.info("constructing {}");
+        logger.info("constructing {} for {}", name, port);
+
+        myName = name;
 
         stick = new GenericHID(port);
 
@@ -51,6 +58,5 @@ abstract class BaseGamepad  implements IGamepad {
         }
         return retValue;
     }
-
 
 }

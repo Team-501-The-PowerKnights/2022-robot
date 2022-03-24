@@ -11,6 +11,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 import frc.robot.hmi.DriverGamepad;
 import frc.robot.hmi.OperatorGamepad;
 import frc.robot.telemetry.ITelemetryProvider;
@@ -25,7 +26,7 @@ import riolog.RioLogger;
 /**
  * Add your docs here.
  */
-public class OI implements ITelemetryProvider {
+public class OI implements ITelemetryProvider, IModeFollower {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(OI.class.getName());
@@ -70,34 +71,65 @@ public class OI implements ITelemetryProvider {
         logger.info("constructed");
     }
 
-    public void configureButtonBindings() {
-        logger.info("configure");
+    @Override
+    public void updateTelemetry() {
+        driverPad.updateTelemetry();
+        operatorPad.updateTelemetry();
+    }
+
+    @Override
+    public void disabledInit() {
+        logger.info("initializing disabled for {}", myName);
 
         // Disable the previous button mappings
+        logger.trace("***** clearButtons()");
         CommandScheduler.getInstance().clearButtons();
 
-        driverPad.configureButtonBindings();
-        operatorPad.configureButtonBindings();
+        logger.info("initialized auto for {}", myName);
+    }
 
-        logger.info("configured");
+    @Override
+    public void autonomousInit() {
+        logger.info("initializing auto for {}", myName);
+
+        // Make the button bindings for this mode
+        driverPad.autonomousInit();
+        operatorPad.autonomousInit();        
+
+        logger.info("initialized auto for {}", myName);
+    }
+
+    @Override
+    public void teleopInit() {
+        logger.info("initializing teleop for {}", myName);
+
+        // Make the button bindings for this mode
+        operatorPad.teleopInit();
+        operatorPad.teleopInit();        
+
+        logger.info("initialized teleop for {}", myName);
+    }
+
+    @Override
+    public void testInit() {
+        logger.info("initializing test for {}", myName);
+
+        // Nothing for this
+        
+        logger.info("initialized test for {}", myName);
     }
 
     public void configureClimbingButtonBindings() {
         logger.info("configure");
 
         // Disable the previous button mappings
+        logger.trace("***** clearButtons()");
         CommandScheduler.getInstance().clearButtons();
 
         driverPad.configureClimbingButtonBindings();
         operatorPad.configureClimbingButtonBindings();
 
         logger.info("configure");
-    }
-
-    @Override
-    public void updateTelemetry() {
-        driverPad.updateTelemetry();
-        operatorPad.updateTelemetry();
     }
 
     /*****************

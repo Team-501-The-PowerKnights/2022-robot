@@ -35,8 +35,8 @@ public class DriverGamepad extends F310Gamepad {
     
     public DriverGamepad() 
     {
-        super(0);
-        logger.info("constructing {}");
+        super("DriverGamepad", 0);
+        logger.info("constructing");
 
         turboButton = new JoystickButton(stick, leftBumper);
         crawlButton = new JoystickButton(stick, rightBumper);
@@ -79,6 +79,24 @@ public class DriverGamepad extends F310Gamepad {
         SmartDashboard.putNumber(TelemetryNames.HMI.oiTurn, getDriveTurn());
 
         SmartDashboard.putNumber(TelemetryNames.HMI.intakeSpeed, getIntakeSpeed());
+    }
+
+    @Override
+    public void autonomousInit() {
+        logger.info("initializing auto for {}", this.getClass().getSimpleName());
+
+        // no button or other trigger for autonomous
+
+        logger.info("initialized auto for {}", myName);
+    }
+
+    @Override
+    public void teleopInit() {
+        logger.info("initializing teleop for {}", myName);
+
+        configureButtonBindings();
+        
+        logger.info("initialized teleop for {}", myName);
     }
 
     /*********************

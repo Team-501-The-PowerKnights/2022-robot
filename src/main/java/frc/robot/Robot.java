@@ -175,11 +175,6 @@ public class Robot extends TimedRobot {
         TelemetryManager.constructInstance();
         tlmMgr = TelemetryManager.getInstance();
 
-        // Initialize the OI "subsystem"
-        OI.constructInstance();
-        oi = OI.getInstance();
-        tlmMgr.addProvider(oi);
-
         // Create command manager
         SchedulerProvider.constructInstance();
         tlmMgr.addProvider(SchedulerProvider.getInstance());
@@ -197,13 +192,16 @@ public class Robot extends TimedRobot {
         subsystems = SubsystemsFactory.constructSubsystems();
         followers.addAll(subsystems);
 
+        // Initialize the OI "subsystem"
+        OI.constructInstance();
+        oi = OI.getInstance();
+        tlmMgr.addProvider(oi);
+        followers.add(oi);
+
         // TODO: Put in the Climber subsystem before default commands
         // Construct the instance of climber state machine
         ClimberStateMachine.constructInstance();
         climberSM = ClimberStateMachine.getInstance();
-
-        // Configure all OI now that subsystems are complete
-        oi.configureButtonBindings();
 
         // Create the chooser for autonomous command
         createAutoChooser();
