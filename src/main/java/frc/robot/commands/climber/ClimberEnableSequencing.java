@@ -38,7 +38,7 @@ public class ClimberEnableSequencing extends ClimberOICommandBase {
         // Zero encoder position in advance of climber sequencing; they should never be
         // zeroed after this point
         climber.zeroPosition();
-        ClimberStateMachine.getInstance().startClimberSequencing();
+        ClimberStateMachine.getInstance().beginClimberSequencing();
     }
 
 }
