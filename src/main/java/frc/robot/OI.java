@@ -8,8 +8,9 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.hmi.DriverGamepad;
 import frc.robot.hmi.OperatorGamepad;
 import frc.robot.telemetry.ITelemetryProvider;
@@ -19,6 +20,7 @@ import frc.robot.utils.PKStatus;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Add your docs here.
@@ -71,6 +73,9 @@ public class OI implements ITelemetryProvider {
     public void configureButtonBindings() {
         logger.info("configure");
 
+        // Disable the previous button mappings
+        CommandScheduler.getInstance().clearButtons();
+
         driverPad.configureButtonBindings();
         operatorPad.configureButtonBindings();
 
@@ -79,6 +84,9 @@ public class OI implements ITelemetryProvider {
 
     public void configureClimbingButtonBindings() {
         logger.info("configure");
+
+        // Disable the previous button mappings
+        CommandScheduler.getInstance().clearButtons();
 
         driverPad.configureClimbingButtonBindings();
         operatorPad.configureClimbingButtonBindings();

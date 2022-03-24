@@ -109,7 +109,10 @@ public class Robot extends TimedRobot {
 
         @Override
         public void run() {
-            if (teleopRunning && !endGameStarted) {
+            // Have to have field connected, otherwise remaining seconds counts up
+            // Have to be running teleop
+            // Have to not have triggered the end game start yet
+            if (isFieldConnected() && teleopRunning && !endGameStarted) {
                 double remainingSeconds = DriverStation.getMatchTime();
                 if (remainingSeconds <= 40) {
                     endGameStarted = true;
@@ -341,6 +344,9 @@ public class Robot extends TimedRobot {
     public void disabledInit() {
         logger.info("disabling");
 
+        // Cancel any running commands so they exit the scheduler
+        CommandScheduler.getInstance().cancelAll();
+
         for (IModeFollower f : followers) {
             f.disabledInit();
         }
@@ -445,6 +451,7 @@ public class Robot extends TimedRobot {
         autonomousFirstRun = false;
         autonomousComplete = false;
 
+        // Initialize autonomous everywhere (which sets default commands)
         for (IModeFollower f : followers) {
             f.autonomousInit();
         }
@@ -504,6 +511,7 @@ public class Robot extends TimedRobot {
             autoCommand.cancel();
         }
 
+        // Initialize autonomous everywhere (which sets default commands)
         for (IModeFollower f : followers) {
             f.teleopInit();
         }
