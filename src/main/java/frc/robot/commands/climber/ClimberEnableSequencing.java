@@ -8,6 +8,8 @@
 package frc.robot.commands.climber;
 
 
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Robot;
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -38,12 +40,6 @@ public class ClimberEnableSequencing extends ClimberOICommandBase {
     public void end(boolean interrupted) {
         super.end(interrupted);
         
-        // If match completes before end; we don't want to do anything
-        // further and so just return
-        if (Robot.isMatchComplete()) {
-            return;
-        }
-
         // Ended by players? (or some kind of interrupt)
         if (!interrupted) {
             // Zero encoder position in advance of climber sequencing; they

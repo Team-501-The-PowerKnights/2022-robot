@@ -342,9 +342,6 @@ public class Robot extends TimedRobot {
     public void disabledInit() {
         logger.info("disabling");
 
-        // Cancel any running commands so they exit the scheduler
-        CommandScheduler.getInstance().cancelAll();
-
         for (IModeFollower f : followers) {
             f.disabledInit();
         }
@@ -448,6 +445,9 @@ public class Robot extends TimedRobot {
         autonomousRunning = true;
         autonomousFirstRun = false;
         autonomousComplete = false;
+        
+        // Cancel any running commands so they exit the scheduler
+        CommandScheduler.getInstance().cancelAll();
 
         // Initialize autonomous everywhere (which sets default commands)
         for (IModeFollower f : followers) {
@@ -508,6 +508,10 @@ public class Robot extends TimedRobot {
         if (autoCommand != null) {
             autoCommand.cancel();
         }
+                
+        // Cancel any running commands so they exit the scheduler
+        // (this includes the auto command)
+        CommandScheduler.getInstance().cancelAll();
 
         // Initialize autonomous everywhere (which sets default commands)
         for (IModeFollower f : followers) {
@@ -548,6 +552,9 @@ public class Robot extends TimedRobot {
         for (IModeFollower f : followers) {
             f.teleopExit();
         }
+
+        // Disable the climber sequencing as we're done
+        climberSM.disableClimberSequencing();
 
         logger.info("exited teleop");
     }
