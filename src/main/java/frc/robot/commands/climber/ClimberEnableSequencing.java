@@ -8,9 +8,6 @@
 package frc.robot.commands.climber;
 
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Robot;
 import riolog.PKLogger;
 import riolog.RioLogger;
 

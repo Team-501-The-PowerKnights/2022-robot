@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 import frc.robot.commands.climber.ClimberExtendLevel2;
 import frc.robot.commands.drive.DriveBackwardTimed;
-import frc.robot.commands.drive.DriveStraightJoystickControl;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
