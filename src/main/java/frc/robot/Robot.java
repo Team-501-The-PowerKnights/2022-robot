@@ -93,14 +93,14 @@ public class Robot extends TimedRobot {
     // Flag for having run first autonomous loop
     private boolean autonomousFirstRun;
     // Flag for having completed autonomous part of match
-    private boolean autonomousComplete;
+    private static boolean autonomousComplete;
 
     // Flag for having started/running teleop part of match
     private boolean teleopRunning;
     // Flag for having run first teleop loop
     private boolean teleopFirstRun;
     // Flag for having completed teleop part of match
-    private boolean teleopComplete;
+    private static boolean teleopComplete;
 
     // Flag for in end game of match
     private static boolean endGameStarted;
@@ -109,7 +109,10 @@ public class Robot extends TimedRobot {
 
         @Override
         public void run() {
-            if (teleopRunning && !endGameStarted) {
+            // Have to have field connected, otherwise remaining seconds counts up
+            // Have to be running teleop
+            // Have to not have triggered the end game start yet
+            if (isFieldConnected() && teleopRunning && !endGameStarted) {
                 double remainingSeconds = DriverStation.getMatchTime();
                 if (remainingSeconds <= 40) {
                     endGameStarted = true;
@@ -172,11 +175,6 @@ public class Robot extends TimedRobot {
         TelemetryManager.constructInstance();
         tlmMgr = TelemetryManager.getInstance();
 
-        // Initialize the OI "subsystem"
-        OI.constructInstance();
-        oi = OI.getInstance();
-        tlmMgr.addProvider(oi);
-
         // Create command manager
         SchedulerProvider.constructInstance();
         tlmMgr.addProvider(SchedulerProvider.getInstance());
@@ -194,13 +192,16 @@ public class Robot extends TimedRobot {
         subsystems = SubsystemsFactory.constructSubsystems();
         followers.addAll(subsystems);
 
+        // Initialize the OI "subsystem"
+        OI.constructInstance();
+        oi = OI.getInstance();
+        tlmMgr.addProvider(oi);
+        followers.add(oi);
+
         // TODO: Put in the Climber subsystem before default commands
         // Construct the instance of climber state machine
         ClimberStateMachine.constructInstance();
         climberSM = ClimberStateMachine.getInstance();
-
-        // Configure all OI now that subsystems are complete
-        oi.configureButtonBindings();
 
         // Create the chooser for autonomous command
         createAutoChooser();
@@ -345,7 +346,7 @@ public class Robot extends TimedRobot {
             f.disabledInit();
         }
 
-        if (autonomousComplete && teleopComplete) {
+        if (isMatchComplete()) {
             logger.info("match complete");
 
             logFinalVisionData();
@@ -444,7 +445,11 @@ public class Robot extends TimedRobot {
         autonomousRunning = true;
         autonomousFirstRun = false;
         autonomousComplete = false;
+        
+        // Cancel any running commands so they exit the scheduler
+        CommandScheduler.getInstance().cancelAll();
 
+        // Initialize autonomous everywhere (which sets default commands)
         for (IModeFollower f : followers) {
             f.autonomousInit();
         }
@@ -503,7 +508,12 @@ public class Robot extends TimedRobot {
         if (autoCommand != null) {
             autoCommand.cancel();
         }
+                
+        // Cancel any running commands so they exit the scheduler
+        // (this includes the auto command)
+        CommandScheduler.getInstance().cancelAll();
 
+        // Initialize autonomous everywhere (which sets default commands)
         for (IModeFollower f : followers) {
             f.teleopInit();
         }
@@ -543,7 +553,8 @@ public class Robot extends TimedRobot {
             f.teleopExit();
         }
 
-        climberSM.resetState();
+        // Disable the climber sequencing as we're done
+        climberSM.disableClimberSequencing();
 
         logger.info("exited teleop");
     }
@@ -609,6 +620,10 @@ public class Robot extends TimedRobot {
 
     static public boolean isEndGameStarted() {
         return endGameStarted;
+    }
+
+    static public boolean isMatchComplete() {
+        return (autonomousComplete && teleopComplete);
     }
 
 }

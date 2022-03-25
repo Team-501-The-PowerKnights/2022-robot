@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.climber.ClimberDoSequencing;
-import frc.robot.commands.climber.ClimberManualControl;
 import frc.robot.commands.poses.FirePoseNoVision;
 import frc.robot.commands.poses.FirePoseVision;
 import frc.robot.commands.turret.TurretVisionAlign;
@@ -42,18 +41,47 @@ public class OperatorGamepad extends F310Gamepad {
     private final Button climbSequenceButton;
 
     public OperatorGamepad() {
-        super(1);
-        logger.info("constructing {}");
+        super("OperatorGamepad", 1);
+        logger.info("constructing");
 
         firePoseButton = new JoystickButton(stick, greenButton);
         visionTargettingButton = new JoystickButton(stick, rightBumper);
 
         climbSequenceButton = new JoystickButton(stick, startButton);
+
         logger.info("constructed");
     }
 
     @Override
-    public void configureButtonBindings() {
+    public void updateTelemetry() {
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.firePose, firePoseButton.get());
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.visionTargetting, visionTargettingButton.get());
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.revShooter, revShooterButton.get());
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.homeTurret, homeTurretButton.get());
+
+        SmartDashboard.putNumber(TelemetryNames.HMI.elevatorSpeed, getElevatorSpeed());
+        SmartDashboard.putNumber(TelemetryNames.HMI.turretJog, getTurretJog());
+    }
+
+    @Override
+    public void autonomousInit() {
+        logger.info("initializing auto for {}", this.getClass().getSimpleName());
+
+        // no button or other trigger for autonomous
+
+        logger.info("initialized auto for {}", myName);
+    }
+
+    @Override
+    public void teleopInit() {
+        logger.info("initializing teleop for {}", myName);
+
+        configureTeleopButtonBindings();
+        
+        logger.info("initialized teleop for {}", myName);
+    }
+
+    private void configureTeleopButtonBindings() {
         logger.info("configure");
 
         visionTargettingButton.whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(),
@@ -73,17 +101,6 @@ public class OperatorGamepad extends F310Gamepad {
         climbSequenceButton.whileHeld(new ClimberDoSequencing());
 
         logger.info("configured");
-    }
-
-    @Override
-    public void updateTelemetry() {
-        // SmartDashboard.putBoolean(TelemetryNames.HMI.firePose, firePoseButton.get());
-        // SmartDashboard.putBoolean(TelemetryNames.HMI.visionTargetting, visionTargettingButton.get());
-        // SmartDashboard.putBoolean(TelemetryNames.HMI.revShooter, revShooterButton.get());
-        // SmartDashboard.putBoolean(TelemetryNames.HMI.homeTurret, homeTurretButton.get());
-
-        SmartDashboard.putNumber(TelemetryNames.HMI.elevatorSpeed, getElevatorSpeed());
-        SmartDashboard.putNumber(TelemetryNames.HMI.turretJog, getTurretJog());
     }
 
     /*********************

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -122,17 +123,17 @@ public class ClimberStateMachine {
         initState();
     }
 
-    public void resetState() {
-        initialize(); // same for now
-    }
-
+    // Handle to sequencing command so we can cancel it later
+    private Command enableSequencingCommand;
+  
     public void enableClimberSequencing() {
         logger.info("enabling climber sequencing");
 
         climberEnabled = true;
         SmartDashboard.putBoolean(TelemetryNames.Climber.enabled, climberEnabled);
 
-        CommandScheduler.getInstance().schedule(true, new ClimberEnableSequencing());
+        enableSequencingCommand = new ClimberEnableSequencing();
+        CommandScheduler.getInstance().schedule(true, enableSequencingCommand);
     }
 
     public void beginClimberSequencing() {
@@ -149,8 +150,17 @@ public class ClimberStateMachine {
 
     public void endClimberSequencing() {
         logger.info("ending climber sequencing");
+
         climberRunning = false;
         SmartDashboard.putBoolean(TelemetryNames.Climber.running, climberRunning);
+    }
+
+    public void disableClimberSequencing() {
+        logger.info("disabling climber sequencing");
+
+        enableSequencingCommand.cancel();
+
+        initState();
     }
 
     public boolean isClimberEnabled() {
