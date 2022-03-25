@@ -14,14 +14,11 @@ import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.commands.PKParallelCommandGroup;
-import frc.robot.commands.PKSequentialCommandGroup;
-import frc.robot.commands.climber.ClimberRetract;
-import frc.robot.commands.climber.ClimberRunToTarget;
+import frc.robot.commands.climber.ClimberDoSequencing;
 import frc.robot.commands.poses.FirePoseNoVision;
 import frc.robot.commands.poses.FirePoseVision;
 import frc.robot.commands.turret.TurretVisionAlign;
 import frc.robot.telemetry.TelemetryNames;
-
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -40,62 +37,70 @@ public class OperatorGamepad extends F310Gamepad {
 
     private final Button firePoseButton;
     private final Button visionTargettingButton;
-    private final Button climberRetractButton;
-    private final Button climberClimbButton;
-    // private final Button revShooterButton;
-    // private final Button homeTurretButton;
+
+    private final Button climbSequenceButton;
 
     public OperatorGamepad() {
-        super(1);
-        logger.info("constructing {}");
+        super("OperatorGamepad", 1);
+        logger.info("constructing");
 
         firePoseButton = new JoystickButton(stick, greenButton);
-        // visionTargettingButton = new JoystickButton(stick, rightBumper);
         visionTargettingButton = new JoystickButton(stick, rightBumper);
-        // revShooterButton = new JoystickButton(stick, redButton);
-        // homeTurretButton = new JoystickButton(stick, startButton);
-        climberRetractButton = new JoystickButton(stick, backButton);
-        climberClimbButton = new JoystickButton(stick, startButton);
+
+        climbSequenceButton = new JoystickButton(stick, startButton);
 
         logger.info("constructed");
     }
 
     @Override
-    public void configureButtonBindings() {
+    public void updateTelemetry() {
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.firePose, firePoseButton.get());
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.visionTargetting, visionTargettingButton.get());
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.revShooter, revShooterButton.get());
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.homeTurret, homeTurretButton.get());
+
+        SmartDashboard.putNumber(TelemetryNames.HMI.elevatorSpeed, getElevatorSpeed());
+        SmartDashboard.putNumber(TelemetryNames.HMI.turretJog, getTurretJog());
+    }
+
+    @Override
+    public void autonomousInit() {
+        logger.info("initializing auto for {}", this.getClass().getSimpleName());
+
+        // no button or other trigger for autonomous
+
+        logger.info("initialized auto for {}", myName);
+    }
+
+    @Override
+    public void teleopInit() {
+        logger.info("initializing teleop for {}", myName);
+
+        configureTeleopButtonBindings();
+        
+        logger.info("initialized teleop for {}", myName);
+    }
+
+    private void configureTeleopButtonBindings() {
         logger.info("configure");
 
-        // visionTargettingButton
-        // .whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(), new
-        // ShooterSpinUpFormula()));
-        // visionTargettingButton
-        // .whenHeld(new TurretVisionAlign());
-        // homeTurretButton.whenHeld(new TurretHome());
-        // firePoseButton.whenHeld(new FirePoseVision());
-        visionTargettingButton.whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(), new FirePoseVision()));
+        visionTargettingButton.whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(),
+                new FirePoseVision()));
         firePoseButton.whenHeld(new FirePoseNoVision());
-        climberRetractButton.whenHeld(new ClimberRetract());
-        // climberClimbButton.whenHeld(new ClimberClimb());
-        // FIXME - add parameter once DriveForwardTimed(double seconds) comes back
-        // climberClimbButton.whenHeld(new PKSequentialCommandGroup(new ClimberClimbTimed(2.0), new DriveForwardTimed(0.0),
-        //         new ClimberClimbTimed(2)));
-        climberClimbButton.whenPressed(new PKSequentialCommandGroup(new ClimberRunToTarget(265)));
-        // TODO - do this with encoders / actually time how long these climbers should
-        // run for: this is a stopgap solution
 
         logger.info("configured");
     }
 
-    @Override
-    public void updateTelemetry() {
-        // SmartDashboard.putBoolean(TelemetryNames.HMI.firePose, firePoseButton.get());
-        // SmartDashboard.putBoolean(TelemetryNames.HMI.visionTargetting,
-        // visionTargettingButton.get());
-        // SmartDashboard.putBoolean(TelemetryNames.HMI.revShooter,
-        // revShooterButton.get());
-        // SmartDashboard.putBoolean(TelemetryNames.HMI.homeTurret,
-        // homeTurretButton.get());
-        SmartDashboard.putNumber(TelemetryNames.HMI.elevatorSpeed, getElevatorSpeed());
-        SmartDashboard.putNumber(TelemetryNames.HMI.turretJog, getTurretJog());
+    /**
+     * (Re-)Configures the button bindings on the gamepad for the
+     * climbing end game play.
+     */
+    public void configureClimbingButtonBindings() {
+        logger.info("configure");
+
+        climbSequenceButton.whileHeld(new ClimberDoSequencing());
+
+        logger.info("configured");
     }
 
     /*********************
@@ -128,14 +133,12 @@ public class OperatorGamepad extends F310Gamepad {
      * Climber
      *********************/
 
-    public boolean getClimberExtend() {
-        // return isPov0();
+    public boolean getClimberStart() {
         return getStartButton();
     }
 
-    public boolean getClimberClimb() {
-        // return isPov180();
-        return getBackButton();
+    public double getClimberSpeed() {
+        return deadBand(-getRightYAxis(), 0.05);
     }
 
 }

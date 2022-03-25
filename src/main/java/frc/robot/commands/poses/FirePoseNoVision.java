@@ -8,20 +8,19 @@
 
 package frc.robot.commands.poses;
 
-
+import frc.robot.Robot;
 import frc.robot.commands.PKCommandBase;
 import frc.robot.sensors.vision.IVisionSensor;
 import frc.robot.sensors.vision.VisionFactory;
 import frc.robot.subsystems.elevator.ElevatorFactory;
 import frc.robot.subsystems.elevator.IElevatorSubsystem;
-import frc.robot.subsystems.incrementer.IIncrementerSubsystem;
-import frc.robot.subsystems.incrementer.IncrementerFactory;
+import frc.robot.subsystems.incrementor.IIncrementorSubsystem;
+import frc.robot.subsystems.incrementor.IncrementorFactory;
 import frc.robot.subsystems.shooter.IShooterSubsystem;
 import frc.robot.subsystems.shooter.ShooterFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 public class FirePoseNoVision extends PKCommandBase {
 
@@ -31,7 +30,7 @@ public class FirePoseNoVision extends PKCommandBase {
     private final IVisionSensor vision;
 
     private final IShooterSubsystem shooter;
-    private final IIncrementerSubsystem incrementer;
+    private final IIncrementorSubsystem incrementer;
     private final IElevatorSubsystem elevator;
 
     public FirePoseNoVision() {
@@ -40,7 +39,7 @@ public class FirePoseNoVision extends PKCommandBase {
         vision = VisionFactory.getInstance();
 
         shooter = ShooterFactory.getInstance();
-        incrementer = IncrementerFactory.getInstance();
+        incrementer = IncrementorFactory.getInstance();
         elevator = ElevatorFactory.getInstance();
 
         addRequirements(shooter, incrementer, elevator);
@@ -57,17 +56,19 @@ public class FirePoseNoVision extends PKCommandBase {
     public void execute() {
         super.execute();
 
-        double speed = 0.5;
+        // double speed = 0.5;
 
-        if (vision.isActive()) {
-            double y = vision.getY();
-            speed = 0.489 + (-0.0116 * y) + (0.0107 * (Math.pow(y, 2))) + ((-4.32E-03) * (Math.pow(y, 3)))
-                + (2.07E-04 * Math.pow(y, 4)) + (2.34E-04 * Math.pow(y, 5)) + (-5.47E-05 * Math.pow(y, 6))
-                + (4.68E-06 * Math.pow(y, 7)) + -1.41E-07 * (Math.pow(y, 8));
-            // speed += 0.015;
-        }
+        // if (vision.isActive()) {
+        // double y = vision.getY();
+        // speed = 0.489 + (-0.0116 * y) + (0.0107 * (Math.pow(y, 2))) + ((-4.32E-03) *
+        // (Math.pow(y, 3)))
+        // + (2.07E-04 * Math.pow(y, 4)) + (2.34E-04 * Math.pow(y, 5)) + (-5.47E-05 *
+        // Math.pow(y, 6))
+        // + (4.68E-06 * Math.pow(y, 7)) + -1.41E-07 * (Math.pow(y, 8));
+        // // speed += 0.015;
+        // }
 
-        shooter.setSpeed(29, speed);
+        shooter.setSpeed(29, Robot.shooterSetSpeed);
 
         incrementer.increment();
         // elevator.liftToLimit();

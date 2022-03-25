@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.climber;
 
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
@@ -22,14 +21,16 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
-
 class ClimberSubsystem extends BaseClimberSubsystem {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimberSubsystem.class.getName());
 
-    private final CANSparkMax motor;
-    private final RelativeEncoder encoder;
+    private final CANSparkMax rightMotor;
+    private final CANSparkMax leftMotor;
+
+    private final RelativeEncoder rightEncoder;
+    private final RelativeEncoder leftEncoder;
 
     // private final AnalogInput limitUp;
     // private final AnalogInput limitDown;
@@ -39,17 +40,30 @@ class ClimberSubsystem extends BaseClimberSubsystem {
 
         lastError = REVLibError.kOk;
 
-        motor = new CANSparkMax(55, MotorType.kBrushless);
-        checkError(motor.restoreFactoryDefaults(), "setting factory defaults {}");
+        rightMotor = new CANSparkMax(55, MotorType.kBrushless);
 
-        checkError(motor.setIdleMode(IdleMode.kBrake), "setting to brake {}");
-        checkError(motor.setOpenLoopRampRate(0.5), "setting ramp rate {}");
-        checkError(motor.setSmartCurrentLimit(35), "setting current limit {}");
+        checkError(rightMotor.restoreFactoryDefaults(), "setting factory defaults {}");
+        rightMotor.setInverted(true);
+        checkError(rightMotor.setIdleMode(IdleMode.kBrake), "setting to brake {}");
+        checkError(rightMotor.setOpenLoopRampRate(0.5), "setting ramp rate {}");
+        checkError(rightMotor.setSmartCurrentLimit(55), "setting current limit {}");
 
-        encoder = motor.getEncoder();
+        rightEncoder = rightMotor.getEncoder();
 
-        checkError(encoder.setPosition(0.0), "zeroing the encoder {}");
- 
+        checkError(rightEncoder.setPosition(0.0), "zeroing the rightEncoder {}");
+
+        leftMotor = new CANSparkMax(56, MotorType.kBrushless);
+        leftMotor.setInverted(false);
+        checkError(leftMotor.restoreFactoryDefaults(), "setting factory defaults {}");
+
+        checkError(leftMotor.setIdleMode(IdleMode.kBrake), "setting to brake {}");
+        checkError(leftMotor.setOpenLoopRampRate(0.5), "setting ramp rate {}");
+        checkError(leftMotor.setSmartCurrentLimit(55), "setting current limit {}");
+
+        leftEncoder = leftMotor.getEncoder();
+
+        checkError(leftEncoder.setPosition(0.0), "zeroing the leftEncoder {}");
+
         // limitUp = new AnalogInput(0);
         // limitDown = new AnalogInput(1);
 
@@ -104,36 +118,52 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     public void stop() {
         super.stop();
 
-        setSpeed(0.0);
+        setSpeed(0.0, 55);
+        setSpeed(0.0, 56);
     }
 
     @Override
-    public void climb() {
-        super.climb();
-
-        setSpeed(1.0);
+    public void run(double speed) {
+        setSpeed(speed, 55);
+        setSpeed(speed, 56);
     }
 
     @Override
-    public void retract() {
-        super.retract();
-
-        setSpeed(-0.40);
+    public void goToSetPoint(double setPoint) {
+        // PID control not implemented yet
     }
 
-    private void setSpeed(double speed) {
+    private void setSpeed(double speed, int motorId) {
         setTlmSpeed(speed);
-        motor.set(speed);
-    }
-
-    @Override
-    public double getPosition() {
-        return encoder.getPosition();
+        switch (motorId) {
+            case 55:
+                rightMotor.set(speed);
+            case 56:
+                leftMotor.set(speed);
+            default:
+                break;
+        }
     }
 
     @Override
     public void zeroPosition() {
-        encoder.setPosition(0.0);
+        rightEncoder.setPosition(0.0);
+        leftEncoder.setPosition(0.0);
+    }
+
+    @Override
+    public double getRightPosition() {
+        return rightEncoder.getPosition();
+    }
+
+    @Override
+    public double getLeftPosition() {
+        return leftEncoder.getPosition();
+    }
+
+    @Override
+    public double getAveragePosition() {
+        return (getLeftPosition() + getRightPosition()) / 2;
     }
 
 }

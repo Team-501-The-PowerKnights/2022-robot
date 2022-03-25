@@ -24,4 +24,16 @@ public class TurretDoNothing extends TurretCommandBase {
         logger.info("constructed");
     }
 
+    @Override
+    public void execute() {
+      super.execute();
+    }
+  
+    @Override
+    protected void firstExecution() {
+      logger.trace("turret.stop() called in firstExecution()");
+
+      turret.stop();
+    }
+
 }

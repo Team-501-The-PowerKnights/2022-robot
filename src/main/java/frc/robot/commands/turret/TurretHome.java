@@ -7,10 +7,8 @@
 
 package frc.robot.commands.turret;
 
-
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Add your docs here.
@@ -34,7 +32,15 @@ public class TurretHome extends TurretCommandBase {
     @Override
     protected void firstExecution() {
         logger.trace("turret.home() called in firstExecution()");
-        turret.home();
+        
+        // turret.home();
+        turret.setTurretAngle(0); // This works for now; 0 and 180 will be roughly facing straight ahead or back
+    }
+
+    @Override
+    public boolean isFinished() {
+        // FIXME: Should this be something else? Timed? Check on angle?
+        return true;
     }
 
 }

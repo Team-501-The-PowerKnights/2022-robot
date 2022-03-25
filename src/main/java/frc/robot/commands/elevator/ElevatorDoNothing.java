@@ -24,4 +24,16 @@ public class ElevatorDoNothing extends ElevatorCommandBase {
         logger.info("constructed");
     }
 
+    @Override
+    public void execute() {
+      super.execute();
+    }
+  
+    @Override
+    protected void firstExecution() {
+      logger.trace("elevator.stop() called in firstExecution()");
+
+      elevator.stop();
+    }
+
 }

@@ -18,10 +18,10 @@ abstract class F310Gamepad extends BaseGamepad {
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(F310Gamepad.class.getName());
 
-    protected F310Gamepad(int port)
+    protected F310Gamepad(String name, int port)
     {
-        super(port);
-        logger.info("constructing {}");
+        super(name, port);
+        logger.info("constructing {} for {}", name, port);
 
         logger.info("constructed");
     }

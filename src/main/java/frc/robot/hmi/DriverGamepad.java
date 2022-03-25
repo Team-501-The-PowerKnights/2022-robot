@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-import frc.robot.commands.drive.DriveSwap;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -32,30 +31,26 @@ public class DriverGamepad extends F310Gamepad {
 
     private final Button turboButton;
     private final Button crawlButton;
-    private final Button driveSwapButton;
+    //private final Button driveSwapButton;
     
     public DriverGamepad() 
     {
-        super(0);
-        logger.info("constructing {}");
+        super("DriverGamepad", 0);
+        logger.info("constructing");
 
         turboButton = new JoystickButton(stick, leftBumper);
         crawlButton = new JoystickButton(stick, rightBumper);
-        driveSwapButton = new JoystickButton(stick, backButton);
+        //driveSwapButton = new JoystickButton(stick, backButton);
 
         logger.info("constructed");
     }
 
-    @Override
-    public void configureButtonBindings() {
+     /**
+     * (Re-)Configures the button bindings on the gamepad for the
+     * climbing end game play.
+     */   
+    public void configureClimbingButtonBindings() {
         logger.info("configure");
-
-        // turboButton - implemented in getting values speed & turn
-        // crawlButton - implemented in getting values speed & turn
-        driveSwapButton.whenPressed(new DriveSwap());
-
-        // Hook to configure for testing of new stuff
-        configureTestBindings();
 
         logger.info("configured");
     }
@@ -70,6 +65,37 @@ public class DriverGamepad extends F310Gamepad {
         SmartDashboard.putNumber(TelemetryNames.HMI.oiTurn, getDriveTurn());
 
         SmartDashboard.putNumber(TelemetryNames.HMI.intakeSpeed, getIntakeSpeed());
+    }
+
+    @Override
+    public void autonomousInit() {
+        logger.info("initializing auto for {}", this.getClass().getSimpleName());
+
+        // no button or other trigger for autonomous
+
+        logger.info("initialized auto for {}", myName);
+    }
+
+    @Override
+    public void teleopInit() {
+        logger.info("initializing teleop for {}", myName);
+
+        configureTeleopButtonBindings();
+        
+        logger.info("initialized teleop for {}", myName);
+    }
+
+    private void configureTeleopButtonBindings() {
+        logger.info("configure");
+
+        // turboButton - implemented in getting values speed & turn
+        // crawlButton - implemented in getting values speed & turn
+        //driveSwapButton.whenPressed(new DriveSwap());
+
+        // Hook to configure for testing of new stuff
+        configureTestBindings();
+
+        logger.info("configured");
     }
 
     /*********************
@@ -127,6 +153,14 @@ public class DriverGamepad extends F310Gamepad {
         {
             return -getRightTrigger();
         }
+    }
+
+    /*********************
+     * Climber
+     *********************/
+
+    public boolean getClimberStart() {
+        return getStartButton();
     }
 
     /*********************

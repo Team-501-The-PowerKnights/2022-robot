@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.climber;
 
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -21,7 +20,6 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 class ZesterClimberSubsystem extends BaseClimberSubsystem {
 
@@ -91,32 +89,44 @@ class ZesterClimberSubsystem extends BaseClimberSubsystem {
         setSpeed(0.0);
     }
 
-    @Override
-    public void climb() {
-        setSpeed(1.0);
-    }
-
-    @Override
-    public void retract() {
-        setSpeed(-0.20);
-    }
-
     private void setSpeed(double speed) {
         setTlmSpeed(speed);
-        ;
+
         motor.set(speed);
     }
 
     @Override
-    public double getPosition() {
+    public void run(double speed) {
+        // Zester doesn't implement this
+
+    }
+
+    @Override
+    public void goToSetPoint(double setPoint) {
+        // Zester doesn't implement this
+    }
+
+    @Override
+    public double getRightPosition() {
+        // Zester doesn't implement this
+        return 0;
+    }
+
+    @Override
+    public double getLeftPosition() {
+        // Zester doesn't implement this
+        return 0;
+    }
+
+    @Override
+    public double getAveragePosition() {
         // Zester doesn't implement this
         return 0;
     }
 
     @Override
     public void zeroPosition() {
-        // TODO Auto-generated method stub
-
+        // Zester doesn't implement this
     }
 
 }

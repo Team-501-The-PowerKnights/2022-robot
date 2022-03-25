@@ -8,11 +8,9 @@
 
 package frc.robot.telemetry;
 
-
 import frc.robot.modules.ModuleNames;
 import frc.robot.sensors.SensorNames;
 import frc.robot.subsystems.SubsystemNames;
-
 
 /**
  * Provides a standard way of defining names for the <i>Telemetry</i> used in
@@ -36,6 +34,10 @@ public final class TelemetryNames {
         public static final String fmsConnected = name + ".fmsConnected";
 
         public static final String realAuto = name + ".realAuto";
+
+        public static final String initStatus = name + ".initStatus";
+
+        public static final String endGameStarted = name + ".endGameStarted";
     }
 
     /***************
@@ -150,6 +152,20 @@ public final class TelemetryNames {
         public static final String heading = name + ".heading";
     }
 
+    public final class IncrementorLoadedSensor {
+        private static final String name = SensorNames.incrementorLoadedName;
+
+        public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+    }
+
+    public final class ElevatorLoadedSensor {
+        private static final String name = SensorNames.elevatorLoadedName;
+
+        public static final String status = name + ".status";
+        public static final String implClass = name + ".implClass";
+    }
+
     public final class TurretLocation {
         private static final String name = SensorNames.turretLocationName;
 
@@ -159,18 +175,14 @@ public final class TelemetryNames {
         public static final String isFound = name + ".isFound";
     }
 
-    public final class ElevatorSensor {
-        private static final String name = SensorNames.elevatorName;
+    public final class WallDistance {
+        private static final String name = SensorNames.wallDistanceName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
-    }
 
-    public final class IncrementerSensor {
-        private static final String name = SensorNames.incrementerName;
-
-        public static final String status = name + ".status";
-        public static final String implClass = name + ".implClass";
+        public static final String distance = name + ".distance";
+        public static final String valid = name + ".valid";
     }
 
     public final class Vision {
@@ -238,7 +250,7 @@ public final class TelemetryNames {
     }
 
     public final class Incrementer {
-        private static final String name = SubsystemNames.incrementerName;
+        private static final String name = SubsystemNames.incrementorName;
 
         public static final String status = name + ".status";
         public static final String implClass = name + ".implClass";
@@ -301,9 +313,21 @@ public final class TelemetryNames {
         public static final String climbing = name + ".climbing";
         public static final String retracting = name + ".retracting";
 
+        public static final String leftPosition = name + ".leftPosition";
+        public static final String rightPosition = name + ".rightPosition";
         public static final String position = name + ".position";
         public static final String targetPos = name + ".targetPosition";
         public static final String atTarget = name + ".atTarget";
+
+        public static final String enabled = name + ".enabled";
+        public static final String started = name + ".started";
+        public static final String running = name + ".running";
+        public static final String sequenceName = name + ".sequenceName";
+
+        //public static final String climberPaused = name + ".climberPaused";
+        public static final String level2Climbed = name + ".level2Climbed";
+        public static final String level3Climbed = name + ".level3Climbed";
+        public static final String level4Climbed = name + ".level4Climbed";
     }
 
 }

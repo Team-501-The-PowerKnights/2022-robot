@@ -21,19 +21,33 @@ public interface IClimberSubsystem extends ISubsystem {
     public void stop();
 
     /**
-     * Pull in to actually lift robot and climb
-     **/
-    public void climb();
-
-    /**
-     * Run the motors in reverse to retract and arm. Should only be run in the pit.
-     **/
-    public void retract();
-
-    /**
-     * Returns the value of the climber's encoder (if present)
+     * Runs the climber motors at the passed speed.
+     * 
+     * @param speed
      */
-    public double getPosition();
+    public void run(double speed);
+
+    /**
+     * Use PID control on the elbow to make it go to a set point.
+     * 
+     * @param setPoint
+     */
+    public void goToSetPoint(double setPoint);
+
+    /**
+     * Returns the value of the climber's left encoder (if present)
+     */
+    public double getLeftPosition();
+
+    /**
+     * Returns the value of the climber's right encoder (if present)
+     */
+    public double getRightPosition();
+
+    /**
+     * Returns the average value of the climber encoder
+     */
+    public double getAveragePosition();
 
     /**
      * Zeros the climber's encoder (if present)

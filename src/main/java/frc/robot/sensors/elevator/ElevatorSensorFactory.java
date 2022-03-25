@@ -30,9 +30,9 @@ public class ElevatorSensorFactory {
     private static final PKLogger logger = RioLogger.getLogger(ElevatorSensorFactory.class.getName());
 
     /** Singleton instance of class for all to use **/
-    private static IElevatorSensor ourInstance;
+    private static IElevatorLoadedSensor ourInstance;
     /** Name of our subsystem **/
-    private static final String myName = SensorNames.elevatorName;
+    private static final String myName = SensorNames.elevatorLoadedName;
 
     /**
      * Constructs instance of the subsystem. Assumed to be called before any usage
@@ -40,16 +40,17 @@ public class ElevatorSensorFactory {
      * sequencing of the robot and all it's sensors.
      **/
     public static synchronized void constructInstance() {
-        SmartDashboard.putNumber(TelemetryNames.ElevatorSensor.status, PKStatus.inProgress.tlmValue);
+        SmartDashboard.putNumber(TelemetryNames.ElevatorLoadedSensor.status, PKStatus.inProgress.tlmValue);
 
         if (ourInstance != null) {
             throw new IllegalStateException(myName + " Already Constructed");
         }
 
         PKProperties props = PropertiesManager.getInstance().getProperties(myName);
-        props.listProperties();
+        logger.info(props.listProperties());
+        String className = props.getString("className");
 
-        loadImplementationClass(props.getString("className"));
+        loadImplementationClass(className);
     }
 
     private static void loadImplementationClass(String myClassName) {
@@ -68,14 +69,14 @@ public class ElevatorSensorFactory {
             Class myClass = Class.forName(classToLoad);
             @SuppressWarnings("deprecation")
             Object myObject = myClass.newInstance();
-            ourInstance = (IElevatorSensor) myObject;
-            SmartDashboard.putNumber(TelemetryNames.ElevatorSensor.status, PKStatus.success.tlmValue);
+            ourInstance = (IElevatorLoadedSensor) myObject;
+            SmartDashboard.putNumber(TelemetryNames.ElevatorLoadedSensor.status, PKStatus.success.tlmValue);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             logger.error("failed to load class; instantiating default stub for {}", myName);
-            ourInstance = new StubElevatorSensor();
-            SmartDashboard.putNumber(TelemetryNames.ElevatorSensor.status, PKStatus.degraded.tlmValue);
+            ourInstance = new StubElevatorLoadedSensor();
+            SmartDashboard.putNumber(TelemetryNames.ElevatorLoadedSensor.status, PKStatus.degraded.tlmValue);
         }
-        SmartDashboard.putString(TelemetryNames.ElevatorSensor.implClass, ourInstance.getClass().getSimpleName());
+        SmartDashboard.putString(TelemetryNames.ElevatorLoadedSensor.implClass, ourInstance.getClass().getSimpleName());
     }
 
     /**
@@ -85,7 +86,7 @@ public class ElevatorSensorFactory {
      *
      * @return singleton instance of sensor
      **/
-    public synchronized static IElevatorSensor getInstance() {
+    public synchronized static IElevatorLoadedSensor getInstance() {
         if (ourInstance == null) {
             throw new IllegalStateException(myName + " Not Constructed Yet");
         }

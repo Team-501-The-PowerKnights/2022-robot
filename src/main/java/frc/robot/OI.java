@@ -10,6 +10,7 @@ package frc.robot;
 
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.hmi.DriverGamepad;
 import frc.robot.hmi.OperatorGamepad;
@@ -25,7 +26,7 @@ import riolog.RioLogger;
 /**
  * Add your docs here.
  */
-public class OI implements ITelemetryProvider {
+public class OI implements ITelemetryProvider, IModeFollower {
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(OI.class.getName());
@@ -56,10 +57,10 @@ public class OI implements ITelemetryProvider {
         return ourInstance;
     }
 
-    // TODO: Make this private with accessor methods
-    public final DriverGamepad driverPad;
-    public final OperatorGamepad operatorPad;
-    
+    // Driver gamepad
+    private final DriverGamepad driverPad;
+    // Operator gamepad
+    private final OperatorGamepad operatorPad;
 
     private OI() {
         logger.info("constructing {}", myName);
@@ -70,19 +71,65 @@ public class OI implements ITelemetryProvider {
         logger.info("constructed");
     }
 
-    public void configureButtonBindings() {
-        logger.info("configure");
-
-        driverPad.configureButtonBindings();
-        operatorPad.configureButtonBindings();
-
-        logger.info("configured");
-    }
-
     @Override
     public void updateTelemetry() {
         driverPad.updateTelemetry();
         operatorPad.updateTelemetry();
+    }
+
+    @Override
+    public void disabledInit() {
+        logger.info("initializing disabled for {}", myName);
+
+        // Disable the previous button mappings
+        logger.trace("***** clearButtons()");
+        CommandScheduler.getInstance().clearButtons();
+
+        logger.info("initialized auto for {}", myName);
+    }
+
+    @Override
+    public void autonomousInit() {
+        logger.info("initializing auto for {}", myName);
+
+        // Make the button bindings for this mode
+        driverPad.autonomousInit();
+        operatorPad.autonomousInit();        
+
+        logger.info("initialized auto for {}", myName);
+    }
+
+    @Override
+    public void teleopInit() {
+        logger.info("initializing teleop for {}", myName);
+
+        // Make the button bindings for this mode
+        operatorPad.teleopInit();
+        operatorPad.teleopInit();        
+
+        logger.info("initialized teleop for {}", myName);
+    }
+
+    @Override
+    public void testInit() {
+        logger.info("initializing test for {}", myName);
+
+        // Nothing for this
+        
+        logger.info("initialized test for {}", myName);
+    }
+
+    public void configureClimbingButtonBindings() {
+        logger.info("configure");
+
+        // Disable the previous button mappings
+        logger.trace("***** clearButtons()");
+        CommandScheduler.getInstance().clearButtons();
+
+        driverPad.configureClimbingButtonBindings();
+        operatorPad.configureClimbingButtonBindings();
+
+        logger.info("configure");
     }
 
     /*****************
@@ -125,13 +172,16 @@ public class OI implements ITelemetryProvider {
      * Climber
      *****************/
 
-     public boolean getClimberExtend() {
-         return false;
-     }
+    public boolean getDriverClimberStart() {
+        return driverPad.getClimberStart();
+    }
 
-     public boolean getClimberClimb() {
-         return false;
-     }
-    
+    public boolean getOperatorClimberStart() {
+        return operatorPad.getClimberStart();
+    }
+
+    public double getClimberSpeed() {
+        return operatorPad.getClimberSpeed();
+    }
 
 }

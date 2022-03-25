@@ -8,7 +8,6 @@
 
 package frc.robot.subsystems.climber;
 
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.climber.ClimberDoNothing;
@@ -18,7 +17,6 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
-
 
 /**
  * Add your docs here.
@@ -59,7 +57,9 @@ abstract class BaseClimberSubsystem extends BaseSubsystem implements IClimberSub
 
     @Override
     public void updateTelemetry() {
-        SmartDashboard.putNumber(TelemetryNames.Climber.position, getPosition());
+        SmartDashboard.putNumber(TelemetryNames.Climber.leftPosition, getLeftPosition());
+        SmartDashboard.putNumber(TelemetryNames.Climber.rightPosition, getRightPosition());
+        SmartDashboard.putNumber(TelemetryNames.Climber.position, getAveragePosition());
         SmartDashboard.putNumber(TelemetryNames.Climber.speed, tlmSpeed);
         SmartDashboard.putBoolean(TelemetryNames.Climber.climbing, tlmClimbing);
         SmartDashboard.putBoolean(TelemetryNames.Climber.retracting, tlmRetracting);
@@ -74,18 +74,6 @@ abstract class BaseClimberSubsystem extends BaseSubsystem implements IClimberSub
     public void stop() {
         tlmClimbing = false;
         tlmRetracting = false;
-    }
-
-    @Override
-    public void climb() {
-        tlmClimbing = true;
-        tlmRetracting = false;
-    }
-
-    @Override
-    public void retract() {
-        tlmClimbing = false;
-        tlmRetracting = true;
     }
 
 }

@@ -17,8 +17,19 @@ public class PKLogger implements Logger {
 
     private final ch.qos.logback.classic.Logger logger;
 
-    PKLogger(ch.qos.logback.classic.Logger logger)
-    {
+    private static long warnCount = 0;
+    
+    public long getWarnCount() {
+        return warnCount;
+    }
+
+    private static long errorCount = 0;
+
+    public long getErrorCount() {
+        return errorCount;
+    }
+
+    PKLogger(ch.qos.logback.classic.Logger logger) {
         this.logger = logger;
     }
 
@@ -214,26 +225,31 @@ public class PKLogger implements Logger {
 
     @Override
     public void warn(String msg) {
+        warnCount++;
         logger.warn( msg );
     }
 
     @Override
     public void warn(String format, Object arg) {
+        warnCount++;
        logger.warn( format, arg );
     }
 
     @Override
     public void warn(String format, Object... arguments) {
+        warnCount++;
         logger.warn( format, arguments );
     }
 
     @Override
     public void warn(String format, Object arg1, Object arg2) {
+        warnCount++;
         logger.warn( format, arg1, arg2 );
     }
 
     @Override
     public void warn(String msg, Throwable t) {
+        warnCount++;
         logger.warn( msg, t );
     }
 
@@ -244,26 +260,31 @@ public class PKLogger implements Logger {
 
     @Override
     public void warn(Marker marker, String msg) {
+        warnCount++;
         logger.warn( marker, msg );
     }
 
     @Override
     public void warn(Marker marker, String format, Object arg) {
+        warnCount++;
         logger.warn( marker, format, arg );
     }
 
     @Override
     public void warn(Marker marker, String format, Object arg1, Object arg2) {
+        warnCount++;
         logger.warn( marker, format, arg1, arg2 );
     }
 
     @Override
     public void warn(Marker marker, String format, Object... arguments) {
+        warnCount++;
         logger.warn( marker, format, arguments );
     }
 
     @Override
     public void warn(Marker marker, String msg, Throwable t) {
+        warnCount++;
         logger.warn( marker, msg, t );
     }
 
@@ -274,26 +295,31 @@ public class PKLogger implements Logger {
 
     @Override
     public void error(String msg) {
+        errorCount++;
         logger.error( msg );
     }
 
     @Override
     public void error(String format, Object arg) {
+        errorCount++;
        logger.error( format, arg );
     }
 
     @Override
     public void error(String format, Object arg1, Object arg2) {
+        errorCount++;
         logger.error( format, arg1, arg2 );
     }
 
     @Override
     public void error(String format, Object... arguments) {
+        errorCount++;
         logger.error( format, arguments );
     }
 
     @Override
     public void error(String msg, Throwable t) {
+        errorCount++;
         logger.error( msg, t );
     }
 
@@ -304,26 +330,31 @@ public class PKLogger implements Logger {
 
     @Override
     public void error(Marker marker, String msg) {
+        errorCount++;
         logger.error( marker, msg );
     }
 
     @Override
     public void error(Marker marker, String format, Object arg) {
+        errorCount++;
         logger.error( marker, format, arg );
     }
 
     @Override
     public void error(Marker marker, String format, Object arg1, Object arg2) {
+        errorCount++;
         logger.error( marker, format, arg1, arg2 );
     }
 
     @Override
     public void error(Marker marker, String format, Object... arguments) {
+        errorCount++;
         logger.error( marker, format, arguments );
     }
 
     @Override
     public void error(Marker marker, String msg, Throwable t) {
+        errorCount++;
         logger.error( marker, msg, t );
     }
     
