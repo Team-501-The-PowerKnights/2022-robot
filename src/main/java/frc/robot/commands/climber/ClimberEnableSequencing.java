@@ -8,6 +8,7 @@
 package frc.robot.commands.climber;
 
 
+import frc.robot.Robot;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
@@ -37,10 +38,19 @@ public class ClimberEnableSequencing extends ClimberOICommandBase {
     public void end(boolean interrupted) {
         super.end(interrupted);
         
-        // Zero encoder position in advance of climber sequencing; they should never be
-        // zeroed after this point
-        climber.zeroPosition();
-        ClimberStateMachine.getInstance().beginClimberSequencing();
+        // If match completes before end; we don't want to do anything
+        // further and so just return
+        if (Robot.isMatchComplete()) {
+            return;
+        }
+
+        // Ended by players? (or some kind of interrupt)
+        if (!interrupted) {
+            // Zero encoder position in advance of climber sequencing; they
+            // should never be zeroed after this point
+            climber.zeroPosition();
+            ClimberStateMachine.getInstance().beginClimberSequencing();
+        }
     }
 
 }

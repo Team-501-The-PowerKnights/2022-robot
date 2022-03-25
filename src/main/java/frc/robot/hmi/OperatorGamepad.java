@@ -53,29 +53,6 @@ public class OperatorGamepad extends F310Gamepad {
     }
 
     @Override
-    public void configureButtonBindings() {
-        logger.info("configure");
-
-        visionTargettingButton.whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(),
-                new FirePoseVision()));
-        firePoseButton.whenHeld(new FirePoseNoVision());
-
-        logger.info("configured");
-    }
-
-    /**
-     * (Re-)Configures the button bindings on the gamepad for the
-     * climbing end game play.
-     */
-    public void configureClimbingButtonBindings() {
-        logger.info("configure");
-
-        climbSequenceButton.whileHeld(new ClimberDoSequencing());
-
-        logger.info("configured");
-    }
-
-    @Override
     public void updateTelemetry() {
         // SmartDashboard.putBoolean(TelemetryNames.HMI.firePose, firePoseButton.get());
         // SmartDashboard.putBoolean(TelemetryNames.HMI.visionTargetting, visionTargettingButton.get());
@@ -99,9 +76,31 @@ public class OperatorGamepad extends F310Gamepad {
     public void teleopInit() {
         logger.info("initializing teleop for {}", myName);
 
-        configureButtonBindings();
+        configureTeleopButtonBindings();
         
         logger.info("initialized teleop for {}", myName);
+    }
+
+    private void configureTeleopButtonBindings() {
+        logger.info("configure");
+
+        visionTargettingButton.whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(),
+                new FirePoseVision()));
+        firePoseButton.whenHeld(new FirePoseNoVision());
+
+        logger.info("configured");
+    }
+
+    /**
+     * (Re-)Configures the button bindings on the gamepad for the
+     * climbing end game play.
+     */
+    public void configureClimbingButtonBindings() {
+        logger.info("configure");
+
+        climbSequenceButton.whileHeld(new ClimberDoSequencing());
+
+        logger.info("configured");
     }
 
     /*********************

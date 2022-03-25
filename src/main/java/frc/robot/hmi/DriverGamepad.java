@@ -45,21 +45,7 @@ public class DriverGamepad extends F310Gamepad {
         logger.info("constructed");
     }
 
-    @Override
-    public void configureButtonBindings() {
-        logger.info("configure");
-
-        // turboButton - implemented in getting values speed & turn
-        // crawlButton - implemented in getting values speed & turn
-        //driveSwapButton.whenPressed(new DriveSwap());
-
-        // Hook to configure for testing of new stuff
-        configureTestBindings();
-
-        logger.info("configured");
-    }
-
-    /**
+     /**
      * (Re-)Configures the button bindings on the gamepad for the
      * climbing end game play.
      */   
@@ -94,9 +80,22 @@ public class DriverGamepad extends F310Gamepad {
     public void teleopInit() {
         logger.info("initializing teleop for {}", myName);
 
-        configureButtonBindings();
+        configureTeleopButtonBindings();
         
         logger.info("initialized teleop for {}", myName);
+    }
+
+    private void configureTeleopButtonBindings() {
+        logger.info("configure");
+
+        // turboButton - implemented in getting values speed & turn
+        // crawlButton - implemented in getting values speed & turn
+        //driveSwapButton.whenPressed(new DriveSwap());
+
+        // Hook to configure for testing of new stuff
+        configureTestBindings();
+
+        logger.info("configured");
     }
 
     /*********************

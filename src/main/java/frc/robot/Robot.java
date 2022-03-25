@@ -93,14 +93,14 @@ public class Robot extends TimedRobot {
     // Flag for having run first autonomous loop
     private boolean autonomousFirstRun;
     // Flag for having completed autonomous part of match
-    private boolean autonomousComplete;
+    private static boolean autonomousComplete;
 
     // Flag for having started/running teleop part of match
     private boolean teleopRunning;
     // Flag for having run first teleop loop
     private boolean teleopFirstRun;
     // Flag for having completed teleop part of match
-    private boolean teleopComplete;
+    private static boolean teleopComplete;
 
     // Flag for in end game of match
     private static boolean endGameStarted;
@@ -349,7 +349,7 @@ public class Robot extends TimedRobot {
             f.disabledInit();
         }
 
-        if (autonomousComplete && teleopComplete) {
+        if (isMatchComplete()) {
             logger.info("match complete");
 
             logFinalVisionData();
@@ -549,8 +549,6 @@ public class Robot extends TimedRobot {
             f.teleopExit();
         }
 
-        climberSM.resetState();
-
         logger.info("exited teleop");
     }
 
@@ -615,6 +613,10 @@ public class Robot extends TimedRobot {
 
     static public boolean isEndGameStarted() {
         return endGameStarted;
+    }
+
+    static public boolean isMatchComplete() {
+        return (autonomousComplete && teleopComplete);
     }
 
 }

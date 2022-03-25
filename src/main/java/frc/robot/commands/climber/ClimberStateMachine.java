@@ -121,11 +121,7 @@ public class ClimberStateMachine {
 
         initState();
     }
-
-    public void resetState() {
-        initialize(); // same for now
-    }
-
+  
     public void enableClimberSequencing() {
         logger.info("enabling climber sequencing");
 

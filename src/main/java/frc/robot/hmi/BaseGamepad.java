@@ -40,7 +40,12 @@ abstract class BaseGamepad  implements IModeFollower, IGamepad {
         logger.info("constructed");
     }
 
-     /**
+     @Override
+    public void configureButtonBindings() {
+        logger.error("Shouldn't be calling this from anywhere");
+    }
+
+    /**
      * 
      * Lifted from:
      * https://www.chiefdelphi.com/t/how-do-i-program-a-joystick-deadband/122625
