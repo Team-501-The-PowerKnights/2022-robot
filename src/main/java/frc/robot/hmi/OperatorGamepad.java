@@ -17,6 +17,7 @@ import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.climber.ClimberDoSequencing;
 import frc.robot.commands.poses.FirePoseNoVision;
 import frc.robot.commands.poses.FirePoseVision;
+import frc.robot.commands.poses.VisionTrackingPose;
 import frc.robot.commands.turret.TurretVisionAlign;
 import frc.robot.telemetry.TelemetryNames;
 
@@ -85,7 +86,7 @@ public class OperatorGamepad extends F310Gamepad {
         logger.info("configure");
 
         visionTargettingButton.whenHeld(new PKParallelCommandGroup(new TurretVisionAlign(),
-                new FirePoseVision()));
+                new VisionTrackingPose()));
         firePoseButton.whenHeld(new FirePoseNoVision());
 
         logger.info("configured");
