@@ -277,6 +277,8 @@ public class Robot extends TimedRobot {
 
         String fileName;
 
+        fileName = validateDriveTrajectoryFile("StusTestErrorFile");
+
         // LinearTest
         fileName = validateDriveTrajectoryFile("LinearTest");
         autoChooser.addOption("General 2 Ball", 
@@ -355,8 +357,9 @@ public class Robot extends TimedRobot {
         String trajectoryJSON = "output/" + fileName + ".wpilib.json";
         Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
         logger.info("validating trajectory {} via {}", trajectoryJSON, trajectoryPath);
-        // if (!trajectoryPath. ) {
-        // }
+        if (!trajectoryPath.toFile().exists() ) {
+            logger.error("trajectory file {} doesn't exist", fileName);
+        }
         return fileName;
     }
 
