@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.climber.ClimberDoSequencing;
 import frc.robot.commands.poses.FirePoseNoVision;
-import frc.robot.commands.poses.FirePoseVision;
 import frc.robot.commands.poses.VisionTrackingPose;
 import frc.robot.commands.turret.TurretVisionAlign;
 import frc.robot.telemetry.TelemetryNames;

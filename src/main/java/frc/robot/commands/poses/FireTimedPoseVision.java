@@ -19,15 +19,16 @@ import frc.robot.subsystems.incrementor.IIncrementorSubsystem;
 import frc.robot.subsystems.incrementor.IncrementorFactory;
 import frc.robot.subsystems.shooter.IShooterSubsystem;
 import frc.robot.subsystems.shooter.ShooterFactory;
+import frc.robot.utils.TimerFromPeriod;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class FirePoseVision extends PKCommandBase {
+public class FireTimedPoseVision extends PKCommandBase {
 
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(FirePoseVision.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(FireTimedPoseVision.class.getName());
 
     private final IVisionSensor vision;
 
@@ -35,8 +36,15 @@ public class FirePoseVision extends PKCommandBase {
     private final IIncrementorSubsystem incrementer;
     private final IElevatorSubsystem elevator;
 
-    public FirePoseVision() {
-        logger.info("constructing {}", getName());
+    // Duration to execute (in seconds)
+    private double duration;
+    // Timer to count it down during execute()
+    private TimerFromPeriod timer;
+
+    public FireTimedPoseVision(double duration) {
+        logger.info("constructing {} for {}", getName(), duration);
+
+        this.duration = duration;
 
         vision = VisionFactory.getInstance();
 
@@ -47,6 +55,13 @@ public class FirePoseVision extends PKCommandBase {
         addRequirements(shooter, incrementer, elevator);
 
         logger.info("constructed {}", getName());
+    }
+
+    @Override
+    public void initialize() {
+        super.initialize();
+
+        timer = new TimerFromPeriod(duration);
     }
 
     @Override
@@ -88,6 +103,13 @@ public class FirePoseVision extends PKCommandBase {
             incrementer.stop();
             elevator.stop();
         }
+
+        timer.nextTic();
+    }
+
+    @Override
+    public boolean isFinished() {
+        return timer.isExpired();
     }
 
     @Override

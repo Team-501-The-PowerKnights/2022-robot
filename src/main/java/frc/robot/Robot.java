@@ -13,7 +13,6 @@
 package frc.robot;
 
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +34,7 @@ import frc.robot.commands.drive.DriveForwardTimed;
 import frc.robot.commands.drive.DriveTrajectory;
 import frc.robot.commands.intake.IntakeIngestTimed;
 import frc.robot.commands.poses.FirePoseVision;
+import frc.robot.commands.poses.FireTimedPoseVision;
 import frc.robot.commands.turret.TurretVisionAlign;
 import frc.robot.modules.IModule;
 import frc.robot.modules.ModulesFactory;
@@ -64,9 +64,7 @@ public class Robot extends TimedRobot {
     /* Our classes logger */
     private static final PKLogger logger = RioLogger.getLogger(Robot.class.getName());
 
-    private OI oi;
-
-    // Handle to telemetry manager
+     // Handle to telemetry manager
     private TelemetryManager tlmMgr;
     // Periodic runnable to do the reporting off main loop
     private Runnable telemetryReporter = new Runnable() {
@@ -276,6 +274,7 @@ public class Robot extends TimedRobot {
         autoChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
 
         String fileName;
+        String secondFileName;
 
         // LinearTest
         fileName = validateDriveTrajectoryFile("LinearTest");
@@ -312,6 +311,23 @@ public class Robot extends TimedRobot {
                                                                 )
                                    )
                           );
+
+        // WallSide2Ball
+        fileName = validateDriveTrajectoryFile("WallSide1Ball");
+        secondFileName = validateDriveTrajectoryFile("WallSide2Ball");
+        autoChooser.addOption("Wall Side 3 Ball", 
+         new PKParallelCommandGroup(new TurretVisionAlign(),
+                                    new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(5.0),
+                                                                                            new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveTrajectory(fileName)),
+                                                                                            new FireTimedPoseVision(5.0)
+                                                                                            ),
+                                                                 new PKParallelCommandGroup(new IntakeIngestTimed(5.0),
+                                                                                            new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveTrajectory(secondFileName)),
+                                                                                            new FireTimedPoseVision(5.0)
+                                                                                            )
+                                                                )
+                                   )
+                              );
 
         // autoChooser.addOption("Wall Side 2 Ball Then Turn", new PKParallelCommandGroup(new TurretVisionAlign(),
         //                         new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(5.0),
