@@ -274,19 +274,19 @@ public class Robot extends TimedRobot {
         // FIXME: This only works because default shooter command is idle
 
         // FIXME: Make parameterized like distance
-        autoChooser.addOption("Drive Forward (4 sec)", new DriveForwardTimed(4.0));
-        autoChooser.addOption("Drive Forward (3 feet)", new DriveForwardDistance(3.0));
-        autoChooser.addOption("Shoot and Drive Forward (3 feet)",
-                new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardDistance(3)));
-        autoChooser.addOption("Shoot and Drive Forward (4 sec)",
-                new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardTimed(4.0)));
+        // autoChooser.addOption("Drive Forward (4 sec)", new DriveForwardTimed(4.0));
+        // autoChooser.addOption("Drive Forward (3 feet)", new DriveForwardDistance(3.0));
+        // autoChooser.addOption("Shoot and Drive Forward (3 feet)",
+        //         new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardDistance(3)));
+        // autoChooser.addOption("Shoot and Drive Forward (4 sec)",
+        //         new PKParallelCommandGroup(new ElevatorLift(), new DriveForwardTimed(4.0)));
 
-        autoChooser.addOption("Drive Backward (4 sec)", new DriveBackwardTimed(4.0));
-        autoChooser.addOption("Drive Backward (3 feet)", new DriveBackwardDistance(3));
-        autoChooser.addOption("Shoot and Drive Backward (3 feet)",
-                new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardDistance(3)));
-        autoChooser.addOption("Shoot and Drive Backward (4 sec)",
-                new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardTimed(4.0)));
+        // autoChooser.addOption("Drive Backward (4 sec)", new DriveBackwardTimed(4.0));
+        // autoChooser.addOption("Drive Backward (3 feet)", new DriveBackwardDistance(3));
+        // autoChooser.addOption("Shoot and Drive Backward (3 feet)",
+        //         new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardDistance(3)));
+        // autoChooser.addOption("Shoot and Drive Backward (4 sec)",
+        //         new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardTimed(4.0)));
 
         autoChooser.addOption("Full Auto (Driving Forward Delay)",
                 new PKParallelCommandGroup(new TurretVisionAlign(),
