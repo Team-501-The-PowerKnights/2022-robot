@@ -13,10 +13,13 @@
 package frc.robot;
 
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -269,14 +272,17 @@ public class Robot extends TimedRobot {
     private void createAutoChooser() {
         autoChooser = new SendableChooser<>();
 
-        //
+        // Default option is safety of "do nothing"
         autoChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
 
+        String fileName;
+
         // LinearTest
+        fileName = validateDriveTrajectoryFile("LinearTest");
         autoChooser.addOption("General 2 Ball", 
             new PKParallelCommandGroup(new TurretVisionAlign(),
                                        new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(5.0),
-                                                                                               new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveTrajectory("LinearTest")),
+                                                                                               new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveTrajectory(fileName)),
                                                                                                new FirePoseVision()
                                                                                               )
                                                                    )
@@ -284,10 +290,11 @@ public class Robot extends TimedRobot {
                              );
 
         // HangerSideFirstBall
+        fileName = validateDriveTrajectoryFile("HangarSideFirstBall");
         autoChooser.addOption("Hangar Side 2 Ball", 
             new PKParallelCommandGroup(new TurretVisionAlign(),
                                        new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(5.0),
-                                                                                               new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveTrajectory("HangarSideFirstBall")),
+                                                                                               new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveTrajectory(fileName)),
                                                                                                new FirePoseVision()
                                                                                                )
                                                                    )
@@ -295,10 +302,11 @@ public class Robot extends TimedRobot {
                              );
 
          // WallSide1Ball
+         fileName = validateDriveTrajectoryFile("WallSide1Ball");
          autoChooser.addOption("Wall Side 2 Ball", 
          new PKParallelCommandGroup(new TurretVisionAlign(),
                                     new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(5.0),
-                                                                                            new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveTrajectory("WallSide1Ball")),
+                                                                                            new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveTrajectory(fileName)),
                                                                                             new FirePoseVision()
                                                                                             )
                                                                 )
@@ -341,6 +349,16 @@ public class Robot extends TimedRobot {
         // autoChooser.addOption("Linear Test Trajectory", new DriveTrajectory("LinearTest"));
 
         SmartDashboard.putData("Auto Mode", autoChooser);
+    }
+
+    private String validateDriveTrajectoryFile(String fileName) {
+        String trajectoryJSON = "output/" + fileName + ".wpilib.json";
+        Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+        logger.info("validating trajectory {} via {}", trajectoryJSON, trajectoryPath);
+        if (!trajectoryPath.toFile().exists() ) {
+            logger.error("trajectory file {} doesn't exist", fileName);
+        }
+        return fileName;
     }
 
     private void determineInitStatus() {
