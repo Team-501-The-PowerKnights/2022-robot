@@ -294,11 +294,11 @@ public class Robot extends TimedRobot {
                                       )
                              );
 
-         // WallSideFirstBall
+         // WallSide1Ball
          autoChooser.addOption("Wall Side 2 Ball", 
          new PKParallelCommandGroup(new TurretVisionAlign(),
                                     new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(5.0),
-                                                                                            new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveTrajectory("WallSideFirstBall")),
+                                                                                            new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveTrajectory("WallSide1Ball")),
                                                                                             new FirePoseVision()
                                                                                             )
                                                                 )

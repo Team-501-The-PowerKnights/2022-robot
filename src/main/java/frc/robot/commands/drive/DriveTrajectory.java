@@ -8,12 +8,12 @@
 
 package frc.robot.commands.drive;
 
+
 import java.io.IOException;
 import java.nio.file.Path;
 
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryUtil;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import frc.robot.commands.PKSequentialCommandGroup;
 import frc.robot.subsystems.drive.DriveFactory;
@@ -21,6 +21,7 @@ import frc.robot.subsystems.drive.IDriveSubsystem;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * Add your docs here.
@@ -36,20 +37,19 @@ public class DriveTrajectory extends PKSequentialCommandGroup {
         logger.info("constructing {} for {}", getName(), pathName);
 
         drive = DriveFactory.getInstance();
-
         addRequirements(drive);
 
         String trajectoryJSON = "output/" + pathName + ".wpilib.json";
         Trajectory trajectory;
         try {
             Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+            logger.info("opening trajectory {} via {}", trajectoryJSON, trajectoryPath);
             trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+            
+            addCommands(drive.followTrajectory(trajectory), new DriveStop());
         } catch (IOException ex) {
-            DriverStation.reportError("Unable to open trajectory " + trajectoryJSON, ex.getStackTrace());
-            return;
+            logger.error("Unable to open trajectory", ex);
         }
-
-        addCommands(drive.followTrajectory(trajectory), new DriveStop());
 
         logger.info("constructed");
     }

@@ -60,6 +60,8 @@ public class FirePoseVision extends PKCommandBase {
         // 0.5); // Tuning only
         // speed += 0.015;
         if (speed > 0.46 && speed < 0.64) {
+            // Extra boost without mucking on formula
+            speed += 0.01;
             Robot.shooterSetSpeed = speed;
         }
 
