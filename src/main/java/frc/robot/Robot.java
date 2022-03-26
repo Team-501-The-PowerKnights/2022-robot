@@ -277,8 +277,6 @@ public class Robot extends TimedRobot {
 
         String fileName;
 
-        fileName = validateDriveTrajectoryFile("StusTestErrorFile");
-
         // LinearTest
         fileName = validateDriveTrajectoryFile("LinearTest");
         autoChooser.addOption("General 2 Ball", 
