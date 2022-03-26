@@ -12,6 +12,7 @@
 
 package frc.robot;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,11 +28,8 @@ import frc.robot.commands.modes.AutoDoNothing;
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.PKSequentialCommandGroup;
 import frc.robot.commands.climber.ClimberStateMachine;
-import frc.robot.commands.drive.DriveBackwardDistance;
-import frc.robot.commands.drive.DriveBackwardTimed;
-import frc.robot.commands.drive.DriveForwardDistance;
 import frc.robot.commands.drive.DriveForwardTimed;
-import frc.robot.commands.elevator.ElevatorLift;
+import frc.robot.commands.drive.DriveTrajectory;
 import frc.robot.commands.intake.IntakeIngestTimed;
 import frc.robot.commands.poses.FirePoseVision;
 import frc.robot.commands.turret.TurretVisionAlign;
@@ -49,6 +47,7 @@ import frc.robot.subsystems.SubsystemsFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -182,6 +181,11 @@ public class Robot extends TimedRobot {
         // Add all the mode followers (need to be in order of creation)
         followers = new ArrayList<>();
 
+        // Initialize the OI "subsystem"
+        OI.constructInstance();
+        oi = OI.getInstance();
+        tlmMgr.addProvider(oi);
+
         // Create all the modules
         modules = ModulesFactory.constructModules();
         followers.addAll(modules);
@@ -192,10 +196,6 @@ public class Robot extends TimedRobot {
         subsystems = SubsystemsFactory.constructSubsystems();
         followers.addAll(subsystems);
 
-        // Initialize the OI "subsystem"
-        OI.constructInstance();
-        oi = OI.getInstance();
-        tlmMgr.addProvider(oi);
         followers.add(oi);
 
         // TODO: Put in the Climber subsystem before default commands
@@ -271,6 +271,17 @@ public class Robot extends TimedRobot {
 
         autoChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
 
+        // autoChooser.addOption("Full Auto (Driving Forward Delay)",
+        //     new PKParallelCommandGroup(new TurretVisionAlign(),
+        //                                 new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(4.0),
+        //                                                                                         new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(3.0)),
+        //                                                                                         new FirePoseVision()
+        //                                                                                        )
+        //                                                             )
+        //                               )
+        //                      );
+
+
         // FIXME: This only works because default shooter command is idle
 
         // FIXME: Make parameterized like distance
@@ -288,18 +299,22 @@ public class Robot extends TimedRobot {
         // autoChooser.addOption("Shoot and Drive Backward (4 sec)",
         //         new PKParallelCommandGroup(new ElevatorLift(), new DriveBackwardTimed(4.0)));
 
-        autoChooser.addOption("Full Auto (Driving Forward Delay)",
-                new PKParallelCommandGroup(new TurretVisionAlign(),
-                        new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(4.0),
-                                new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveForwardTimed(3.0)),
-                                new FirePoseVision()))));
-
         // autoChooser.addOption("Drive Straight Trajectory", new DriveTrajectory("StraightLine"));
         // autoChooser.addOption("Linear Test Trajectory", new DriveTrajectory("LinearTest"));
-        // autoChooser.addOption("Linear Auto Test Trajectory", new PKParallelCommandGroup(new TurretVisionAlign(),
-        //         new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(5.0),
-        //                 new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveTrajectory("LinearTest")),
-        //                 new FirePoseVision()))));
+        autoChooser.addOption("General 2 Ball", new PKParallelCommandGroup(new TurretVisionAlign(),
+                new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(5.0),
+                        new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveTrajectory("LinearTest")),
+                        new FirePoseVision()))));
+        autoChooser.addOption("Hangar Side 2 Ball", new PKParallelCommandGroup(new TurretVisionAlign(),
+                        new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(5.0),
+                                new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveTrajectory("HangarSideFirstBall")),
+                                new FirePoseVision()))));
+        // autoChooser.addOption("Wall Side 2 Ball Then Turn", new PKParallelCommandGroup(new TurretVisionAlign(),
+        //                         new PKSequentialCommandGroup(new PKParallelCommandGroup(new IntakeIngestTimed(5.0),
+        //                                 new PKSequentialCommandGroup(new WaitCommand(1.0), new DriveTrajectory("WallSideFirstBallThenTurn")),
+        //                                 new FirePoseVision()))));
+                
+        
 
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
