@@ -33,13 +33,13 @@ public class DriveTrajectory extends PKSequentialCommandGroup {
 
     private final IDriveSubsystem drive;
 
-    public DriveTrajectory(String pathName) {
-        logger.info("constructing {} for {}", getName(), pathName);
+    public DriveTrajectory(String fileName) {
+        logger.info("constructing {} for {}", getName(), fileName);
 
         drive = DriveFactory.getInstance();
         addRequirements(drive);
 
-        String trajectoryJSON = "output/" + pathName + ".wpilib.json";
+        String trajectoryJSON = "output/" + fileName + ".wpilib.json";
         Trajectory trajectory;
         try {
             Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
