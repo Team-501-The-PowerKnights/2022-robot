@@ -40,7 +40,8 @@ public class ClimbSetSubystemsPose extends ClimbBasePose {
                 new PKSequentialCommandGroup(new IntakeRetract(), new IntakeStop()),
                 new IncrementorStop(),
                 new ElevatorStop(),
-                new PKSequentialCommandGroup(new TurretHome(), new WaitCommand(0.5), new TurretStop()),
+                // new PKSequentialCommandGroup(new TurretHome(), new WaitCommand(0.5), new TurretStop()),
+                new TurretStop(),
                 new ShooterStop()
                 )
         );

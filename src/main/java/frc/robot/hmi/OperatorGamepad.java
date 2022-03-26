@@ -138,7 +138,7 @@ public class OperatorGamepad extends F310Gamepad {
     }
 
     public double getClimberSpeed() {
-        return deadBand(-getRightYAxis(), 0.05);
+        return deadBand(getRightYAxis(), 0.05);
     }
 
 }
