@@ -63,7 +63,6 @@ class ClimberSubsystem extends BaseClimberSubsystem {
         checkError(rightEncoder.setPosition(0.0), "zeroing the rightEncoder {}");
 
         // Ramp rates
-        double ramp = 0.5;
         checkError(leftMotor.setOpenLoopRampRate(ramp), "Left setting ramp rate {}");
         checkError(rightMotor.setOpenLoopRampRate(ramp), "Right setting ramp rate {}");
  
@@ -112,7 +111,9 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     public void updatePreferences() {
         super.updatePreferences();
 
-        // Real doesn't implement this
+        logger.info("setting OpenLoopRate={}", ramp);
+        checkError(leftMotor.setOpenLoopRampRate(ramp), "Left setting ramp rate {}");
+        checkError(rightMotor.setOpenLoopRampRate(ramp), "Right setting ramp rate {}");
     }
 
     @Override
