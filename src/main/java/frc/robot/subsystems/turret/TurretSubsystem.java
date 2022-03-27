@@ -182,6 +182,10 @@ class TurretSubsystem extends BaseTurretSubsystem {
         float min_command = 0.05f;
 
         double heading_error = vision.getError();
+        if (Math.abs(heading_error) > 10) {
+            motor.setVoltage(0);
+            return;
+        }
         double steering_adjust = Kp * heading_error;
 
         if (steering_adjust > 4) {
@@ -191,7 +195,6 @@ class TurretSubsystem extends BaseTurretSubsystem {
         if (steering_adjust < -4) {
             steering_adjust = -4;
         }
-
         // if (heading_error < 0.5) {
         //     steering_adjust = Kp * heading_error - min_command;
         // } else if (heading_error > 0.5) {
@@ -200,7 +203,8 @@ class TurretSubsystem extends BaseTurretSubsystem {
 
         SmartDashboard.putNumber(TelemetryNames.Turret.visionPIDOutput, steering_adjust);
 
-        checkError(pid.setReference(steering_adjust, CANSparkMax.ControlType.kVoltage, 1), "PID setting reference {}");
+        // checkError(pid.setReference(steering_adjust, CANSparkMax.ControlType.kVoltage, 1), "PID setting reference {}");
+        motor.setVoltage(steering_adjust);
     }
 
     @Override
