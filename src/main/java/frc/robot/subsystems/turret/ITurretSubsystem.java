@@ -30,6 +30,8 @@ public interface ITurretSubsystem extends ISubsystem {
 
     public void jogCCW();
 
+    public void initVisionTracking();
+
     public void setAngleFromVision();
 
     public void holdAngle();

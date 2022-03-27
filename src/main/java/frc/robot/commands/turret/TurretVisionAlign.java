@@ -36,6 +36,7 @@ public class TurretVisionAlign extends TurretCommandBase {
         super.initialize();
 
         vision.enable();
+        turret.initVisionTracking();
     }
 
     @Override
