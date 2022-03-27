@@ -182,13 +182,21 @@ class TurretSubsystem extends BaseTurretSubsystem {
         float min_command = 0.05f;
 
         double heading_error = vision.getError();
-        double steering_adjust = 0.0f;
+        double steering_adjust = Kp * heading_error;
 
-        if (heading_error < 0.5) {
-            steering_adjust = Kp * heading_error - min_command;
-        } else if (heading_error > 0.5) {
-            steering_adjust = Kp * heading_error + min_command;
+        if (steering_adjust > 4) {
+            steering_adjust = 4;
         }
+        
+        if (steering_adjust < -4) {
+            steering_adjust = -4;
+        }
+
+        // if (heading_error < 0.5) {
+        //     steering_adjust = Kp * heading_error - min_command;
+        // } else if (heading_error > 0.5) {
+        //     steering_adjust = Kp * heading_error + min_command;
+        // }
 
         SmartDashboard.putNumber(TelemetryNames.Turret.visionPIDOutput, steering_adjust);
 
