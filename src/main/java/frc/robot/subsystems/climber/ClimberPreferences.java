@@ -9,6 +9,8 @@
 package frc.robot.subsystems.climber;
 
 
+import edu.wpi.first.wpilibj.Preferences;
+
 import frc.robot.subsystems.SubsystemNames;
 
 import riolog.PKLogger;
@@ -30,16 +32,19 @@ import riolog.RioLogger;
 public final class ClimberPreferences {
 
     /** Our classes' logger **/
-    @SuppressWarnings("unused")
     private static final PKLogger logger = RioLogger.getLogger(ClimberPreferences.class.getName());
 
-    @SuppressWarnings("unused")
     static private final String name = SubsystemNames.climberName;
+    static final String ramp = name + ".ramp";
 
     private ClimberPreferences() {}
 
     public static void initialize()
     {
+        if (!Preferences.containsKey(ramp)) {
+            logger.warn("{} doesn't exist; creating with default", ramp);
+            Preferences.setDouble(ramp, 0.0);
+        }
     }
 
 }

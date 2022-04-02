@@ -153,46 +153,37 @@ class TurretSubsystem extends BaseTurretSubsystem {
         checkError(pid.setReference(targetCounts, CANSparkMax.ControlType.kPosition, 1), "PID setting reference {}");
     }
 
+
+
     @Override
     public void setAngleFromVision() {
-        // float Kp = -0.15f;
-        // float min_command = 0.05f;
-        // double max_output = 0.5;
-
-        // double heading_error = vision.getError();
-        // double steering_adjust = 0.0f;
-
-        // if (heading_error < 0.5) {
-        // steering_adjust = Kp * heading_error - min_command;
-        // } else if (heading_error > 0.5) {
-        // steering_adjust = Kp * heading_error + min_command;
-        // }
-
-        // if (Math.abs(steering_adjust) > 1) {
-        // steering_adjust = steering_adjust > 0 ? max_output : -max_output;
-        // }
-
-        // SmartDashboard.putNumber(TelemetryNames.Turret.visionPIDOutput,
-        // steering_adjust);
-
-        // // pid.setReference(steering_adjust, CANSparkMax.ControlType.kVoltage, 1);
-        // motor.set(steering_adjust);
-
-        float Kp = -0.75f;
-        float min_command = 0.05f;
-
         double heading_error = vision.getError();
-        double steering_adjust = 0.0f;
 
-        if (heading_error < 0.5) {
-            steering_adjust = Kp * heading_error - min_command;
-        } else if (heading_error > 0.5) {
-            steering_adjust = Kp * heading_error + min_command;
+        if (Math.abs(heading_error) > 10) {
+            motor.setVoltage(0);
+            return;
+        }
+
+        double Kp = -0.75;
+        double proportional_error = Kp * heading_error;
+
+        double Ke = -2.0;
+        double delta_error = Ke * (heading_error - heading_last);
+        heading_last = heading_error;
+
+        double steering_adjust = proportional_error - delta_error;
+
+        if (steering_adjust > 4) {
+            steering_adjust = 4;
+        }
+        if (steering_adjust < -4) {
+            steering_adjust = -4;
         }
 
         SmartDashboard.putNumber(TelemetryNames.Turret.visionPIDOutput, steering_adjust);
 
-        checkError(pid.setReference(steering_adjust, CANSparkMax.ControlType.kVoltage, 1), "PID setting reference {}");
+        // checkError(pid.setReference(steering_adjust, CANSparkMax.ControlType.kVoltage, 1), "PID setting reference {}");
+        motor.setVoltage(steering_adjust);
     }
 
     @Override

@@ -97,4 +97,11 @@ abstract class BaseTurretSubsystem extends BaseSubsystem implements ITurretSubsy
         loadPreferences();
     }
 
+    protected double heading_last;
+
+    @Override
+    public void initVisionTracking() {
+        heading_last = 0.0;
+    }
+
 }

@@ -6,52 +6,35 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.turret;
+package frc.robot.commands.climber;
 
-
-import frc.robot.sensors.vision.IVisionSensor;
-import frc.robot.sensors.vision.VisionFactory;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class TurretVisionAlign extends TurretCommandBase {
-    
+public class ClimberDisable extends ClimberCommandBase {
+
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(TurretVisionAlign.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(ClimberDisable.class.getName());
 
-    private IVisionSensor vision;
-
-    public TurretVisionAlign() {
+    public ClimberDisable() {
         logger.info("constructing {}", getName());
 
-        vision = VisionFactory.getInstance();
-
         logger.info("constructed");
-    }
-
-    @Override
-    public void initialize() {
-        super.initialize();
-
-        vision.enable();
-        turret.initVisionTracking();
     }
 
     @Override
     public void execute() {
         super.execute();
 
-        turret.setAngleFromVision();
+        climber.stop();
+        climber.setDefaultCommand(new ClimberDoNothing());
     }
-
+ 
     @Override
-    public void end(boolean interrupted) {
-        super.end(interrupted);
-
-        vision.disable();
-        turret.holdAngle();
+    public boolean isFinished() {
+        return true;
     }
 
 }

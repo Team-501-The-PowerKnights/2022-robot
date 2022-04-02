@@ -8,6 +8,7 @@
 
 package frc.robot.subsystems.climber;
 
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
@@ -20,6 +21,7 @@ import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class ClimberSubsystem extends BaseClimberSubsystem {
 
@@ -40,28 +42,31 @@ class ClimberSubsystem extends BaseClimberSubsystem {
 
         lastError = REVLibError.kOk;
 
-        rightMotor = new CANSparkMax(55, MotorType.kBrushless);
-
-        checkError(rightMotor.restoreFactoryDefaults(), "setting factory defaults {}");
-        rightMotor.setInverted(true);
-        checkError(rightMotor.setIdleMode(IdleMode.kBrake), "setting to brake {}");
-        checkError(rightMotor.setOpenLoopRampRate(0.5), "setting ramp rate {}");
-        checkError(rightMotor.setSmartCurrentLimit(55), "setting current limit {}");
-
-        rightEncoder = rightMotor.getEncoder();
-
-        checkError(rightEncoder.setPosition(0.0), "zeroing the rightEncoder {}");
-
         leftMotor = new CANSparkMax(56, MotorType.kBrushless);
-        leftMotor.setInverted(false);
         checkError(leftMotor.restoreFactoryDefaults(), "setting factory defaults {}");
 
         checkError(leftMotor.setIdleMode(IdleMode.kBrake), "setting to brake {}");
         checkError(leftMotor.setOpenLoopRampRate(0.5), "setting ramp rate {}");
         checkError(leftMotor.setSmartCurrentLimit(55), "setting current limit {}");
 
-        leftEncoder = leftMotor.getEncoder();
+        rightMotor = new CANSparkMax(55, MotorType.kBrushless);
+        checkError(rightMotor.restoreFactoryDefaults(), "setting factory defaults {}");
+ 
+        checkError(rightMotor.setIdleMode(IdleMode.kBrake), "setting to brake {}");
+        checkError(rightMotor.setOpenLoopRampRate(0.5), "setting ramp rate {}");
+        checkError(rightMotor.setSmartCurrentLimit(55), "setting current limit {}");
 
+        leftMotor.setInverted(false);
+        rightMotor.setInverted(true);
+
+        rightEncoder = rightMotor.getEncoder();
+        checkError(rightEncoder.setPosition(0.0), "zeroing the rightEncoder {}");
+
+        // Ramp rates
+        checkError(leftMotor.setOpenLoopRampRate(ramp), "Left setting ramp rate {}");
+        checkError(rightMotor.setOpenLoopRampRate(ramp), "Right setting ramp rate {}");
+ 
+        leftEncoder = leftMotor.getEncoder();
         checkError(leftEncoder.setPosition(0.0), "zeroing the leftEncoder {}");
 
         // limitUp = new AnalogInput(0);
@@ -106,7 +111,9 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     public void updatePreferences() {
         super.updatePreferences();
 
-        // Real doesn't implement this
+        logger.info("setting OpenLoopRate={}", ramp);
+        checkError(leftMotor.setOpenLoopRampRate(ramp), "Left setting ramp rate {}");
+        checkError(rightMotor.setOpenLoopRampRate(ramp), "Right setting ramp rate {}");
     }
 
     @Override

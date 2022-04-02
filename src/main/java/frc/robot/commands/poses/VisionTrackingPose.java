@@ -6,9 +6,11 @@
 /* of this project.                                                      */
 /*-----------------------------------------------------------------------*/
 
-package frc.robot.commands.turret;
+package frc.robot.commands.poses;
 
 
+import frc.robot.Robot;
+import frc.robot.commands.PKCommandBase;
 import frc.robot.sensors.vision.IVisionSensor;
 import frc.robot.sensors.vision.VisionFactory;
 
@@ -16,42 +18,36 @@ import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class TurretVisionAlign extends TurretCommandBase {
-    
+public class VisionTrackingPose extends PKCommandBase {
+
     /** Our classes' logger **/
-    private static final PKLogger logger = RioLogger.getLogger(TurretVisionAlign.class.getName());
+    private static final PKLogger logger = RioLogger.getLogger(VisionTrackingPose.class.getName());
 
-    private IVisionSensor vision;
-
-    public TurretVisionAlign() {
+    private final IVisionSensor vision;
+    
+    public VisionTrackingPose() {
         logger.info("constructing {}", getName());
 
         vision = VisionFactory.getInstance();
 
-        logger.info("constructed");
-    }
-
-    @Override
-    public void initialize() {
-        super.initialize();
-
-        vision.enable();
-        turret.initVisionTracking();
+         logger.info("constructed {}", getName());
     }
 
     @Override
     public void execute() {
         super.execute();
 
-        turret.setAngleFromVision();
-    }
+        double y = vision.getY();
 
-    @Override
-    public void end(boolean interrupted) {
-        super.end(interrupted);
-
-        vision.disable();
-        turret.holdAngle();
+         double speed = 0.48;
+        if (y >= 7.1) {
+            speed = 0.48;
+        } else if (y >= 3.1) {
+            speed = 0.49;
+        } else {
+            speed = 0.5;
+        }
+        Robot.shooterSetSpeed = speed;
     }
 
 }

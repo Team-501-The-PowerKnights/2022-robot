@@ -158,7 +158,10 @@ public class ClimberStateMachine {
     public void disableClimberSequencing() {
         logger.info("disabling climber sequencing");
 
-        enableSequencingCommand.cancel();
+        // Exists only if we started sequencing
+        if (enableSequencingCommand != null) {
+          enableSequencingCommand.cancel();
+        }
 
         initState();
     }

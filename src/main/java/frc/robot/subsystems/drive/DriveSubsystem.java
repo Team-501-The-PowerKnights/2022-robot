@@ -129,11 +129,9 @@ class DriveSubsystem extends BaseDriveSubsystem {
         setBrake(false);
 
         // Following
-        // checkError(leftRearMotor.follow(leftFrontMotor), "L setting following mode
-        // {}");
-        // checkError(rightRearMotor.follow(rightFrontMotor), "R setting following mode
-        // {}");
-
+        // checkError(leftRearMotor.follow(leftFrontMotor), "L setting following mode {}");
+        // checkError(rightRearMotor.follow(rightFrontMotor), "R setting following mode {}");
+ 
         // Ramp rates
         checkError(leftFrontMotor.setOpenLoopRampRate(ramp), "L Front setting ramp rate {}");
         checkError(rightFrontMotor.setOpenLoopRampRate(ramp), "R Front setting ramp rate {}");

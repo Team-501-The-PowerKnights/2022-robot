@@ -30,7 +30,8 @@ public class ClimberEnableSequencing extends ClimberOICommandBase {
 
     @Override
     public boolean isFinished() {
-        return (oi.getDriverClimberStart() && oi.getOperatorClimberStart());
+        // return (oi.getDriverClimberStart() && oi.getOperatorClimberStart());
+        return oi.getOperatorClimberStart();
     }
 
     @Override

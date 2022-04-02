@@ -49,12 +49,14 @@ class LimelightVision {
 
     protected void enable() {
         table.getEntry("ledMode").setDouble(3);
-        table.getEntry("camMode").setDouble(0);
+        // table.getEntry("camMode").setDouble(0);
+        table.getEntry("pipeline").setDouble(0);
     }
 
     protected void disable() {
         table.getEntry("ledMode").setDouble(1);
-        table.getEntry("camMode").setDouble(1);
+        // table.getEntry("camMode").setDouble(1);
+        table.getEntry("pipeline").setDouble(1);
     }
 
     protected double getY() {

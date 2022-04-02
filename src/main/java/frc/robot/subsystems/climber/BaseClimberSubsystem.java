@@ -8,6 +8,8 @@
 
 package frc.robot.subsystems.climber;
 
+
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.commands.climber.ClimberDoNothing;
@@ -18,6 +20,7 @@ import frc.robot.telemetry.TelemetryNames;
 import riolog.PKLogger;
 import riolog.RioLogger;
 
+
 /**
  * Add your docs here.
  */
@@ -25,7 +28,13 @@ abstract class BaseClimberSubsystem extends BaseSubsystem implements IClimberSub
 
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(BaseClimberSubsystem.class.getName());
+ 
+    /** Default preferences for subystem **/
+    private final double default_ramp = 0.0;
 
+    /** Speed controller ramping between 0 and max (sec) */
+    protected double ramp = 0;
+ 
     BaseClimberSubsystem() {
         super(SubsystemNames.climberName);
         logger.info("constructing");
@@ -41,10 +50,12 @@ abstract class BaseClimberSubsystem extends BaseSubsystem implements IClimberSub
     }
 
     protected void loadPreferences() {
-        @SuppressWarnings("unused")
         double v;
 
         logger.info("new preferences for {}:", myName);
+        v = Preferences.getDouble(ClimberPreferences.ramp, default_ramp);
+        logger.info("{} = {}", ClimberPreferences.ramp, v);
+        ramp = v;
     }
 
     private double tlmSpeed = 0.0;

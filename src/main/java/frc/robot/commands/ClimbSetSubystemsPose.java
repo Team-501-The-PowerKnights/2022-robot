@@ -9,15 +9,12 @@
 package frc.robot.commands;
 
 
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-
-import frc.robot.commands.elevator.ElevatorStop;
-import frc.robot.commands.incrementor.IncrementorStop;
+import frc.robot.commands.elevator.ElevatorDisable;
+import frc.robot.commands.incrementor.IncrementorDisable;
+import frc.robot.commands.intake.IntakeDisable;
 import frc.robot.commands.intake.IntakeRetract;
-import frc.robot.commands.intake.IntakeStop;
-import frc.robot.commands.shooter.ShooterStop;
-import frc.robot.commands.turret.TurretHome;
-import frc.robot.commands.turret.TurretStop;
+import frc.robot.commands.shooter.ShooterDisable;
+import frc.robot.commands.turret.TurretDisable;
 
 import riolog.PKLogger;
 import riolog.RioLogger;
@@ -36,12 +33,21 @@ public class ClimbSetSubystemsPose extends ClimbBasePose {
         logger.info("constructing {}", getName());
 
         addCommands(
+            // new PKParallelCommandGroup(
+            //     new PKSequentialCommandGroup(new IntakeRetract(), new IntakeStop()),
+            //     new IncrementorStop(),
+            //     new ElevatorStop(),
+            //     // new PKSequentialCommandGroup(new TurretHome(), new WaitCommand(0.5), new TurretStop()),
+            //     new TurretStop(),
+            //     new ShooterStop()
+            //     )
             new PKParallelCommandGroup(
-                new PKSequentialCommandGroup(new IntakeRetract(), new IntakeStop()),
-                new IncrementorStop(),
-                new ElevatorStop(),
-                new PKSequentialCommandGroup(new TurretHome(), new WaitCommand(0.5), new TurretStop()),
-                new ShooterStop()
+                new PKSequentialCommandGroup(new IntakeRetract(), new IntakeDisable()),
+                new IncrementorDisable(),
+                new ElevatorDisable(),
+                // new PKSequentialCommandGroup(new TurretHome(), new WaitCommand(0.5), new TurretStop()),
+                new TurretDisable(),
+                new ShooterDisable()
                 )
         );
 
