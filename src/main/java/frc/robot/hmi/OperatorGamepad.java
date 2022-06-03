@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.commands.PKParallelCommandGroup;
 import frc.robot.commands.climber.ClimberDoSequencing;
+import frc.robot.commands.climber.ClimberRotateForward;
 import frc.robot.commands.poses.FirePoseNoVision;
 import frc.robot.commands.poses.FirePoseVision;
 import frc.robot.commands.poses.VisionTrackingPose;
@@ -40,6 +41,7 @@ public class OperatorGamepad extends F310Gamepad {
     private final Button visionTargettingButton;
 
     private final Button climbSequenceButton;
+    private final Button climberRotateButton;
 
     public OperatorGamepad() {
         super("OperatorGamepad", 1);
@@ -48,7 +50,11 @@ public class OperatorGamepad extends F310Gamepad {
         firePoseButton = new JoystickButton(stick, greenButton);
         visionTargettingButton = new JoystickButton(stick, rightBumper);
 
+        // TODO - This is not really implemented and could be removed
+        // Carefully ...
         climbSequenceButton = new JoystickButton(stick, startButton);
+
+        climberRotateButton = new JoystickButton(stick, redButton);
 
         logger.info("constructed");
     }
@@ -100,6 +106,8 @@ public class OperatorGamepad extends F310Gamepad {
         logger.info("configure");
 
         climbSequenceButton.whileHeld(new ClimberDoSequencing());
+
+        climberRotateButton.whenHeld(new ClimberRotateForward());
 
         logger.info("configured");
     }

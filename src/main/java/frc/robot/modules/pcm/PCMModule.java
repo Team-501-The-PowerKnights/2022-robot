@@ -25,11 +25,14 @@ class PCMModule extends BasePCMModule {
     /** My module */
     private final PneumaticsControlModule module;
 
-    private static final int climberSolenoidChannel = 1; // TODO - unsure what this will be
+    private static final int climberSolenoidChannelOut = 6; // TODO - Untested
+    private static final int climberSolenoidChannelIn = 7; // TODO - Untested
     private static final int intakeSolenoidChannel = 3;
 
     private final Solenoid intakeSolenoid;
-    private final Solenoid climberSolenoid;
+    private final Solenoid climberSolenoidOut;
+    private final Solenoid climberSolenoidIn;
+    
 
     public PCMModule() {
         logger.info("constructing");
@@ -40,8 +43,11 @@ class PCMModule extends BasePCMModule {
         intakeSolenoid = module.makeSolenoid(intakeSolenoidChannel);
         intakeSolenoid.set(false);
 
-        climberSolenoid = module.makeSolenoid(climberSolenoidChannel);
-        // TODO - This isn't implemented mechanically yet
+        climberSolenoidOut = module.makeSolenoid(climberSolenoidChannelOut);
+        climberSolenoidIn  = module.makeSolenoid(climberSolenoidChannelIn);
+        climberSolenoidOut.set(true);
+        climberSolenoidIn.set(false);
+        // TODO - This isn't tested mechanically yet
 
         logger.info("constructed");
     }
@@ -89,12 +95,14 @@ class PCMModule extends BasePCMModule {
 
     @Override
     public void extendClimber() {
-        climberSolenoid.set(true);
-    }
+        climberSolenoidOut.set(true);
+        climberSolenoidIn.set(false);
+        }
 
     @Override
     public void retractClimber() {
-        climberSolenoid.set(false);
+        climberSolenoidOut.set(false);
+        climberSolenoidIn.set(true);
     }
 
 }

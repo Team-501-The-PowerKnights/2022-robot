@@ -54,4 +54,14 @@ public interface IClimberSubsystem extends ISubsystem {
      */
     public void zeroPosition();
 
+    /**
+     * Rotates the climber (arms) backward to end point.
+     */
+    public void rotateBackward();
+
+    /**
+     * Rotates the climber (arms) forward to end point.
+     */
+    public void rotateForward();
+
 }

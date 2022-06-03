@@ -84,4 +84,14 @@ class StubClimberSubsystem extends BaseClimberSubsystem {
         // Stub doesn't implement this
     }
 
+    @Override
+    public void rotateBackward() {
+        // Stub doesn't implement this     
+    }
+
+    @Override
+    public void rotateForward() {
+        // Stub doesn't implement this
+    }
+
 }

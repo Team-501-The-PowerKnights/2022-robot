@@ -129,4 +129,14 @@ class ZesterClimberSubsystem extends BaseClimberSubsystem {
         // Zester doesn't implement this
     }
 
+    @Override
+    public void rotateBackward() {
+        // Zester doesn't implement this     
+    }
+
+    @Override
+    public void rotateForward() {
+        // Zester doesn't implement this
+    }
+
 }
