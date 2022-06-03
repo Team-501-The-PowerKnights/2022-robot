@@ -25,11 +25,13 @@ class PCMModule extends BasePCMModule {
     /** My module */
     private final PneumaticsControlModule module;
 
-    private static final int climberSolenoidChannelOut = 6; // TODO - Untested
-    private static final int climberSolenoidChannelIn = 7; // TODO - Untested
     private static final int intakeSolenoidChannel = 3;
 
+    private static final int climberSolenoidChannelOut = 6; // TODO - Untested
+    private static final int climberSolenoidChannelIn = 7; // TODO - Untested
+
     private final Solenoid intakeSolenoid;
+
     private final Solenoid climberSolenoidOut;
     private final Solenoid climberSolenoidIn;
     
@@ -58,6 +60,7 @@ class PCMModule extends BasePCMModule {
         super.updateTelemetry();
 
         SmartDashboard.putBoolean(TelemetryNames.PCM.intakeExtended, isIntakeExtended());
+        SmartDashboard.putBoolean(TelemetryNames.PCM.climberExtended, isClimberExtended());
     }
 
     @Override
@@ -103,6 +106,10 @@ class PCMModule extends BasePCMModule {
     public void retractClimber() {
         climberSolenoidOut.set(false);
         climberSolenoidIn.set(true);
+    }
+
+    private boolean isClimberExtended() {
+        return climberSolenoidOut.get();
     }
 
 }
