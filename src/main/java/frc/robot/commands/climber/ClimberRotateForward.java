@@ -7,17 +7,28 @@
 
 package frc.robot.commands.climber;
 
+import frc.robot.commands.PKCommandBase;
+import frc.robot.subsystems.climber.ClimberFactory;
+import frc.robot.subsystems.climber.IClimberSubsystem;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
 
 
-public class ClimberRotateForward extends ClimberCommandBase {
+// TODO: Can't be a Climber subsystem as need to run two (need a Pose?)
+public class ClimberRotateForward extends PKCommandBase {
     
     /** Our classes' logger **/
     private static final PKLogger logger = RioLogger.getLogger(ClimberRotateForward.class.getName());
 
+    // Handle to our subsystem
+    protected final IClimberSubsystem climber;
+
     public ClimberRotateForward() {
         logger.info("constructing {}", getName());
+
+        climber = ClimberFactory.getInstance();
+        // Do not add requirement for climber
 
         logger.info("constructed");
     }
