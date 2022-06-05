@@ -116,7 +116,7 @@ public class Robot extends TimedRobot {
             // Have to not have triggered the end game start yet
             if (isFieldConnected() && teleopRunning && !endGameStarted) {
                 double remainingSeconds = DriverStation.getMatchTime();
-                if (remainingSeconds <= 40) {
+                if (remainingSeconds <= 60) { // 40
                     endGameStarted = true;
                     SmartDashboard.putBoolean(TelemetryNames.Misc.endGameStarted, endGameStarted);
                 }
