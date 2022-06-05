@@ -8,13 +8,18 @@
 
 package frc.robot.subsystems.intake;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.robot.modules.pcm.IPCMModule;
 import frc.robot.modules.pcm.PCMFactory;
+
 import riolog.PKLogger;
 import riolog.RioLogger;
+
 
 class IntakeSubsystem extends BaseIntakeSubsystem {
 
@@ -22,24 +27,48 @@ class IntakeSubsystem extends BaseIntakeSubsystem {
     private static final PKLogger logger = RioLogger.getLogger(IntakeSubsystem.class.getName());
 
     // Our motor to drive the intake in (up) & out (down)
-    private final TalonSRX motor;
+    //private final TalonSRX motor;
+    private final CANSparkMax motor;
 
     // Our pneumatics to extend/retract the intake
     private final IPCMModule pcm;
 
     /**
      * Creates a new IntakeSubsystem.
+     * @param IdleMode 
      */
     IntakeSubsystem() {
         logger.info("constructing");
 
-        motor = new TalonSRX(41);
-        motor.setInverted(false);
-        motor.configFactoryDefault();
+        // motor = new TalonSRX(41);
+        // motor.setInverted(false);
+        // motor.configFactoryDefault();
+
+        lastError = REVLibError.kOk;
+
+        motor = new CANSparkMax(41, MotorType.kBrushless);
+        checkError(motor.restoreFactoryDefaults(), "setting factory defaults {}");
+
+        checkError(motor.setIdleMode(IdleMode.kBrake), "setting to brake {}");
+
+        motor.setInverted(true);
+
 
         pcm = PCMFactory.getInstance();
 
         logger.info("constructed");
+    }
+
+    // last error (not the same as kOk)
+    // TODO: Use to set a degraded error status/state on subsystem
+    @SuppressWarnings("unused")
+    private REVLibError lastError;
+
+    private void checkError(REVLibError error, String message) {
+        if (error != REVLibError.kOk) {
+            lastError = error;
+            logger.error(message, error);
+        }
     }
 
     @Override
@@ -99,7 +128,7 @@ class IntakeSubsystem extends BaseIntakeSubsystem {
     private void setSpeed(double speed) {
         setTlmSpeed(speed);
 
-        motor.set(ControlMode.PercentOutput, speed);
+        motor.set(speed);
     }
 
     @Override
