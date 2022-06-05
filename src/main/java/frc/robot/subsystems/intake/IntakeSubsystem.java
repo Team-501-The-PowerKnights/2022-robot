@@ -34,7 +34,7 @@ class IntakeSubsystem extends BaseIntakeSubsystem {
         logger.info("constructing");
 
         motor = new TalonSRX(41);
-        motor.setInverted(true);
+        motor.setInverted(false);
         motor.configFactoryDefault();
 
         pcm = PCMFactory.getInstance();
