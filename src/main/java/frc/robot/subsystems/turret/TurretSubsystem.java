@@ -167,17 +167,17 @@ class TurretSubsystem extends BaseTurretSubsystem {
         double Kp = -0.75;
         double proportional_error = Kp * heading_error;
 
-        double Ke = -2.0;
+        double Ke = 3.0;
         double delta_error = Ke * (heading_error - heading_last);
         heading_last = heading_error;
 
         double steering_adjust = proportional_error - delta_error;
 
-        if (steering_adjust > 4) {
-            steering_adjust = 4;
+        if (steering_adjust > 7) {
+            steering_adjust = 7;
         }
-        if (steering_adjust < -4) {
-            steering_adjust = -4;
+        if (steering_adjust < -7) {
+            steering_adjust = -7;
         }
 
         SmartDashboard.putNumber(TelemetryNames.Turret.visionPIDOutput, steering_adjust);
@@ -301,9 +301,10 @@ class TurretSubsystem extends BaseTurretSubsystem {
 
     @Override
     public void holdAngle() {
-        double currentAngle = getAngle();
+        // double currentAngle = getAngle();
 
-        setTurretAngle(currentAngle);
+        // setTurretAngle(currentAngle);
+        setSpeed(0.0);
     }
 
     @Override
