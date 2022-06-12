@@ -133,6 +133,7 @@ public final class TelemetryNames {
         public static final String enabled = name + ".enabled";
         public static final String pressureGood = name + ".pressureGood";
         public static final String intakeExtended = name + ".intakeExtended";
+        public static final String climberExtended = name + ".climberExtended";
     }
 
     /***************

@@ -17,6 +17,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import frc.robot.modules.pcm.IPCMModule;
+import frc.robot.modules.pcm.PCMFactory;
 import frc.robot.telemetry.TelemetryNames;
 
 import riolog.PKLogger;
@@ -36,6 +38,10 @@ class ClimberSubsystem extends BaseClimberSubsystem {
 
     // private final AnalogInput limitUp;
     // private final AnalogInput limitDown;
+    
+    // Our pneumatics to extend/retract the intake
+    private final IPCMModule pcm;
+
 
     ClimberSubsystem() {
         logger.info("constructing");
@@ -75,6 +81,8 @@ class ClimberSubsystem extends BaseClimberSubsystem {
         // TODO: Put these into subsystem?
         SmartDashboard.putNumber(TelemetryNames.Climber.targetPos, 0);
         SmartDashboard.putBoolean(TelemetryNames.Climber.atTarget, false);
+
+        pcm = PCMFactory.getInstance();
 
         logger.info("constructed");
     }
@@ -171,6 +179,20 @@ class ClimberSubsystem extends BaseClimberSubsystem {
     @Override
     public double getAveragePosition() {
         return (getLeftPosition() + getRightPosition()) / 2;
+    }
+
+    @Override
+    public void rotateBackward() {
+        //super.rotateBackward();
+
+        pcm.extendClimber();
+    }
+
+    @Override
+    public void rotateForward() {
+        //super.rotateForward();
+
+        pcm.retractClimber();
     }
 
 }
