@@ -30,7 +30,7 @@ public class DriverGamepad extends F310Gamepad {
     private static final PKLogger logger = RioLogger.getLogger(DriverGamepad.class.getName());
 
     private final Button turboButton;
-    private final Button crawlButton;
+    // private final Button crawlButton;
     //private final Button driveSwapButton;
     
     public DriverGamepad() 
@@ -39,7 +39,7 @@ public class DriverGamepad extends F310Gamepad {
         logger.info("constructing");
 
         turboButton = new JoystickButton(stick, leftBumper);
-        crawlButton = new JoystickButton(stick, rightBumper);
+        // crawlButton = new JoystickButton(stick, rightBumper);
         //driveSwapButton = new JoystickButton(stick, backButton);
 
         logger.info("constructed");
@@ -60,7 +60,7 @@ public class DriverGamepad extends F310Gamepad {
         SmartDashboard.putNumber(TelemetryNames.HMI.rawSpeed, getRawDriveSpeed());
         SmartDashboard.putNumber(TelemetryNames.HMI.rawTurn, getRawDriveTurn());
         SmartDashboard.putBoolean(TelemetryNames.HMI.turbo, turboButton.get());
-        SmartDashboard.putBoolean(TelemetryNames.HMI.crawl, crawlButton.get());
+        // SmartDashboard.putBoolean(TelemetryNames.HMI.crawl, crawlButton.get());
         SmartDashboard.putNumber(TelemetryNames.HMI.oiSpeed, getDriveSpeed());
         SmartDashboard.putNumber(TelemetryNames.HMI.oiTurn, getDriveTurn());
 
@@ -107,8 +107,8 @@ public class DriverGamepad extends F310Gamepad {
         double calcSpeed;
         if (turboButton.get()) {
             calcSpeed = hmiSpeed;
-        } else if (crawlButton.get()) {
-            calcSpeed = hmiSpeed * 0.30;
+        // } else if (crawlButton.get()) {
+        //     calcSpeed = hmiSpeed * 0.30;
         } else {
             calcSpeed = hmiSpeed *= 0.50;
         }
@@ -124,8 +124,8 @@ public class DriverGamepad extends F310Gamepad {
         double calcTurn;
         if (turboButton.get()) {
             calcTurn = hmiTurn * 0.60;
-        } else if (crawlButton.get()) {
-            calcTurn = hmiTurn * 0.25;
+        // } else if (crawlButton.get()) {
+        //     calcTurn = hmiTurn * 0.25;
         } else {
             calcTurn = hmiTurn * 0.30;
         }
